@@ -22,7 +22,7 @@ themes:
 general:
 	sudo add-apt-repository ppa:kgilmer/speed-ricer
 	sudo snap install --beta nvim --classic
-	sudo apt-get install -y git cmake meson i3-gaps curl feh npm slick greeter
+	sudo apt-get install -y git cmake meson i3-gaps curl feh npm slick-greeter lightdm-settings
 
 # Install picom (compositor)
 picom:
