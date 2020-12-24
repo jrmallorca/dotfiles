@@ -1,5 +1,5 @@
 # -----------------------------------------------------------------------------
-#  Xubuntu Setup
+# Xubuntu Setup
 # -----------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------
@@ -26,7 +26,7 @@ themes:
 general:
 	sudo add-apt-repository ppa:kgilmer/speed-ricer
 	sudo snap install --beta nvim --classic
-	sudo apt-get install -y git cmake meson i3-gaps curl feh rtv npm
+	sudo apt-get install -y git cmake meson i3-gaps curl feh npm
 
 # Install picom (compositor)
 picom:
