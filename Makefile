@@ -9,10 +9,6 @@
 config:
 	cp -R dotfiles/.config ~
 
-# Transfer bash config.
-bash:
-	cp dotfiles/.bashrc ~
-
 # Transfer theme related files.
 themes:
 	cp -R dotfiles/.themes ~
@@ -26,7 +22,7 @@ themes:
 general:
 	sudo add-apt-repository ppa:kgilmer/speed-ricer
 	sudo snap install --beta nvim --classic
-	sudo apt-get install -y git cmake meson i3-gaps curl feh npm
+	sudo apt-get install -y git cmake meson i3-gaps curl feh npm slick greeter
 
 # Install picom (compositor)
 picom:
