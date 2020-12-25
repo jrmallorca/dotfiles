@@ -216,9 +216,16 @@ mode "(S)uspend, (L)ogout, (R)eboot, (P)oweroff" {
 bindsym Mod1+Shift+q mode "(S)uspend, (L)ogout, (R)eboot, (P)oweroff"
 
 # Bar
+set $transparent #00000000
+set $dmenu_colour #222222
 bar {
+        mode hide
+        modifier None
+        position top
+        i3bar_command i3bar -t
+        status_command i3status
         colors {
-        background #222222
+        background $transparent
         statusline #ffffff
         separator #4b5262
 
@@ -228,10 +235,6 @@ bar {
         inactive_workspace      #2f343f #2f343f #d8dee8
         urgent_workspacei       #2f343f #ebcb8b #2f343f
     }
-        mode hide
-        modifier None
-        position top
-        status_command i3status
 }
 
 bindsym Mod1+b bar mode toggle
