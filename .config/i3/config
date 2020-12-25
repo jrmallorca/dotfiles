@@ -19,6 +19,9 @@ set $mod Mod1
 # You can also use any non-zero value if you'd like to have a border
 for_window [class=".*"] border pixel 0
 
+# Autotiling
+exec --no-startup-id ~/i3-alternating-layout/alternating_layouts.py
+
 # XFCE settings application
 exec --no-startup-id xfsettingsd &
 

@@ -26,10 +26,16 @@ general:
 	sudo snap install --beta nvim --classic
 	sudo apt-get install -y git cmake meson i3-gaps curl feh npm slick-greeter lightdm-settings xdotool xclip
 
+# Install autotiling for i3
+autotiling:
+	sudo apt-get install python3-pip git
+	pip3 install i3ipc
+	cd ~ && git clone git@github.com:olemartinorg/i3-alternating-layout.git
+
 # Install picom (compositor)
 picom:
 	sudo apt-get install libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libpcre3-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev
-	cd ~ && git clone https://github.com/yshui/picom.git
+	cd ~ && git clone git@github.com:yshui/picom.git
 	cd ~/picom/ && git submodule update --init --recursive
 	sudo meson --buildtype=release . build
 	sudo ninja -C build
@@ -41,6 +47,7 @@ propreitary:
 	sudo snap install teams
 	# spotify
 
+# NEED TO EDIT FROM HERE ------------------------------------------------------
 # Install Spotify Terminal UI.
 spt:
 	sudo snap install spt
