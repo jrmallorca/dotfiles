@@ -10,9 +10,10 @@ config:
 	cp -R dotfiles/.config ~
 
 # Transfer theme related files.
-themes:
-	cp -R dotfiles/.themes ~
-	cp -R dotfiles/.icons ~
+theme:
+	sudo cp -R backgrounds/ /usr/share/
+	sudo cp -R themes/ /usr/share/
+	sudo cp -R icons /usr/share/
 
 # -----------------------------------------------------------------------------
 # Programs
