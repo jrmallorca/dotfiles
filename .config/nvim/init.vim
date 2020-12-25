@@ -1,8 +1,6 @@
 " curl -fLO $HOME/.config/nvim/autoload/plug.vim --create-dirs \
 "     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-syntax enable
-
 " Remap Esc to kj
 imap kj <Esc>
 
@@ -48,7 +46,7 @@ Plug 'dart-lang/dart-vim-plugin'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'tomasiser/vim-code-dark'
-Plug 'jschmold/sweet-dark.vim'
+" Plug 'jschmold/sweet-dark.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'preservim/nerdtree'
 Plug 'vifm/vifm.vim'
@@ -58,9 +56,13 @@ Plug 'junegunn/fzf.vim'
 call plug#end()
 
 " Color scheme
-" colorscheme codedark
+syntax enable
+set background=dark
 " colorscheme sweet_dark
-hi Normal guibg=NONE ctermbg=NONE
+au Colorscheme * hi Normal guibg=NONE ctermbg=NONE guifg=NONE ctermfg=NONE
+au Colorscheme * hi LineNr guibg=NONE ctermbg=NONE
+au Colorscheme * hi CursorLine guibg=NONE ctermbg=NONE
+colorscheme codedark
 
 " Goyo configurations
 " Color name (:help cterm-colors) or ANSI code
