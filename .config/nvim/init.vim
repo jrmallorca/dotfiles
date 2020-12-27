@@ -2,7 +2,7 @@
 "     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 " Remap Esc to kj
-imap kj <Esc>
+" imap kj <Esc>
 
 " Toggling pasting to not lose formatting
 set pastetoggle=<F2>
