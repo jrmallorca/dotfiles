@@ -11,10 +11,12 @@ config:
 	cp -R .config ~
 
 # Transfer theme related files.
+# NEED TO CHANGE TO NOT OVERWIRTE EXISTING FILES/DIRECTORIES
 theme:
 	sudo cp -R backgrounds/ /usr/share/
 	sudo cp -R themes/ /usr/share/
-	sudo cp -R icons /usr/share/
+	sudo cp -R icons/ /usr/share/
+	sudo cp -R fonts/ /usr/share/
 
 # -----------------------------------------------------------------------------
 # Programs
@@ -27,6 +29,7 @@ general:
 	sudo snap install googler
 	sudo apt-get install -y git cmake meson i3-gaps curl feh npm slick-greeter lightdm-settings xdotool xclip
 
+# Install terminal colour scheme changer
 gogh:
 	sudo apt install dconf-cli uuid-runtime wget
 	bash -c "$(wget -qO- https://git.io/vQgMr)"
@@ -45,6 +48,11 @@ picom:
 	sudo meson --buildtype=release . build
 	sudo ninja -C build
 	sudo ninja -C build install
+
+# Install Vim-Plug. NeoVim configs must be set up.
+vim-plug:
+	sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+    	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 # Install propreitary software:
 # Microsoft Teams
@@ -67,11 +75,6 @@ spotifyd:
 		cp ../dotfiles/Cargo.toml . && \
 		cargo install --path . --locked
 	rm -Rf spotifyd
-
-# Install Vim-Plug. NeoVim configs must be set up.
-vim-plug:
-	sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-    	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 # Install Go.
 go:
