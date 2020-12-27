@@ -14,6 +14,12 @@ alias bat='batcat'
 abbr cdd 'cd /mnt/d'
 abbr cdc 'cd ~/.config'
 
+# nmcli abbr
+abbr nmcs 'nmcli c show'
+abbr nmcd 'nmcli c down'
+abbr nmcu 'nmcli c up'
+abbr nmcc 'nmcli -a d wifi connect'
+
 # Git abbr
 abbr g 'git'
 abbr ga 'git add'

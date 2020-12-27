@@ -24,7 +24,12 @@ theme:
 general:
 	sudo add-apt-repository ppa:kgilmer/speed-ricer
 	sudo snap install --beta nvim --classic
+	sudo snap install googler
 	sudo apt-get install -y git cmake meson i3-gaps curl feh npm slick-greeter lightdm-settings xdotool xclip
+
+gogh:
+	sudo apt install dconf-cli uuid-runtime wget
+	bash -c "$(wget -qO- https://git.io/vQgMr)"
 
 # Install autotiling for i3
 autotiling:
