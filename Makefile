@@ -46,9 +46,8 @@ autotiling:
 # UNTESTED
 picom:
 	sudo apt-get install libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libpcre3-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev
-	git clone git@github.com:yshui/picom.git
-	cd picom/ && \
-		git submodule update --init --recursive && \
+	cd ~/gitapps/ && git clone git@github.com:yshui/picom.git && \
+		cd picom/ && git submodule update --init --recursive && \
 		sudo meson --buildtype=release . build && \
 		sudo ninja -C build && \
 		sudo ninja -C build install
@@ -58,6 +57,14 @@ picom:
 vim-plug:
 	sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
     	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+# Install Go.
+# UNTESTED
+# CHECK VERSION BEFORE MAKING
+go:
+	wget https://dl.google.com/go/go1.15.3.linux-amd64.tar.gz
+	sudo tar -C /usr/local -xzf go1.15.3.linux-amd64.tar.gz
+	rm go1.15.3.linux-amd64.tar.gz
 
 # Install propreitary software:
 # Microsoft Teams
@@ -80,12 +87,6 @@ spotifyd:
 		cp ../dotfiles/Cargo.toml . && \
 		cargo install --path . --locked
 	rm -Rf spotifyd
-
-# Install Go.
-go:
-	wget https://dl.google.com/go/go1.15.3.linux-amd64.tar.gz
-	sudo tar -C /usr/local -xzf go1.15.3.linux-amd64.tar.gz
-	rm go1.15.3.linux-amd64.tar.gz
 
 # Install Android Studios
 android-studios:
