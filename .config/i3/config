@@ -25,7 +25,7 @@ exec --no-startup-id xcape -t 200ms -e 'Caps_Lock=Escape'
 for_window [class=".*"] border pixel 0
 
 # Autotiling
-exec --no-startup-id ~/i3-alternating-layout/alternating_layouts.py
+exec --no-startup-id ~/gitapps/i3-alternating-layout/alternating_layouts.py
 
 # XFCE settings application
 exec --no-startup-id xfsettingsd &

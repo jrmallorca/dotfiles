@@ -37,10 +37,10 @@ gogh:
 	bash -c "$(wget -qO- https://git.io/vQgMr)"
 
 # Install autotiling for i3
-# autotiling:
-# 	sudo apt-get install python3-pip git
-#	pip3 install i3ipc
-#	cd ~ && git clone git@github.com:olemartinorg/i3-alternating-layout.git
+autotiling:
+	sudo apt-get install python3-pip git
+	pip3 install i3ipc
+	cd ~/gitapps/ && git clone git@github.com:olemartinorg/i3-alternating-layout.git
 
 # Install picom (compositor)
 # UNTESTED
