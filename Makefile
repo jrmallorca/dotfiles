@@ -26,10 +26,15 @@ theme:
 general:
 	sudo add-apt-repository ppa:kgilmer/speed-ricer
 	sudo snap install --beta nvim --classic
-	sudo snap install googler
-	sudo snap install autotiling
+	sudo snap install googler autotiling ffmpeg
 	sudo apt-get install -y git cmake meson i3-gaps curl feh npm slick-greeter \
 		lightdm-settings xdotool xclip zathura xcape
+
+# mpv https://github.com/mpv-player/mpv-build
+mpv:
+	sudo add-apt-repository ppa:mc3man/mpv-tests
+	sudo apt-get update
+	sudo apt-get install mpv
 
 # Install terminal colour scheme changer
 gogh:
