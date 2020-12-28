@@ -27,6 +27,7 @@ general:
 	sudo add-apt-repository ppa:kgilmer/speed-ricer
 	sudo snap install --beta nvim --classic
 	sudo snap install googler
+	sudo snap install autotiling
 	sudo apt-get install -y git cmake meson i3-gaps curl feh npm slick-greeter \
 		lightdm-settings xdotool xclip zathura xcape
 
@@ -36,10 +37,10 @@ gogh:
 	bash -c "$(wget -qO- https://git.io/vQgMr)"
 
 # Install autotiling for i3
-autotiling:
-	sudo apt-get install python3-pip git
-	pip3 install i3ipc
-	cd ~ && git clone git@github.com:olemartinorg/i3-alternating-layout.git
+# autotiling:
+# 	sudo apt-get install python3-pip git
+#	pip3 install i3ipc
+#	cd ~ && git clone git@github.com:olemartinorg/i3-alternating-layout.git
 
 # Install picom (compositor)
 # UNTESTED
