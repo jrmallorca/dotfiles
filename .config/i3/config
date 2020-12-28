@@ -16,10 +16,10 @@
 # Set $mod as Mod1
 set $mod Mod1
 
-# swap caps lock and escape
-exec_always --no-startup-id xmodmap -e "clear lock"
-exec_always --no-startup-id xmodmap -e "keycode 9 = Caps_Lock NoSymbol Caps_Lock"
-exec_always --no-startup-id xmodmap -e "keycode 66 = Escape NoSymbol Escape"
+# Remap caps-lock to cntrl+escape
+# EDIT TIMEOUT OPTION FOR XCAPE?
+exec --no-startup-id setxkbmap -option 'caps:ctrl_modifier'
+exec --no-startup-id xcape -e 'Caps_Lock=Escape'
 
 # You can also use any non-zero value if you'd like to have a border
 for_window [class=".*"] border pixel 0
