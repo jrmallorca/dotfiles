@@ -17,7 +17,6 @@
 set $mod Mod1
 
 # Remap caps-lock to cntrl+escape
-# EDIT TIMEOUT OPTION FOR XCAPE?
 exec --no-startup-id setxkbmap -option 'caps:ctrl_modifier'
 exec --no-startup-id xcape -t 200ms -e 'Caps_Lock=Escape'
 
