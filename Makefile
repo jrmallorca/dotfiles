@@ -30,6 +30,18 @@ general:
 	sudo apt-get install -y git cmake meson i3-gaps curl feh npm slick-greeter \
 		lightdm-settings xdotool xclip zathura xcape
 
+# weechat (CLI messaging) and bitlbee (For facebook and other stuff)
+# UNTESTED
+# https://wiki.bitlbee.org/HowtoFacebookMQTT
+# https://weechat.org/files/doc/stable/weechat_quickstart.en.html
+weechat-bitlbee:
+	sudo apt-get install weechat
+	echo "deb http://download.opensuse.org/repositories/home:/jgeboski/xUbuntu_20.04 ./" > /etc/apt/sources.list.d/jgeboski.list
+	wget -O- 'https://build.opensuse.org/projects/home:jgeboski/public_key' | sudo apt-key add -
+	sudo apt-get update -y
+	sudo apt-get install bitlbee-facebook
+
+# mpv (Media player)
 # mpv https://github.com/mpv-player/mpv-build
 mpv:
 	sudo add-apt-repository ppa:mc3man/mpv-tests
