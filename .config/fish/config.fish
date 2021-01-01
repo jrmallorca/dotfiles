@@ -12,6 +12,7 @@ alias bat='batcat'
 
 # Changing directory abbr
 abbr cdd 'cd /mnt/d'
+abbr cduni 'cd /mnt/d/University'
 abbr cdc 'cd ~/.config'
 
 # nmcli abbr (Wifi)
