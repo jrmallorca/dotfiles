@@ -30,6 +30,10 @@ general:
 	sudo apt-get install -y git cmake meson i3-gaps curl feh npm slick-greeter \
 		lightdm-settings xdotool xclip zathura xcape
 
+pomo:
+	curl -L -s https://kevinschoon.github.io/pomo/install.sh | bash /dev/stdin
+	sudo mv pomo /usr/local/bin/
+
 # weechat (CLI messaging) and bitlbee (For facebook and other stuff)
 # UNTESTED
 # https://wiki.bitlbee.org/HowtoFacebookMQTT
