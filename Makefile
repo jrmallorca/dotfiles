@@ -28,7 +28,7 @@ general:
 	sudo snap install --beta nvim --classic
 	sudo snap install googler autotiling ffmpeg
 	sudo apt-get install -y git cmake meson i3-gaps curl feh npm slick-greeter \
-		lightdm-settings xdotool xclip zathura xcape
+		lightdm-settings xdotool xclip zathura xcape redshift-gtk
 
 pomo:
 	curl -L -s https://kevinschoon.github.io/pomo/install.sh | bash /dev/stdin

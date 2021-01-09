@@ -14,10 +14,10 @@
 # ------------------------------------------------------------------------
 
 # You can also use any non-zero value if you'd like to have a border
-for_window [class=".*"] border pixel 3
+for_window [class=".*"] border pixel 5
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #4c7899 #285577 #ffffff #990000   #000000
+client.focused          #4c7899 #285577 #ffffff #bb0000   #000000
 client.focused_inactive #333333 #5f676a #ffffff #000000   #000000
 client.unfocused        #333333 #222222 #888888 #000000   #000000
 client.urgent           #2f343a #900000 #ffffff #900000   #900000
@@ -28,6 +28,8 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 # ------------------------------------------------------------------------
 # General
 # ------------------------------------------------------------------------
+# exec only executes command when i3 is started
+# exec_always executed the command each time i3 is reloarded
 
 # Set $mod as Mod1
 set $mod Mod1
@@ -36,17 +38,25 @@ set $mod Mod1
 exec --no-startup-id setxkbmap -option 'caps:ctrl_modifier'
 exec --no-startup-id xcape -t 200ms -e 'Caps_Lock=Escape'
 
-# Autotiling
-exec --no-startup-id ~/gitapps/i3-alternating-layout/alternating_layouts.py
-
-# XFCE settings application
+# XFCE
+# Session
+# Power manager
+# Settings application
+# exec --no-startup-id xfce4-session
+# exec_always --no-startup-id xfce4-power-manager
 exec --no-startup-id xfsettingsd &
 
 # Compositor (Picom)
 exec_always --no-startup-id picom --config ~/.config/picom.conf
 
+# Autotiling
+exec_always --no-startup-id ~/gitapps/i3-alternating-layout/alternating_layouts.py
+
+# Redshift (Temperature control)
+exec --no-startup-id redshift-gtk
+
 # Start unclutter (hide mouse cursor)
-exec_always --no-startup-id unclutter
+exec --no-startup-id unclutter
 
 # Wallpaper
 exec_always --no-startup-id feh --no-fehbg --bg-scale /usr/share/backgrounds/BlackAndWhite.jpg &
@@ -247,9 +257,9 @@ mode "(S)uspend, (L)ogout, (R)eboot, (P)oweroff" {
 bindsym $mod+Shift+q mode "(S)uspend, (L)ogout, (R)eboot, (P)oweroff"
 
 # Toggle gaps
-gaps inner 10
-# smart_gaps on
-# smart_borders on
+gaps inner 0
+smart_gaps on
+smart_borders on
 
 set $mode_gaps Toggle gaps: (1) on (2) off
 mode "$mode_gaps" {

@@ -1,6 +1,3 @@
-" curl -fLO $HOME/.config/nvim/autoload/plug.vim --create-dirs \
-"     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
 " Remap Esc to kj
 " imap kj <Esc>
 
@@ -47,6 +44,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'tomasiser/vim-code-dark'
 " Plug 'jschmold/sweet-dark.vim'
+Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
 Plug 'preservim/nerdtree'
 Plug 'vifm/vifm.vim'
@@ -62,6 +60,7 @@ set background=dark
 au Colorscheme * hi Normal guibg=NONE ctermbg=NONE guifg=NONE ctermfg=NONE
 au Colorscheme * hi LineNr guibg=NONE ctermbg=NONE
 au Colorscheme * hi CursorLine guibg=NONE ctermbg=NONE
+au Colorscheme * hi SignColumn guibg=NONE ctermbg=NONE
 colorscheme codedark
 
 " Goyo configurations
@@ -106,12 +105,7 @@ set shortmess+=c
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
-if has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
+set signcolumn=number
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -201,7 +195,6 @@ xmap ic <Plug>(coc-classobj-i)
 omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
-
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 " Note coc#float#scroll works on neovim >= 0.4.0 or vim >= 8.2.0750
 nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
