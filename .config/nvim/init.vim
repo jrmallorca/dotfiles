@@ -99,9 +99,12 @@ autocmd! User GoyoLeave Limelight!
 
 map <Leader>vs :VsplitVifm<CR>
 
-" FZF configurations
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Fzf
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 set grepprg=rg\ --vimgrep\ --smart-case\ --follow
-nnoremap <silent> <C-p> :Files<CR>
+nnoremap <silent> <leader><leader> :GFiles<CR>
 nnoremap <silent> <Leader>p :Rg<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""

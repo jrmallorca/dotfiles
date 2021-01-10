@@ -34,7 +34,7 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 # Set $mod as Mod1
 set $mod Mod1
 
-# Remap caps-lock to cntrl+escape
+# Remap caps-lock to ctrl+escape
 exec --no-startup-id setxkbmap -option 'caps:ctrl_modifier'
 exec --no-startup-id xcape -t 200ms -e 'Caps_Lock=Escape'
 

@@ -27,7 +27,7 @@ general:
 	sudo add-apt-repository ppa:kgilmer/speed-ricer
 	sudo snap install --beta nvim --classic
 	sudo snap install googler autotiling ffmpeg
-	sudo apt-get install -y git cmake meson i3-gaps curl feh npm slick-greeter \
+	sudo apt install -y git cmake meson i3-gaps curl feh npm slick-greeter \
 		lightdm-settings xdotool xclip zathura xcape redshift-gtk
 
 pomo:
@@ -39,18 +39,18 @@ pomo:
 # https://wiki.bitlbee.org/HowtoFacebookMQTT
 # https://weechat.org/files/doc/stable/weechat_quickstart.en.html
 weechat-bitlbee:
-	sudo apt-get install weechat
+	sudo apt install weechat
 	echo "deb http://download.opensuse.org/repositories/home:/jgeboski/xUbuntu_20.04 ./" > /etc/apt/sources.list.d/jgeboski.list
 	wget -O- 'https://build.opensuse.org/projects/home:jgeboski/public_key' | sudo apt-key add -
-	sudo apt-get update -y
-	sudo apt-get install bitlbee-facebook
+	sudo apt update -y
+	sudo apt install bitlbee-facebook
 
 # mpv (Media player)
 # mpv https://github.com/mpv-player/mpv-build
 mpv:
 	sudo add-apt-repository ppa:mc3man/mpv-tests
-	sudo apt-get update
-	sudo apt-get install mpv
+	sudo apt update
+	sudo apt install mpv
 
 # Install terminal colour scheme changer
 gogh:
@@ -59,14 +59,14 @@ gogh:
 
 # Install autotiling for i3
 autotiling:
-	sudo apt-get install python3-pip git
+	sudo apt install python3-pip git
 	pip3 install i3ipc
 	cd ~/gitapps/ && git clone git@github.com:olemartinorg/i3-alternating-layout.git
 
 # Install picom (compositor)
 # UNTESTED
 picom:
-	sudo apt-get install libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libpcre3-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev
+	sudo apt install libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libpcre3-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev
 	cd ~/gitapps/ && git clone git@github.com:yshui/picom.git && \
 		cd picom/ && git submodule update --init --recursive && \
 		sudo meson --buildtype=release . build && \
