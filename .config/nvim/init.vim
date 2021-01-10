@@ -1,8 +1,17 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" General
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Remap Esc to kj
 " imap kj <Esc>
 
 " Toggling pasting to not lose formatting
 set pastetoggle=<F2>
+
+" Opening new file when current buffer has unsaved changes causes
+" files to be hidden instead of closed
+" (Coc) TextEdit might fail if hidden is not set.
+set hidden
 
 " Setting relative line numbers
 set number
@@ -37,23 +46,30 @@ nnoremap <C-H> <C-W><C-H>
 set splitbelow
 set splitright
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 call plug#begin('~/.config/nvim/plugged')
-Plug 'dart-lang/dart-vim-plugin'
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
-Plug 'tomasiser/vim-code-dark'
-" Plug 'jschmold/sweet-dark.vim'
-Plug 'mhinz/vim-signify'
-Plug 'tpope/vim-fugitive'
-Plug 'preservim/nerdtree'
-Plug 'vifm/vifm.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+    Plug 'dart-lang/dart-vim-plugin'
+    Plug 'junegunn/goyo.vim'
+    Plug 'junegunn/limelight.vim'
+    Plug 'tomasiser/vim-code-dark'
+    " Plug 'jschmold/sweet-dark.vim'
+    Plug 'mhinz/vim-signify'
+    Plug 'tpope/vim-fugitive'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+    if !exists('g:vscode')
+        Plug 'vifm/vifm.vim'
+        Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    endif
 call plug#end()
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Color scheme
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 syntax enable
 set background=dark
 " colorscheme sweet_dark
@@ -63,7 +79,10 @@ au Colorscheme * hi CursorLine guibg=NONE ctermbg=NONE
 au Colorscheme * hi SignColumn guibg=NONE ctermbg=NONE
 colorscheme codedark
 
-" Goyo configurations
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Goyo
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Color name (:help cterm-colors) or ANSI code
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_ctermfg = 240
@@ -74,10 +93,10 @@ nnoremap <leader>ll :Limelight<cr>
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
-" Nerd tree configurations
-map <silent> <C-n> :NERDTreeFocus<CR>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vifm
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" vifm configurations
 map <Leader>vs :VsplitVifm<CR>
 
 " FZF configurations
@@ -85,9 +104,9 @@ set grepprg=rg\ --vimgrep\ --smart-case\ --follow
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <Leader>p :Rg<CR>
 
-" coc configurations
-"TextEdit might fail if hidden is not set.
-set hidden
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Coc
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Some servers have issues with backup files, see #649.
 set nobackup

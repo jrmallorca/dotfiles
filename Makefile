@@ -89,8 +89,10 @@ go:
 
 # Install propreitary software:
 # Microsoft Teams
+# VSCode
 propreitary:
 	sudo snap install teams
+	sudo snap install code --classic
 	# spotify
 
 # NEED TO EDIT FROM HERE ------------------------------------------------------

@@ -10,6 +10,9 @@ set fish_cursor_visual      block
 # Remap autocompletion
 bind -M insert \ce accept-autosuggestion
 
+# sudoedit abbr
+abbr se 'sudoedit'
+
 # nvim abbr
 abbr vim 'nvim'
 export EDITOR='nvim'
