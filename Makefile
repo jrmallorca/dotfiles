@@ -34,6 +34,9 @@ pomo:
 	curl -L -s https://kevinschoon.github.io/pomo/install.sh | bash /dev/stdin
 	sudo mv pomo /usr/local/bin/
 
+flutter:
+	cd ~ && git clone https://github.com/flutter/flutter.git
+
 # weechat (CLI messaging) and bitlbee (For facebook and other stuff)
 # UNTESTED
 # https://wiki.bitlbee.org/HowtoFacebookMQTT

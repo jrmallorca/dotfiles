@@ -2,6 +2,9 @@
 " General
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Set python3 path
+let g:python3_host_prog=expand('/usr/bin/python3.8')
+
 " Remap Esc to kj
 " imap kj <Esc>
 
@@ -61,10 +64,17 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     if !exists('g:vscode')
-        Plug 'vifm/vifm.vim'
-        Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'vifm/vifm.vim'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'honza/vim-snippets'
+    Plug 'dart-lang/dart-vim-plugin'
     endif
 call plug#end()
+
+let g:coc_global_extensions=[
+                \ 'coc-snippets',
+                \ 'coc-json', 'coc-flutter',
+                \ ]
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " Color scheme
@@ -72,12 +82,18 @@ call plug#end()
 
 syntax enable
 set background=dark
-" colorscheme sweet_dark
 au Colorscheme * hi Normal guibg=NONE ctermbg=NONE guifg=NONE ctermfg=NONE
 au Colorscheme * hi LineNr guibg=NONE ctermbg=NONE
 au Colorscheme * hi CursorLine guibg=NONE ctermbg=NONE
 au Colorscheme * hi SignColumn guibg=NONE ctermbg=NONE
 colorscheme codedark
+" colorscheme sweet_dark
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Status line
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set laststatus=2
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " Goyo
@@ -94,18 +110,20 @@ autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vifm
-""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-map <Leader>vs :VsplitVifm<CR>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fzf
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set grepprg=rg\ --vimgrep\ --smart-case\ --follow
 nnoremap <silent> <leader><leader> :GFiles<CR>
 nnoremap <silent> <Leader>p :Rg<CR>
+
+if !exists('g:vscode')
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vifm
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+map <Leader>vs :VsplitVifm<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " Coc
@@ -127,21 +145,40 @@ set shortmess+=c
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
-set signcolumn=number
+set signcolumn=yes
 
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+" Use <leader>x for convert visual selected code to snippet
+xmap <leader>x  <Plug>(coc-convert-snippet)
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+let g:coc_snippet_next = '<tab>'
 
 " Use <c-space> to trigger completion.
 if has('nvim')
@@ -248,7 +285,9 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+set statusline=%<%f\ %h%m%r\ %y\ Coc:
+    \\ %{coc#status()}
+    \%{get(b:,'coc_current_function','')}%=%l,%c%V\ %P
 
 " Mappings for CoCList
 " Show all diagnostics.
@@ -267,3 +306,5 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+endif

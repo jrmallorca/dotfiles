@@ -23,12 +23,16 @@ alias bat='batcat'
 abbr cdd 'cd /mnt/d'
 abbr cduni 'cd /mnt/d/University'
 abbr cdc 'cd ~/.config'
+abbr cddot 'cd ~/dotfiles'
+
+# dotfiles make config abbr
+abbr mc 'make config'
 
 # nmcli abbr (Wifi)
-abbr nmcs 'nmcli c show'
-abbr nmcd 'nmcli c down'
-abbr nmcu 'nmcli c up'
-abbr nmcc 'nmcli -a d wifi connect'
+abbr ns 'nmcli c show'
+abbr nd 'nmcli c down'
+abbr nu 'nmcli c up'
+abbr nc 'nmcli -a d wifi connect'
 
 # googler abbr
 abbr g 'googler'
@@ -53,5 +57,5 @@ abbr grb 'git rebase'
 abbr gs 'git status'
 abbr gst 'git stash'
 
-# ripgrep configurations
-set -x RIPGREP_CONFIG_PATH ~/.ripgrep/rc
+# PATH configurations
+set -x PATH $PATH ~/flutter/bin
