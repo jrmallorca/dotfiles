@@ -13,6 +13,9 @@ bind -M insert \ce accept-autosuggestion
 # sudoedit abbr
 abbr se 'sudoedit'
 
+# mpv lofi youtube stream
+abbr lofi 'mpv --no-video --ytdl-format=91 https://youtu.be/5qap5aO4i9A'
+
 # nvim abbr
 abbr vim 'nvim'
 export EDITOR='nvim'
