@@ -13,8 +13,11 @@ bind -M insert \ce accept-autosuggestion
 # sudoedit abbr
 abbr se 'sudoedit'
 
-# mpv lofi youtube stream
+# mpv lofi youtube stream no audio
 abbr lofi 'mpv --no-video --ytdl-format=91 https://youtu.be/5qap5aO4i9A'
+
+# youtube on mpv alias
+abbr yv 'googler -w youtube.com --url-handler mpv $argv'
 
 # nvim abbr
 abbr vim 'nvim'

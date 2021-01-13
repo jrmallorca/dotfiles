@@ -25,10 +25,11 @@ theme:
 # Install main programs.
 general:
 	sudo add-apt-repository ppa:kgilmer/speed-ricer
-	sudo snap install --beta nvim --classic
-	sudo snap install googler autotiling ffmpeg
-	sudo apt install -y git cmake meson i3-gaps curl feh npm slick-greeter \
-		lightdm-settings xdotool xclip zathura xcape redshift-gtk
+	sudo add-apt-repository ppa:neovim-ppa/stable
+	sudo apt update -y
+	sudo snap install autotiling ffmpeg
+	sudo apt install -y git cmake meson i3-gaps curl wget feh npm slick-greeter \
+		neovim lightdm-settings xdotool xclip zathura xcape redshift-gtk
 
 pomo:
 	curl -L -s https://kevinschoon.github.io/pomo/install.sh | bash /dev/stdin
@@ -57,7 +58,7 @@ mpv:
 
 # Install terminal colour scheme changer
 gogh:
-	sudo apt install dconf-cli uuid-runtime wget
+	sudo apt install dconf-cli uuid-runtime
 	bash -c "$(wget -qO- https://git.io/vQgMr)"
 
 # Install autotiling for i3
@@ -90,11 +91,16 @@ go:
 	sudo tar -C /usr/local -xzf go1.15.3.linux-amd64.tar.gz
 	rm go1.15.3.linux-amd64.tar.gz
 
+# Install googler
+googler:
+	wget https://github.com/jarun/googler/releases/download/v4.3.1/googler_4.3.1-1_ubuntu20.04.amd64.deb
+	sudo apt install ./googler_4.3.1-1_ubuntu20.04.amd64.deb
+	rm googler_4.3.1-1_ubuntu20.04.amd64.deb
+
 # Install propreitary software:
 # Microsoft Teams
 # VSCode
 propreitary:
-	sudo snap install teams
 	sudo snap install code --classic
 	# spotify
 
