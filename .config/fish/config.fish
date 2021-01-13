@@ -7,29 +7,18 @@ set fish_cursor_insert      line       blink
 set fish_cursor_replace_one underscore blink
 set fish_cursor_visual      block
 
-# Remap autocompletion
-bind -M insert \ce accept-autosuggestion
-
 # sudoedit abbr
 abbr se 'sudoedit'
-
-# mpv lofi youtube stream no audio
-abbr lofi 'mpv --no-video --ytdl-format=91 https://youtu.be/5qap5aO4i9A'
-
-# youtube on mpv alias
-abbr yv 'googler -w youtube.com --url-handler mpv $argv'
 
 # nvim abbr
 abbr vim 'nvim'
 export EDITOR='nvim'
-alias fd='fdfind'
-alias bat='batcat'
 
 # Changing directory abbr
 abbr cdd 'cd /mnt/d'
-abbr cduni 'cd /mnt/d/University'
+abbr uni 'cd /mnt/d/University'
 abbr cdc 'cd ~/.config'
-abbr cddot 'cd ~/dotfiles'
+abbr dot 'cd ~/dotfiles'
 
 # dotfiles make config abbr
 abbr mc 'make config'
@@ -42,6 +31,18 @@ abbr nc 'nmcli -a d wifi connect'
 
 # googler abbr
 abbr g 'googler'
+
+# firefox abbr
+abbr fanime 'daemon firefox https://9anime.to/home &'
+abbr fkdrama 'daemon firefox https://dramacool.so/ &'
+abbr fgit 'daemon firefox https://github.com/ &'
+abbr fbb 'daemon firefox https://www.ole.bris.ac.uk/ &'
+
+# mpv lofi youtube stream no audio
+abbr lofi 'mpv --no-video --ytdl-format=91 https://youtu.be/5qap5aO4i9A'
+
+# youtube on mpv alias
+abbr yv 'googler -w youtube.com --url-handler mpv'
 
 # Git abbr
 abbr ga 'git add'

@@ -28,8 +28,17 @@ general:
 	sudo add-apt-repository ppa:neovim-ppa/stable
 	sudo apt update -y
 	sudo snap install autotiling ffmpeg
-	sudo apt install -y git cmake meson i3-gaps curl wget feh npm slick-greeter \
-		neovim lightdm-settings xdotool xclip zathura xcape redshift-gtk
+	sudo apt install -y git cmake meson i3-gaps curl wget feh npm daemon \
+		slick-greeter neovim lightdm-settings xdotool xclip zathura xcape \
+		redshift-gtk
+
+fisher:
+	curl -sL https://git.io/fisher | . && fisher install jorgebucaran/fisher
+
+ripgrep:
+	curl -LO https://github.com/BurntSushi/ripgrep/releases/download/12.1.1/ripgrep_12.1.1_amd64.deb
+	sudo dpkg -i ripgrep_12.1.1_amd64.deb
+	rm ripgrep_12.1.1.amd64.deb
 
 pomo:
 	curl -L -s https://kevinschoon.github.io/pomo/install.sh | bash /dev/stdin
@@ -96,6 +105,16 @@ googler:
 	wget https://github.com/jarun/googler/releases/download/v4.3.1/googler_4.3.1-1_ubuntu20.04.amd64.deb
 	sudo apt install ./googler_4.3.1-1_ubuntu20.04.amd64.deb
 	rm googler_4.3.1-1_ubuntu20.04.amd64.deb
+
+fd:
+	wget https://github.com/sharkdp/fd/releases/download/v8.2.1/fd_8.2.1_amd64.deb
+	sudo apt install ./fd_8.2.1_amd64.deb
+	rm fd_8.2.1_amd64.deb
+
+bat:
+	wget https://github.com/sharkdp/bat/releases/download/v0.17.1/bat_0.17.1_amd64.deb
+	sudo apt install ./bat_0.17.1_amd64.deb
+	rm bat_0.17.1_amd64.deb
 
 # Install propreitary software:
 # Microsoft Teams
