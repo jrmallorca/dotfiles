@@ -10,8 +10,15 @@ set fish_cursor_visual      block
 # sudoedit abbr
 abbr se 'sudoedit'
 
+# Fzf fish abbr
+abbr vf '__fzf_search_current_dir | commandline | xargs -r $EDITOR ; commandline -r ""'
+abbr vdot 'cd ~/dotfiles ; __fzf_search_current_dir | commandline | xargs -r $EDITOR ; commandline -r ""'
+abbr vuni 'cd /mnt/d/University ; __fzf_search_current_dir | commandline | xargs -r $EDITOR ; commandline -r ""'
+abbr cdot 'cd ~/dotfiles ; cd (__fzf_search_current_dir | commandline) ; commandline -r ""'
+abbr cuni 'cd ~/mnt/d/University ; cd (__fzf_search_current_dir | commandline) ; commandline -r ""'
+
 # nvim abbr
-abbr vim 'nvim'
+abbr v 'nvim'
 export EDITOR='nvim'
 
 # Changing directory abbr
