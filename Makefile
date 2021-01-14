@@ -44,6 +44,11 @@ pomo:
 	curl -L -s https://kevinschoon.github.io/pomo/install.sh | bash /dev/stdin
 	sudo mv pomo /usr/local/bin/
 
+glow:
+	wget https://github.com/charmbracelet/glow/releases/download/v1.3.0/glow_1.3.0_linux_amd64.deb
+	sudo apt install ./glow_1.3.0_linux_amd64.deb
+	rm glow_1.3.0_linux_amd64.deb
+
 flutter:
 	cd ~ && git clone https://github.com/flutter/flutter.git
 

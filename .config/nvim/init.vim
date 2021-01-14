@@ -2,49 +2,43 @@
 " General
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Set python3 path
-let g:python3_host_prog=expand('/usr/bin/python3.8')
-
-" Remap Esc to kj
-" imap kj <Esc>
-
-" Toggling pasting to not lose formatting
-set pastetoggle=<F2>
-
 " Opening new file when current buffer has unsaved changes causes
 " files to be hidden instead of closed
 " (Coc) TextEdit might fail if hidden is not set.
 set hidden
 
-" Setting relative line numbers
-set number
-set relativenumber
+" (Coc)_Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+" Must be either yes or number
+" set signcolumn=number
+set signcolumn=yes
 
-" Searching is highlighted and smart
-set smartcase
-set hlsearch
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=200
 
-" Set yank to system clipboard
-set clipboard=unnamedplus
+let g:python3_host_prog=expand('/usr/bin/python3.8') " Set python3 path
+" imap kj <Esc> " Remap Esc to kj
+set pastetoggle=<F2> " Toggling pasting to not lose formatting
+set number " Show line numbers (Shows current line when paired with relativenumber)
+set relativenumber "Show relative line numbers
+set smartcase " Smart case
+set hlsearch " Searches highlighted
+set clipboard=unnamedplus " Set yank to system clipboard
+set nowrap " Doesn't wrap lines
+filetype indent on " Tab spacing
+set tabstop=4 " show existing tab with 4 spaces width
+set shiftwidth=4 " when indenting with '>', use 4 spaces width
+set expandtab " On pressing tab, insert 4 spaces
 
-set nocompatible
-filetype off
-set nowrap
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Split panes
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Tab spacing
-filetype plugin indent on
-" show existing tab with 4 spaces width
-set tabstop=4
-" when indenting with '>', use 4 spaces width
-set shiftwidth=4
-" On pressing tab, insert 4 spaces
-set expandtab
-
-" Vim split pane configurations
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+"nnoremap <C-J> <C-W><C-J>
+"nnoremap <C-K> <C-W><C-K>
+"nnoremap <C-L> <C-W><C-L>
+"nnoremap <C-H> <C-W><C-H>
 
 set splitbelow
 set splitright
@@ -55,7 +49,6 @@ set splitright
 
 call plug#begin('~/.config/nvim/plugged')
     Plug 'dart-lang/dart-vim-plugin'
-    Plug 'junegunn/goyo.vim'
     Plug 'junegunn/limelight.vim'
     Plug 'tomasiser/vim-code-dark'
     " Plug 'jschmold/sweet-dark.vim'
@@ -63,12 +56,11 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'tpope/vim-fugitive'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-    if !exists('g:vscode')
     Plug 'vifm/vifm.vim'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'honza/vim-snippets'
     Plug 'dart-lang/dart-vim-plugin'
-    endif
+    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 call plug#end()
 
 let g:coc_global_extensions=[
@@ -80,8 +72,8 @@ let g:coc_global_extensions=[
 " Color scheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
-syntax enable
-set background=dark
+syntax enable "Keeps current color settings
+set background=dark " Vimm tries to use colors best on dark backgrounds
 au Colorscheme * hi Normal guibg=NONE ctermbg=NONE guifg=NONE ctermfg=NONE
 au Colorscheme * hi LineNr guibg=NONE ctermbg=NONE
 au Colorscheme * hi CursorLine guibg=NONE ctermbg=NONE
@@ -93,21 +85,17 @@ colorscheme codedark
 " Status line
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set laststatus=2
+set laststatus=2 " Turn on status bar
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-" Goyo
+" Limelight 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Color name (:help cterm-colors) or ANSI code
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_ctermfg = 240
 
-nnoremap <leader>gy :Goyo<cr> :set spell spelllang=en_gb<cr> :set linebreak<cr> :set wrap<cr> :nnoremap j gj<cr> :vnoremap j gj<cr> :onoremap j gj<cr> :nnoremap k gk<cr> :vnoremap k gk<cr> :onoremap k gk<cr> :nnoremap 0 g0<cr> :nnoremap $ g$<cr>
 nnoremap <leader>ll :Limelight<cr>
-
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fzf
@@ -115,9 +103,7 @@ autocmd! User GoyoLeave Limelight!
 
 set grepprg=rg\ --vimgrep\ --smart-case\ --follow
 nnoremap <silent> <leader><leader> :GFiles<CR>
-nnoremap <silent> <Leader>p :Rg<CR>
-
-if !exists('g:vscode')
+nnoremap <silent> <leader>f :Rg<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vifm
@@ -136,16 +122,8 @@ set nowritebackup
 " Give more space for displaying messages.
 set cmdheight=2
 
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
-
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
-
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-set signcolumn=yes
 
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
@@ -223,8 +201,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>p  <Plug>(coc-format-selected)
+nmap <leader>p  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -307,4 +285,97 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
-endif
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Markdown Preview
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" set to 1, nvim will open the preview window after entering the markdown buffer
+" default: 0
+let g:mkdp_auto_start = 1
+
+" set to 1, the nvim will auto close current preview window when change
+" from markdown buffer to another buffer
+" default: 1
+let g:mkdp_auto_close = 1
+
+" set to 1, the vim will refresh markdown when save the buffer or
+" leave from insert mode, default 0 is auto refresh markdown as you edit or
+" move the cursor
+" default: 0
+let g:mkdp_refresh_slow = 0
+
+" set to 1, the MarkdownPreview command can be use for all files,
+" by default it can be use in markdown file
+" default: 0
+let g:mkdp_command_for_global = 0
+
+" set to 1, preview server available to others in your network
+" by default, the server listens on localhost (127.0.0.1)
+" default: 0
+let g:mkdp_open_to_the_world = 0
+
+" use custom IP to open preview page
+" useful when you work in remote vim and preview on local browser
+" more detail see: https://github.com/iamcco/markdown-preview.nvim/pull/9
+" default empty
+let g:mkdp_open_ip = ''
+
+" specify browser to open preview page
+" default: ''
+let g:mkdp_browser = ''
+
+" set to 1, echo preview page url in command line when open preview page
+" default is 0
+let g:mkdp_echo_preview_url = 0
+
+" a custom vim function name to open preview page
+" this function will receive url as param
+" default is empty
+let g:mkdp_browserfunc = ''
+
+" options for markdown render
+" mkit: markdown-it options for render
+" katex: katex options for math
+" uml: markdown-it-plantuml options
+" maid: mermaid options
+" disable_sync_scroll: if disable sync scroll, default 0
+" sync_scroll_type: 'middle', 'top' or 'relative', default value is 'middle'
+"   middle: mean the cursor position alway show at the middle of the preview page
+"   top: mean the vim top viewport alway show at the top of the preview page
+"   relative: mean the cursor position alway show at the relative positon of the preview page
+" hide_yaml_meta: if hide yaml metadata, default is 1
+" sequence_diagrams: js-sequence-diagrams options
+" content_editable: if enable content editable for preview page, default: v:false
+" disable_filename: if disable filename header for preview page, default: 0
+let g:mkdp_preview_options = {
+    \ 'mkit': {},
+    \ 'katex': {},
+    \ 'uml': {},
+    \ 'maid': {},
+    \ 'disable_sync_scroll': 0,
+    \ 'sync_scroll_type': 'middle',
+    \ 'hide_yaml_meta': 1,
+    \ 'sequence_diagrams': {},
+    \ 'flowchart_diagrams': {},
+    \ 'content_editable': v:false,
+    \ 'disable_filename': 0
+    \ }
+
+" use a custom markdown style must be absolute path
+" like '/Users/username/markdown.css' or expand('~/markdown.css')
+let g:mkdp_markdown_css = ''
+
+" use a custom highlight style must absolute path
+" like '/Users/username/highlight.css' or expand('~/highlight.css')
+let g:mkdp_highlight_css = ''
+
+" use a custom port to start server or random for empty
+let g:mkdp_port = ''
+
+" preview page title
+" ${name} will be replace with the file name
+let g:mkdp_page_title = '「${name}」'
+
+" recognized filetypes
+" these filetypes will have MarkdownPreview... commands
+let g:mkdp_filetypes = ['markdown']
