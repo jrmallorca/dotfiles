@@ -24,6 +24,7 @@ set number " Show line numbers (Shows current line when paired with relativenumb
 set relativenumber "Show relative line numbers
 set smartcase " Smart case
 set hlsearch " Searches highlighted
+set incsearch " Incremental search
 set clipboard=unnamedplus " Set yank to system clipboard
 set nowrap " Doesn't wrap lines
 filetype indent on " Tab spacing

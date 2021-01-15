@@ -11,11 +11,16 @@ set fish_cursor_visual      block
 abbr se 'sudoedit'
 
 # Fzf fish abbr
-abbr vf '__fzf_search_current_dir | commandline | xargs -r $EDITOR ; commandline -r ""'
-abbr vdot 'cd ~/dotfiles ; __fzf_search_current_dir | commandline | xargs -r $EDITOR ; commandline -r ""'
-abbr vuni 'cd /mnt/d/University ; __fzf_search_current_dir | commandline | xargs -r $EDITOR ; commandline -r ""'
-abbr cdot 'cd ~/dotfiles ; cd (__fzf_search_current_dir | commandline) ; commandline -r ""'
-abbr cuni 'cd ~/mnt/d/University ; cd (__fzf_search_current_dir | commandline) ; commandline -r ""'
+# abbr vf '__fzf_search_current_dir | commandline | xargs -r $EDITOR ; commandline -r ""'
+abbr vf 'commandline -i "nvim " | __fzf_search_current_dir'
+# abbr vdot 'cd ~/dotfiles ; __fzf_search_current_dir | commandline | xargs -r $EDITOR ; commandline -r ""'
+abbr vdot 'cd ~/dotfiles ; commandline -i "nvim " | __fzf_search_current_dir'
+# abbr vuni 'cd /mnt/d/University ; __fzf_search_current_dir | commandline | xargs -r $EDITOR ; commandline -r ""'
+abbr vuni 'cd /mnt/d/University ; commandline -i "nvim " | __fzf_search_current_dir'
+# abbr cdot 'cd ~/dotfiles ; cd (__fzf_search_current_dir | commandline) ; commandline -r ""'
+abbr cdot 'cd ~/dotfiles ; commandline -i "cd " | __fzf_search_current_dir'
+# abbr cuni 'cd ~/mnt/d/University ; cd (__fzf_search_current_dir | commandline) ; commandline -r ""'
+abbr cdot 'cd ~/mnt/d/University ; commandline -i "cd " | __fzf_search_current_dir'
 
 # nvim abbr
 abbr v 'nvim'
@@ -53,6 +58,7 @@ abbr yv 'googler -w youtube.com --url-handler mpv'
 
 # Git abbr
 abbr ga 'git add'
+abbr ga. 'git add .'
 abbr gb 'git branch'
 abbr gbl 'git blame'
 abbr gc 'git commit -m'
