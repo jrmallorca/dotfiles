@@ -4,10 +4,10 @@
 
 " Opening new file when current buffer has unsaved changes causes
 " files to be hidden instead of closed
-" (Coc) TextEdit might fail if hidden is not set.
+" (COC) TextEdit might fail if hidden is not set.
 set hidden
 
-" (Coc)_Always show the signcolumn, otherwise it would shift the text each time
+" (COC)_Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 " Must be either yes or number
 " set signcolumn=number
@@ -21,9 +21,9 @@ let g:python3_host_prog=expand('/usr/bin/python3.8') " Set python3 path
 " imap kj <Esc> " Remap Esc to kj
 set pastetoggle=<F2> " Toggling pasting to not lose formatting
 set number " Show line numbers (Shows current line when paired with relativenumber)
-set relativenumber "Show relative line numbers
+" set relativenumber " Show relative line numbers
 set smartcase " Smart case
-set hlsearch " Searches highlighted
+" set hlsearch " Searches highlighted
 set incsearch " Incremental search
 set clipboard=unnamedplus " Set yank to system clipboard
 set nowrap " Doesn't wrap lines
@@ -49,7 +49,7 @@ set splitright
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
 call plug#begin('~/.config/nvim/plugged')
-    Plug 'dart-lang/dart-vim-plugin'
+    Plug 'easymotion/vim-easymotion'
     Plug 'junegunn/limelight.vim'
     Plug 'tomasiser/vim-code-dark'
     " Plug 'jschmold/sweet-dark.vim'
@@ -57,7 +57,6 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'tpope/vim-fugitive'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-    Plug 'vifm/vifm.vim'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'honza/vim-snippets'
     Plug 'dart-lang/dart-vim-plugin'
@@ -86,7 +85,7 @@ colorscheme codedark
 " Status line
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set laststatus=2 " Turn on status bar
+set laststatus=0 " Turn on status bar
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " Limelight 
@@ -96,10 +95,8 @@ set laststatus=2 " Turn on status bar
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_ctermfg = 240
 
-nnoremap <leader>ll :Limelight<cr>
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-" Fzf
+" FZF
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set grepprg=rg\ --vimgrep\ --smart-case\ --follow
@@ -107,13 +104,25 @@ nnoremap <silent> <leader><leader> :GFiles<CR>
 nnoremap <silent> <leader>f :Rg<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vifm
+" Easymotion
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
-map <Leader>vs :VsplitVifm<CR>
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+let g:EasyMotion_smartcase = 1 " Turn on case-insensitive feature
+
+" move to character
+nmap f <Plug>(easymotion-overwin-f2)
+xmap f <Plug>(easymotion-f2)
+omap f <Plug>(easymotion-f2)
+
+" move to line
+map <leader>l <Plug>(easymotion-lineforward)
+map <leader>j <Plug>(easymotion-j)
+map <leader>k <Plug>(easymotion-k)
+map <leader>h <Plug>(easymotion-linebackward)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-" Coc
+" COC
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Some servers have issues with backup files, see #649.
@@ -264,7 +273,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline=%<%f\ %h%m%r\ %y\ Coc:
+set statusline=%<%f\ %h%m%r\ %y\ COC:
     \\ %{coc#status()}
     \%{get(b:,'coc_current_function','')}%=%l,%c%V\ %P
 
