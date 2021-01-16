@@ -107,9 +107,8 @@ go:
 
 # Install googler
 googler:
-	wget https://github.com/jarun/googler/releases/download/v4.3.1/googler_4.3.1-1_ubuntu20.04.amd64.deb
-	sudo apt install ./googler_4.3.1-1_ubuntu20.04.amd64.deb
-	rm googler_4.3.1-1_ubuntu20.04.amd64.deb
+	cd ~/gitapps/ && git clone git@github.com:jarun/googler.git && \
+		cd googler/ && sudo make install
 
 fd:
 	wget https://github.com/sharkdp/fd/releases/download/v8.2.1/fd_8.2.1_amd64.deb
