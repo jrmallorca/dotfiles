@@ -35,6 +35,12 @@ general:
 fisher:
 	curl -sL https://git.io/fisher | . && fisher install jorgebucaran/fisher
 
+calcurse:
+	wget https://calcurse.org/files/calcurse-4.7.0.tar.gz
+	tar -xf calcurse-4.7.0.tar.gz
+	cd calcurse-4.7.0/ && \
+		.configure && make && sudo make install
+
 ripgrep:
 	curl -LO https://github.com/BurntSushi/ripgrep/releases/download/12.1.1/ripgrep_12.1.1_amd64.deb
 	sudo dpkg -i ripgrep_12.1.1_amd64.deb
