@@ -21,9 +21,9 @@ let g:python3_host_prog=expand('/usr/bin/python3.8') " Set python3 path
 " imap kj <Esc> " Remap Esc to kj
 set pastetoggle=<F2> " Toggling pasting to not lose formatting
 set number " Show line numbers (Shows current line when paired with relativenumber)
-" set relativenumber " Show relative line numbers
+set relativenumber " Show relative line numbers
 set smartcase " Smart case
-" set hlsearch " Searches highlighted
+set hlsearch " Searches highlighted
 set incsearch " Incremental search
 set clipboard=unnamedplus " Set yank to system clipboard
 set nowrap " Doesn't wrap lines
@@ -110,16 +110,10 @@ nnoremap <silent> <leader>f :Rg<CR>
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 let g:EasyMotion_smartcase = 1 " Turn on case-insensitive feature
 
-" move to character
-nmap f <Plug>(easymotion-overwin-f2)
-xmap f <Plug>(easymotion-f2)
-omap f <Plug>(easymotion-f2)
-
-" move to line
-map <leader>l <Plug>(easymotion-lineforward)
-map <leader>j <Plug>(easymotion-j)
-map <leader>k <Plug>(easymotion-k)
-map <leader>h <Plug>(easymotion-linebackward)
+" Move to character
+nmap f <Plug>(easymotion-overwin-f)
+xmap f <Plug>(easymotion-f)
+omap f <Plug>(easymotion-f)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " COC
@@ -299,9 +293,12 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " Markdown Preview
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Start markdown preview
+nnoremap <leader>m  :MarkdownPreview<CR>
+
 " set to 1, nvim will open the preview window after entering the markdown buffer
 " default: 0
-let g:mkdp_auto_start = 1
+let g:mkdp_auto_start = 0
 
 " set to 1, the nvim will auto close current preview window when change
 " from markdown buffer to another buffer
