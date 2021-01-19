@@ -1,6 +1,6 @@
 #!/bin/bash
 
-file=$(mktemp)
+file=$(mktemp editInVim.XXXXXXXX.txt)
 
 xfce4-terminal --disable-server --command="nvim "$file"" # replace with your favorite terminal"
 

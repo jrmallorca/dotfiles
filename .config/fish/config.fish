@@ -23,9 +23,9 @@ abbr vf 'commandline -i "nvim " ; __fzf_search_current_dir'
 abbr vdot 'cd ~/dotfiles ; commandline -i "nvim " ; __fzf_search_current_dir'
 abbr vuni 'cd /mnt/d/University ; commandline -i "nvim " ; __fzf_search_current_dir'
 abbr vno 'cd /mnt/d/Notes ; commandline -i "nvim " ; __fzf_search_current_dir'
-abbr cdot 'cd ~/dotfiles ; commandline -i "cd " ; __fzf_search_current_dir'
-abbr cuni 'cd /mnt/d/University ; commandline -i "cd " ; __fzf_search_current_dir'
-abbr cuni 'cd /mnt/d/Notes ; commandline -i "cd " ; __fzf_search_current_dir'
+abbr cdot 'cd ~/dotfiles ; __fzf_search_current_dir'
+abbr cuni 'cd /mnt/d/University ; __fzf_search_current_dir'
+abbr cuni 'cd /mnt/d/Notes ; __fzf_search_current_dir'
 
 # Chat abbr
 abbr we 'weechat'
