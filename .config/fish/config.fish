@@ -9,23 +9,31 @@ set fish_cursor_visual      block
 # sudoedit abbr
 abbr se 'sudoedit'
 
-# fzf fish abbr
-# IMPROVE SO THAT IT CANCELS ON ESC BUT AUTOMATICALLY ENTERS WHEN SELECTED
-# Direct (no command history)
-# abbr vf '__fzf_search_current_dir | commandline | xargs -r $EDITOR ; commandline -r ""'
-# abbr vdot 'cd ~/dotfiles ; __fzf_search_current_dir | commandline | xargs -r $EDITOR ; commandline -r ""'
-# abbr vuni 'cd /mnt/d/University ; __fzf_search_current_dir | commandline | xargs -r $EDITOR ; commandline -r ""'
-# abbr cdot 'cd ~/dotfiles ; cd (__fzf_search_current_dir | commandline) ; commandline -r ""'
-# abbr cuni 'cd ~/mnt/d/University ; cd (__fzf_search_current_dir | commandline) ; commandline -r ""'
+# Finds file in current directory and executes nvim
+function vf
+    commandline -i "nvim " # Insert "nvim "
+    __fzf_search_current_dir # Find file in current directory
+    if test (count (commandline --tokenize)) = 2 # If found something...
+        commandline -f execute # Press enter
+    else
+        commandline -r "" # Clear commandline buffer
+    end
+end
+
+# Finds file in current directory and changes to that directory
+function cdf
+    __fzf_search_current_dir # Find file in current directory
+    commandline -f execute # Press enter
+end
 
 # Confirmation (command history)
-abbr vf 'commandline -i "nvim " ; __fzf_search_current_dir'
-abbr vdot 'cd ~/dotfiles ; commandline -i "nvim " ; __fzf_search_current_dir'
-abbr vuni 'cd /mnt/d/University ; commandline -i "nvim " ; __fzf_search_current_dir'
-abbr vno 'cd /mnt/d/Notes ; commandline -i "nvim " ; __fzf_search_current_dir'
-abbr cdot 'cd ~/dotfiles ; __fzf_search_current_dir'
-abbr cuni 'cd /mnt/d/University ; __fzf_search_current_dir'
-abbr cuni 'cd /mnt/d/Notes ; __fzf_search_current_dir'
+# abbr vf 'commandline -i "nvim " ; __fzf_search_current_dir'
+abbr vdot 'cd ~/dotfiles ; vf'
+abbr vuni 'cd /mnt/d/University ; vf'
+abbr vno 'cd /mnt/d/Notes ; vf'
+abbr cdot 'cd ~/dotfiles ; cdf'
+abbr cuni 'cd /mnt/d/University ; cdf'
+abbr cno 'cd /mnt/d/Notes ; cdf'
 
 # Chat abbr
 abbr we 'weechat'
