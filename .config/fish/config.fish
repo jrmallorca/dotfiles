@@ -10,6 +10,7 @@ set fish_cursor_visual      block
 abbr se 'sudoedit'
 
 # fzf fish abbr
+# IMPROVE SO THAT IT CANCELS ON ESC BUT AUTOMATICALLY ENTERS WHEN SELECTED
 # Direct (no command history)
 # abbr vf '__fzf_search_current_dir | commandline | xargs -r $EDITOR ; commandline -r ""'
 # abbr vdot 'cd ~/dotfiles ; __fzf_search_current_dir | commandline | xargs -r $EDITOR ; commandline -r ""'
@@ -21,8 +22,10 @@ abbr se 'sudoedit'
 abbr vf 'commandline -i "nvim " ; __fzf_search_current_dir'
 abbr vdot 'cd ~/dotfiles ; commandline -i "nvim " ; __fzf_search_current_dir'
 abbr vuni 'cd /mnt/d/University ; commandline -i "nvim " ; __fzf_search_current_dir'
+abbr vno 'cd /mnt/d/Notes ; commandline -i "nvim " ; __fzf_search_current_dir'
 abbr cdot 'cd ~/dotfiles ; commandline -i "cd " ; __fzf_search_current_dir'
 abbr cuni 'cd /mnt/d/University ; commandline -i "cd " ; __fzf_search_current_dir'
+abbr cuni 'cd /mnt/d/Notes ; commandline -i "cd " ; __fzf_search_current_dir'
 
 # Chat abbr
 abbr we 'weechat'
@@ -38,6 +41,7 @@ export EDITOR='nvim'
 # Changing directory abbr
 abbr cdd 'cd /mnt/d'
 abbr uni 'cd /mnt/d/University'
+abbr no 'cd /mnt/d/Notes'
 abbr cdc 'cd ~/.config'
 abbr dot 'cd ~/dotfiles'
 
