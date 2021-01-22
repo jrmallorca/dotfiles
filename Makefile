@@ -24,23 +24,30 @@ theme:
 
 # Install main programs.
 general:
+	cd ~ && mkdir gitapps
 	sudo add-apt-repository ppa:kgilmer/speed-ricer
 	sudo add-apt-repository ppa:neovim-ppa/stable
+	sudo apt-add-repository ppa:fish-shell/release-3
 	sudo apt update -y
 	sudo snap install ffmpeg
 	sudo apt install -y git cmake meson i3-gaps curl wget feh npm daemon \
 		slick-greeter neovim lightdm-settings xdotool xclip zathura xcape \
-		redshift-gtk
+		redshift-gtk unclutter-xfixes
+	chsh -s /usr/bin/fish
 
 fzf:
 	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 	~/.fzf/install
 
-fish:
-	sudo apt-add-repository ppa:fish-shell/release-3
-	sudo apt-get update -y
-	sudo apt-get install fish
-	chsh -s /usr/bin/fish
+ripgrep:
+	curl -LO https://github.com/BurntSushi/ripgrep/releases/download/12.1.1/ripgrep_12.1.1_amd64.deb
+	sudo dpkg -i ripgrep_12.1.1_amd64.deb
+	rm ripgrep_12.1.1_amd64.deb
+
+fd:
+	wget https://github.com/sharkdp/fd/releases/download/v8.2.1/fd_8.2.1_amd64.deb
+	sudo apt install ./fd_8.2.1_amd64.deb
+	rm fd_8.2.1_amd64.deb
 
 ohmyfish:
 	curl -L https://get.oh-my.fish | fish
@@ -57,11 +64,6 @@ calcurse:
 	tar -xf calcurse-4.7.0.tar.gz
 	cd calcurse-4.7.0/ && \
 		.configure && make && sudo make install
-
-ripgrep:
-	curl -LO https://github.com/BurntSushi/ripgrep/releases/download/12.1.1/ripgrep_12.1.1_amd64.deb
-	sudo dpkg -i ripgrep_12.1.1_amd64.deb
-	rm ripgrep_12.1.1.amd64.deb
 
 pomo:
 	curl -L -s https://kevinschoon.github.io/pomo/install.sh | bash /dev/stdin
@@ -105,7 +107,6 @@ autotiling:
 	cd ~/gitapps/ && git clone git@github.com:olemartinorg/i3-alternating-layout.git
 
 # Install picom (compositor)
-# UNTESTED
 picom:
 	sudo apt install libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libpcre3-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev
 	cd ~/gitapps/ && git clone git@github.com:yshui/picom.git && \
@@ -132,11 +133,6 @@ go:
 googler:
 	cd ~/gitapps/ && git clone git@github.com:jarun/googler.git && \
 		cd googler/ && sudo make install
-
-fd:
-	wget https://github.com/sharkdp/fd/releases/download/v8.2.1/fd_8.2.1_amd64.deb
-	sudo apt install ./fd_8.2.1_amd64.deb
-	rm fd_8.2.1_amd64.deb
 
 bat:
 	wget https://github.com/sharkdp/bat/releases/download/v0.17.1/bat_0.17.1_amd64.deb
