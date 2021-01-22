@@ -27,15 +27,32 @@ general:
 	sudo add-apt-repository ppa:kgilmer/speed-ricer
 	sudo add-apt-repository ppa:neovim-ppa/stable
 	sudo apt update -y
-	sudo snap install autotiling ffmpeg
+	sudo snap install ffmpeg
 	sudo apt install -y git cmake meson i3-gaps curl wget feh npm daemon \
 		slick-greeter neovim lightdm-settings xdotool xclip zathura xcape \
 		redshift-gtk
 
+fzf:
+	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+	~/.fzf/install
+
+fish:
+	sudo apt-add-repository ppa:fish-shell/release-3
+	sudo apt-get update -y
+	sudo apt-get install fish
+	chsh -s /usr/bin/fish
+
+ohmyfish:
+	curl -L https://get.oh-my.fish | fish
+
 fisher:
 	curl -sL https://git.io/fisher | . && fisher install jorgebucaran/fisher
 
+fisherplugins:
+	fisher install PatrickF1/fzf.fish
+
 calcurse:
+	sudo apt install libncurses5-dev
 	wget https://calcurse.org/files/calcurse-4.7.0.tar.gz
 	tar -xf calcurse-4.7.0.tar.gz
 	cd calcurse-4.7.0/ && \
