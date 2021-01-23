@@ -28,11 +28,12 @@ general:
 	sudo add-apt-repository ppa:kgilmer/speed-ricer
 	sudo add-apt-repository ppa:neovim-ppa/stable
 	sudo apt-add-repository ppa:fish-shell/release-3
+	sudo add-apt-repository ppa:linrunner/tlp
 	sudo apt update -y
 	sudo snap install ffmpeg
 	sudo apt install -y git cmake meson i3-gaps curl wget feh npm daemon \
 		slick-greeter neovim lightdm-settings xdotool xclip zathura xcape \
-		redshift-gtk unclutter-xfixes
+		redshift-gtk unclutter-xfixes tlp tlp-rdw
 	chsh -s /usr/bin/fish
 
 fzf:
