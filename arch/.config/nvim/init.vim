@@ -17,7 +17,7 @@ set signcolumn=yes
 " delays and poor user experience.
 set updatetime=200
 
-let g:python3_host_prog=expand('/usr/bin/python3.8') " Set python3 path
+let g:python3_host_prog=expand('/usr/bin/python') " Set python3 path
 " imap kj <Esc> " Remap Esc to kj
 set pastetoggle=<F2> " Toggling pasting to not lose formatting
 set number " Show line numbers (Shows current line when paired with relativenumber)

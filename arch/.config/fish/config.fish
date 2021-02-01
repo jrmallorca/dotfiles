@@ -28,10 +28,10 @@ end
 
 # Confirmation (command history)
 # abbr vf 'commandline -i "nvim " ; __fzf_search_current_dir'
-abbr vdot 'cd ~/dotfiles ; vf'
+abbr vdot 'cd ~/dotfiles/arch ; vf'
 abbr vuni 'cd /mnt/d/University ; vf'
 abbr vno 'cd /mnt/d/Notes ; vf'
-abbr cdot 'cd ~/dotfiles ; cdf'
+abbr cdot 'cd ~/dotfiles/arch ; cdf'
 abbr cuni 'cd /mnt/d/University ; cdf'
 abbr cno 'cd /mnt/d/Notes ; cdf'
 
@@ -51,7 +51,7 @@ abbr cdd 'cd /mnt/d'
 abbr uni 'cd /mnt/d/University'
 abbr no 'cd /mnt/d/Notes'
 abbr cdc 'cd ~/.config'
-abbr dot 'cd ~/dotfiles'
+abbr dot 'cd ~/dotfiles/arch'
 
 # dotfiles make config abbr
 abbr mc 'make config'

@@ -24,8 +24,8 @@ theme:
 
 # yay
 yay:
-	sudo pacman -S git
-	cd ~ && sudo git clone https://aur.archlinux.org/yay-git.git
+	sudo pacman -S --needed git
+	cd ~ && sudo git clone https://aur.archlinux.org/yay-git.git && \
 	cd yay-git && makepkg -si
 
 # Necessary
@@ -36,13 +36,30 @@ necessary:
 		xf86-video-vesa xdg-utils xdg-user-dirs openssh alacritty xorg-server \
 		xorg-xinit i3-gaps i3status dmenu fish curl wget daemon xclip xsel \
 		xdotool fzf fd bat ripgrep xcape unclutter tlp feh mpv ffmpeg \
-		youtube-dl googler alsa-utils zathura zathura-pdf-mupdf redshift
+		youtube-dl googler alsa-utils zathura zathura-pdf-mupdf redshift nodejs \
+		npm python python-pip autotiling
+	npm install -g neovim
+	pip install pynvim
+	# systemctl enable NetworkManager
+	# systemctl enable tlp
+
+spotify:
+	yay -S --needed spotifyd spotify-tui
+	echo "Make the .config/spotifyd/spotifyd.conf for the login"
+	systemctl --user start spotifyd.service
+	systemctl --user enable spotifyd.service
 
 # Install Vim-Plug. NeoVim configs must be set up.
 # DOESN'T WORK IN MAKEFILE
 vim-plug:
 	sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
     	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+gitsshkeys:
+	ssh-keygen -t ed25519 -C "isysrmallorca@gmail.com"
+	eval "$(ssh-agent -s)"
+	ssh-add ~/.ssh/id_ed25519
+	xclip -selection clipboard < ~/.ssh/id_ed25519.pub
 
 ticker:
 	curl -Ls https://api.github.com/repos/achannarasappa/ticker/releases/latest \
@@ -95,12 +112,6 @@ weechat-bitlbee:
 gogh:
 	sudo apt install dconf-cli uuid-runtime
 	bash -c "$(wget -qO- https://git.io/vQgMr)"
-
-# Install autotiling for i3
-autotiling:
-	sudo apt install python3-pip git
-	pip3 install i3ipc
-	cd ~/gitapps/ && git clone git@github.com:olemartinorg/i3-alternating-layout.git
 
 # Install picom (compositor)
 picom:

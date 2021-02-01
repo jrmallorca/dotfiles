@@ -42,7 +42,7 @@ exec --no-startup-id xcape -t 200ms -e 'Caps_Lock=Escape'
 # exec_always --no-startup-id picom --config ~/.config/picom.conf
 
 # Autotiling
-exec_always --no-startup-id ~/gitapps/i3-alternating-layout/alternating_layouts.py
+exec_always --no-startup-id autotiling
 
 # Redshift (Temperature control)
 exec --no-startup-id redshift-gtk
