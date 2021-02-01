@@ -14,7 +14,7 @@
 # ------------------------------------------------------------------------
 
 # You can also use any non-zero value if you'd like to have a border
-for_window [class=".*"] border pixel 5
+for_window [class=".*"] border pixel 0
 
 # class                 border  backgr. text    indicator child_border
 client.focused          #4c7899 #285577 #ffffff #bb0000   #000000
@@ -38,16 +38,8 @@ set $mod Mod1
 exec --no-startup-id setxkbmap -option 'caps:ctrl_modifier'
 exec --no-startup-id xcape -t 200ms -e 'Caps_Lock=Escape'
 
-# XFCE
-# Session
-# Power manager
-# Settings application
-# exec --no-startup-id xfce4-session
-# exec_always --no-startup-id xfce4-power-manager
-exec --no-startup-id xfsettingsd &
-
 # Compositor (Picom)
-exec_always --no-startup-id picom --config ~/.config/picom.conf
+# exec_always --no-startup-id picom --config ~/.config/picom.conf
 
 # Autotiling
 exec_always --no-startup-id ~/gitapps/i3-alternating-layout/alternating_layouts.py
@@ -92,10 +84,9 @@ exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec "amixer -q sset Master,0 1+ unmute"
+bindsym XF86AudioLowerVolume exec "amixer -q sset Master,0 1- unmute"
+bindsym XF86AudioMute exec "amixer -q sset Master,0 toggle"
 
 # use these keys for focus, movement, and resize directions when reaching for
 # the arrows is not convenient

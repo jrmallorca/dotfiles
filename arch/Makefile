@@ -22,33 +22,35 @@ theme:
 # Programs
 # -----------------------------------------------------------------------------
 
-# Install main programs.
-general:
-	cd ~ && mkdir gitapps
-	sudo add-apt-repository ppa:kgilmer/speed-ricer
-	sudo add-apt-repository ppa:neovim-ppa/stable
-	sudo apt-add-repository ppa:fish-shell/release-3
-	sudo add-apt-repository ppa:linrunner/tlp
-	sudo apt update -y
-	sudo snap install ffmpeg
-	sudo apt install -y git cmake meson i3-gaps curl wget feh npm daemon \
-		slick-greeter neovim lightdm-settings xdotool xclip zathura xcape \
-		redshift-gtk unclutter-xfixes tlp tlp-rdw
-	chsh -s /usr/bin/fish
+# yay
+yay:
+	sudo pacman -S git
+	cd ~ && sudo git clone https://aur.archlinux.org/yay-git.git
+	cd yay-git && makepkg -si
 
-fzf:
-	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-	~/.fzf/install
+# Necessary
+necessary:
+	yay -S --needed grub base-devel reflector efibootmgr mtools dosfstools firefox \
+		intel-ucode amd-ucode git neovim networkmanager network-manager-applet \
+		xf86-video-amdgpu xf86-video-ati xf86-video-intel xf86-video-nouveau \
+		xf86-video-vesa xdg-utils xdg-user-dirs openssh alacritty xorg-server \
+		xorg-xinit i3-gaps i3status dmenu fish curl wget daemon xclip xsel \
+		xdotool fzf fd bat ripgrep xcape unclutter tlp feh mpv ffmpeg \
+		youtube-dl googler alsa-utils zathura zathura-pdf-mupdf redshift
 
-ripgrep:
-	curl -LO https://github.com/BurntSushi/ripgrep/releases/download/12.1.1/ripgrep_12.1.1_amd64.deb
-	sudo dpkg -i ripgrep_12.1.1_amd64.deb
-	rm ripgrep_12.1.1_amd64.deb
+# Install Vim-Plug. NeoVim configs must be set up.
+# DOESN'T WORK IN MAKEFILE
+vim-plug:
+	sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+    	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
-fd:
-	wget https://github.com/sharkdp/fd/releases/download/v8.2.1/fd_8.2.1_amd64.deb
-	sudo apt install ./fd_8.2.1_amd64.deb
-	rm fd_8.2.1_amd64.deb
+ticker:
+	curl -Ls https://api.github.com/repos/achannarasappa/ticker/releases/latest \
+	| grep -wo "https.*linux-amd64*.tar.gz" \
+	| wget -qi - \
+	&& tar -xf ticker*.tar.gz \
+	&& chmod +x ./ticker \
+	&& sudo mv ticker /usr/local/bin/
 
 ohmyfish:
 	curl -L https://get.oh-my.fish | fish
@@ -89,13 +91,6 @@ weechat-bitlbee:
 	sudo apt update -y
 	sudo apt install bitlbee-facebook
 
-# mpv (Media player)
-# mpv https://github.com/mpv-player/mpv-build
-mpv:
-	sudo add-apt-repository ppa:mc3man/mpv-tests
-	sudo apt update
-	sudo apt install mpv
-
 # Install terminal colour scheme changer
 gogh:
 	sudo apt install dconf-cli uuid-runtime
@@ -116,12 +111,6 @@ picom:
 		sudo ninja -C build && \
 		sudo ninja -C build install
 
-# Install Vim-Plug. NeoVim configs must be set up.
-# UNTESTED
-vim-plug:
-	sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-    	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-
 # Install Go.
 # UNTESTED
 # CHECK VERSION BEFORE MAKING
@@ -130,39 +119,7 @@ go:
 	sudo tar -C /usr/local -xzf go1.15.3.linux-amd64.tar.gz
 	rm go1.15.3.linux-amd64.tar.gz
 
-# Install googler
-googler:
-	cd ~/gitapps/ && git clone git@github.com:jarun/googler.git && \
-		cd googler/ && sudo make install
-
-bat:
-	wget https://github.com/sharkdp/bat/releases/download/v0.17.1/bat_0.17.1_amd64.deb
-	sudo apt install ./bat_0.17.1_amd64.deb
-	rm bat_0.17.1_amd64.deb
-
 # Install propreitary software:
 # Microsoft Teams
-# VSCode
-propreitary:
-	sudo snap install code --classic
-	# spotify
-
-# NEED TO EDIT FROM HERE ------------------------------------------------------
-# Install Spotify Terminal UI.
-spt:
-	sudo snap install spt
-	xdg-open https://developer.spotify.com/dashboard/login
-
-# Install Spotifyd.
-spotifyd:
-	sudo apt install -y libasound2-dev libssl-dev libpulse-dev libdbus-1-dev
-	git clone https://github.com/Spotifyd/spotifyd.git
-	cd spotifyd && cargo build --release --no-default-features \
-		--features pulseaudio_backend,dbus_mpris && \
-		cp ../dotfiles/Cargo.toml . && \
-		cargo install --path . --locked
-	rm -Rf spotifyd
-
-# Install Android Studios
-android-studios:
-	sudo snap install android-studio
+proprietary:
+	yay -S teams
