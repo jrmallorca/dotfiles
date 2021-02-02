@@ -34,15 +34,22 @@ necessary:
 		intel-ucode amd-ucode git neovim networkmanager network-manager-applet \
 		xf86-video-amdgpu xf86-video-ati xf86-video-intel xf86-video-nouveau \
 		xf86-video-vesa xdg-utils xdg-user-dirs openssh alacritty xorg-server \
-		xorg-xinit i3-gaps i3status dmenu fish curl wget daemon xclip xsel \
+		xorg-xinit i3-gaps i3status xss-lock dmenu fish curl wget daemon xclip xsel \
 		xdotool fzf fd bat ripgrep xcape unclutter tlp feh mpv ffmpeg \
 		youtube-dl googler alsa-utils zathura zathura-pdf-mupdf redshift nodejs \
-		npm python python-pip autotiling
+		npm python python-pip autotiling dunst
 	npm install -g neovim
 	pip install pynvim
 	# systemctl enable NetworkManager
 	# systemctl enable tlp
+	# systemctl --user enable redshift.service # Doesn't have sys tray icon
+	# systemctl --user enable redshift-gtk.service # Has sys tray icon
 
+greeter:
+	yay -S --needed xorg-server xorg-xinit lightdm lightdm-webkit2-greeter lightdm-webkit-theme-sequoia-git
+	systemctl enable lightdm
+
+# Spotify TUI
 spotify:
 	yay -S --needed spotifyd spotify-tui
 	echo "Make the .config/spotifyd/spotifyd.conf for the login"
@@ -55,12 +62,14 @@ vim-plug:
 	sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
     	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
+# UNTESTED and probably doesn't work with 2nd line
 gitsshkeys:
 	ssh-keygen -t ed25519 -C "isysrmallorca@gmail.com"
 	eval "$(ssh-agent -s)"
 	ssh-add ~/.ssh/id_ed25519
 	xclip -selection clipboard < ~/.ssh/id_ed25519.pub
 
+# Stock watcher
 ticker:
 	curl -Ls https://api.github.com/repos/achannarasappa/ticker/releases/latest \
 	| grep -wo "https.*linux-amd64*.tar.gz" \
@@ -72,12 +81,15 @@ ticker:
 ohmyfish:
 	curl -L https://get.oh-my.fish | fish
 
+# Doesn't work in Makefile
 fisher:
 	curl -sL https://git.io/fisher | . && fisher install jorgebucaran/fisher
 
 fisherplugins:
 	fisher install PatrickF1/fzf.fish
 
+# CHANGE
+# CHECK VERSION
 calcurse:
 	sudo apt install libncurses5-dev
 	wget https://calcurse.org/files/calcurse-4.7.0.tar.gz
@@ -85,14 +97,10 @@ calcurse:
 	cd calcurse-4.7.0/ && \
 		.configure && make && sudo make install
 
+# CHANGE (or use another pomo)
 pomo:
 	curl -L -s https://kevinschoon.github.io/pomo/install.sh | bash /dev/stdin
 	sudo mv pomo /usr/local/bin/
-
-glow:
-	wget https://github.com/charmbracelet/glow/releases/download/v1.3.0/glow_1.3.0_linux_amd64.deb
-	sudo apt install ./glow_1.3.0_linux_amd64.deb
-	rm glow_1.3.0_linux_amd64.deb
 
 flutter:
 	cd ~ && git clone https://github.com/flutter/flutter.git
@@ -107,11 +115,6 @@ weechat-bitlbee:
 	wget -O- 'https://build.opensuse.org/projects/home:jgeboski/public_key' | sudo apt-key add -
 	sudo apt update -y
 	sudo apt install bitlbee-facebook
-
-# Install terminal colour scheme changer
-gogh:
-	sudo apt install dconf-cli uuid-runtime
-	bash -c "$(wget -qO- https://git.io/vQgMr)"
 
 # Install picom (compositor)
 picom:
