@@ -13,10 +13,10 @@ config:
 # Transfer theme related files.
 # NEED TO CHANGE TO NOT OVERWIRTE EXISTING FILES/DIRECTORIES
 theme:
-	sudo cp -R backgrounds/ /usr/share/
-	sudo cp -R themes/ /usr/share/
-	sudo cp -R icons/ /usr/share/
-	sudo cp -R fonts/ /usr/share/
+	sudo cp -R ../backgrounds/ /usr/share/
+	# sudo cp -R ../themes/ /usr/share/
+	# sudo cp -R ../icons/ /usr/share/
+	sudo cp -R ../fonts/ /usr/share/
 
 # -----------------------------------------------------------------------------
 # Programs
