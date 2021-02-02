@@ -45,6 +45,13 @@ necessary:
 	# systemctl --user enable redshift.service # Doesn't have sys tray icon
 	# systemctl --user enable redshift-gtk.service # Has sys tray icon
 
+mountd:
+	yay -S --needed ntfs-3g
+	mkdir -p /mnt/d
+	echo "Copy this into etc/fstab: UUID=<uuid> /mnt/d ntfs uid=1000,gid=1000,umask=0022,sync,auto,rw 0 0"
+	echo "Get UUID from lsblk -o NAME,FSTYPE,UUID" 
+	echo "Do: sudo mount -av"
+
 greeter:
 	yay -S --needed xorg-server xorg-xinit lightdm lightdm-webkit2-greeter lightdm-webkit-theme-sequoia-git
 	systemctl enable lightdm
