@@ -52,6 +52,7 @@ mountd:
 	echo "Get UUID from lsblk -o NAME,FSTYPE,UUID" 
 	echo "Do: sudo mount -av"
 
+# Change to slick greeter? (webkit2 greeter slow but pretty)
 greeter:
 	yay -S --needed xorg-server xorg-xinit lightdm lightdm-webkit2-greeter lightdm-webkit-theme-sequoia-git
 	systemctl enable lightdm
@@ -63,13 +64,19 @@ spotify:
 	systemctl --user start spotifyd.service
 	systemctl --user enable spotifyd.service
 
-# Install Vim-Plug. NeoVim configs must be set up.
-# DOESN'T WORK IN MAKEFILE
-vim-plug:
-	sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-    	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+# For some reason CMake fails on the lib32-libjpeg
+maya:
+	yay -S --needed libjpeg lib32-libjpeg libjpeg6 openssl-1.0 openssl audiofile xorg-fonts-misc libxp \
+		python2 python2-backports ld-lsb lsb-release cpio xorg-fonts-100dpi xorg-fonts-75dpi xorg-fonts \
+		gsfonts adobe-source-code-pro-fonts xorg-xlsfonts xorg-fonts-type1 libtiff ruby libpng15
 
-# UNTESTED and probably doesn't work with 2nd line
+# Install Vim-Plug. NeoVim configs must be set up.
+# UNTESTED but likely works
+vim-plug:
+	curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+    	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+# UNTESTED and probably doesn't work with 2nd line due to fish
 gitsshkeys:
 	ssh-keygen -t ed25519 -C "isysrmallorca@gmail.com"
 	eval "$(ssh-agent -s)"
@@ -113,15 +120,25 @@ flutter:
 	cd ~ && git clone https://github.com/flutter/flutter.git
 
 # weechat (CLI messaging) and bitlbee (For facebook and other stuff)
-# UNTESTED
+# http://thedarnedestthing.com/weechat%20+%20bitlbee
+# https://zanshin.net/2015/01/10/a-guide-for-setting-up-weechat-and-bitlbee/
 # https://wiki.bitlbee.org/HowtoFacebookMQTT
 # https://weechat.org/files/doc/stable/weechat_quickstart.en.html
 weechat-bitlbee:
-	sudo apt install weechat
-	echo "deb http://download.opensuse.org/repositories/home:/jgeboski/xUbuntu_20.04 ./" > /etc/apt/sources.list.d/jgeboski.list
-	wget -O- 'https://build.opensuse.org/projects/home:jgeboski/public_key' | sudo apt-key add -
-	sudo apt update -y
-	sudo apt install bitlbee-facebook
+	yay -S --needed weechat bitlbee bitlbee-facebook aspell lua tcl ruby libotr
+	sudo cp ../bitlbee.conf /etc/bitlbee
+	systemctl enable bitlbee --now
+	printf "Start weechat and do the following:\n
+	/server add im localhost/6667 -autoconnect\n
+	/connect im\n
+	In the bitlbee channel:\n
+	register <password>\n
+	In the weechat channel:\n
+	/set irc.server.im.command \"/msg &bitllbee identify <password>\"\n
+	Now generate an app password on facebook for bitlbee
+	In the bitlbee channel:\n
+	account add facebook <email> <app_password>\n
+	account facebook on\n"
 
 # Install picom (compositor)
 picom:
