@@ -10,7 +10,7 @@
 #
 
 # ------------------------------------------------------------------------
-# Border & Colours
+# Border, Colours & Fonts
 # ------------------------------------------------------------------------
 
 # You can also use any non-zero value if you'd like to have a border
@@ -25,40 +25,37 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 # client.background       #ffffff
 
-# ------------------------------------------------------------------------
-# General
-# ------------------------------------------------------------------------
-# exec only executes command when i3 is started
-# exec_always executed the command each time i3 is reloarded
-
-# Set $mod as Mod1
-set $mod Mod1
-
-# Remap caps-lock to ctrl+escape
-exec --no-startup-id setxkbmap -option 'caps:ctrl_modifier'
-exec --no-startup-id xcape -t 200ms -e 'Caps_Lock=Escape'
-
-# Compositor (Picom)
-# exec_always --no-startup-id picom --config ~/.config/picom.conf
-
-# Autotiling
-exec_always --no-startup-id autotiling
-
-# Start unclutter (hide mouse cursor)
-exec --no-startup-id unclutter
-
-# Wallpaper
-exec_always --no-startup-id feh --no-fehbg --bg-scale /usr/share/backgrounds/BlackAndWhite.jpg &
-
-# Edit in nvim anywhere
-bindsym $mod+o exec --no-startup-id ~/.config/i3/editInVim.sh
-
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 #
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango:DejaVu Sans Mono, FontAwesome 9
+
+# ------------------------------------------------------------------------
+# Autostart
+# ------------------------------------------------------------------------
+# exec only executes command when i3 is started
+# exec_always executed the command each time i3 is reloaded
+
+# Remap caps-lock to Ctrl+Escape
+exec --no-startup-id setxkbmap -option 'caps:ctrl_modifier'
+exec --no-startup-id xcape -t 200ms -e 'Caps_Lock=Escape'
+
+# Compositor (Picom)
+# exec_always --no-startup-id picom --config ~/.config/picom.conf
+
+# Flameshot (Print screen)
+exec --no-startup-id flameshot &
+
+# Autotiling
+exec_always --no-startup-id autotiling &
+
+# Start unclutter (hide mouse cursor)
+exec --no-startup-id unclutter &
+
+# Wallpaper
+exec_always --no-startup-id feh --no-fehbg --bg-scale /usr/share/backgrounds/BlackAndWhite.jpg &
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
@@ -74,6 +71,9 @@ exec --no-startup-id nm-applet
 # ------------------------------------------------------------------------
 # Controls
 # ------------------------------------------------------------------------
+
+# Set $mod as Mod1
+set $mod Mod1
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -99,6 +99,11 @@ bindsym $mod+Shift+Return exec firefox
 
 # kill focused window
 bindsym $mod+q kill
+
+# Edit in nvim anywhere
+# DOESN'T WORK IN ALACRITTY
+# WORKS IN XFCE4-TERMINAL IF WITH --disable-server
+bindsym $mod+o exec --no-startup-id ~/.config/i3/editInVim.sh
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
@@ -239,6 +244,25 @@ mode "(S)uspend, (L)ogout, (R)eboot, (P)oweroff" {
 }
 
 bindsym $mod+Shift+q mode "(S)uspend, (L)ogout, (R)eboot, (P)oweroff"
+
+# Screenshotting.
+mode "(P)artial, (S)creen, (D)esktop" {
+
+    # Capture a portion of the screen.
+    bindsym p mode "default"; exec flameshot gui
+
+    # Capture current screen.
+    bindsym s mode "default"; exec flameshot screen -p $screenshots
+    
+    # Capture entire desktop.
+    bindsym d mode "default"; exec flameshot full -p $screenshots
+    
+    # Return to normal mode.
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
+
+bindsym Print mode "Screenshot"
 
 # Toggle gaps
 gaps inner 0
