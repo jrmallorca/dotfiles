@@ -63,13 +63,12 @@ abbr nd 'nmcli c down'
 abbr nu 'nmcli c up'
 abbr nc 'nmcli -a d wifi connect'
 
-# googler abbr
-abbr g 'googler'
-
 # Stocks abbr
 abbr stocks ticker -w AMD,AAPL,GME,AMC,SQ,NIO --show-fundamentals --show-separator
 
-# firefox abbr
+# Browser-related abbr
+abbr g 'googler'
+abbr b 'buku'
 abbr fanime 'daemon firefox https://9anime.to/home &'
 abbr fkdrama 'daemon firefox https://dramacool.so/ &'
 abbr fgit 'daemon firefox https://github.com/ &'

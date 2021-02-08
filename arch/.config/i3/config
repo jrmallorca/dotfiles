@@ -10,9 +10,10 @@
 #
 
 # ------------------------------------------------------------------------
-# Border, Colours & Fonts
+# Appearance
 # ------------------------------------------------------------------------
 
+# Border
 # You can also use any non-zero value if you'd like to have a border
 for_window [class=".*"] border pixel 5
 
@@ -31,6 +32,30 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango:DejaVu Sans Mono, FontAwesome 9
+
+# Bar
+set $transparent #00000000
+set $dmenu_colour #222222
+bar {
+        mode hide
+        modifier None
+        position top
+        i3bar_command i3bar -t
+        status_command i3status
+        colors {
+        background $transparent
+        statusline #ffffff
+        separator #4b5262
+
+        # colour of border, background, and text
+        focused_workspace       #2f343f #bf616a #d8dee8
+        active_workspace        #2f343f #2f343f #d8dee8
+        inactive_workspace      #2f343f #2f343f #d8dee8
+        urgent_workspace        #2f343f #ebcb8b #2f343f
+    }
+}
+
+bindsym $mod+b bar mode toggle
 
 # ------------------------------------------------------------------------
 # Autostart
@@ -68,6 +93,11 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
 # ------------------------------------------------------------------------
 # Controls
 # ------------------------------------------------------------------------
@@ -104,13 +134,6 @@ bindsym $mod+q kill
 # DOESN'T WORK IN ALACRITTY
 # WORKS IN XFCE4-TERMINAL IF WITH --disable-server
 bindsym $mod+o exec --no-startup-id ~/.config/i3/editInVim.sh
-
-# start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+$left focus left
@@ -204,7 +227,8 @@ bindsym $mod+Shift+r restart
 # ------------------------------------------------------------------------
 
 # resize window (you can also use the mouse for that)
-mode "Resize" {
+set $mode_resize Resize
+mode "$mode_resize" {
         # These bindings trigger as soon as you enter the resize mode
 
         # Pressing left will shrink the window’s width.
@@ -228,83 +252,80 @@ mode "Resize" {
         bindsym $mod+r mode "default"
 }
 
-bindsym $mod+r mode "Resize"
+bindsym $mod+r mode "$mode_resize"
 
-# Create Log out, Reboot, Poweroff bindings
-mode "(S)uspend, (L)ogout, (R)eboot, (P)oweroff" {
-        bindsym r exec --no-startup-id systemctl reboot
-        bindsym s exec --no-startup-id systemctl suspend; mode "default"
-        bindsym l exit
-        bindsym p exec --no-startup-id systemctl poweroff
+# Computer power
+set $mode_power (S)uspend, (L)ogout, (R)eboot, (P)oweroff
+mode "$mode_power" {
+    # Suspend
+    bindsym s exec --no-startup-id systemctl suspend; mode "default"
+    # Log out
+    bindsym l exit
+    # Reboot
+    bindsym r exec --no-startup-id systemctl reboot
+    # Power off
+    bindsym p exec --no-startup-id systemctl poweroff
 
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+Shift+q mode "default"
+    # Return to normal mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
-bindsym $mod+Shift+q mode "(S)uspend, (L)ogout, (R)eboot, (P)oweroff"
+bindsym $mod+Shift+q mode "$mode_power"
 
-# Screenshotting.
-mode "(P)artial, (S)creen, (D)esktop" {
-
-    # Capture a portion of the screen.
+# Screenshotting
+set $mode_screenshot (P)artial, (S)creen, (D)esktop
+set $screenshots ~/Pictures
+mode "$mode_screenshot" {
+    # Capture a portion of the screen
     bindsym p mode "default"; exec flameshot gui
-
-    # Capture current screen.
+    # Capture current screen
     bindsym s mode "default"; exec flameshot screen -p $screenshots
-    
-    # Capture entire desktop.
+    # Capture entire desktop
     bindsym d mode "default"; exec flameshot full -p $screenshots
-    
-    # Return to normal mode.
+
+    # Return to normal mode
     bindsym Escape mode "default"
     bindsym Return mode "default"
 }
 
-bindsym Print mode "Screenshot"
+bindsym Print mode "$mode_screenshot"
 
-# Toggle gaps
+# Dmenu
+set $mode_dmenu (G)oogle, (B)ookmarks, (A)pplications
+mode "$mode_dmenu" {
+    # Search Google
+    bindsym g mode "default"; exec --no-startup-id ~/.config/i3/dmenu_search.sh
+    # Capture entire desktop
+    bindsym b mode "default"; exec --no-startup-id ~/.config/i3/dmenu_bookmarks.sh
+    # Search for applications
+    bindsym a mode "default"; exec dmenu_run 
+    
+    # Return to normal mode
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
+
+bindsym $mod+d mode "$mode_dmenu"
+
+# Gaps
 gaps inner 0
 smart_gaps on
 smart_borders on
 
 set $mode_gaps Toggle gaps: (1) on (2) off
 mode "$mode_gaps" {
+    # On
     bindsym 1 mode "default", gaps inner all set 10
+    # Off
     bindsym 2 mode "default", gaps inner all set 0, gaps outer all set 0
+
+    # Return to normal mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 
 bindsym $mod+g mode "$mode_gaps"
-
-# ------------------------------------------------------------------------
-# Bar
-# ------------------------------------------------------------------------
-
-set $transparent #00000000
-set $dmenu_colour #222222
-bar {
-        mode hide
-        modifier None
-        position top
-        i3bar_command i3bar -t
-        status_command i3status
-        colors {
-        background $transparent
-        statusline #ffffff
-        separator #4b5262
-
-        # colour of border, background, and text
-        focused_workspace       #2f343f #bf616a #d8dee8
-        active_workspace        #2f343f #2f343f #d8dee8
-        inactive_workspace      #2f343f #2f343f #d8dee8
-        urgent_workspace        #2f343f #ebcb8b #2f343f
-    }
-}
-
-bindsym $mod+b bar mode toggle
 
 #######################################################################
 # automatically start i3-config-wizard to offer the user to create a
