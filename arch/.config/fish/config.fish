@@ -1,4 +1,5 @@
 fish_vi_key_bindings
+set fish_greeting # Removes fish greeting
 
 # Set the cursor shapes for the different vi modes.
 set fish_cursor_default     block      blink
