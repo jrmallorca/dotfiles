@@ -8,20 +8,23 @@
 
 # Transfer config files.
 config:
-	cp -R .config ~
+	cp -a config/. ~/.config
+	cp .profile ~
 
 # Transfer theme related files.
-# NEED TO CHANGE TO NOT OVERWIRTE EXISTING FILES/DIRECTORIES
+# NEED TO CHANGE TO NOT OVERWRITE EXISTING FILES/DIRECTORIES
 theme:
-	sudo cp -R ../backgrounds/ /usr/share/
-	# sudo cp -R ../themes/ /usr/share/
-	# sudo cp -R ../icons/ /usr/share/
-	sudo cp -R ../fonts/ /usr/share/
+	sudo cp -a ../backgrounds/ /usr/share/
+	# sudo cp -a ../themes/ /usr/share/
+	# sudo cp -a ../icons/ /usr/share/
+	sudo cp -a ../fonts/ /usr/share/
+	sudo cp bitlbee.conf /etc/bitlbee/
 
 # -----------------------------------------------------------------------------
 # Programs
 # -----------------------------------------------------------------------------
 
+# Think about moving to paru
 # yay
 yay:
 	sudo pacman -S --needed git
@@ -134,7 +137,7 @@ weechat-bitlbee:
 	In the bitlbee channel:\n
 	register <password>\n
 	In the weechat channel:\n
-	/set irc.server.im.command \"/msg &bitllbee identify <password>\"\n
+	/set irc.server.im.command \"/msg &bitlbee identify <password>\"\n
 	Now generate an app password on facebook for bitlbee
 	In the bitlbee channel:\n
 	account add facebook <email> <app_password>\n
