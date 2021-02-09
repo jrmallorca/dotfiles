@@ -6,10 +6,10 @@
 # Dot Files
 # -----------------------------------------------------------------------------
 
-# Transfer config files.
-config:
-	cp -a config/. ~/.config
-	cp .profile ~
+# Transfer configuration files.
+configuration:
+	cp -a config/. ~/.config/
+	cp .profile ~/
 
 # Transfer theme related files.
 # NEED TO CHANGE TO NOT OVERWRITE EXISTING FILES/DIRECTORIES
@@ -24,16 +24,15 @@ theme:
 # Programs
 # -----------------------------------------------------------------------------
 
-# Think about moving to paru
-# yay
-yay:
-	sudo pacman -S --needed git
-	cd ~ && sudo git clone https://aur.archlinux.org/yay-git.git && \
-	cd yay-git && makepkg -si
+# paru
+paru:
+	sudo pacman -S --needed git base-devel
+	cd ~ && sudo git clone https://aur.archlinux.org/paru.git && \
+		cd paru && makepkg -si
 
 # Necessary
 necessary:
-	yay -S --needed grub base-devel reflector efibootmgr mtools dosfstools firefox \
+	paru -S --needed grub base-devel reflector efibootmgr mtools dosfstools firefox \
 		intel-ucode amd-ucode git neovim networkmanager network-manager-applet \
 		xf86-video-amdgpu xf86-video-ati xf86-video-intel xf86-video-nouveau \
 		xf86-video-vesa xdg-utils xdg-user-dirs openssh alacritty xorg-server \
@@ -49,7 +48,7 @@ necessary:
 	# systemctl --user enable redshift-gtk.service # Has sys tray icon
 
 mountd:
-	yay -S --needed ntfs-3g
+	paru -S --needed ntfs-3g
 	mkdir -p /mnt/d
 	echo "Copy this into etc/fstab: UUID=<uuid> /mnt/d ntfs uid=1000,gid=1000,umask=0022,sync,auto,rw 0 0"
 	echo "Get UUID from lsblk -o NAME,FSTYPE,UUID" 
@@ -57,19 +56,19 @@ mountd:
 
 # Change to slick greeter? (webkit2 greeter slow but pretty)
 greeter:
-	yay -S --needed xorg-server xorg-xinit lightdm lightdm-webkit2-greeter lightdm-webkit-theme-sequoia-git
+	paru -S --needed xorg-server xorg-xinit lightdm lightdm-webkit2-greeter lightdm-webkit-theme-sequoia-git
 	systemctl enable lightdm
 
 # Spotify TUI
 spotify:
-	yay -S --needed spotifyd spotify-tui
+	paru -S --needed spotifyd spotify-tui
 	echo "Make the .config/spotifyd/spotifyd.conf for the login"
 	systemctl --user start spotifyd.service
 	systemctl --user enable spotifyd.service
 
 # For some reason CMake fails on the lib32-libjpeg
 maya:
-	yay -S --needed libjpeg lib32-libjpeg libjpeg6 openssl-1.0 openssl audiofile xorg-fonts-misc libxp \
+	paru -S --needed libjpeg lib32-libjpeg libjpeg6 openssl-1.0 openssl audiofile xorg-fonts-misc libxp \
 		python2 python2-backports ld-lsb lsb-release cpio xorg-fonts-100dpi xorg-fonts-75dpi xorg-fonts \
 		gsfonts adobe-source-code-pro-fonts xorg-xlsfonts xorg-fonts-type1 libtiff ruby libpng15
 
@@ -128,7 +127,7 @@ flutter:
 # https://wiki.bitlbee.org/HowtoFacebookMQTT
 # https://weechat.org/files/doc/stable/weechat_quickstart.en.html
 weechat-bitlbee:
-	yay -S --needed weechat bitlbee bitlbee-facebook aspell lua tcl ruby libotr
+	paru -S --needed weechat bitlbee bitlbee-facebook aspell lua tcl ruby libotr
 	sudo cp ../bitlbee.conf /etc/bitlbee
 	systemctl enable bitlbee --now
 	printf "Start weechat and do the following:\n
@@ -163,4 +162,4 @@ go:
 # Install propreitary software:
 # Microsoft Teams
 proprietary:
-	yay -S teams
+	paru -S teams

@@ -55,7 +55,7 @@ abbr cdc 'cd ~/.config'
 abbr dot 'cd ~/dotfiles/arch'
 
 # dotfiles make config abbr
-abbr mc 'make config'
+abbr mc 'make configuration'
 
 # nmcli abbr (Wifi)
 abbr ns 'nmcli c show'

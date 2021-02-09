@@ -102,8 +102,10 @@ exec --no-startup-id nm-applet
 # Controls
 # ------------------------------------------------------------------------
 
-# Set $mod as Mod1
+# Set $mod as Mod1 (Alt)
 set $mod Mod1
+# Set $scripts to script folder
+set $scripts ~/dotfiles/arch/scripts
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -133,7 +135,7 @@ bindsym $mod+q kill
 # Edit in nvim anywhere
 # DOESN'T WORK IN ALACRITTY
 # WORKS IN XFCE4-TERMINAL IF WITH --disable-server
-bindsym $mod+o exec --no-startup-id ~/.config/i3/editInVim.sh
+bindsym $mod+o exec --no-startup-id $scripts/editInVim.sh
 
 # change focus
 bindsym $mod+$left focus left
@@ -295,9 +297,9 @@ bindsym Print mode "$mode_screenshot"
 set $mode_dmenu (G)oogle, (B)ookmarks, (A)pplications
 mode "$mode_dmenu" {
     # Search Google
-    bindsym g mode "default"; exec --no-startup-id ~/.config/i3/dmenu_search.sh
+    bindsym g mode "default"; exec --no-startup-id $scripts/dmenu_search.sh
     # Capture entire desktop
-    bindsym b mode "default"; exec --no-startup-id ~/.config/i3/dmenu_bookmarks.sh
+    bindsym b mode "default"; exec --no-startup-id $scripts/dmenu_bookmarks.sh
     # Search for applications
     bindsym a mode "default"; exec dmenu_run 
     
