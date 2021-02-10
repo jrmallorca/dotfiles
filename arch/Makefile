@@ -15,8 +15,8 @@ configuration:
 # NEED TO CHANGE TO NOT OVERWRITE EXISTING FILES/DIRECTORIES
 theme:
 	sudo cp -a ../backgrounds/ /usr/share/
-	# sudo cp -a ../themes/ /usr/share/
-	# sudo cp -a ../icons/ /usr/share/
+	sudo cp -a ../themes/ /usr/share/
+	sudo cp -a ../icons/ /usr/share/
 	sudo cp -a ../fonts/ /usr/share/
 	sudo cp bitlbee.conf /etc/bitlbee/
 
