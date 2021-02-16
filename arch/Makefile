@@ -19,6 +19,7 @@ theme:
 	sudo cp -a ../icons/ /usr/share/
 	sudo cp -a ../fonts/ /usr/share/
 	sudo cp bitlbee.conf /etc/bitlbee/
+	sudo cp 40-libinput.conf /usr/share/X11/xorg.conf.d/
 
 # -----------------------------------------------------------------------------
 # Programs
@@ -40,7 +41,7 @@ necessary:
 		xdotool fzf fd bat ripgrep xcape unclutter tlp feh mpv ffmpeg \
 		youtube-dl googler alsa-utils zathura zathura-pdf-mupdf redshift nodejs \
 		npm python python-pip autotiling dunst flameshot buku lxappearance-gtk3 \
-		gtk3
+		gtk3 libinput xorg-xinput
 	npm install -g neovim
 	pip install pynvim
 	# systemctl enable NetworkManager
