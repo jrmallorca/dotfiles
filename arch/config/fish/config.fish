@@ -74,8 +74,8 @@ abbr fkdrama 'daemon firefox https://dramacool.so/ &'
 abbr fgit 'daemon firefox https://github.com/ &'
 abbr fbb 'daemon firefox https://www.ole.bris.ac.uk/ &'
 
-# mpv lofi youtube stream no audio
-abbr lofi 'mpv --no-video --ytdl-format=91 https://youtu.be/5qap5aO4i9A'
+# Play Lo-Fi Cafe on spt
+abbr lofi 'spt p --uri spotify:playlist:37i9dQZF1DX9RwfGbeGQwP'
 
 # youtube on mpv alias
 abbr yv 'googler -w youtube.com --url-handler mpv'

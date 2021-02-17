@@ -63,9 +63,15 @@ bindsym $mod+b bar mode toggle
 # exec only executes command when i3 is started
 # exec_always executed the command each time i3 is reloaded
 
+# Set $scripts to script folder
+set $scripts ~/dotfiles/arch/scripts
+
 # Remap caps-lock to Ctrl+Escape
 exec --no-startup-id setxkbmap -option 'caps:ctrl_modifier'
 exec --no-startup-id xcape -t 200ms -e 'Caps_Lock=Escape'
+
+# Start up workspaces automatically
+exec --no-startup-id $scripts/i3layout.sh
 
 # Compositor (Picom)
 # exec_always --no-startup-id picom --config ~/.config/picom.conf
@@ -99,18 +105,11 @@ exec --no-startup-id nm-applet
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # ------------------------------------------------------------------------
-# Autostart applications in workspaces
-# ------------------------------------------------------------------------
-exec --no-startup-id i3-msg 'workspace 10; exec $TERMINAL -e spt && sleep 1; workspace 1; exec firefox'
-
-# ------------------------------------------------------------------------
 # Controls
 # ------------------------------------------------------------------------
 
 # Set $mod as Mod1 (Alt)
 set $mod Mod1
-# Set $scripts to script folder
-set $scripts ~/dotfiles/arch/scripts
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -235,18 +234,18 @@ bindsym $mod+Shift+r restart
 set $i3_resurrect i3-resurrect
 
 # Save workspace mode.
-set $mode_save Save workspace X
+set $mode_save Save workspace X (X = {1, 2, ..., 10})
 mode "$mode_save" {
-  bindsym 1 exec "$i3_resurrect save -w 1 --swallow=class,instance,title"
-  bindsym 2 exec "$i3_resurrect save -w 2 --swallow=class,instance,title"
-  bindsym 3 exec "$i3_resurrect save -w 3 --swallow=class,instance,title"
-  bindsym 4 exec "$i3_resurrect save -w 4 --swallow=class,instance,title"
-  bindsym 5 exec "$i3_resurrect save -w 5 --swallow=class,instance,title"
-  bindsym 6 exec "$i3_resurrect save -w 6 --swallow=class,instance,title"
-  bindsym 7 exec "$i3_resurrect save -w 7 --swallow=class,instance,title"
-  bindsym 8 exec "$i3_resurrect save -w 8 --swallow=class,instance,title"
-  bindsym 9 exec "$i3_resurrect save -w 9 --swallow=class,instance,title"
-  bindsym 0 exec "$i3_resurrect save -w 10 --swallow=class,instance,title"
+  bindsym 1 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 1 --swallow=class,instance,title"
+  bindsym 2 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 2 --swallow=class,instance,title"
+  bindsym 3 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 3 --swallow=class,instance,title"
+  bindsym 4 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 4 --swallow=class,instance,title"
+  bindsym 5 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 5 --swallow=class,instance,title"
+  bindsym 6 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 6 --swallow=class,instance,title"
+  bindsym 7 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 7 --swallow=class,instance,title"
+  bindsym 8 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 8 --swallow=class,instance,title"
+  bindsym 9 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 9 --swallow=class,instance,title"
+  bindsym 0 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 10 --swallow=class,instance,title"
 
   # Back to normal: Enter, Escape
   bindsym Return mode "default"
@@ -256,29 +255,29 @@ mode "$mode_save" {
 bindsym $mod+s mode "$mode_save"
 
 # Restore workspace mode.
-set $mode_restore Restore workspace X
+set $mode_restore Restore workspace X (X = {1, 2, .., 10}, Shift+X to restore only layout)
 mode "$mode_restore" {
-  bindsym 1 exec "$i3_resurrect restore -w 1 --programs-only"
-  bindsym 2 exec "$i3_resurrect restore -w 2 --programs-only"
-  bindsym 3 exec "$i3_resurrect restore -w 3 --programs-only"
-  bindsym 4 exec "$i3_resurrect restore -w 4 --programs-only"
-  bindsym 5 exec "$i3_resurrect restore -w 5 --programs-only"
-  bindsym 6 exec "$i3_resurrect restore -w 6 --programs-only"
-  bindsym 7 exec "$i3_resurrect restore -w 7 --programs-only"
-  bindsym 8 exec "$i3_resurrect restore -w 8 --programs-only"
-  bindsym 9 exec "$i3_resurrect restore -w 9 --programs-only"
-  bindsym 0 exec "$i3_resurrect restore -w 10 --programs-only"
+  bindsym 1 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 1 --programs-only"
+  bindsym 2 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 2 --programs-only"
+  bindsym 3 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 3 --programs-only"
+  bindsym 4 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 4 --programs-only"
+  bindsym 5 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 5 --programs-only"
+  bindsym 6 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 6 --programs-only"
+  bindsym 7 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 7 --programs-only"
+  bindsym 8 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 8 --programs-only"
+  bindsym 9 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 9 --programs-only"
+  bindsym 0 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 10 --programs-only"
 
-  bindsym $mod+1 exec "$i3_resurrect restore -w 1 --layout-only"
-  bindsym $mod+2 exec "$i3_resurrect restore -w 2 --layout-only"
-  bindsym $mod+3 exec "$i3_resurrect restore -w 3 --layout-only"
-  bindsym $mod+4 exec "$i3_resurrect restore -w 4 --layout-only"
-  bindsym $mod+5 exec "$i3_resurrect restore -w 5 --layout-only"
-  bindsym $mod+6 exec "$i3_resurrect restore -w 6 --layout-only"
-  bindsym $mod+7 exec "$i3_resurrect restore -w 7 --layout-only"
-  bindsym $mod+8 exec "$i3_resurrect restore -w 8 --layout-only"
-  bindsym $mod+9 exec "$i3_resurrect restore -w 9 --layout-only"
-  bindsym $mod+0 exec "$i3_resurrect restore -w 10 --layout-only"
+  bindsym Shift+1 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 1 --layout-only"
+  bindsym Shift+2 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 2 --layout-only"
+  bindsym Shift+3 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 3 --layout-only"
+  bindsym Shift+4 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 4 --layout-only"
+  bindsym Shift+5 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 5 --layout-only"
+  bindsym Shift+6 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 6 --layout-only"
+  bindsym Shift+7 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 7 --layout-only"
+  bindsym Shift+8 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 8 --layout-only"
+  bindsym Shift+9 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 9 --layout-only"
+  bindsym Shift+0 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 10 --layout-only"
 
   # Back to normal: Enter, Escape
   bindsym Return mode "default"
