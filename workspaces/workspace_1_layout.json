@@ -28,11 +28,11 @@
         "x": 0,
         "y": 0,
         "width": 1920,
-        "height": 1080
+        "height": 1060
       },
       "layout": "splith",
       "marks": [],
-      "name": "Bento \u2013 Mozilla Firefox",
+      "name": "Tasks | Habitica \u2013 Mozilla Firefox",
       "orientation": "none",
       "percent": 1.0,
       "scratchpad_state": "none",
@@ -43,7 +43,7 @@
         {
           "class": "^firefox$",
           "instance": "^Navigator$",
-          "title": "^Bento\\ \u2013\\ Mozilla\\ Firefox$"
+          "title": "^Tasks\\ \\|\\ Habitica\\ \u2013\\ Mozilla\\ Firefox$"
         }
       ]
     }

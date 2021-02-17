@@ -1,7 +1,7 @@
 [
   {
     "command": [
-      "/usr/lib/firefox/firefox"
+      "/usr/lib/firefox/firefox", "-new-tab", "https://habitica.com/"
     ],
     "working_directory": "/home/jrmallorca"
   }
