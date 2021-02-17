@@ -37,11 +37,11 @@ necessary:
 		intel-ucode amd-ucode git neovim networkmanager network-manager-applet \
 		xf86-video-amdgpu xf86-video-ati xf86-video-intel xf86-video-nouveau \
 		xf86-video-vesa xdg-utils xdg-user-dirs openssh alacritty xorg-server \
-		xorg-xinit i3-gaps i3status xss-lock dmenu fish curl wget daemon xclip xsel \
-		xdotool fzf fd bat ripgrep xcape unclutter tlp feh mpv ffmpeg \
-		youtube-dl googler alsa-utils zathura zathura-pdf-mupdf redshift nodejs \
-		npm python python-pip autotiling dunst flameshot buku lxappearance-gtk3 \
-		gtk3 libinput xorg-xinput
+		xorg-xinit i3-gaps i3status i3lock perl-anyevent-i3 i3-resurrect xss-lock \
+		dmenu fish curl wget daemon xclip xsel xdotool fzf fd bat ripgrep xcape \
+		unclutter tlp feh mpv ffmpeg youtube-dl googler alsa-utils zathura \
+		zathura-pdf-mupdf redshift nodejs npm python python-pip autotiling \
+		dunst flameshot buku lxappearance-gtk3 gtk3 libinput xorg-xinput
 	npm install -g neovim
 	pip install pynvim
 	# systemctl enable NetworkManager

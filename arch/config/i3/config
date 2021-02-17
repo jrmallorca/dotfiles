@@ -99,6 +99,11 @@ exec --no-startup-id nm-applet
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # ------------------------------------------------------------------------
+# Autostart applications in workspaces
+# ------------------------------------------------------------------------
+exec --no-startup-id i3-msg 'workspace 10; exec $TERMINAL -e spt && sleep 1; workspace 1; exec firefox'
+
+# ------------------------------------------------------------------------
 # Controls
 # ------------------------------------------------------------------------
 
@@ -159,9 +164,9 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+# bindsym $mod+s layout stacking
+# bindsym $mod+w layout tabbed
+# bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -227,9 +232,63 @@ bindsym $mod+Shift+r restart
 # ------------------------------------------------------------------------
 # Modes
 # ------------------------------------------------------------------------
+set $i3_resurrect i3-resurrect
 
-# resize window (you can also use the mouse for that)
-set $mode_resize Resize
+# Save workspace mode.
+set $mode_save Save workspace X
+mode "$mode_save" {
+  bindsym 1 exec "$i3_resurrect save -w 1 --swallow=class,instance,title"
+  bindsym 2 exec "$i3_resurrect save -w 2 --swallow=class,instance,title"
+  bindsym 3 exec "$i3_resurrect save -w 3 --swallow=class,instance,title"
+  bindsym 4 exec "$i3_resurrect save -w 4 --swallow=class,instance,title"
+  bindsym 5 exec "$i3_resurrect save -w 5 --swallow=class,instance,title"
+  bindsym 6 exec "$i3_resurrect save -w 6 --swallow=class,instance,title"
+  bindsym 7 exec "$i3_resurrect save -w 7 --swallow=class,instance,title"
+  bindsym 8 exec "$i3_resurrect save -w 8 --swallow=class,instance,title"
+  bindsym 9 exec "$i3_resurrect save -w 9 --swallow=class,instance,title"
+  bindsym 0 exec "$i3_resurrect save -w 10 --swallow=class,instance,title"
+
+  # Back to normal: Enter, Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+bindsym $mod+s mode "$mode_save"
+
+# Restore workspace mode.
+set $mode_restore Restore workspace X
+mode "$mode_restore" {
+  bindsym 1 exec "$i3_resurrect restore -w 1 --programs-only"
+  bindsym 2 exec "$i3_resurrect restore -w 2 --programs-only"
+  bindsym 3 exec "$i3_resurrect restore -w 3 --programs-only"
+  bindsym 4 exec "$i3_resurrect restore -w 4 --programs-only"
+  bindsym 5 exec "$i3_resurrect restore -w 5 --programs-only"
+  bindsym 6 exec "$i3_resurrect restore -w 6 --programs-only"
+  bindsym 7 exec "$i3_resurrect restore -w 7 --programs-only"
+  bindsym 8 exec "$i3_resurrect restore -w 8 --programs-only"
+  bindsym 9 exec "$i3_resurrect restore -w 9 --programs-only"
+  bindsym 0 exec "$i3_resurrect restore -w 10 --programs-only"
+
+  bindsym $mod+1 exec "$i3_resurrect restore -w 1 --layout-only"
+  bindsym $mod+2 exec "$i3_resurrect restore -w 2 --layout-only"
+  bindsym $mod+3 exec "$i3_resurrect restore -w 3 --layout-only"
+  bindsym $mod+4 exec "$i3_resurrect restore -w 4 --layout-only"
+  bindsym $mod+5 exec "$i3_resurrect restore -w 5 --layout-only"
+  bindsym $mod+6 exec "$i3_resurrect restore -w 6 --layout-only"
+  bindsym $mod+7 exec "$i3_resurrect restore -w 7 --layout-only"
+  bindsym $mod+8 exec "$i3_resurrect restore -w 8 --layout-only"
+  bindsym $mod+9 exec "$i3_resurrect restore -w 9 --layout-only"
+  bindsym $mod+0 exec "$i3_resurrect restore -w 10 --layout-only"
+
+  # Back to normal: Enter, Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+bindsym $mod+n mode "$mode_restore"
+
+# Resize window (you can also use the mouse for that)
+set $mode_resize Resize: (H) Shrink width, (L) Grow width, (J) Grow height, (K) Shrink height
 mode "$mode_resize" {
         # These bindings trigger as soon as you enter the resize mode
 
@@ -257,23 +316,23 @@ mode "$mode_resize" {
 bindsym $mod+r mode "$mode_resize"
 
 # Computer power
-set $mode_power (S)uspend, (L)ogout, (R)eboot, (P)oweroff
-mode "$mode_power" {
-    # Suspend
-    bindsym s exec --no-startup-id systemctl suspend; mode "default"
-    # Log out
-    bindsym l exit
-    # Reboot
-    bindsym r exec --no-startup-id systemctl reboot
-    # Power off
-    bindsym p exec --no-startup-id systemctl poweroff
+set $Locker i3lock && sleep 1
 
-    # Return to normal mode
+set $mode_system (L)ock, Log (O)ut, (S)uspend, (H)ibernate, (R)eboot, (P)ower Off
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym o exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym p exec --no-startup-id systemctl poweroff -i, mode "default"  
+
+    # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 
-bindsym $mod+Shift+q mode "$mode_power"
+bindsym $mod+Shift+q mode "$mode_system"
 
 # Screenshotting
 set $mode_screenshot (P)artial, (S)creen, (D)esktop
