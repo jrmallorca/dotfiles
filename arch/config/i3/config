@@ -72,6 +72,7 @@ exec --no-startup-id xcape -t 200ms -e 'Caps_Lock=Escape'
 
 # Start up workspaces automatically
 exec --no-startup-id $scripts/i3layout.sh
+assign [class="^Microsoft Teams - Preview$"] 9
 
 # Compositor (Picom)
 # exec_always --no-startup-id picom --config ~/.config/picom.conf
