@@ -7,7 +7,7 @@
 " (COC) TextEdit might fail if hidden is not set.
 set hidden
 
-" (COC)_Always show the signcolumn, otherwise it would shift the text each time
+" (COC) Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 " Must be either yes or number
 " set signcolumn=number
@@ -49,18 +49,29 @@ set splitright
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
 call plug#begin('~/.config/nvim/plugged')
-    Plug 'easymotion/vim-easymotion'
-    Plug 'junegunn/limelight.vim'
+    " Theme
     Plug 'tomasiser/vim-code-dark'
     " Plug 'jschmold/sweet-dark.vim'
+
+    " Git
     Plug 'mhinz/vim-signify'
     Plug 'tpope/vim-fugitive'
+
+    " Navigation
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
+    Plug 'easymotion/vim-easymotion'
+
+    " Programming tools
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'honza/vim-snippets'
+
     Plug 'dart-lang/dart-vim-plugin'
+    Plug 'thosakwe/vim-flutter'
+
+    " Writing tools
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+    Plug 'junegunn/limelight.vim'
 call plug#end()
 
 let g:coc_global_extensions=[
@@ -73,7 +84,7 @@ let g:coc_global_extensions=[
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
 syntax enable "Keeps current color settings
-set background=dark " Vimm tries to use colors best on dark backgrounds
+set background=dark " Vim tries to use colors best on dark backgrounds
 au Colorscheme * hi Normal guibg=NONE ctermbg=NONE guifg=NONE ctermfg=NONE
 au Colorscheme * hi LineNr guibg=NONE ctermbg=NONE
 au Colorscheme * hi CursorLine guibg=NONE ctermbg=NONE

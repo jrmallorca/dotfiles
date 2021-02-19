@@ -99,11 +99,6 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-
 # ------------------------------------------------------------------------
 # Controls
 # ------------------------------------------------------------------------
@@ -359,7 +354,7 @@ mode "$mode_dmenu" {
     # Capture entire desktop
     bindsym b mode "default"; exec --no-startup-id $scripts/dmenu_bookmarks.sh
     # Search for applications
-    bindsym a mode "default"; exec dmenu_run 
+    bindsym a mode "default"; exec --no-startup-id i3-dmenu-desktop
     
     # Return to normal mode
     bindsym Escape mode "default"

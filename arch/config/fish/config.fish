@@ -30,9 +30,11 @@ end
 # Confirmation (command history)
 # abbr vf 'commandline -i "nvim " ; __fzf_search_current_dir'
 abbr vdot 'cd ~/dotfiles/arch ; vf'
+abbr vws 'cd ~/dotfiles/workspaces ; vf'
 abbr vuni 'cd /mnt/d/University ; vf'
 abbr vno 'cd /mnt/d/Notes ; vf'
 abbr cdot 'cd ~/dotfiles/arch ; cdf'
+abbr cws 'cd ~/dotfiles/workspaces ; cdf'
 abbr cuni 'cd /mnt/d/University ; cdf'
 abbr cno 'cd /mnt/d/Notes ; cdf'
 
@@ -48,10 +50,10 @@ abbr v 'nvim'
 export EDITOR='nvim'
 
 # Changing directory abbr
-abbr cdd 'cd /mnt/d'
+abbr md 'cd /mnt/d'
 abbr uni 'cd /mnt/d/University'
 abbr no 'cd /mnt/d/Notes'
-abbr cdc 'cd ~/.config'
+abbr cfg 'cd ~/.config'
 abbr dot 'cd ~/dotfiles/arch'
 
 # dotfiles make config abbr
@@ -102,4 +104,4 @@ abbr gs 'git status'
 abbr gst 'git stash'
 
 # PATH configurations
-set -x PATH $PATH ~/flutter/bin
+set PATH $PATH /opt/android-studio/bin 

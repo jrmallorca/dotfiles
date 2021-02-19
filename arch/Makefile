@@ -25,7 +25,10 @@ theme:
 # Programs
 # -----------------------------------------------------------------------------
 
-# paru
+# Base
+# -----------------------------------------------------------------------------
+
+# paru (AUR Helper)
 paru:
 	sudo pacman -S --needed git base-devel
 	cd ~ && sudo git clone https://aur.archlinux.org/paru.git && \
@@ -49,30 +52,19 @@ necessary:
 	# systemctl --user enable redshift.service # Doesn't have sys tray icon
 	# systemctl --user enable redshift-gtk.service # Has sys tray icon
 
+# Mount the D drive from Windows
 mountd:
 	paru -S --needed ntfs-3g
 	mkdir -p /mnt/d
 	echo "Copy this into etc/fstab: UUID=<uuid> /mnt/d ntfs uid=1000,gid=1000,umask=0022,sync,auto,rw 0 0"
-	echo "Get UUID from lsblk -o NAME,FSTYPE,UUID" 
+	echo "Get UUID from the following command: lsblk -o NAME,FSTYPE,UUID" 
 	echo "Do: sudo mount -av"
 
+# Webkit2 greeter
 # Change to slick greeter? (webkit2 greeter slow but pretty)
 greeter:
 	paru -S --needed xorg-server xorg-xinit lightdm lightdm-webkit2-greeter lightdm-webkit-theme-sequoia-git
 	systemctl enable lightdm
-
-# Spotify TUI
-spotify:
-	paru -S --needed spotifyd spotify-tui
-	echo "Make the .config/spotifyd/spotifyd.conf for the login"
-	systemctl --user start spotifyd.service
-	systemctl --user enable spotifyd.service
-
-# For some reason CMake fails on the lib32-libjpeg
-maya:
-	paru -S --needed libjpeg lib32-libjpeg libjpeg6 openssl-1.0 openssl audiofile xorg-fonts-misc libxp \
-		python2 python2-backports ld-lsb lsb-release cpio xorg-fonts-100dpi xorg-fonts-75dpi xorg-fonts \
-		gsfonts adobe-source-code-pro-fonts xorg-xlsfonts xorg-fonts-type1 libtiff ruby libpng15
 
 # Install Vim-Plug. NeoVim configs must be set up.
 # UNTESTED but likely works
@@ -87,15 +79,6 @@ gitsshkeys:
 	ssh-add ~/.ssh/id_ed25519
 	xclip -selection clipboard < ~/.ssh/id_ed25519.pub
 
-# Stock watcher
-ticker:
-	curl -Ls https://api.github.com/repos/achannarasappa/ticker/releases/latest \
-	| grep -wo "https.*linux-amd64*.tar.gz" \
-	| wget -qi - \
-	&& tar -xf ticker*.tar.gz \
-	&& chmod +x ./ticker \
-	&& sudo mv ticker /usr/local/bin/
-
 ohmyfish:
 	curl -L https://get.oh-my.fish | fish
 
@@ -106,22 +89,9 @@ fisher:
 fisherplugins:
 	fisher install PatrickF1/fzf.fish
 
-# CHANGE
-# CHECK VERSION
-calcurse:
-	sudo apt install libncurses5-dev
-	wget https://calcurse.org/files/calcurse-4.7.0.tar.gz
-	tar -xf calcurse-4.7.0.tar.gz
-	cd calcurse-4.7.0/ && \
-		.configure && make && sudo make install
-
-# CHANGE (or use another pomo)
-pomo:
-	curl -L -s https://kevinschoon.github.io/pomo/install.sh | bash /dev/stdin
-	sudo mv pomo /usr/local/bin/
-
-flutter:
-	cd ~ && git clone https://github.com/flutter/flutter.git
+# Install picom (compositor)
+picom:
+	paru -S picom
 
 # weechat (CLI messaging) and bitlbee (For facebook and other stuff)
 # http://thedarnedestthing.com/weechat%20+%20bitlbee
@@ -144,16 +114,22 @@ weechat-bitlbee:
 	account add facebook <email> <app_password>\n
 	account facebook on\n"
 
-# Install picom (compositor)
-picom:
-	sudo apt install libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libpcre3-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev
-	cd ~/gitapps/ && git clone git@github.com:yshui/picom.git && \
-		cd picom/ && git submodule update --init --recursive && \
-		sudo meson --buildtype=release . build && \
-		sudo ninja -C build && \
-		sudo ninja -C build install
+# Spotify TUI
+spotify:
+	paru -S --needed spotifyd spotify-tui
+	echo "Make the .config/spotifyd/spotifyd.conf for the login"
+	systemctl --user start spotifyd.service
+	systemctl --user enable spotifyd.service
 
-# Install Go.
+# Programming
+# -----------------------------------------------------------------------------
+
+java:
+	paru -S jre-openjdk jdk-openjdk
+
+flutter:
+	paru -S --needed flutter android-file-transfer
+
 # UNTESTED
 # CHECK VERSION BEFORE MAKING
 go:
@@ -161,7 +137,32 @@ go:
 	sudo tar -C /usr/local -xzf go1.15.3.linux-amd64.tar.gz
 	rm go1.15.3.linux-amd64.tar.gz
 
-# Install propreitary software:
+# Extra
+# -----------------------------------------------------------------------------
+
 # Microsoft Teams
-proprietary:
+teams:
 	paru -S teams
+
+# Stock watcher
+ticker:
+	curl -Ls https://api.github.com/repos/achannarasappa/ticker/releases/latest \
+	| grep -wo "https.*linux-amd64*.tar.gz" \
+	| wget -qi - \
+	&& tar -xf ticker*.tar.gz \
+	&& chmod +x ./ticker \
+	&& sudo mv ticker /usr/local/bin/
+
+# CHANGE
+# CHECK VERSION
+calcurse:
+	sudo apt install libncurses5-dev
+	wget https://calcurse.org/files/calcurse-4.7.0.tar.gz
+	tar -xf calcurse-4.7.0.tar.gz
+	cd calcurse-4.7.0/ && \
+		.configure && make && sudo make install
+
+# CHANGE (or use another pomo)
+pomo:
+	curl -L -s https://kevinschoon.github.io/pomo/install.sh | bash /dev/stdin
+	sudo mv pomo /usr/local/bin/
