@@ -125,10 +125,11 @@ spotify:
 # -----------------------------------------------------------------------------
 
 java:
-	paru -S jre-openjdk jdk-openjdk
+	paru -S jre-openjdk jdk-openjdk #jdk8-openjdk
 
 flutter:
-	paru -S --needed flutter android-file-transfer
+	paru -S --needed jdk8-openjdk simple-mtpfs flutter android-sdk \
+		android-sdk-platform-tools android-sdk-build-tools android-platform
 
 # UNTESTED
 # CHECK VERSION BEFORE MAKING
