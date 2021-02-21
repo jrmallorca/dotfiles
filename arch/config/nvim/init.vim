@@ -72,11 +72,13 @@ call plug#begin('~/.config/nvim/plugged')
     " Writing tools
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
     Plug 'junegunn/limelight.vim'
+
+    Plug 'lervag/vimtex'
 call plug#end()
 
 let g:coc_global_extensions=[
                 \ 'coc-snippets',
-                \ 'coc-json', 'coc-flutter',
+                \ 'coc-json', 'coc-flutter', 'coc-vimtex'
                 \ ]
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
