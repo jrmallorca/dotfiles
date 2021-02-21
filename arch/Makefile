@@ -12,7 +12,6 @@ configuration:
 	cp .profile ~/
 
 # Transfer theme related files.
-# NEED TO CHANGE TO NOT OVERWRITE EXISTING FILES/DIRECTORIES
 theme:
 	sudo cp -a ../backgrounds/ /usr/share/
 	sudo cp -a ../themes/ /usr/share/
@@ -20,6 +19,7 @@ theme:
 	sudo cp -a ../fonts/ /usr/share/
 	sudo cp bitlbee.conf /etc/bitlbee/
 	sudo cp 40-libinput.conf /usr/share/X11/xorg.conf.d/
+	sudo cp lightdm.conf /etc/lightdm/
 
 # -----------------------------------------------------------------------------
 # Programs
@@ -60,10 +60,9 @@ mountd:
 	echo "Get UUID from the following command: lsblk -o NAME,FSTYPE,UUID" 
 	echo "Do: sudo mount -av"
 
-# Webkit2 greeter
-# Change to slick greeter? (webkit2 greeter slow but pretty)
+# Pantheon greeter
 greeter:
-	paru -S --needed xorg-server xorg-xinit lightdm lightdm-webkit2-greeter lightdm-webkit-theme-sequoia-git
+	paru -S --needed xorg-server xorg-xinit lightdm lightdm-pantheon-greeter
 	systemctl enable lightdm
 
 # Install Vim-Plug. NeoVim configs must be set up.
