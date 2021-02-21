@@ -105,3 +105,7 @@ abbr gst 'git stash'
 
 # PATH configurations
 set PATH $PATH /opt/android-studio/bin 
+set PATH $PATH /opt/gradle/gradle-6.8.2/bin
+# set -gx JAVA_OPTS '-XX:+IgnoreUnrecognizedVMOptions'
+set -gx JAVA_HOME /usr/lib/jvm/java-8-openjdk
+# set -gx ANDROID_SDK_ROOT /opt/android-sdk
