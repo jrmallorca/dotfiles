@@ -33,10 +33,12 @@ abbr vdot 'cd ~/dotfiles/arch ; vf'
 abbr vws 'cd ~/dotfiles/workspaces ; vf'
 abbr vuni 'cd /mnt/d/University ; vf'
 abbr vno 'cd /mnt/d/Notes ; vf'
+abbr vpro 'cd ~/Projects ; vf'
 abbr cdot 'cd ~/dotfiles/arch ; cdf'
 abbr cws 'cd ~/dotfiles/workspaces ; cdf'
 abbr cuni 'cd /mnt/d/University ; cdf'
 abbr cno 'cd /mnt/d/Notes ; cdf'
+abbr cpro 'cd ~/Projects ; cdf'
 
 # Chat abbr
 abbr we 'weechat'
@@ -55,6 +57,7 @@ abbr uni 'cd /mnt/d/University'
 abbr no 'cd /mnt/d/Notes'
 abbr cfg 'cd ~/.config'
 abbr dot 'cd ~/dotfiles/arch'
+abbr pro 'cd ~/Projects'
 
 # dotfiles make config abbr
 abbr mc 'make configuration'
