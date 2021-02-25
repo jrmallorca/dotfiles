@@ -74,6 +74,9 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'junegunn/limelight.vim'
 
     Plug 'lervag/vimtex'
+
+    " Misc
+    Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 call plug#end()
 
 let g:coc_global_extensions=[
