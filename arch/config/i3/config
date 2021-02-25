@@ -1,13 +1,23 @@
-# i3 config file (v4)
-#
-# Please see https://i3wm.org/docs/userguide.html for a complete reference!
-#
-# This config file uses keycodes (bindsym) and was written for the QWERTY
-# layout.
-#
-# To get a config file with the same key positions, but for your current
-# layout, use the i3-config-wizard
-#
+# ------------------------------------------------------------------------
+# Variables
+# ------------------------------------------------------------------------
+
+# Mod1 (Alt)
+set $mod Mod1
+
+# Locker
+set $locker betterlockscreen
+set $locker_options -l dim
+
+# Background
+set $path_to_background /usr/share/backgrounds
+set $background BlackAndWhite.png
+
+# Scripts
+set $path_to_scripts ~/dotfiles/arch/scripts
+
+# i3-resurrect (Workspace layout saver/restorer)
+set $i3_resurrect i3-resurrect
 
 # ------------------------------------------------------------------------
 # Appearance
@@ -63,15 +73,12 @@ bindsym $mod+b bar mode toggle
 # exec only executes command when i3 is started
 # exec_always executed the command each time i3 is reloaded
 
-# Set $scripts to script folder
-set $scripts ~/dotfiles/arch/scripts
-
 # Remap caps-lock to Ctrl+Escape
 exec --no-startup-id setxkbmap -option 'caps:ctrl_modifier'
 exec --no-startup-id xcape -t 200ms -e 'Caps_Lock=Escape'
 
 # Start up workspaces automatically
-exec --no-startup-id $scripts/i3layout.sh
+exec --no-startup-id $path_to_scripts/i3layout.sh
 assign [class="^Microsoft Teams - Preview$"] 9
 
 # Compositor (Picom)
@@ -87,14 +94,14 @@ exec_always --no-startup-id autotiling &
 exec --no-startup-id unclutter &
 
 # Wallpaper
-exec_always --no-startup-id feh --no-fehbg --bg-scale /usr/share/backgrounds/BlackAndWhite.jpg &
+exec_always --no-startup-id feh --no-fehbg --bg-scale $path_to_background/$background &
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
-
+#
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id xss-lock $locker $locker_options
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -103,9 +110,6 @@ exec --no-startup-id nm-applet
 # ------------------------------------------------------------------------
 # Controls
 # ------------------------------------------------------------------------
-
-# Set $mod as Mod1 (Alt)
-set $mod Mod1
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -135,7 +139,7 @@ bindsym $mod+q kill
 # Edit in nvim anywhere
 # DOESN'T WORK IN ALACRITTY
 # WORKS IN XFCE4-TERMINAL IF WITH --disable-server
-bindsym $mod+o exec --no-startup-id $scripts/editInVim.sh
+bindsym $mod+o exec --no-startup-id $path_to_scripts/editInVim.sh
 
 # change focus
 bindsym $mod+$left focus left
@@ -227,7 +231,6 @@ bindsym $mod+Shift+r restart
 # ------------------------------------------------------------------------
 # Modes
 # ------------------------------------------------------------------------
-set $i3_resurrect i3-resurrect
 
 # Save workspace mode.
 set $mode_save Save workspace X (X = {1, 2, ..., 10})
@@ -311,14 +314,12 @@ mode "$mode_resize" {
 bindsym $mod+r mode "$mode_resize"
 
 # Computer power
-set $Locker i3lock && sleep 1
-
 set $mode_system (L)ock, Log (O)ut, (S)uspend, (H)ibernate, (R)eboot, (P)ower Off
 mode "$mode_system" {
-    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym l exec --no-startup-id $locker $locker_options, mode "default"
     bindsym o exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
-    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+    bindsym s exec --no-startup-id $locker $locker_options && sleep 1 && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $locker $locker_options && sleep 1 && systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym p exec --no-startup-id systemctl poweroff -i, mode "default"  
 
@@ -351,9 +352,9 @@ bindsym Print mode "$mode_screenshot"
 set $mode_dmenu (G)oogle, (B)ookmarks, (A)pplications
 mode "$mode_dmenu" {
     # Search Google
-    bindsym g mode "default"; exec --no-startup-id $scripts/dmenu_search.sh
+    bindsym g mode "default"; exec --no-startup-id $path_to_scripts/dmenu_search.sh
     # Capture entire desktop
-    bindsym b mode "default"; exec --no-startup-id $scripts/dmenu_bookmarks.sh
+    bindsym b mode "default"; exec --no-startup-id $path_to_scripts/dmenu_bookmarks.sh
     # Search for applications
     bindsym a mode "default"; exec --no-startup-id i3-dmenu-desktop
     
