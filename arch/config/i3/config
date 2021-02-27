@@ -384,6 +384,40 @@ mode "$mode_gaps" {
 
 bindsym $mod+g mode "$mode_gaps"
 
+# Mouse movement
+set $mode_mouse Mouse
+mode "$mode_mouse" {
+    # Movement
+    bindsym h exec "xdotool mousemove_relative -- -20 0"
+    bindsym l exec "xdotool mousemove_relative 20 0"
+    bindsym k exec "xdotool mousemove_relative 0 -20"
+    bindsym j exec "xdotool mousemove_relative -- 0 20"
+
+    # Movement - bigger steps
+    bindsym shift+h exec "xdotool mousemove_relative -- -100 0"
+    bindsym shift+l exec "xdotool mousemove_relative 100 0"
+    bindsym shift+k exec "xdotool mousemove_relative 0 -100"
+    bindsym shift+j exec "xdotool mousemove_relative -- 0 100"
+
+    # Movement - smaller steps
+    bindsym ctrl+h exec "xdotool mousemove_relative -- -2 0"
+    bindsym ctrl+l exec "xdotool mousemove_relative 2 0"
+    bindsym ctrl+k exec "xdotool mousemove_relative 0 -2"
+    bindsym ctrl+j exec "xdotool mousemove_relative -- 0 2"
+
+    # Click: left mid right
+    bindsym u exec "xdotool click 1"
+    bindsym i exec "xdotool click 2"
+    bindsym o exec "xdotool click 3"
+
+    # Return to normal mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+m mode "$mode_mouse"
+
+
 #######################################################################
 # automatically start i3-config-wizard to offer the user to create a
 # keysym-based config which used their favorite modifier (alt or windows)
