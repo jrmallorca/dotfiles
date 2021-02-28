@@ -11,7 +11,7 @@ set $locker_options -l dim
 
 # Background
 set $path_to_background /usr/share/backgrounds
-set $background BlackAndWhite.png
+set $background BlackAndOrange.png
 
 # Scripts
 set $path_to_scripts ~/dotfiles/arch/scripts
@@ -28,8 +28,8 @@ set $i3_resurrect i3-resurrect
 for_window [class=".*"] border pixel 5
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #4c7899 #285577 #ffffff #bb0000   #000000
-client.focused_inactive #333333 #5f676a #ffffff #000000   #000000
+client.focused          #4c7899 #285577 #ffffff #e69806   #1d1f21
+client.focused_inactive #333333 #5f676a #ffffff #1d1f21   #1d1f21
 client.unfocused        #333333 #222222 #888888 #000000   #000000
 client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
