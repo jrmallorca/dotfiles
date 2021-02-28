@@ -1,4 +1,5 @@
 autocmd VimEnter * Limelight
+autocmd VimEnter * SoftPencil
 
 nnoremap <buffer> j gj
 vnoremap <buffer> j gj

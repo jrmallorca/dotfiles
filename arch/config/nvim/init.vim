@@ -70,9 +70,10 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'thosakwe/vim-flutter'
 
     " Writing tools
-    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+    Plug 'reedes/vim-pencil'
     Plug 'junegunn/limelight.vim'
-
+    Plug 'tpope/vim-markdown'
+    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
     Plug 'lervag/vimtex'
 
     " Misc
@@ -101,7 +102,8 @@ colorscheme codedark
 " Status line
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set laststatus=0 " Turn on status bar
+" Turn on status bar
+set laststatus=0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " Limelight 
