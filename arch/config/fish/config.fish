@@ -1,6 +1,12 @@
 fish_vi_key_bindings
 set fish_greeting # Removes fish greeting
 
+# Base16 Shell
+if status --is-interactive
+    set BASE16_SHELL "$HOME/.config/base16-shell/"
+    source "$BASE16_SHELL/profile_helper.fish"
+end
+
 # Set the cursor shapes for the different vi modes.
 # set fish_cursor_default     block      blink
 # set fish_cursor_insert      line       blink
