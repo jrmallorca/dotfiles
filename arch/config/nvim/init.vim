@@ -87,17 +87,19 @@ let g:coc_global_extensions=[
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " Color scheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
+syntax enable " Keeps current color settings
 
-syntax enable "Keeps current color settings
 set background=dark " Vim tries to use colors best on dark backgrounds
 " au Colorscheme * hi Normal guibg=NONE ctermbg=NONE guifg=NONE ctermfg=NONE
 " au Colorscheme * hi LineNr guibg=NONE ctermbg=NONE
 " au Colorscheme * hi CursorLine guibg=NONE ctermbg=NONE
 " au Colorscheme * hi SignColumn guibg=NONE ctermbg=NONE
+au Colorscheme * hi Comment ctermfg=DarkGrey
+
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " Status line
