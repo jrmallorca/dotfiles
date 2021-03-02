@@ -36,10 +36,10 @@ set expandtab " On pressing tab, insert 4 spaces
 " Split panes
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"nnoremap <C-J> <C-W><C-J>
-"nnoremap <C-K> <C-W><C-K>
-"nnoremap <C-L> <C-W><C-L>
-"nnoremap <C-H> <C-W><C-H>
+nnoremap <leader>j <C-W><C-J>
+nnoremap <leader>k <C-W><C-K>
+nnoremap <leader>l <C-W><C-L>
+nnoremap <leader>h <C-W><C-H>
 
 set splitbelow
 set splitright
