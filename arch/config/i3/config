@@ -11,7 +11,7 @@ set $locker_options -l dim
 
 # Background
 set $path_to_background /usr/share/backgrounds
-set $background BlackAndOrange.png
+set $background minimalism.png
 
 # Scripts
 set $path_to_scripts ~/dotfiles/arch/scripts
@@ -28,9 +28,9 @@ set $i3_resurrect i3-resurrect
 for_window [class=".*"] border pixel 5
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #4c7899 #285577 #ffffff #eecc6c   #1d1f21
-client.focused_inactive #333333 #5f676a #ffffff #1d1f21   #1d1f21
-client.unfocused        #333333 #222222 #888888 #1d1f21   #1d1f21
+client.focused          #4c7899 #285577 #ffffff #eecc6c   #1a1a1a
+client.focused_inactive #333333 #5f676a #ffffff #1a1a1a   #1a1a1a
+client.unfocused        #333333 #222222 #888888 #1a1a1a   #1a1a1a
 client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
@@ -131,7 +131,7 @@ floating_modifier $mod
 bindsym $mod+Return exec i3-sensible-terminal
 
 # start firefox
-bindsym $mod+Shift+Return exec firefox
+bindsym $mod+Shift+Return exec --no-startup-id firefox
 
 # kill focused window
 bindsym $mod+q kill
