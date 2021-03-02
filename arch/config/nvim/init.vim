@@ -95,6 +95,10 @@ set background=dark " Vim tries to use colors best on dark backgrounds
 " au Colorscheme * hi CursorLine guibg=NONE ctermbg=NONE
 " au Colorscheme * hi SignColumn guibg=NONE ctermbg=NONE
 au Colorscheme * hi Comment ctermfg=DarkGrey
+au Colorscheme * hi SpellBad ctermbg=NONE ctermfg=Red cterm=underline
+au Colorscheme * hi SpellCap ctermbg=NONE ctermfg=Red cterm=underline
+au Colorscheme * hi SpellRare ctermbg=NONE ctermfg=LightGrey
+au Colorscheme * hi SpellLocal ctermbg=NONE ctermfg=LightGrey
 
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
