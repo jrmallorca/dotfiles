@@ -33,16 +33,14 @@ set shiftwidth=4 " when indenting with '>', use 4 spaces width
 set expandtab " On pressing tab, insert 4 spaces
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-" Split panes
+" Panes and TMUX interaction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" nnoremap <leader>j <C-W><C-J>
-" nnoremap <leader>k <C-W><C-K>
-" nnoremap <leader>l <C-W><C-L>
-" nnoremap <leader>h <C-W><C-H>
 
 set splitbelow
 set splitright
+
+" Write all buffers before navigating from Vim to TMUX pane
+let g:tmux_navigator_save_on_switch = 2
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
@@ -61,10 +59,12 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'junegunn/fzf.vim'
     Plug 'easymotion/vim-easymotion'
 
-    " Programming tools
+    " Tools
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'honza/vim-snippets'
+    Plug 'christoomey/vim-tmux-navigator'
 
+    " Programming tools
     Plug 'dart-lang/dart-vim-plugin'
     Plug 'thosakwe/vim-flutter'
 

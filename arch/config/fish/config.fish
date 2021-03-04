@@ -58,8 +58,8 @@ abbr cpro 'cd ~/Projects ; cdf'
 # tmux abbr
 abbr t 'tmux'
 abbr tls 'tmux ls'
-abbr tn 'tmux new -s '
-abbr ta 'tmux attach-session -t '
+abbr tn 'tmux new -s'
+abbr ta 'tmux attach-session -t'
 
 # Chat abbr
 abbr we 'weechat'
