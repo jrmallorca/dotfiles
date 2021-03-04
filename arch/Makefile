@@ -36,7 +36,7 @@ paru:
 
 # Necessary
 necessary:
-	paru -S --needed grub base-devel reflector efibootmgr mtools dosfstools firefox \
+	paru -Syu --needed grub base-devel reflector efibootmgr mtools dosfstools firefox \
 		intel-ucode amd-ucode git neovim networkmanager network-manager-applet \
 		xf86-video-amdgpu xf86-video-ati xf86-video-intel xf86-video-nouveau \
 		xf86-video-vesa xdg-utils xdg-user-dirs openssh alacritty xorg-server \
@@ -44,7 +44,7 @@ necessary:
 		dmenu fish curl wget daemon xclip xsel xdotool fzf fd bat ripgrep xcape \
 		unclutter tlp feh mpv ffmpeg youtube-dl googler alsa-utils zathura \
 		zathura-pdf-mupdf redshift nodejs npm python python-pip autotiling \
-		dunst flameshot buku lxappearance-gtk3 gtk3 libinput xorg-xinput
+		dunst flameshot buku lxappearance-gtk3 gtk3 libinput xorg-xinput tmux
 	npm install -g neovim
 	pip install pynvim
 	# systemctl enable NetworkManager
@@ -54,7 +54,7 @@ necessary:
 
 # Mount the D drive from Windows
 mountd:
-	paru -S --needed ntfs-3g
+	paru -Syu --needed ntfs-3g
 	mkdir -p /mnt/d
 	echo "Copy this into etc/fstab: UUID=<uuid> /mnt/d ntfs uid=1000,gid=1000,umask=0022,sync,auto,rw 0 0"
 	echo "Get UUID from the following command: lsblk -o NAME,FSTYPE,UUID" 
@@ -62,7 +62,7 @@ mountd:
 
 # Pantheon greeter
 greeter:
-	paru -S --needed xorg-server xorg-xinit lightdm lightdm-pantheon-greeter
+	paru -Syu --needed xorg-server xorg-xinit lightdm lightdm-pantheon-greeter
 	systemctl enable lightdm
 
 # Install Vim-Plug. NeoVim configs must be set up.
@@ -90,7 +90,7 @@ fisherplugins:
 
 # Install picom (compositor)
 picom:
-	paru -S picom
+	paru -Syu picom
 
 # weechat (CLI messaging) and bitlbee (For facebook and other stuff)
 # http://thedarnedestthing.com/weechat%20+%20bitlbee
@@ -98,7 +98,7 @@ picom:
 # https://wiki.bitlbee.org/HowtoFacebookMQTT
 # https://weechat.org/files/doc/stable/weechat_quickstart.en.html
 weechat-bitlbee:
-	paru -S --needed weechat bitlbee bitlbee-facebook aspell lua tcl ruby libotr
+	paru -Syu --needed weechat bitlbee bitlbee-facebook aspell lua tcl ruby libotr
 	sudo cp ../bitlbee.conf /etc/bitlbee
 	systemctl enable bitlbee --now
 	printf "Start weechat and do the following:\n
@@ -115,7 +115,7 @@ weechat-bitlbee:
 
 # Spotify TUI
 spotify:
-	paru -S --needed spotifyd spotify-tui
+	paru -Syu --needed spotifyd spotify-tui
 	echo "Make the .config/spotifyd/spotifyd.conf for the login"
 	systemctl --user start spotifyd.service
 	systemctl --user enable spotifyd.service
@@ -124,10 +124,10 @@ spotify:
 # -----------------------------------------------------------------------------
 
 java:
-	paru -S jre-openjdk jdk-openjdk #jdk8-openjdk
+	paru -Syu jre-openjdk jdk-openjdk #jdk8-openjdk
 
 flutter:
-	paru -S --needed jdk8-openjdk simple-mtpfs flutter android-sdk \
+	paru -Syu --needed jdk8-openjdk simple-mtpfs flutter android-sdk \
 		android-sdk-platform-tools android-sdk-build-tools android-platform
 
 # UNTESTED
@@ -137,12 +137,15 @@ go:
 	sudo tar -C /usr/local -xzf go1.15.3.linux-amd64.tar.gz
 	rm go1.15.3.linux-amd64.tar.gz
 
+latex:
+	paru -Syu texlive-most
+
 # Extra
 # -----------------------------------------------------------------------------
 
 # Microsoft Teams
 teams:
-	paru -S teams
+	paru -Syu teams
 
 # Stock watcher
 ticker:
