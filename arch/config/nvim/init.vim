@@ -63,6 +63,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'honza/vim-snippets'
     Plug 'christoomey/vim-tmux-navigator'
+    Plug 'tpope/vim-obsession'
 
     " Programming tools
     Plug 'dart-lang/dart-vim-plugin'
