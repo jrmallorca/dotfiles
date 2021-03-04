@@ -10,6 +10,7 @@
 configuration:
 	cp -a config/. ~/.config/
 	cp .profile ~/
+	cp .tmux.conf ~/
 
 # Transfer theme related files.
 theme:
