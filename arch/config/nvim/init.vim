@@ -36,10 +36,10 @@ set expandtab " On pressing tab, insert 4 spaces
 " Split panes
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
-nnoremap <leader>j <C-W><C-J>
-nnoremap <leader>k <C-W><C-K>
-nnoremap <leader>l <C-W><C-L>
-nnoremap <leader>h <C-W><C-H>
+" nnoremap <leader>j <C-W><C-J>
+" nnoremap <leader>k <C-W><C-K>
+" nnoremap <leader>l <C-W><C-L>
+" nnoremap <leader>h <C-W><C-H>
 
 set splitbelow
 set splitright
@@ -155,20 +155,20 @@ set cmdheight=2
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
-" Use <C-l> for trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
+" Use <leader>l for trigger snippet expand.
+imap <leader>l <Plug>(coc-snippets-expand)
 
-" Use <C-j> for select text for visual placeholder of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
+" Use <leader>j for select text for visual placeholder of snippet.
+vmap <leader>j <Plug>(coc-snippets-select)
 
-" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-let g:coc_snippet_next = '<c-j>'
+" Use <leader>j for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<leader>j'
 
-" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-let g:coc_snippet_prev = '<c-k>'
+" Use <leader>k for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<leader>k'
 
-" Use <C-j> for both expand and jump (make expand higher priority.)
-imap <C-j> <Plug>(coc-snippets-expand-jump)
+" Use <leader>j for both expand and jump (make expand higher priority.)
+imap <leader>j <Plug>(coc-snippets-expand-jump)
 
 " Use <leader>x for convert visual selected code to snippet
 xmap <leader>x  <Plug>(coc-convert-snippet)
