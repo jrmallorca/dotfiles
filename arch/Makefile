@@ -61,9 +61,10 @@ mountd:
 	echo "Get UUID from the following command: lsblk -o NAME,FSTYPE,UUID" 
 	echo "Do: sudo mount -av"
 
-# Pantheon greeter
+# Webkit2 greeter
 greeter:
-	paru -Syu --needed xorg-server xorg-xinit lightdm lightdm-pantheon-greeter
+	paru -Syu --needed xorg-server xorg-xinit lightdm lightdm-webkit2-greeter \
+		lightdm-webkit-theme-sequoia-git
 	systemctl enable lightdm
 
 # Install Vim-Plug. NeoVim configs must be set up.
