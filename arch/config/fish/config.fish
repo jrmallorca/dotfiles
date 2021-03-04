@@ -33,6 +33,10 @@ function cdf
     commandline -f execute # Press enter
 end
 
+# Mount phone
+abbr mntph 'simple-mtpfs --device 1 /mnt/phone/'
+abbr umntph 'fusermount -u /mnt/phone/'
+
 # Confirmation (command history)
 # abbr vf 'commandline -i "nvim " ; __fzf_search_current_dir'
 abbr vdot 'cd ~/dotfiles/arch ; vf'
