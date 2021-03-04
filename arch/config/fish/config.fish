@@ -7,14 +7,12 @@ if status --is-interactive
     source "$BASE16_SHELL/profile_helper.fish"
 end
 
+# DOESN'T WORK IN ALACRITTY
 # Set the cursor shapes for the different vi modes.
 # set fish_cursor_default     block      blink
 # set fish_cursor_insert      line       blink
 # set fish_cursor_replace_one underscore blink
 # set fish_cursor_visual      block
-
-# sudoedit abbr
-abbr se 'sudoedit'
 
 # Finds file in current directory and executes nvim
 function vf
@@ -37,8 +35,15 @@ end
 abbr mntph 'simple-mtpfs --device 1 /mnt/phone/'
 abbr umntph 'fusermount -u /mnt/phone/'
 
+# Changing directory abbr
+abbr md 'cd /mnt/d'
+abbr uni 'cd /mnt/d/University'
+abbr no 'cd /mnt/d/Notes'
+abbr cfg 'cd ~/.config'
+abbr dot 'cd ~/dotfiles/arch'
+abbr pro 'cd ~/Projects'
+
 # Confirmation (command history)
-# abbr vf 'commandline -i "nvim " ; __fzf_search_current_dir'
 abbr vdot 'cd ~/dotfiles/arch ; vf'
 abbr vws 'cd ~/dotfiles/workspaces ; vf'
 abbr vuni 'cd /mnt/d/University ; vf'
@@ -50,6 +55,12 @@ abbr cuni 'cd /mnt/d/University ; cdf'
 abbr cno 'cd /mnt/d/Notes ; cdf'
 abbr cpro 'cd ~/Projects ; cdf'
 
+# tmux abbr
+abbr t 'tmux'
+abbr tls 'tmux ls'
+abbr tn 'tmux new -s '
+abbr ta 'tmux attach-session -t '
+
 # Chat abbr
 abbr we 'weechat'
 abbr wh 'whatscli'
@@ -57,17 +68,9 @@ abbr wh 'whatscli'
 # Calcurse abbr
 abbr cal 'calcurse'
 
-# nvim abbr
+# Editor abbr
+abbr se 'sudoedit'
 abbr v 'nvim'
-export EDITOR='nvim'
-
-# Changing directory abbr
-abbr md 'cd /mnt/d'
-abbr uni 'cd /mnt/d/University'
-abbr no 'cd /mnt/d/Notes'
-abbr cfg 'cd ~/.config'
-abbr dot 'cd ~/dotfiles/arch'
-abbr pro 'cd ~/Projects'
 
 # dotfiles make config abbr
 abbr mc 'make configuration'
