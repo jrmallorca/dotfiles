@@ -81,7 +81,8 @@ call plug#end()
 
 let g:coc_global_extensions=[
                 \ 'coc-snippets',
-                \ 'coc-json', 'coc-flutter', 'coc-vimtex'
+                \ 'coc-json', 'coc-flutter',
+                \ 'coc-vimtex', 'coc-markdownlint'
                 \ ]
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
