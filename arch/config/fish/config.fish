@@ -82,7 +82,7 @@ abbr nu 'nmcli c up'
 abbr nc 'nmcli -a d wifi connect'
 
 # Stocks abbr
-abbr stocks ticker -w AMD,AAPL,GME,AMC,SQ,NIO --show-fundamentals --show-separator
+abbr stocks ticker -w AMD,AAPL,CRSP,GME,AMC,SQ,NIO --show-fundamentals --show-separator
 
 # Browser-related abbr
 abbr g 'googler'
