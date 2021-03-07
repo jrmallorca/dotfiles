@@ -130,7 +130,8 @@ java:
 
 flutter:
 	paru -Syu --needed jdk8-openjdk simple-mtpfs flutter android-sdk \
-		android-sdk-platform-tools android-sdk-build-tools android-platform
+		android-sdk-platform-tools android-sdk-build-tools android-platform \
+		scrcpy
 
 # UNTESTED
 # CHECK VERSION BEFORE MAKING
