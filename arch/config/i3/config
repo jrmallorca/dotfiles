@@ -129,6 +129,7 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Shift+Return exec --no-startup-id "$TERMINAL -e tmux attach-session"
 
 # kill focused window
 bindsym $mod+q kill
