@@ -75,11 +75,12 @@ vim-plug:
 
 # UNTESTED and probably doesn't work with 2nd line due to fish
 gitsshkeys:
-	ssh-keygen -t ed25519 -C "isysrmallorca@gmail.com"
+	ssh-keygen -t ed25519 -C "48072014+jrmallorca@users.noreply.github.com"
 	eval "$(ssh-agent -s)"
 	ssh-add ~/.ssh/id_ed25519
 	xclip -selection clipboard < ~/.ssh/id_ed25519.pub
 
+# INCOMPLETE and doesn't do the last 2 lines in git docs
 gitgpgkeys:
 	git config --global gpg.program gpg2
 	gpg2 --full-generate-key
