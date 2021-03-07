@@ -103,7 +103,7 @@ abbr ga 'git add'
 abbr ga. 'git add .'
 abbr gb 'git branch'
 abbr gbl 'git blame'
-abbr gc 'git commit -m'
+abbr gc 'git commit -S -m'
 abbr gca 'git commit --amend -m'
 abbr gco 'git checkout'
 abbr gcp 'git cherry-pick'
@@ -118,6 +118,8 @@ abbr gr 'git remote'
 abbr grb 'git rebase'
 abbr gs 'git status'
 abbr gst 'git stash'
+
+set -x GPG_TTY (tty)
 
 # PATH configurations
 # set PATH $PATH /opt/android-studio/bin 
