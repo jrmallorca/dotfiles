@@ -80,6 +80,11 @@ gitsshkeys:
 	ssh-add ~/.ssh/id_ed25519
 	xclip -selection clipboard < ~/.ssh/id_ed25519.pub
 
+gitgpgkeys:
+	git config --global gpg.program gpg2
+	gpg2 --full-generate-key
+	gpg2 --list-secret-keys --keyid-format LONG
+
 ohmyfish:
 	curl -L https://get.oh-my.fish | fish
 
