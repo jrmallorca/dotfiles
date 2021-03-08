@@ -28,9 +28,13 @@ set incsearch " Incremental search
 set clipboard=unnamedplus " Set yank to system clipboard
 set nowrap " Doesn't wrap lines
 filetype indent on " Tab spacing
-set tabstop=4 " show existing tab with 4 spaces width
-set shiftwidth=4 " when indenting with '>', use 4 spaces width
-set expandtab " On pressing tab, insert 4 spaces
+set tabstop=4 " Show existing tab with 4 spaces width
+set shiftwidth=4 " When indenting with '>', use 4 spaces width
+set expandtab " Turn tabs into spaces
+
+" Make vertical separator pretty
+highlight VertSplit cterm=NONE
+set fillchars+=vert:\▏
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " Panes and TMUX interaction
