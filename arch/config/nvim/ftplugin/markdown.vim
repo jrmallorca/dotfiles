@@ -10,6 +10,7 @@ setlocal spell spelllang=en_gb
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " Markdown Preview
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Start markdown preview
 nnoremap <leader>m  :MarkdownPreview<CR>
 

@@ -118,6 +118,14 @@ endif
 " Turn on status bar
 set laststatus=0
 
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline=%<%f\ %h%m%r\ %y\ COC:
+    \\ %{coc#status()}
+    \%{get(b:,'coc_current_function','')}%=%l,%c%V\ %P
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " Limelight 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -295,13 +303,6 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline=%<%f\ %h%m%r\ %y\ COC:
-    \\ %{coc#status()}
-    \%{get(b:,'coc_current_function','')}%=%l,%c%V\ %P
-
 " Mappings for CoCList
 " Show all diagnostics.
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
@@ -319,9 +320,3 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" VimTex
-""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:vimtex_view_general_viewer = 'zathura'
-
