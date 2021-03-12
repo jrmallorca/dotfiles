@@ -59,7 +59,8 @@ abbr cpro 'cd ~/Projects ; cdf'
 abbr t 'tmux'
 abbr tls 'tmux ls'
 abbr tn 'tmux new -s'
-abbr ta 'tmux attach-session -t'
+abbr ta 'tmux attach-session'
+abbr tat 'tmux attach-session -t'
 
 # Chat abbr
 abbr we 'weechat'
@@ -82,7 +83,7 @@ abbr nu 'nmcli c up'
 abbr nc 'nmcli -a d wifi connect'
 
 # Stocks abbr
-abbr stocks ticker -w AMD,AAPL,CRSP,GME,AMC,SQ,NIO --show-fundamentals --show-separator
+abbr stocks ticker -w AMD,AAPL,CRSP,CRSR,GME,AMC,SQ,NIO --show-fundamentals --show-separator
 
 # Browser-related abbr
 abbr g 'googler'
