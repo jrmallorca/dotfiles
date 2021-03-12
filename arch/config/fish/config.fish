@@ -102,6 +102,7 @@ abbr yv 'googler -w youtube.com --url-handler mpv'
 # Git abbr
 abbr ga 'git add'
 abbr ga. 'git add .'
+abbr gaa 'git add -A'
 abbr gb 'git branch'
 abbr gbl 'git blame'
 abbr gc 'git commit -S -m'
