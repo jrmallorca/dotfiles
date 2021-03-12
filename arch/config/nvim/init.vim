@@ -68,6 +68,8 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'honza/vim-snippets'
     Plug 'christoomey/vim-tmux-navigator'
     Plug 'tpope/vim-obsession'
+    Plug 'tpope/vim-surround'
+    Plug 'jiangmiao/auto-pairs'
 
     " Programming tools
     Plug 'dart-lang/dart-vim-plugin'
