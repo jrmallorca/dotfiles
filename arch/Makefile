@@ -45,7 +45,8 @@ necessary:
 		dmenu fish curl wget daemon xclip xsel xdotool fzf fd bat ripgrep xcape \
 		unclutter tlp feh mpv ffmpeg youtube-dl googler alsa-utils zathura \
 		zathura-pdf-mupdf redshift nodejs npm python python-pip autotiling \
-		dunst flameshot buku lxappearance-gtk3 gtk3 libinput xorg-xinput tmux
+		dunst flameshot buku lxappearance-gtk3 gtk3 libinput xorg-xinput tmux \
+		github-cli
 	npm install -g neovim
 	pip install pynvim
 	# systemctl enable NetworkManager
