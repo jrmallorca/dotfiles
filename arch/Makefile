@@ -44,15 +44,14 @@ necessary:
 		xorg-xinit i3-gaps i3status i3lock perl-anyevent-i3 i3-resurrect xss-lock \
 		dmenu fish curl wget daemon xclip xsel xdotool fzf fd bat ripgrep xcape \
 		unclutter tlp feh mpv ffmpeg youtube-dl googler alsa-utils zathura \
-		zathura-pdf-mupdf redshift nodejs npm python python-pip autotiling \
+		zathura-pdf-mupdf clight nodejs npm python python-pip autotiling \
 		dunst flameshot buku lxappearance-gtk3 gtk3 libinput xorg-xinput tmux \
 		github-cli
 	npm install -g neovim
 	pip install pynvim
 	# systemctl enable NetworkManager
 	# systemctl enable tlp
-	# systemctl --user enable redshift.service # Doesn't have sys tray icon
-	# systemctl --user enable redshift-gtk.service # Has sys tray icon
+	# systemctl enable clightd.service
 
 # Mount the D drive from Windows
 mountd:
