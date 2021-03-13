@@ -1,5 +1,4 @@
 autocmd VimEnter * Limelight
-autocmd VimEnter * HardPencil
 
 setlocal scrolloff=999
 setlocal textwidth=61
