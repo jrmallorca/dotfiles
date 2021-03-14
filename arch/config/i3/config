@@ -152,10 +152,10 @@ bindsym $mod+Shift+$up move up
 bindsym $mod+Shift+$right move right
 
 # split in horizontal orientation
-bindsym $mod+Shift+v split h
+# bindsym $mod+Shift+v split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+# bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -175,7 +175,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+# bindsym $mod+d focus child
 
 # move the currently focused window to the scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -233,20 +233,20 @@ bindsym $mod+Shift+r restart
 # Save workspace mode.
 set $mode_save Save workspace X (X = {1, 2, ..., 10})
 mode "$mode_save" {
-  bindsym 1 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 1 --swallow=class,instance,title"
-  bindsym 2 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 2 --swallow=class,instance,title"
-  bindsym 3 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 3 --swallow=class,instance,title"
-  bindsym 4 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 4 --swallow=class,instance,title"
-  bindsym 5 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 5 --swallow=class,instance,title"
-  bindsym 6 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 6 --swallow=class,instance,title"
-  bindsym 7 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 7 --swallow=class,instance,title"
-  bindsym 8 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 8 --swallow=class,instance,title"
-  bindsym 9 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 9 --swallow=class,instance,title"
-  bindsym 0 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 10 --swallow=class,instance,title"
+    bindsym 1 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 1 --swallow=class,instance,title"
+    bindsym 2 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 2 --swallow=class,instance,title"
+    bindsym 3 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 3 --swallow=class,instance,title"
+    bindsym 4 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 4 --swallow=class,instance,title"
+    bindsym 5 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 5 --swallow=class,instance,title"
+    bindsym 6 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 6 --swallow=class,instance,title"
+    bindsym 7 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 7 --swallow=class,instance,title"
+    bindsym 8 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 8 --swallow=class,instance,title"
+    bindsym 9 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 9 --swallow=class,instance,title"
+    bindsym 0 exec "$i3_resurrect save -d ~/dotfiles/workspaces -w 10 --swallow=class,instance,title"
 
-  # Back to normal: Enter, Escape
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
+    # Back to normal: Enter, Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 bindsym $mod+s mode "$mode_save"
@@ -254,31 +254,31 @@ bindsym $mod+s mode "$mode_save"
 # Restore workspace mode.
 set $mode_restore Restore workspace X (X = {1, 2, .., 10}, Shift+X to restore only layout)
 mode "$mode_restore" {
-  bindsym 1 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 1 --programs-only"
-  bindsym 2 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 2 --programs-only"
-  bindsym 3 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 3 --programs-only"
-  bindsym 4 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 4 --programs-only"
-  bindsym 5 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 5 --programs-only"
-  bindsym 6 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 6 --programs-only"
-  bindsym 7 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 7 --programs-only"
-  bindsym 8 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 8 --programs-only"
-  bindsym 9 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 9 --programs-only"
-  bindsym 0 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 10 --programs-only"
+    bindsym 1 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 1 --programs-only"
+    bindsym 2 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 2 --programs-only"
+    bindsym 3 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 3 --programs-only"
+    bindsym 4 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 4 --programs-only"
+    bindsym 5 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 5 --programs-only"
+    bindsym 6 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 6 --programs-only"
+    bindsym 7 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 7 --programs-only"
+    bindsym 8 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 8 --programs-only"
+    bindsym 9 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 9 --programs-only"
+    bindsym 0 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 10 --programs-only"
 
-  bindsym Shift+1 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 1 --layout-only"
-  bindsym Shift+2 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 2 --layout-only"
-  bindsym Shift+3 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 3 --layout-only"
-  bindsym Shift+4 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 4 --layout-only"
-  bindsym Shift+5 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 5 --layout-only"
-  bindsym Shift+6 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 6 --layout-only"
-  bindsym Shift+7 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 7 --layout-only"
-  bindsym Shift+8 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 8 --layout-only"
-  bindsym Shift+9 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 9 --layout-only"
-  bindsym Shift+0 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 10 --layout-only"
+    bindsym Shift+1 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 1 --layout-only"
+    bindsym Shift+2 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 2 --layout-only"
+    bindsym Shift+3 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 3 --layout-only"
+    bindsym Shift+4 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 4 --layout-only"
+    bindsym Shift+5 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 5 --layout-only"
+    bindsym Shift+6 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 6 --layout-only"
+    bindsym Shift+7 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 7 --layout-only"
+    bindsym Shift+8 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 8 --layout-only"
+    bindsym Shift+9 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 9 --layout-only"
+    bindsym Shift+0 exec "$i3_resurrect restore -d ~/dotfiles/workspaces -w 10 --layout-only"
 
-  # Back to normal: Enter, Escape
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
+    # Back to normal: Enter, Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 bindsym $mod+n mode "$mode_restore"
@@ -286,26 +286,24 @@ bindsym $mod+n mode "$mode_restore"
 # Resize window (you can also use the mouse for that)
 set $mode_resize Resize: (H) Shrink width, (L) Grow width, (J) Grow height, (K) Shrink height
 mode "$mode_resize" {
-        # These bindings trigger as soon as you enter the resize mode
+    # Pressing left will shrink the window’s width.
+    # Pressing right will grow the window’s width.
+    # Pressing up will shrink the window’s height.
+    # Pressing down will grow the window’s height.
+    bindsym $left       resize shrink width 10 px or 10 ppt
+    bindsym $down       resize grow height 10 px or 10 ppt
+    bindsym $up         resize shrink height 10 px or 10 ppt
+    bindsym $right      resize grow width 10 px or 10 ppt
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym $left       resize shrink width 10 px or 10 ppt
-        bindsym $down       resize grow height 10 px or 10 ppt
-        bindsym $up         resize shrink height 10 px or 10 ppt
-        bindsym $right      resize grow width 10 px or 10 ppt
+    # same bindings, but for the arrow keys
+    bindsym Left        resize shrink width 10 px or 10 ppt
+    bindsym Down        resize grow height 10 px or 10 ppt
+    bindsym Up          resize shrink height 10 px or 10 ppt
+    bindsym Right       resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left        resize shrink width 10 px or 10 ppt
-        bindsym Down        resize grow height 10 px or 10 ppt
-        bindsym Up          resize shrink height 10 px or 10 ppt
-        bindsym Right       resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    # back to normal: Enter or Escape or $mod+r
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 bindsym $mod+r mode "$mode_resize"
@@ -414,6 +412,22 @@ mode "$mode_mouse" {
 
 bindsym $mod+m mode "$mode_mouse"
 
+# Volume/Screen controls
+set $mode_volume_screen (J) Volume down (K) Volume up
+mode "$mode_volume_screen" {
+    # Volume down
+    bindsym j exec "amixer -q sset Master,0 1- unmute"
+    # Volume up
+    bindsym k exec "amixer -q sset Master,0 1+ unmute"
+    # Mute/Unmute
+    bindsym m mode "default", exec "amixer -q sset Master,0 toggle"
+
+    # Return to normal mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+v mode "$mode_volume_screen"
 
 #######################################################################
 # automatically start i3-config-wizard to offer the user to create a
