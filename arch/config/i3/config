@@ -87,6 +87,9 @@ assign [class="^Microsoft Teams - Preview$"] 9
 # Flameshot (Print screen)
 exec --no-startup-id flameshot &
 
+# Clight
+exec --no-startup-id clight &
+
 # Autotiling
 exec_always --no-startup-id autotiling &
 
@@ -412,8 +415,8 @@ mode "$mode_mouse" {
 
 bindsym $mod+m mode "$mode_mouse"
 
-# Volume/Screen controls
-set $mode_volume_screen (J) Volume down (K) Volume up
+# Volume/Brightness controls
+set $mode_volume_screen (J) Volume down (K) Volume up (H) Brightness down (L) Brightness up
 mode "$mode_volume_screen" {
     # Volume down
     bindsym j exec "amixer -q sset Master,0 1- unmute"
@@ -421,6 +424,10 @@ mode "$mode_volume_screen" {
     bindsym k exec "amixer -q sset Master,0 1+ unmute"
     # Mute/Unmute
     bindsym m mode "default", exec "amixer -q sset Master,0 toggle"
+    # Brightness down
+    bindsym h exec "busctl --user call org.clight.clight /org/clight/clight org.clight.clight DecBl d 0.1"
+    # Brightness up
+    bindsym l exec "busctl --user call org.clight.clight /org/clight/clight org.clight.clight IncBl d 0.1"
 
     # Return to normal mode
     bindsym Return mode "default"
