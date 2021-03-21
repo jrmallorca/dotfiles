@@ -128,6 +128,14 @@ spotify:
 	systemctl --user start spotifyd.service
 	systemctl --user enable spotifyd.service
 
+vm:
+	paru -Syu virtualbox virtualbox-guest-iso virtualbox-ext-oracle
+	sudo modprobe vboxdrv
+	sudo gpasswd -aG vboxusers $USER
+
+torrent:
+	paru -Syu  qbittorrent
+
 # Programming
 # -----------------------------------------------------------------------------
 
@@ -178,3 +186,15 @@ calcurse:
 pomo:
 	curl -L -s https://kevinschoon.github.io/pomo/install.sh | bash /dev/stdin
 	sudo mv pomo /usr/local/bin/
+
+# -----------------------------------------------------------------------------
+# Programs
+# -----------------------------------------------------------------------------
+
+maccat:
+	VBoxManage modifyvm "maccat" --cpuidset 00000001 000106e5 00100800 0098e3fd bfebfbff
+	VBoxManage setextradata "maccat" "VBoxInternal/Devices/efi/0/Config/DmiSystemProduct" "iMac11,3"
+	VBoxManage setextradata "maccat" "VBoxInternal/Devices/efi/0/Config/DmiSystemVersion" "1.0"
+	VBoxManage setextradata "maccat" "VBoxInternal/Devices/efi/0/Config/DmiBoardProduct" "Iloveapple"
+	VBoxManage setextradata "maccat" "VBoxInternal/Devices/smc/0/Config/DeviceKey" "ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc"
+	VBoxManage setextradata "maccat" "VBoxInternal/Devices/smc/0/Config/GetKeyFromRealSMC" 1
