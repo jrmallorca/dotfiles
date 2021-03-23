@@ -46,12 +46,13 @@ necessary:
 		unclutter tlp feh mpv ffmpeg youtube-dl googler alsa-utils zathura \
 		zathura-pdf-mupdf clight nodejs npm python python-pip autotiling \
 		dunst flameshot buku lxappearance-gtk3 gtk3 libinput xorg-xinput tmux \
-		github-cli
+		github-cli bluez bluez-utils blueman
 	npm install -g neovim
 	pip install pynvim
 	# systemctl enable NetworkManager
 	# systemctl enable tlp
 	# systemctl enable clightd.service
+	# systemctl enable bluetooth.service
 
 # Mount the D drive from Windows
 mountd:
@@ -129,7 +130,7 @@ spotify:
 	systemctl --user enable spotifyd.service
 
 vm:
-	paru -Syu virtualbox virtualbox-guest-iso virtualbox-ext-oracle
+	paru -Syu --needed virtualbox virtualbox-guest-iso virtualbox-ext-oracle
 	sudo modprobe vboxdrv
 	sudo gpasswd -aG vboxusers $USER
 
@@ -193,8 +194,9 @@ pomo:
 
 maccat:
 	VBoxManage modifyvm "maccat" --cpuidset 00000001 000106e5 00100800 0098e3fd bfebfbff
-	VBoxManage setextradata "maccat" "VBoxInternal/Devices/efi/0/Config/DmiSystemProduct" "iMac11,3"
+	VBoxManage setextradata "maccat" "VBoxInternal/Devices/efi/0/Config/DmiSystemProduct" "iMac19,1"
 	VBoxManage setextradata "maccat" "VBoxInternal/Devices/efi/0/Config/DmiSystemVersion" "1.0"
-	VBoxManage setextradata "maccat" "VBoxInternal/Devices/efi/0/Config/DmiBoardProduct" "Iloveapple"
+	VBoxManage setextradata "maccat" "VBoxInternal/Devices/efi/0/Config/DmiBoardProduct" "Mac-AA95B1DDAB278B95"
 	VBoxManage setextradata "maccat" "VBoxInternal/Devices/smc/0/Config/DeviceKey" "ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc"
 	VBoxManage setextradata "maccat" "VBoxInternal/Devices/smc/0/Config/GetKeyFromRealSMC" 1
+	VBoxManage setextradata "maccat" VBoxInternal2/EfiGraphicsResolution 1920x1080
