@@ -87,6 +87,9 @@ assign [class="^Microsoft Teams - Preview$"] 9
 # Flameshot (Print screen)
 exec --no-startup-id flameshot &
 
+# Bluez (Bluetooth)
+exec --no-startup-id blueman-tray &
+
 # Clight
 exec --no-startup-id clight &
 
@@ -316,8 +319,8 @@ set $mode_system (L)ock, Log (O)ut, (S)uspend, (H)ibernate, (R)eboot, (P)ower Of
 mode "$mode_system" {
     bindsym l exec --no-startup-id $locker $locker_options, mode "default"
     bindsym o exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id $locker $locker_options && sleep 1 && systemctl suspend, mode "default"
-    bindsym h exec --no-startup-id $locker $locker_options && sleep 1 && systemctl hibernate, mode "default"
+    bindsym s exec --no-startup-id systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym p exec --no-startup-id systemctl poweroff -i, mode "default"  
 
