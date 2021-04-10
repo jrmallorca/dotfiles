@@ -12,6 +12,9 @@ configuration:
 	cp .profile ~/
 	cp .tmux.conf ~/
 
+reflector:
+	sudo cp reflector.conf /etc/xdg/reflector/
+
 # Transfer theme related files.
 theme:
 	sudo cp -a ../backgrounds/ /usr/share/
@@ -53,6 +56,8 @@ necessary:
 	# systemctl enable tlp
 	# systemctl enable clightd.service
 	# systemctl enable bluetooth.service
+	# systemctl enable reflector.service
+	# systemctl enable reflector.timer
 
 # Mount the D drive from Windows
 mountd:
