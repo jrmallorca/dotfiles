@@ -7,13 +7,6 @@ if status --is-interactive
     source "$BASE16_SHELL/profile_helper.fish"
 end
 
-# DOESN'T WORK IN ALACRITTY
-# Set the cursor shapes for the different vi modes.
-# set fish_cursor_default     block      blink
-# set fish_cursor_insert      line       blink
-# set fish_cursor_replace_one underscore blink
-# set fish_cursor_visual      block
-
 # Finds file in current directory and executes nvim
 function vf
     commandline -i "nvim " # Insert "nvim "
@@ -44,12 +37,12 @@ abbr dot 'cd ~/dotfiles/arch'
 abbr pro 'cd ~/Projects'
 
 # Confirmation (command history)
-abbr vdot 'cd ~/dotfiles/arch ; vf'
+abbr v. 'cd ~/dotfiles/arch ; vf'
 abbr vws 'cd ~/dotfiles/workspaces ; vf'
 abbr vuni 'cd /mnt/d/University ; vf'
 abbr vno 'cd /mnt/d/Notes ; vf'
 abbr vpro 'cd ~/Projects ; vf'
-abbr cdot 'cd ~/dotfiles/arch ; cdf'
+abbr c. 'cd ~/dotfiles/arch ; cdf'
 abbr cws 'cd ~/dotfiles/workspaces ; cdf'
 abbr cuni 'cd /mnt/d/University ; cdf'
 abbr cno 'cd /mnt/d/Notes ; cdf'
@@ -61,6 +54,8 @@ abbr tls 'tmux ls'
 abbr tn 'tmux new -s'
 abbr ta 'tmux attach-session'
 abbr tat 'tmux attach-session -t'
+abbr tk 'tmux kill-session'
+abbr rmtr 'rm -rf ~/.tmux/resurrect/*'
 
 # Chat abbr
 abbr we 'weechat'
@@ -123,11 +118,16 @@ abbr gs 'git status'
 abbr gst 'git stash'
 abbr gg 'git log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"'
 
+# GitHub CLI abbr
+abbr ghil 'gh issue list'
+abbr ghprc 'gh pr create --assignee @me --project "" --base main --title "" --body "" --web'
+
 set -x GPG_TTY (tty)
 
 # PATH configurations
 # set PATH $PATH /opt/android-studio/bin 
 # set PATH $PATH /opt/gradle/gradle-6.8.2/bin
+set PATH $PATH /use/lib/dart/bin
 set -gx JAVA_OPTS '-XX:+IgnoreUnrecognizedVMOptions'
 set -gx JAVA_HOME /usr/lib/jvm/java-8-openjdk
 set -gx ANDROID_SDK_ROOT /opt/android-sdk
