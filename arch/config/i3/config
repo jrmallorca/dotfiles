@@ -41,7 +41,7 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 #
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono, FontAwesome 9
+font pango:Iosevka Aile, FontAwesome 9
 
 # Bar
 set $transparent #00000000
@@ -118,10 +118,10 @@ exec --no-startup-id nm-applet
 # ------------------------------------------------------------------------
 
 # Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec "amixer -q sset Master,0 1+ unmute"
-bindsym XF86AudioLowerVolume exec "amixer -q sset Master,0 1- unmute"
-bindsym XF86AudioMute exec "amixer -q sset Master,0 toggle"
+# set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% # increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% # decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # use these keys for focus, movement, and resize directions when reaching for
 # the arrows is not convenient
@@ -135,14 +135,11 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Shift+Return exec --no-startup-id "$TERMINAL -e bash -c 'tmux attach-session || tmux'"
 
 # kill focused window
 bindsym $mod+q kill
 
 # Edit in nvim anywhere
-# DOESN'T WORK IN ALACRITTY
-# WORKS IN XFCE4-TERMINAL IF WITH --disable-server
 bindsym $mod+o exec --no-startup-id $path_to_scripts/editInVim.sh
 
 # change focus
@@ -235,6 +232,20 @@ bindsym $mod+Shift+r restart
 # ------------------------------------------------------------------------
 # Modes
 # ------------------------------------------------------------------------
+
+# Dev tools
+set $mode_dev Dev tool: (T)mux, (S)crcpy, (F)irefox
+mode "$mode_dev" {
+    bindsym t exec --no-startup-id "$TERMINAL -e bash -c 'tmux attach-session || tmux'"
+    bindsym s exec --no-startup-id scrcpy &
+    bindsym f exec --no-startup-id firefox &
+    #
+    # Back to normal: Enter, Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+Shift+Return mode "$mode_dev"
 
 # Save workspace mode.
 set $mode_save Save workspace X (X = {1, 2, ..., 10})
@@ -422,11 +433,11 @@ bindsym $mod+m mode "$mode_mouse"
 set $mode_volume_screen (J) Volume down (K) Volume up (H) Brightness down (L) Brightness up
 mode "$mode_volume_screen" {
     # Volume down
-    bindsym j exec "amixer -q sset Master,0 1- unmute"
+    bindsym j exec --no-startup-id pactl set-sink-volume 0 -5%
     # Volume up
-    bindsym k exec "amixer -q sset Master,0 1+ unmute"
+    bindsym k exec --no-startup-id pactl set-sink-volume 0 +5%
     # Mute/Unmute
-    bindsym m mode "default", exec "amixer -q sset Master,0 toggle"
+    bindsym m mode "default", exec --no-startup-id pactl set-sink-mute 0 toggle
     # Brightness down
     bindsym h exec "busctl --user call org.clight.clight /org/clight/clight org.clight.clight DecBl d 0.1"
     # Brightness up

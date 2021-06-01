@@ -1,0 +1,437 @@
+# == lf =======================================================================
+
+
+
+# -- Settings -----------------------------------------------------------------
+
+set shell fish
+set icons
+set hidden true
+set ignorecase true
+set smartcase true
+set drawbox
+set nopreview
+set ratios 1
+set promptfmt "\033[38;5;250m%d%f"
+
+
+
+# -- Functions ----------------------------------------------------------------
+
+# -- Navigation
+
+cmd fzf_curr_dir ${{
+    set -l curr_dir (pwd)
+    set -l fzf_header (basename "$curr_dir")
+    set -l res (find . -maxdepth 1 2>/dev/null | fzf --header="$fzf_header")
+    if [ -d "$res" ]
+        set cmd "cd"
+    else 
+        set cmd "select"                                                       
+    end
+    lf -remote "send $id $cmd \"$res\""
+}}
+
+cmd fzf_recursive ${{
+    set -l curr_dir (pwd)
+    set -l fzf_header (basename "$curr_dir")
+    set -l res (find . 2>/dev/null | fzf --header="$fzf_header")
+    if [ -d "$res" ]
+        set cmd "cd"
+    else 
+        set cmd "select"                                                       
+    end
+    lf -remote "send $id $cmd \"$res\""
+}}
+
+cmd copy_path %{{
+    set -l file_path (readlink -f "$f")
+    echo -n "$file_path" 2>/dev/null | xclip -selection clipboard >/dev/null 2>&1
+    notify-send "Copied to Clipboard" "$file_path"
+}}
+
+cmd git_root %{{
+    set -l root_dir (git rev-parse --show-toplevel 2>/dev/null)
+    if [ -d "$root_dir" ]
+        lf -remote "send $id cd \"$root_dir\""
+    else
+        echo "Error: Not in a git directory"
+    end
+}}
+
+cmd single_pane &{{
+    lf -remote "send $id set ratios 1"
+}}
+
+cmd triple_pane &{{
+    lf -remote "send $id set ratios 1:2:3"
+}}
+
+# -- Open
+
+cmd run ${{
+    [ -x "$f" ] && "$f"
+}}
+
+cmd new-instance %{{
+    set -l curr_dir (pwd)
+    setsid -f ~/dotfiles/arch/scripts/open-lf "$curr_dir" >/dev/null 2>&1
+}}
+
+cmd open ${{
+    set -l mime_type (file --mime-type "$f" -bL)
+    switch $mime_type
+        case "text/*" "application/json" "inode/*" "application/octet-stream"
+            "$EDITOR" "$f"
+        case "*"
+            devour xdg-open "$f"
+    end
+}}
+
+cmd open-new-window %{{
+    set -l num_files (echo "$fx" | wc -l)
+    set -l i 1
+    while [ $i -le $num_files ]
+        set -l file (echo "$fx" | sed -n "$i p")
+
+        set -l mime_type (file --mime-type "$f" -bL)
+        switch $mime_type
+            case "text/*" "application/json" "inode/*" "application/octet-stream"
+                setsid alacritty -e sh -c "sleep 0.5 && "$EDITOR" "$file"" >/dev/null 2>&1 &
+            case "*"
+                setsid xdg-open "$f" >/dev/null 2>&1 &
+        end
+
+        set i (math "$i + 1")
+    end
+}}
+
+cmd gui %{{
+    set -l curr_dir (pwd)
+    devour pcmanfm "$curr_dir" >/dev/null 2>&1
+}}
+
+cmd open-with %{{
+    echo -n "Open with: "
+    read program
+    if [ -n "$(command -v "$program")" ]; then
+        devour "$program" "$fx" >/dev/null 2>&1
+    else
+        echo "$program not found"
+    fi
+}}
+
+# -- New File / Directory
+
+cmd mkdir %{{
+    echo -n "Directory Name: "
+    read input
+    mkdir "$input"
+}}
+
+cmd mkfile %{{
+    echo -n "Filename: "
+    read input
+    touch "$input"
+    lf -remote 'send reload'
+}}
+
+cmd mkscript %{{
+    echo -n "Script name: "
+    read input
+    echo '#!/bin/sh' > "$input"
+    chmod +x "$input"
+    lf -remote 'send reload'
+}}
+
+# -- File Permissions
+
+cmd make_executable %{{
+    set -l num_files (echo "$fx" | wc -l)
+    set -l i 1
+
+    while [ $i -le $num_files ]
+        set -l file (echo "$fx" | sed -n "$i p")
+
+        chmod +x "$file"
+
+        set i (math "$i + 1")
+    end
+
+    lf -remote 'send reload'
+}}
+
+# -- Trash
+
+cmd trash %{{
+    set -l num_files (echo "$fx" | wc -l)
+    set -l i 1
+
+    while [ $i -le $num_files ]
+        set -l file (echo "$fx" | sed -n "$i p")
+
+        trash-put "$file"
+
+        set i (math "$i + 1")
+    end
+}}
+
+cmd tl ${{
+    trash-list
+    read -rsn1 -p "Press any key to continue."
+}}
+
+cmd tres ${{
+    trash-restore
+}}
+
+cmd trm ${{
+    trash-list
+    echo -n "trash-rm "
+    read input
+    trash-rm "$input"
+}}
+
+cmd clt %trash-empty
+
+# -- Git
+
+cmd gs ${{
+    set -l is_git (git rev-parse --git-dir 2>/dev/null)
+    if [ -n "$is_git" ]
+        git status
+        read -rsn1 -p "Press any key to continue."
+    end
+}}
+
+cmd gp ${{
+    set -l is_git (git rev-parse --git-dir 2>/dev/null)
+    if [ -n "$is_git" ]
+        git push
+        read -rsn1 -p "Press any key to continue."
+    end
+}}
+
+cmd gpl ${{
+    set -l is_git (git rev-parse --git-dir 2>/dev/null)
+    if [ -n "$is_git" ]
+        git pull
+        read -rsn1 -p "Press any key to continue."
+    end
+}}
+
+cmd ga ${{
+    set -l is_git (git rev-parse --git-dir 2>/dev/null)
+    if [ -n "$is_git" ]
+        git add .
+        read -rsn1 -p "Press any key to continue."
+    end
+}}
+
+cmd gc ${{
+    set -l is_git (git rev-parse --git-dir 2>/dev/null)
+    if [ -n "$is_git" ]
+        echo -n "git commit -am "
+        read input
+        eval "git commit -am $input"
+        read -rsn1 -p "Press any key to continue."
+    end
+}}
+
+# -- Archives
+
+cmd extract %{{
+    set -l num_files (echo "$fx" | wc -l)
+    set -l i 1
+
+    while [ $i -le $num_files ]
+        set -l file (echo "$fx" | sed -n "$i p")
+
+        switch "$file"
+
+            case "*.tar.bz2"
+                tar xjf "$file"
+            case "*.tar.gz"
+                tar xzf "$file"
+            case "*.bz2"
+                bunzip2 "$file"
+            case "*.rar"
+                unrar x "$file"
+            case "*.gz"
+                gunzip "$file"
+            case "*.tar"
+                tar xf "$file"
+            case "*.tbz2"
+                tar xjf "$file"
+            case "*.tgz"
+                tar xzf "$file"
+            case "*.zip"
+                unzip "$file"
+            case "*.Z"
+                uncompress "$file"
+            case "*.7z"
+                7z x "$file"
+            case "*.deb"
+                ar x "$file"
+            case "*.tar.xz"
+                tar xf "$file"
+            case "*.tar.zst"
+                unzstd "$file"      
+            case "*"
+                echo "$file: Extraction Failed"
+        end
+
+        set i (math "$i + 1")
+    end
+}}
+
+# -- Commands -----------------------------------------------------------------
+
+# Search and Edit
+cmd se ${{
+    function find_cmd
+        set -l is_fd (command -v fd)
+        if [ -n "$is_fd"]
+            fd . -H -I -t f
+        else
+            find . -type f
+        end
+    end
+
+    find_cmd | fzf | xargs -r "$EDITOR"
+}}
+
+# Search and sudoedit
+cmd ssde ${{
+    function find_cmd
+        set -l is_fd (command -v fd)
+        if [ -n "$is_fd"]
+            fd . -H -I -t f
+        else
+            find . -type f
+        end
+    end
+
+    find_cmd | fzf | xargs -r sudoedit
+}}
+
+#cmd bulk-rename ${{
+    #old="$(mktemp)"
+    #new="$(mktemp)"
+    #[ -n "$fs" ] && fs="$(ls)"
+    #printf '%s\n' "$fs" >"$old"
+    #printf '%s\n' "$fs" >"$new"
+    #$EDITOR "$new"
+    #[ "$(wc -l "$new")" -ne "$(wc -l "$old")" ] && exit
+    #paste "$old" "$new" | while IFS= read -r names; do
+        #src="$(printf '%s' "$names" | cut -f1)"
+        #dst="$(printf '%s' "$names" | cut -f2)"
+        #if [ "$src" = "$dst" ] || [ -e "$dst" ]; then
+            #continue
+        #fi
+        #mv -- "$src" "$dst"
+    #done
+    #rm -- "$old" "$new"
+    #lf -remote "send $id unselect"
+#}}
+
+# -- Keybindings --------------------------------------------------------------
+
+# -- Disable Defaults
+
+map <esc> cmd-escape
+map m
+map "'"
+map '"'
+map d
+map c
+map e
+map f
+
+# -- Commands
+
+map R bulk-rename
+map p paste
+map y copy
+map x cut
+map chx chmodx
+map e gui
+map Y copy_path
+
+# - Delete
+
+map dd trash
+map dD delete
+
+# -- Toggle [ z ]
+
+map . set hidden!
+map z
+
+# - UI
+map zz single_pane
+map zZ triple_pane
+
+# -- Action [ a ]
+
+map ar run
+map ax extract
+
+# -- New [ n ]
+
+map n
+map nd mkdir
+map nf mkfile
+map ns mkscript
+map nn new_notes 
+
+# -- Open [ o ]
+
+map o
+map on open-new-window
+map oo open-with
+
+map O new-instance
+
+# -- Navigation
+
+map F fzf_curr_dir
+map f fzf_recursive
+map <backspace2> updir
+map <enter> open
+
+# -- Change [ c ]
+
+# - Directory [ cd ]
+
+map cdR cd /
+map cdh cd ~/
+map cdc cd ~/other
+map cdC cd ~/.config
+map cdH cd ~/.cache
+map cddw cd ~/downloads
+map cdD cd ~/documents
+map cdw cd ~/wiki
+map cdv cd ~/videos
+map cdp cd ~/projects
+map cdP cd ~/pictures
+map cdS cd ~/pictures/screenshots
+map cds cd ~/other/.scripts
+map cdb cd ~/other/bookmarks
+map cdW cd ~/other/dotfiles/wallpapers
+map cdE cd /etc
+map cdU cd /usr
+map cdl cd ~/.local
+map cdn cd ~/notes
+map cdmm cd /mnt
+map cdme cd /mnt/e
+map cdmf cd /mnt/f
+map cdmg cd /mnt/g
+map cdma cd /media
+map cdmd cd /mnt/d
+map cdmh cd ~/mnt
+map cdmp cd ~/mnt/phone
+map cdt cd ~/.trash
+map cdr cd ~/other/.src
+map cdu cd ~/uni
+map cdG git_root

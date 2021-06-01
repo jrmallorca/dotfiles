@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# Open Neovim in a terminal. Pass the path of a file as an argument to open it
+# in Neovim.
+
+if [ -n "$1" ]
+then
+    if [ -d "$1" ]
+    then
+        args="$1"
+    else
+        args=""
+    fi
+else
+    dir=$(xclip -selection primary -o 2>/dev/null)
+    _dir=$(xclip -selection clipboard -o 2>/dev/null)
+
+    if [ -d "$_dir" ]
+    then
+        args="$_dir"
+    elif [ -d "$dir" ]
+    then
+        args="$dir"
+    else
+        args=""
+    fi
+fi
+
+alacritty -e sh -c "sleep 0.5 && lf '$args'"
