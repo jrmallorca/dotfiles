@@ -73,7 +73,8 @@ necessary:
 		unclutter tlp feh mpv ffmpeg youtube-dl googler alsa-utils zathura \
 		zathura-pdf-mupdf clight nodejs npm python python-pip autotiling \
 		dunst flameshot buku lxappearance-gtk3 gtk3 libinput xorg-xinput tmux \
-		github-cli bluez bluez-utils blueman
+		github-cli bluez bluez-utils blueman lf devour zoxide ttc-iosevka-aile \
+		ttc-iosevka-ss14
 	npm install -g neovim
 	pip install pynvim
 	# systemctl enable NetworkManager
