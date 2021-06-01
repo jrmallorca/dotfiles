@@ -1,6 +1,22 @@
 fish_vi_key_bindings
 set fish_greeting # Removes fish greeting
 
+zoxide init fish | source
+
+function cdf
+    set tmp (mktemp)
+    lf -last-dir-path=$tmp $argv
+    if test -f "$tmp"
+        set dir (cat $tmp)
+        rm -f $tmp
+        if test -d "$dir"
+            if test "$dir" != (pwd)
+                cd $dir
+            end
+        end
+    end
+end
+
 # Base16 Shell
 if status --is-interactive
     set BASE16_SHELL "$HOME/.config/base16-shell/"
@@ -19,34 +35,38 @@ function vf
 end
 
 # Finds file in current directory and changes to that directory
-function cdf
+function zf
     __fzf_search_current_dir # Find file in current directory
     commandline -f execute # Press enter
 end
+
+# paru abbr
+abbr p 'paru -Syu'
+abbr prm 'paru -Rs'
 
 # Mount phone
 abbr mntph 'simple-mtpfs --device 1 /mnt/phone/'
 abbr umntph 'fusermount -u /mnt/phone/'
 
 # Changing directory abbr
-abbr md 'cd /mnt/d'
-abbr uni 'cd /mnt/d/University'
-abbr no 'cd /mnt/d/Notes'
-abbr cfg 'cd ~/.config'
-abbr dot 'cd ~/dotfiles/arch'
-abbr pro 'cd ~/Projects'
+abbr md 'z /mnt/d'
+abbr uni 'z /mnt/d/University'
+abbr no 'z /mnt/d/Notes'
+abbr cfg 'z ~/.config'
+abbr dot 'z ~/dotfiles/arch'
+abbr pro 'z ~/Projects'
 
 # Confirmation (command history)
-abbr v. 'cd ~/dotfiles/arch ; vf'
-abbr vws 'cd ~/dotfiles/workspaces ; vf'
-abbr vuni 'cd /mnt/d/University ; vf'
-abbr vno 'cd /mnt/d/Notes ; vf'
-abbr vpro 'cd ~/Projects ; vf'
-abbr c. 'cd ~/dotfiles/arch ; cdf'
-abbr cws 'cd ~/dotfiles/workspaces ; cdf'
-abbr cuni 'cd /mnt/d/University ; cdf'
-abbr cno 'cd /mnt/d/Notes ; cdf'
-abbr cpro 'cd ~/Projects ; cdf'
+abbr v. 'z ~/dotfiles/arch ; vf'
+abbr vws 'z ~/dotfiles/workspaces ; vf'
+abbr vuni 'z /mnt/d/University ; vf'
+abbr vno 'z /mnt/d/Notes ; vf'
+abbr vpro 'z ~/Projects ; vf'
+abbr z. 'z ~/dotfiles/arch ; zf'
+abbr zws 'z ~/dotfiles/workspaces ; zf'
+abbr zuni 'z /mnt/d/University ; zf'
+abbr zno 'z /mnt/d/Notes ; zf'
+abbr zpro 'z ~/Projects ; zf'
 
 # tmux abbr
 abbr t 'tmux'
@@ -127,7 +147,6 @@ set -x GPG_TTY (tty)
 # PATH configurations
 # set PATH $PATH /opt/android-studio/bin 
 # set PATH $PATH /opt/gradle/gradle-6.8.2/bin
-set PATH $PATH /use/lib/dart/bin
+set PATH $PATH /usr/lib/dart/bin
 set -gx JAVA_OPTS '-XX:+IgnoreUnrecognizedVMOptions'
-set -gx JAVA_HOME /usr/lib/jvm/java-8-openjdk
 set -gx ANDROID_SDK_ROOT /opt/android-sdk
