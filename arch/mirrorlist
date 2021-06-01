@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Update pacman mirrorlist with current fastest
+/usr/bin/reflector -c "United Kingdom" -p http --sort rate --save /etc/pacman.d/mirrorlist

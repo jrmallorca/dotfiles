@@ -12,8 +12,12 @@ configuration:
 	cp .profile ~/
 	cp .tmux.conf ~/
 
-reflector:
-	sudo cp reflector.conf /etc/xdg/reflector/
+input:
+	sudo cp 40-libinput.conf /usr/share/X11/xorg.conf.d/
+
+# Transfer cron jobs
+cron:
+	sudo cp mirrorlist /etc/cron.daily/
 
 # Transfer theme related files.
 theme:
@@ -22,7 +26,6 @@ theme:
 	sudo cp -a ../icons/ /usr/share/
 	sudo cp -a ../fonts/ /usr/share/
 	sudo cp bitlbee.conf /etc/bitlbee/
-	sudo cp 40-libinput.conf /usr/share/X11/xorg.conf.d/
 	sudo cp lightdm.conf /etc/lightdm/
 
 # -----------------------------------------------------------------------------
@@ -31,6 +34,27 @@ theme:
 
 # Base
 # -----------------------------------------------------------------------------
+
+# Signal (EDIT NEEDED TO USE AUR INSTEAD)
+signalcliVer = 0.8.1
+siggoVer = 0.9.0
+scliVer = 0.5.0
+signalcli:
+	wget https://github.com/AsamK/signal-cli/releases/download/v$(signalcliVer)/signal-cli-$(signalcliVer).tar.gz
+	sudo tar xf signal-cli-$(signalcliVer).tar.gz -C /opt
+	sudo ln -sf /opt/signal-cli-$(signalcliVer)/bin/signal-cli /usr/local/bin/
+	rm -f signal-cli-$(signalcliVer).tar.gz
+	# siggo
+	#wget https://github.com/derricw/siggo/releases/download/$(siggoVer)/siggo-$(siggoVer)-linux-amd64.tar.gz
+	#tar xzf siggo-$(siggoVer)-linux-amd64.tar.gz
+	#sudo mv bin/siggo /usr/local/bin
+	#rm -rf bin
+	# scli
+	wget https://github.com/isamert/scli/archive/refs/tags/v$(scliVer).zip
+	unzip v$(scliVer).zip
+	sudo mv scli-$(scliVer)/scli /usr/local/bin 
+	rm -rf scli-$(scliVer) v$(scliVer).zip
+	pip install urwid pyqrcode
 
 # paru (AUR Helper)
 paru:
