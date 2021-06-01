@@ -172,6 +172,35 @@ window:
   # it is recommended to set `use_thin_strokes` to `false`.
   #use_thin_strokes: true
 
+font:
+  normal:
+    family: Iosevka SS14
+    style: Regular
+
+  bold:
+    family: Iosevka SS14
+    style: Bold
+
+  italic:
+    family: Iosevka SS14
+    style: Italic
+
+  bold_italic:
+    family: Iosevka SS14
+    style: Bold Italic
+
+  size: 10.0
+
+  offset:
+    x: 0
+    y: 0
+
+  glyph_offset:
+    x: 0
+    y: 0
+
+  use_thin_strokes: false
+
 # If `true`, bold text is drawn using the bright color variants.
 #draw_bold_text_with_bright_colors: false
 
