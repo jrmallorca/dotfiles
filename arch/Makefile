@@ -222,6 +222,7 @@ pomo:
 # Programs
 # -----------------------------------------------------------------------------
 
+# Virtual MacOS
 maccat:
 	VBoxManage modifyvm "maccat" --cpuidset 00000001 000106e5 00100800 0098e3fd bfebfbff
 	VBoxManage setextradata "maccat" "VBoxInternal/Devices/efi/0/Config/DmiSystemProduct" "iMac19,1"
