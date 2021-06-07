@@ -89,7 +89,7 @@ abbr se 'sudoedit'
 abbr v 'nvim'
 
 # dotfiles make config abbr
-abbr mc 'make configuration'
+abbr mc 'z ~/dotfiles/arch && make configuration && prevd'
 
 # nmcli abbr (Wifi)
 abbr ns 'nmcli c show'
