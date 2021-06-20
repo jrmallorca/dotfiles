@@ -18,7 +18,6 @@ set signcolumn=yes
 set updatetime=200
 
 let g:python3_host_prog=expand('/usr/bin/python') " Set python3 path
-" imap kj <Esc> " Remap Esc to kj
 set pastetoggle=<F2> " Toggling pasting to not lose formatting
 set number " Show line numbers (Shows current line when paired with relativenumber)
 set relativenumber " Show relative line numbers
@@ -31,10 +30,6 @@ filetype indent on " Tab spacing
 set tabstop=4 " Show existing tab with 4 spaces width
 set shiftwidth=4 " When indenting with '>', use 4 spaces width
 set expandtab " Turn tabs into spaces
-
-" Make vertical separator pretty
-highlight VertSplit cterm=NONE
-set fillchars+=vert:\▏
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " Panes and TMUX interaction
@@ -51,9 +46,6 @@ let g:tmux_navigator_save_on_switch = 2
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
 call plug#begin('~/.config/nvim/plugged')
-    " Theme
-    Plug 'chriskempson/base16-vim'
-
     " Git
     Plug 'mhinz/vim-signify'
     Plug 'tpope/vim-fugitive'
@@ -92,29 +84,16 @@ let g:coc_global_extensions=[
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " Color scheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
+
 syntax enable " Keeps current color settings
 
+hi! link SignColumn LineNr
+
+" Make vertical separator pretty
+hi VertSplit cterm=NONE
+set fillchars+=vert:\▏
+
 set background=dark " Vim tries to use colors best on dark backgrounds
-" au Colorscheme * hi Normal guibg=NONE ctermbg=NONE guifg=NONE ctermfg=NONE
-" au Colorscheme * hi LineNr guibg=NONE ctermbg=NONE
-" au Colorscheme * hi CursorLine guibg=NONE ctermbg=NONE
-" au Colorscheme * hi SignColumn guibg=NONE ctermbg=NONE
-au Colorscheme * hi Comment ctermfg=DarkGrey
-au Colorscheme * hi SpellBad ctermbg=NONE ctermfg=Red cterm=underline
-au Colorscheme * hi SpellCap ctermbg=NONE ctermfg=Red cterm=underline
-au Colorscheme * hi SpellRare ctermbg=NONE ctermfg=LightGrey
-au Colorscheme * hi SpellLocal ctermbg=NONE ctermfg=LightGrey
-
-" if exists('+termguicolors')
-"   let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
-"   let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
-"   set termguicolors
-" endif
-
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " Status line
