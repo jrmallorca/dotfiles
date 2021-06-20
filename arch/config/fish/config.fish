@@ -116,5 +116,6 @@ set -x GPG_TTY (tty)
 # set PATH $PATH /opt/android-studio/bin 
 # set PATH $PATH /opt/gradle/gradle-6.8.2/bin
 set PATH $PATH /usr/lib/dart/bin
+set -gx EDITOR /usr/bin/nvim
 set -gx JAVA_OPTS '-XX:+IgnoreUnrecognizedVMOptions'
 set -gx ANDROID_SDK_ROOT /opt/android-sdk

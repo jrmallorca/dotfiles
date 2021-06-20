@@ -9,7 +9,6 @@
 # Transfer configuration files.
 configuration:
 	cp -a config/. ~/.config/
-	cp .profile ~/
 	cp .tmux.conf ~/
 
 input:
