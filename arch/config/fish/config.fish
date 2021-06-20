@@ -104,7 +104,7 @@ abbr grb 'git rebase'
 abbr gs 'git status'
 abbr gst 'git stash'
 abbr gg 'git log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"'
-abbr gresign 'git rebase --exec 'git commit --amend --no-edit -n -S' -i'
+abbr gresign 'git rebase --exec \'git commit --amend --no-edit -n -S\' -i'
 
 # GitHub CLI abbr
 abbr ghil 'gh issue list'
