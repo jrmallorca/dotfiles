@@ -87,6 +87,10 @@ let g:coc_global_extensions=[
 
 syntax enable " Keeps current color settings
 
+hi DiffAdd ctermbg=NONE
+hi DiffDelete ctermbg=NONE
+hi DiffChange ctermbg=NONE
+hi DiffText ctermbg=NONE
 hi! link SignColumn LineNr
 
 " Make vertical separator pretty
