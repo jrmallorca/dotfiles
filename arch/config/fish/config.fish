@@ -1,27 +1,11 @@
+# Set vi key bindings
 fish_vi_key_bindings
-set fish_greeting # Removes fish greeting
 
+# Removes fish greeting
+set fish_greeting
+
+# Replace cd with z
 zoxide init fish | source
-
-function cdf
-    set tmp (mktemp)
-    lf -last-dir-path=$tmp $argv
-    if test -f "$tmp"
-        set dir (cat $tmp)
-        rm -f $tmp
-        if test -d "$dir"
-            if test "$dir" != (pwd)
-                cd $dir
-            end
-        end
-    end
-end
-
-# Base16 Shell
-if status --is-interactive
-    set BASE16_SHELL "$HOME/.config/base16-shell/"
-    source "$BASE16_SHELL/profile_helper.fish"
-end
 
 # Finds file in current directory and executes nvim
 function vf
@@ -81,9 +65,6 @@ abbr rmtr 'rm -rf ~/.tmux/resurrect/*'
 abbr we 'weechat'
 abbr wh 'whatscli'
 
-# Calcurse abbr
-abbr cal 'calcurse'
-
 # Editor abbr
 abbr se 'sudoedit'
 abbr v 'nvim'
@@ -99,20 +80,6 @@ abbr nc 'nmcli -a d wifi connect'
 
 # Stocks abbr
 abbr stocks ticker -w AMD,AAPL,CRSP,CRSR,GME,AMC,SQ,NIO --show-fundamentals --show-separator
-
-# Browser-related abbr
-abbr g 'googler'
-abbr b 'buku'
-abbr fanime 'daemon firefox https://9anime.to/home &'
-abbr fkdrama 'daemon firefox https://dramacool.so/ &'
-abbr fgit 'daemon firefox https://github.com/ &'
-abbr fbb 'daemon firefox https://www.ole.bris.ac.uk/ &'
-
-# Play Lo-Fi Cafe on spt
-abbr lofi 'spt p --uri spotify:playlist:37i9dQZF1DX9RwfGbeGQwP'
-
-# youtube on mpv alias
-abbr yv 'googler -w youtube.com --url-handler mpv'
 
 # Git abbr
 abbr ga 'git add'
@@ -137,6 +104,7 @@ abbr grb 'git rebase'
 abbr gs 'git status'
 abbr gst 'git stash'
 abbr gg 'git log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"'
+abbr gresign 'git rebase --exec 'git commit --amend --no-edit -n -S' -i'
 
 # GitHub CLI abbr
 abbr ghil 'gh issue list'

@@ -35,32 +35,12 @@ theme:
 # Base
 # -----------------------------------------------------------------------------
 
-# Signal (EDIT NEEDED TO USE AUR INSTEAD)
-signalcliVer = 0.8.1
-siggoVer = 0.9.0
-scliVer = 0.5.0
-signalcli:
-	wget https://github.com/AsamK/signal-cli/releases/download/v$(signalcliVer)/signal-cli-$(signalcliVer).tar.gz
-	sudo tar xf signal-cli-$(signalcliVer).tar.gz -C /opt
-	sudo ln -sf /opt/signal-cli-$(signalcliVer)/bin/signal-cli /usr/local/bin/
-	rm -f signal-cli-$(signalcliVer).tar.gz
-	# siggo
-	#wget https://github.com/derricw/siggo/releases/download/$(siggoVer)/siggo-$(siggoVer)-linux-amd64.tar.gz
-	#tar xzf siggo-$(siggoVer)-linux-amd64.tar.gz
-	#sudo mv bin/siggo /usr/local/bin
-	#rm -rf bin
-	# scli
-	wget https://github.com/isamert/scli/archive/refs/tags/v$(scliVer).zip
-	unzip v$(scliVer).zip
-	sudo mv scli-$(scliVer)/scli /usr/local/bin 
-	rm -rf scli-$(scliVer) v$(scliVer).zip
-	pip install urwid pyqrcode
-
 # paru (AUR Helper)
 paru:
 	sudo pacman -S --needed git base-devel
-	cd ~ && sudo git clone https://aur.archlinux.org/paru.git && \
+	cd ~ && git clone https://aur.archlinux.org/paru.git && \
 		cd paru && makepkg -si
+	sudo rm -rf ~/paru/
 
 # Necessary
 necessary:
@@ -84,6 +64,9 @@ necessary:
 	# systemctl enable reflector.service
 	# systemctl enable reflector.timer
 
+necessary-paru:
+	paru -Syu daemon clight lf devour zoxide
+
 # Mount the D drive from Windows
 mountd:
 	paru -Syu --needed ntfs-3g
@@ -99,12 +82,34 @@ greeter:
 	systemctl enable lightdm
 
 # Install Vim-Plug. NeoVim configs must be set up.
-# UNTESTED but likely works
 vim-plug:
 	curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
     	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+# Signal (EDIT NEEDED TO USE AUR INSTEAD)
+signalcliVer = 0.8.1
+siggoVer = 0.9.0
+scliVer = 0.5.0
+signalcli:
+	wget https://github.com/AsamK/signal-cli/releases/download/v$(signalcliVer)/signal-cli-$(signalcliVer).tar.gz
+	sudo tar xf signal-cli-$(signalcliVer).tar.gz -C /opt
+	sudo ln -sf /opt/signal-cli-$(signalcliVer)/bin/signal-cli /usr/local/bin/
+	rm -f signal-cli-$(signalcliVer).tar.gz
+	# siggo
+	#wget https://github.com/derricw/siggo/releases/download/$(siggoVer)/siggo-$(siggoVer)-linux-amd64.tar.gz
+	#tar xzf siggo-$(siggoVer)-linux-amd64.tar.gz
+	#sudo mv bin/siggo /usr/local/bin
+	#rm -rf bin
+	# scli
+	wget https://github.com/isamert/scli/archive/refs/tags/v$(scliVer).zip
+	unzip v$(scliVer).zip
+	sudo mv scli-$(scliVer)/scli /usr/local/bin 
+	rm -rf scli-$(scliVer) v$(scliVer).zip
+	pip install urwid pyqrcode
+
 # UNTESTED and probably doesn't work with 2nd line due to fish
+# Should probably make it a script?
+# Should check if there's no existing SSH key
 gitsshkeys:
 	ssh-keygen -t ed25519 -C "48072014+jrmallorca@users.noreply.github.com"
 	eval "$(ssh-agent -s)"
@@ -117,12 +122,13 @@ gitgpgkeys:
 	gpg2 --full-generate-key
 	gpg2 --list-secret-keys --keyid-format LONG
 
-ohmyfish:
-	curl -L https://get.oh-my.fish | fish
-
 # Doesn't work in Makefile
 fisher:
 	curl -sL https://git.io/fisher | . && fisher install jorgebucaran/fisher
+
+spacefish:
+	paru -Syu --needed powerline-fonts
+	fisher install matchai/spacefish
 
 fisherplugins:
 	fisher install PatrickF1/fzf.fish
@@ -178,16 +184,6 @@ flutter:
 		android-sdk-platform-tools android-sdk-build-tools android-platform \
 		scrcpy
 
-# UNTESTED
-# CHECK VERSION BEFORE MAKING
-go:
-	wget https://dl.google.com/go/go1.15.3.linux-amd64.tar.gz
-	sudo tar -C /usr/local -xzf go1.15.3.linux-amd64.tar.gz
-	rm go1.15.3.linux-amd64.tar.gz
-
-latex:
-	paru -Syu texlive-most
-
 # Extra
 # -----------------------------------------------------------------------------
 
@@ -203,20 +199,6 @@ ticker:
 	&& tar -xf ticker*.tar.gz \
 	&& chmod +x ./ticker \
 	&& sudo mv ticker /usr/local/bin/
-
-# CHANGE
-# CHECK VERSION
-calcurse:
-	sudo apt install libncurses5-dev
-	wget https://calcurse.org/files/calcurse-4.7.0.tar.gz
-	tar -xf calcurse-4.7.0.tar.gz
-	cd calcurse-4.7.0/ && \
-		.configure && make && sudo make install
-
-# CHANGE (or use another pomo)
-pomo:
-	curl -L -s https://kevinschoon.github.io/pomo/install.sh | bash /dev/stdin
-	sudo mv pomo /usr/local/bin/
 
 # -----------------------------------------------------------------------------
 # Programs

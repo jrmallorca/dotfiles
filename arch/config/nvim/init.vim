@@ -81,9 +81,6 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'tpope/vim-markdown'
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
     Plug 'lervag/vimtex'
-
-    " Misc
-    Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 call plug#end()
 
 let g:coc_global_extensions=[
