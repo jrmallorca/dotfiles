@@ -1,3 +1,5 @@
+#!/bin/sh
+
 setxkbmap -layout uk
 setxkbmap -option 'caps:ctrl_modifier'
 xcape -e 'Caps_Lock=Escape'
