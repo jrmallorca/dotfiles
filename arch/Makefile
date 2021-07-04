@@ -9,7 +9,7 @@
 # Transfer configuration files.
 configuration:
 	cp -a config/. ~/.config/
-	cp .tmux.conf ~/
+	cp .tmux.conf .xinitrc ~/
 
 input:
 	sudo cp 40-libinput.conf /usr/share/X11/xorg.conf.d/
@@ -43,7 +43,7 @@ paru:
 
 # Necessary
 necessary:
-	paru -Syu --needed grub base-devel reflector efibootmgr mtools dosfstools firefox \
+	paru -Syu --needed grub base-devel reflector firefox \
 		intel-ucode amd-ucode git neovim networkmanager network-manager-applet \
 		xf86-video-amdgpu xf86-video-ati xf86-video-intel xf86-video-nouveau \
 		xf86-video-vesa xdg-utils xdg-user-dirs openssh alacritty xorg-server \
@@ -69,16 +69,22 @@ necessary-paru:
 # Mount the D drive from Windows
 mountd:
 	paru -Syu --needed ntfs-3g
-	mkdir -p /mnt/d
+	sudo mkdir -p /mnt/d
 	echo "Copy this into etc/fstab: UUID=<uuid> /mnt/d ntfs uid=1000,gid=1000,umask=0022,sync,auto,rw 0 0"
 	echo "Get UUID from the following command: lsblk -o NAME,FSTYPE,UUID" 
 	echo "Do: sudo mount -av"
 
 # Webkit2 greeter
-greeter:
+lightdm:
 	paru -Syu --needed xorg-server xorg-xinit lightdm lightdm-webkit2-greeter \
 		lightdm-webkit-theme-sequoia-git
 	systemctl enable lightdm
+
+ly:
+	paru -Syu --needed ly
+	sudo ssystemctl enable ly.service
+	sudo systemctl disable getty@tty2.service
+	cd ~/ && chmod +x .xinitrc
 
 # Install Vim-Plug. NeoVim configs must be set up.
 vim-plug:
@@ -87,24 +93,14 @@ vim-plug:
 
 # Signal (EDIT NEEDED TO USE AUR INSTEAD)
 signalcliVer = 0.8.1
-siggoVer = 0.9.0
 scliVer = 0.5.0
 signalcli:
 	wget https://github.com/AsamK/signal-cli/releases/download/v$(signalcliVer)/signal-cli-$(signalcliVer).tar.gz
 	sudo tar xf signal-cli-$(signalcliVer).tar.gz -C /opt
 	sudo ln -sf /opt/signal-cli-$(signalcliVer)/bin/signal-cli /usr/local/bin/
 	rm -f signal-cli-$(signalcliVer).tar.gz
-	# siggo
-	#wget https://github.com/derricw/siggo/releases/download/$(siggoVer)/siggo-$(siggoVer)-linux-amd64.tar.gz
-	#tar xzf siggo-$(siggoVer)-linux-amd64.tar.gz
-	#sudo mv bin/siggo /usr/local/bin
-	#rm -rf bin
 	# scli
-	wget https://github.com/isamert/scli/archive/refs/tags/v$(scliVer).zip
-	unzip v$(scliVer).zip
-	sudo mv scli-$(scliVer)/scli /usr/local/bin 
-	rm -rf scli-$(scliVer) v$(scliVer).zip
-	pip install urwid pyqrcode
+	paru -Syu --needed scli
 
 # UNTESTED and probably doesn't work with 2nd line due to fish
 # Should probably make it a script?
