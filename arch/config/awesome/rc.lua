@@ -17,6 +17,9 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
+-- i3/vim style modalbinds
+local modalbind = require("modalbind")
+modalbind.init()
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -217,6 +220,10 @@ root.buttons(gears.table.join(
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
+-- }}}
+
+-- {{{ Modes
+
 -- }}}
 
 -- {{{ Key bindings
