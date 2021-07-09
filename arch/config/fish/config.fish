@@ -15,8 +15,7 @@ zoxide init fish | source
 # FUNCTIONS #
 #############
 
-# Finds file in current directory and executes nvim
-function vf
+function vf -d 'Finds file in current directory and executes nvim'
     commandline -i "nvim " # Insert "nvim "
     __fzf_search_current_dir # Find file in current directory
     if test (count (commandline --tokenize)) = 2 # If found something...
@@ -26,10 +25,29 @@ function vf
     end
 end
 
-# Finds file in current directory and changes to that directory
-function zf
+function zf -d 'Finds file in current directory and changes to that directory'
     __fzf_search_current_dir # Find file in current directory
     commandline -f execute # Press enter
+end
+
+function gcl -d 'Clone a repository with using a username and repository name' -a username repository
+    if set -q username[1] repository[1]
+        git clone git@github.com:$username/$repository.git
+    else
+        printf 'Missing either username or repository name'
+    end
+end
+
+function gsetup -d 'Set up a new repository using a repository name' -a repository
+    if set -q repository[1]
+        git init
+        git add -A
+        git commit -m "Initial commit"
+        git remote add origin git@github.com:jrmallorca/$repository.git
+        git push -u origin main
+    else
+        printf 'Missing repository name'
+    end
 end
 
 #################
@@ -79,6 +97,7 @@ abbr rmtr 'rm -rf ~/.tmux/resurrect/*'
 # Chat
 abbr we 'weechat'
 abbr wh 'whatscli'
+abbr s 'z ~/scli && ./scli'
 
 # Editor
 abbr se 'sudoedit'
