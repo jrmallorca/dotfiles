@@ -91,16 +91,18 @@ vim-plug:
 	curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
     	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-# Signal (EDIT NEEDED TO USE AUR INSTEAD)
-signalcliVer = 0.8.1
-scliVer = 0.5.0
-signalcli:
-	wget https://github.com/AsamK/signal-cli/releases/download/v$(signalcliVer)/signal-cli-$(signalcliVer).tar.gz
-	sudo tar xf signal-cli-$(signalcliVer).tar.gz -C /opt
-	sudo ln -sf /opt/signal-cli-$(signalcliVer)/bin/signal-cli /usr/local/bin/
-	rm -f signal-cli-$(signalcliVer).tar.gz
-	# scli
-	paru -Syu --needed scli
+# Signal
+signal:
+	gpg --keyserver keyserver.ubuntu.com --recv-key FA10826A74907F9EC6BBB7FC2BA2CD21B5B09570
+	paru -Syu --needed jdk-openjdk rustup
+	# paru -Syu --needed jdk11-openjdk rustup
+	sudo archlinux-java set java-16-openjdk
+	# sudo archlinux-java set java-11-openjdk
+	# rustup install stable
+	# rustup default stable
+	paru -Syu --needed signal-cli
+	pip install urwid
+	cd ~ && git clone https://github.com/isamert/scli.git
 
 # UNTESTED and probably doesn't work with 2nd line due to fish
 # Should probably make it a script?
