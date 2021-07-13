@@ -223,18 +223,43 @@ root.buttons(gears.table.join(
 -- }}}
 
 -- {{{ Modes
+local systemmap = {
+    { "a", awesome.quit, "Quit awesome" },
+    { "s", awesome.restart, "Restart awesome" },
 
+    { "h", function() awful.spawn("betterlockscreen -l blur") end, "Lock screen" },
+    { "j", function() awful.spawn("betterlockscreen -s blur") end, "Suspend" },
+    { "k", function() awful.spawn("systemctl reboot") end, "Restart" },
+    { "l", function() awful.spawn("systemctl poweroff") end, "Shut down" },
+}
+
+local volumebrightnessmap = {
+    { "h", function() awful.spawn("busctl --user call org.clight.clight /org/clight/clight org.clight.clight DecBl d 0.1") end, "Brightness down" },
+    { "j", function() awful.spawn("amixer set Master 5%+") end, "Volume up" },
+    { "k", function() awful.spawn("amixer set Master 5%-") end, "Volume down" },
+    { "l", function() awful.spawn("busctl --user call org.clight.clight /org/clight/clight org.clight.clight IncBl d 0.1") end, "Brightness up" },
+}
 -- }}}
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
+    -- Modes
+    awful.key({ modkey, "Shift"   }, "q", function()
+        modalbind.grab{keymap=systemmap, name="System"}
+        end,
+    {description="System mode"}),
+    awful.key({ modkey,           }, "v", function()
+        modalbind.grab{keymap=volumebrightnessmap, name="Volume/Brightness", stay_in_mode=true}
+        end,
+    {description="Volume/Brightness mode"}),
+
     -- Volume
     awful.key({                   }, "XF86AudioRaiseVolume", function ()
-        os.execute("amixer set Master 5%+")
+        awful.spawn("amixer set Master 5%+")
         end,
     {description="volume up", group="volume"}),
     awful.key({                   }, "XF86AudioLowerVolume", function ()
-        os.execute("amixer set Master 5%-")
+        awful.spawn("amixer set Master 5%-")
         end,
     {description="volume down", group="volume"}),
 
@@ -315,8 +340,8 @@ globalkeys = gears.table.join(
               {description = "open firefox", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
-    awful.key({ modkey, "Shift"   }, "q", awesome.quit,
-              {description = "quit awesome", group = "awesome"}),
+    -- awful.key({ modkey, "Shift"   }, "q", awesome.quit,
+    --        {description = "quit awesome", group = "awesome"}),
 
     awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1, nil, true)    end,
               {description = "increase the number of columns", group = "layout"}),
@@ -615,6 +640,7 @@ autorunApps =
 }
 if autorun then
    for app = 1, #autorunApps do
-       awful.util.spawn(autorunApps[app])
+       -- Edit so some of them only run once
+       awful.spawn(autorunApps[app])
    end
 end
