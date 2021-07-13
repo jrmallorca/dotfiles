@@ -86,6 +86,10 @@ ly:
 	sudo systemctl disable getty@tty2.service
 	cd ~/ && chmod +x .xinitrc
 
+betterlockscreen:
+	paru -Syu --needed betterlockscreen
+	betterlockscreen -u "~/dotfiles/backgrounds/"
+
 # Install Vim-Plug. NeoVim configs must be set up.
 vim-plug:
 	curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
