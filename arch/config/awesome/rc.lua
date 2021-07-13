@@ -235,8 +235,8 @@ local systemmap = {
 
 local volumebrightnessmap = {
     { "h", function() awful.spawn("busctl --user call org.clight.clight /org/clight/clight org.clight.clight DecBl d 0.1") end, "Brightness down" },
-    { "j", function() awful.spawn("amixer set Master 5%+") end, "Volume up" },
-    { "k", function() awful.spawn("amixer set Master 5%-") end, "Volume down" },
+    { "j", function() awful.spawn("amixer set Master 5%-") end, "Volume down" },
+    { "k", function() awful.spawn("amixer set Master 5%+") end, "Volume up" },
     { "l", function() awful.spawn("busctl --user call org.clight.clight /org/clight/clight org.clight.clight IncBl d 0.1") end, "Brightness up" },
 }
 -- }}}
