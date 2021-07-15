@@ -5,7 +5,7 @@ vim.o.updatetime = 250 -- Decrease update time
 
 vim.wo.relativenumber = true -- Show relative line numbers
 vim.wo.number = true         -- Show actual line numbers (where the cursor is)
-vim.wo.signcolumn = 'number' -- Override number column with sign column
+vim.wo.signcolumn = 'yes'    -- Override number column with sign column
 
 vim.o.pastetoggle = "<F2>"      -- Toggle paste format via 'F2'
 vim.o.clipboard = "unnamedplus" -- Yank to system clipboard
@@ -37,6 +37,8 @@ vim.o.splitbelow = true -- New vertical window is positioned below current windo
 vim.o.inccommand = "nosplit" -- Show effects of a command incrementally
 
 vim.cmd [[set undofile]] -- Save undo history
+
+vim.o.completeopt = 'menuone,noinsert' -- Completion
 
 -- Highlight on yank
 vim.api.nvim_exec(

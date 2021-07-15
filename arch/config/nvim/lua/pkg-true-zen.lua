@@ -4,7 +4,7 @@ require("true-zen").setup({
 			laststatus = 0,
 			ruler = false,
 			showmode = false,
-			showcmd = false,
+			showcmd = true,
 			cmdheight = 1,
 		},
 		top = {
@@ -22,12 +22,12 @@ require("true-zen").setup({
 			right_padding = 32,
 			top_padding = 1,
 			bottom_padding = 1,
-			ideal_writing_area_width = 80,
-			just_do_it_for_me = true,
+			ideal_writing_area_width = {80, 200},
+			just_do_it_for_me = false,
 			keep_default_fold_fillchars = true,
 			custome_bg = "",
 			bg_configuration = true,
-			affected_higroups = {NonText = {}, FoldColumn = {}, ColorColumn = {}, VertSplit = {}, StatusLine = {}, StatusLineNC = {}, SignColumn = {}}
+			affected_higroups = {NonText = {}, FoldColumn = {}, ColorColumn = {}, VertSplit = {}, StatusLine = {}, StatusLineNC = {} }
 		},
 		focus = {
 			margin_of_error = 5,
@@ -50,7 +50,7 @@ require("true-zen").setup({
 	misc = {
 		on_off_commands = false,
 		ui_elements_commands = false,
-		cursor_by_mode = false,
+		cursor_by_mode = true,
 	}
 })
 

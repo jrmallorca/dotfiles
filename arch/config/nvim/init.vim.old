@@ -1,7 +1,6 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " Opening new file when current buffer has unsaved changes causes
 " files to be hidden instead of closed
 " (COC) TextEdit might fail if hidden is not set.
