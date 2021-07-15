@@ -184,6 +184,14 @@ flutter:
 	paru -Syu --needed jdk8-openjdk simple-mtpfs flutter android-sdk \
 		android-sdk-platform-tools android-sdk-build-tools android-platform \
 		scrcpy
+	sudo groupadd flutterusers
+	sudo gpasswd -a $USER flutterusers
+	sudo chown -R :flutterusers /opt/flutter
+	sudo chmod -R g+w /opt/flutter/
+	sudo groupadd android-sdk
+	sudo gpasswd -a $USER android-sdk
+	sudo setfacl -R -m g:android-sdk:rwx /opt/android-sdk
+	sudo setfacl -d -m g:android-sdk:rwX /opt/android-sdk
 
 # Extra
 # -----------------------------------------------------------------------------
