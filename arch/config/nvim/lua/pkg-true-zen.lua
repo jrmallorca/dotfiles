@@ -13,7 +13,7 @@ require("true-zen").setup({
 		left = {
 			number = true,
 			relativenumber = true,
-			signcolumn = "number",
+			signcolumn = "yes",
 		},
 	},
 	modes = {
@@ -27,7 +27,7 @@ require("true-zen").setup({
 			keep_default_fold_fillchars = true,
 			custome_bg = "",
 			bg_configuration = true,
-			affected_higroups = {NonText = {}, FoldColumn = {}, ColorColumn = {}, VertSplit = {}, StatusLine = {}, StatusLineNC = {} }
+			affected_higroups = {NonText = {}, FoldColumn = {}, ColorColumn = {}, VertSplit = {}, StatusLine = {}, StatusLineNC = {}, SignColumn = {}}
 		},
 		focus = {
 			margin_of_error = 5,
