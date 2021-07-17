@@ -1,3 +1,5 @@
+vim.opt.shell = "/bin/bash" -- Use bash for scripts
+
 vim.o.hidden = true -- Hide buffer when abandoned instead of closing
                     -- Do not save when switching buffers
 
@@ -50,3 +52,4 @@ vim.api.nvim_exec(
 ]],
   false
 )
+
