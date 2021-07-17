@@ -30,3 +30,8 @@ snap.maps {
   {"<Bslash>fo", snap.config.file {producer = "vim.oldfile"}},
   {"<Bslash>/", snap.config.vimgrep {}},
 }
+
+-- Lightspeed
+-- Replace 's' with 'f'
+vim.api.nvim_set_keymap('n', 'f', [[<Plug>Lightspeed_s]], { silent = true })
+vim.api.nvim_set_keymap('n', 'F', [[<Plug>Lightspeed_S]], { silent = true })
