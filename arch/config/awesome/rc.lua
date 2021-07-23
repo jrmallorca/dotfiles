@@ -633,7 +633,7 @@ autorunApps =
    "picom",
    "unclutter",
    "nm-applet",
-   "blueman-tray",
+   "blueman-applet",
    "flameshot",
    "clight",
    "firefox",
