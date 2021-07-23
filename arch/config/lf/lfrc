@@ -1,8 +1,6 @@
-# == lf =======================================================================
-
-
-
-# -- Settings -----------------------------------------------------------------
+############
+# Settings #
+############
 
 set shell fish
 set icons
@@ -10,22 +8,25 @@ set hidden true
 set ignorecase true
 set smartcase true
 set drawbox
-set nopreview
-set ratios 1
 set promptfmt "\033[38;5;250m%d%f"
 
+#############
+# Functions #
+#############
 
+# Navigation
 
-# -- Functions ----------------------------------------------------------------
-
-# -- Navigation
-
-cmd fzf_curr_dir ${{
-    set -l curr_dir (pwd)
-    set -l fzf_header (basename "$curr_dir")
+cmd fzf_current_dir ${{
+    # Get current directory path
+    set -l current_dir (pwd)
+    # Get current directory name to be the header
+    set -l fzf_header (basename "$current_dir")
+    # Find child directories in current directory, direct error results into
+    # /dev/null and pipe remaining output to fzf
     set -l res (find . -maxdepth 1 2>/dev/null | fzf --header="$fzf_header")
+    # If results are directories, go to it
     if [ -d "$res" ]
-        set cmd "cd"
+        set cmd "z"
     else 
         set cmd "select"                                                       
     end
@@ -33,11 +34,17 @@ cmd fzf_curr_dir ${{
 }}
 
 cmd fzf_recursive ${{
-    set -l curr_dir (pwd)
-    set -l fzf_header (basename "$curr_dir")
+    # Get current directory path
+    set -l current_dir (pwd)
+    # Get current directory name to be the header
+    set -l fzf_header (basename "$current_dir")
+    # Find descendant files and directories in current directory, direct error results
+    # into /dev/null and pipe remaining output to fzf. What is selected will determine $res
     set -l res (find . 2>/dev/null | fzf --header="$fzf_header")
+    # If result is a directory, go to it
     if [ -d "$res" ]
-        set cmd "cd"
+        set cmd "z"
+    # Else hover over result and go to its directory if necessary
     else 
         set cmd "select"                                                       
     end
@@ -53,7 +60,7 @@ cmd copy_path %{{
 cmd git_root %{{
     set -l root_dir (git rev-parse --show-toplevel 2>/dev/null)
     if [ -d "$root_dir" ]
-        lf -remote "send $id cd \"$root_dir\""
+        lf -remote "send $id z \"$root_dir\""
     else
         echo "Error: Not in a git directory"
     end
@@ -74,8 +81,8 @@ cmd run ${{
 }}
 
 cmd new-instance %{{
-    set -l curr_dir (pwd)
-    setsid -f ~/dotfiles/arch/scripts/open-lf "$curr_dir" >/dev/null 2>&1
+    set -l current_dir (pwd)
+    setsid -f ~/dotfiles/arch/scripts/open-lf "$current_dir" >/dev/null 2>&1
 }}
 
 cmd open ${{
@@ -107,8 +114,8 @@ cmd open-new-window %{{
 }}
 
 cmd gui %{{
-    set -l curr_dir (pwd)
-    devour pcmanfm "$curr_dir" >/dev/null 2>&1
+    set -l current_dir (pwd)
+    devour pcmanfm "$current_dir" >/dev/null 2>&1
 }}
 
 cmd open-with %{{
@@ -121,7 +128,7 @@ cmd open-with %{{
     fi
 }}
 
-# -- New File / Directory
+# New File / Directory
 
 cmd mkdir %{{
     echo -n "Directory Name: "
@@ -144,7 +151,7 @@ cmd mkscript %{{
     lf -remote 'send reload'
 }}
 
-# -- File Permissions
+# File Permissions
 
 cmd make_executable %{{
     set -l num_files (echo "$fx" | wc -l)
@@ -161,7 +168,7 @@ cmd make_executable %{{
     lf -remote 'send reload'
 }}
 
-# -- Trash
+# Trash
 
 cmd trash %{{
     set -l num_files (echo "$fx" | wc -l)
@@ -194,7 +201,7 @@ cmd trm ${{
 
 cmd clt %trash-empty
 
-# -- Git
+# Git
 
 cmd gs ${{
     set -l is_git (git rev-parse --git-dir 2>/dev/null)
@@ -238,7 +245,7 @@ cmd gc ${{
     end
 }}
 
-# -- Archives
+# Archives
 
 cmd extract %{{
     set -l num_files (echo "$fx" | wc -l)
@@ -285,7 +292,9 @@ cmd extract %{{
     end
 }}
 
-# -- Commands -----------------------------------------------------------------
+############
+# Commands #
+############
 
 # Search and Edit
 cmd se ${{
@@ -335,9 +344,11 @@ cmd ssde ${{
     #lf -remote "send $id unselect"
 #}}
 
-# -- Keybindings --------------------------------------------------------------
+###############
+# Keybindings #
+###############
 
-# -- Disable Defaults
+# Disable Defaults
 
 map <esc> cmd-escape
 map m
@@ -348,7 +359,7 @@ map c
 map e
 map f
 
-# -- Commands
+# Commands
 
 map R bulk-rename
 map p paste
@@ -358,26 +369,26 @@ map chx chmodx
 map e gui
 map Y copy_path
 
-# - Delete
+# Delete
 
 map dd trash
 map dD delete
 
-# -- Toggle [ z ]
+# Toggle [ z ]
 
 map . set hidden!
 map z
 
-# - UI
+# UI
 map zz single_pane
 map zZ triple_pane
 
-# -- Action [ a ]
+# Action [ a ]
 
 map ar run
 map ax extract
 
-# -- New [ n ]
+# New [ n ]
 
 map n
 map nd mkdir
@@ -385,7 +396,7 @@ map nf mkfile
 map ns mkscript
 map nn new_notes 
 
-# -- Open [ o ]
+# Open [ o ]
 
 map o
 map on open-new-window
@@ -393,45 +404,45 @@ map oo open-with
 
 map O new-instance
 
-# -- Navigation
+# Navigation
 
-map F fzf_curr_dir
+map F fzf_current_dir
 map f fzf_recursive
 map <backspace2> updir
 map <enter> open
 
-# -- Change [ c ]
+# Change [ c ]
 
-# - Directory [ cd ]
+# - Directory [ z ]
 
-map cdR cd /
-map cdh cd ~/
-map cdc cd ~/other
-map cdC cd ~/.config
-map cdH cd ~/.cache
-map cddw cd ~/downloads
-map cdD cd ~/documents
-map cdw cd ~/wiki
-map cdv cd ~/videos
-map cdp cd ~/projects
-map cdP cd ~/pictures
-map cdS cd ~/pictures/screenshots
-map cds cd ~/other/.scripts
-map cdb cd ~/other/bookmarks
-map cdW cd ~/other/dotfiles/wallpapers
-map cdE cd /etc
-map cdU cd /usr
-map cdl cd ~/.local
-map cdn cd ~/notes
-map cdmm cd /mnt
-map cdme cd /mnt/e
-map cdmf cd /mnt/f
-map cdmg cd /mnt/g
-map cdma cd /media
-map cdmd cd /mnt/d
-map cdmh cd ~/mnt
-map cdmp cd ~/mnt/phone
-map cdt cd ~/.trash
-map cdr cd ~/other/.src
-map cdu cd ~/uni
-map cdG git_root
+map zR z /
+map zh z ~/
+map zc z ~/other
+map zC z ~/.config
+map zH z ~/.cache
+map zdw z ~/downloads
+map zD z ~/documents
+map zw z ~/wiki
+map zv z ~/videos
+map zp z ~/projects
+map zP z ~/pictures
+map zS z ~/pictures/screenshots
+map zs z ~/other/.scripts
+map zb z ~/other/bookmarks
+map zW z ~/other/dotfiles/wallpapers
+map zE z /etc
+map zU z /usr
+map zl z ~/.local
+map zn z ~/notes
+map zmm z /mnt
+map zme z /mnt/e
+map zmf z /mnt/f
+map zmg z /mnt/g
+map zma z /media
+map zmd z /mnt/d
+map zmh z ~/mnt
+map zmp z ~/mnt/phone
+map zt z ~/.trash
+map zr z ~/other/.src
+map zu z ~/uni
+map zG git_root
