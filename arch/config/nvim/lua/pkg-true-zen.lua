@@ -27,7 +27,8 @@ require("true-zen").setup({
 			keep_default_fold_fillchars = true,
 			custome_bg = "",
 			bg_configuration = true,
-			affected_higroups = {NonText = {}, FoldColumn = {}, ColorColumn = {}, VertSplit = {}, StatusLine = {}, StatusLineNC = {}, SignColumn = {}}
+			affected_higroups = {NonText = {}, FoldColumn = {}, ColorColumn = {}, VertSplit = {}, StatusLine = {}, StatusLineNC = {}, SignColumn = {}},
+            quit = "close"
 		},
 		focus = {
 			margin_of_error = 5,
