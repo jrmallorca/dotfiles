@@ -22,9 +22,9 @@ set promptfmt "\033[38;5;250m%d%f" # Format of prompt show in top line
 cmd fuzzy_find ${{
     set -l current_dir (pwd)                    # Get current directory path
     set -l fzf_header (basename "$current_dir") # Get current directory name to be the header
-    set -l flags                                # Set args to show hidden files/directories
     set -l has_fd (command -v fd)               # Check if fd command has been installed
-    set -l find_cmd                             # Declare find_cmd to find
+    set -l find_cmd                             # Declare find_cmd
+    set -l flags                                # Declare flags
 
     # Check if we should use find or fd
     if [ -n "$has_fd" ]
@@ -447,7 +447,6 @@ map nn new_notes
 map o
 map on open-new-window
 map oo open-with
-
 map O new-instance
 
 # Navigation
@@ -459,13 +458,14 @@ map f fuzzy_find
 
 map zr z /
 map zh z ~/
-map zc z ~/dotfiles/arch
-map zC z ~/.config
+map zp z ~/Projects
+map z. z ~/dotfiles/arch
+map zc z ~/.config
 map zdw z ~/Downloads
 map zE z /etc
 map zU z /usr
-map zl z ~/.local
-map zn z ~/notes
-map zmp z /mnt/phone
 map zmd z /mnt/d
+map zmdn z ~/mnt/d/Notes
+map zmdu z ~/mnt/d/University
+map zmp z /mnt/phone
 map zg git_root
