@@ -26,6 +26,8 @@ vim.bo.autoindent = true
 vim.o.smartindent = true  -- Smart auto indentation
 vim.bo.smartindent = true
 
+vim.o.spelllang = "en_gb"
+
 -- Case insensitive searching unless /C or capital in search
 vim.o.ignorecase = true
 vim.o.smartcase = true
