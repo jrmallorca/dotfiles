@@ -22,17 +22,30 @@ set promptfmt "\033[38;5;250m%d%f" # Format of prompt show in top line
 cmd fuzzy_find ${{
     set -l current_dir (pwd)                    # Get current directory path
     set -l fzf_header (basename "$current_dir") # Get current directory name to be the header
-    set -l flags --hidden                       # Set args to show hidden files/directories
+    set -l flags                                # Set args to show hidden files/directories
+    set -l has_fd (command -v fd)               # Check if fd command has been installed
+    set -l find_cmd                             # Declare find_cmd to find
+
+    # Check if we should use find or fd
+    if [ -n "$has_fd" ]
+        set find_cmd fd
+    else
+        set find_cmd find
+    end
 
     # Check if we should recursively find files and directories
     if count $argv > /dev/null
         and [ "$argv[1]" = "--non-recursive" ]
-        set -a flags --max-depth 1
+        if [ -n "$has_fd" ]
+            set -a flags --hidden --max-depth 1
+        else
+            set -a flags -maxdepth 1
+        end
     end
 
     # Find descendant directories from current directory, direct error results into
     # /dev/null and pipe remaining output to fzf
-    set -l res (fd . $flags | fzf --header=$fzf_header)
+    set -l res ($find_cmd . $flags | fzf --header=$fzf_header)
 
     # If result is a directory, enter it.
     # Add it in the zoxide database as well
@@ -347,11 +360,11 @@ cmd extract %{{
 # Search and Edit
 cmd se ${{
     function find_cmd
-        set -l is_fd (command -v fd) # Check if fd command has been installed
+        set -l has_fd (command -v fd) # Check if fd command has been installed
 
         # If fd command exists, execute
         # Else use find
-        if [ -n "$is_fd"]
+        if [ -n "$has_fd"]
             fd . -H -I -t f
         else
             find . -type f
@@ -364,11 +377,11 @@ cmd se ${{
 # Search and sudoedit
 cmd ssde ${{
     function find_cmd
-        set -l is_fd (command -v fd) # Check if fd command has been installed
+        set -l has_fd (command -v fd) # Check if fd command has been installed
 
         # If fd command exists, execute
         # Else use find
-        if [ -n "$is_fd"]
+        if [ -n "$has_fd"]
             fd . -H -I -t f
         else
             find . -type f
