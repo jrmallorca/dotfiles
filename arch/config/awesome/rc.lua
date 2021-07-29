@@ -62,6 +62,9 @@ editor_cmd = terminal .. " -e " .. editor
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
 
+-- Paths
+scripts = "/home/joni/dotfiles/arch/scripts/"
+
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.tile,
@@ -243,25 +246,31 @@ local volumebrightnessmap = {
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
-    -- Modes
+    -- System mode
     awful.key({ modkey, "Shift"   }, "q", function()
-        modalbind.grab{keymap=systemmap, name="System"}
-        end,
+      modalbind.grab{keymap=systemmap, name="System"}
+    end,
     {description="System mode"}),
     awful.key({ modkey,           }, "v", function()
-        modalbind.grab{keymap=volumebrightnessmap, name="Volume/Brightness", stay_in_mode=true}
-        end,
+      modalbind.grab{keymap=volumebrightnessmap, name="Volume/Brightness", stay_in_mode=true}
+    end,
     {description="Volume/Brightness mode"}),
 
-    -- Volume
+    -- Volume mode
     awful.key({                   }, "XF86AudioRaiseVolume", function ()
-        awful.spawn("amixer set Master 5%+")
-        end,
+      awful.spawn("amixer set Master 5%+")
+    end,
     {description="volume up", group="volume"}),
     awful.key({                   }, "XF86AudioLowerVolume", function ()
-        awful.spawn("amixer set Master 5%-")
-        end,
+      awful.spawn("amixer set Master 5%-")
+    end,
     {description="volume down", group="volume"}),
+
+    -- Scripts
+    awful.key({ modkey,           }, "e", function ()
+      awful.spawn(scripts .. "editInVim.sh")
+    end,
+    {description="Edit in nvim", group="launcher"}),
 
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
