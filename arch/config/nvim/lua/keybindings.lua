@@ -3,9 +3,11 @@ vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- \q = Quit all buffers
+-- \w = Save current file
+-- \q = Quit
 -- \x = Write all buffers and quit
-vim.api.nvim_set_keymap('n', '<Bslash>q', [[<Cmd>q<CR><Cmd>q<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Bslash>w', [[<Cmd>w<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Bslash>q', [[<Cmd>q<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Bslash>x', [[<Cmd>wqa<CR>]], { noremap = true, silent = true })
 
 -- TrueZen --
