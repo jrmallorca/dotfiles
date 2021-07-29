@@ -38,16 +38,13 @@ function gcl -d 'Clone a repository with using a username and repository name' -
     end
 end
 
-function gsetup -d 'Set up a new repository using a repository name' -a repository
-    if set -q repository[1]
-        git init
-        git add -A
-        git commit -m "Initial commit"
-        git remote add origin git@github.com:jrmallorca/$repository.git
-        git push -u origin main
-    else
-        printf 'Missing repository name'
-    end
+function gsetup -d 'Set up a new repository using a repository name'
+    set repository (basename $PWD)
+    git init
+    git add -A
+    git commit -m "Initial commit"
+    git remote add origin git@github.com:jrmallorca/$repository.git
+    git push -u origin main
 end
 
 #################
@@ -61,7 +58,9 @@ abbr xx 'chmod +x'
 abbr p 'paru -Syu'
 abbr prm 'paru -Rs'
 
-# (Un)mount phone
+# (Un)mounting
+abbr mntd 'sudo mount /dev/sda1 /mnt/d'
+abbr umntd 'sudo umount /mnt/d'
 abbr mntph 'simple-mtpfs --device 1 /mnt/phone/'
 abbr umntph 'fusermount -u /mnt/phone/'
 
@@ -124,6 +123,7 @@ abbr gbl 'git blame'
 abbr gc 'git commit -S -m'
 abbr gca 'git commit --amend -S -m'
 abbr gco 'git checkout'
+abbr gcob 'git checkout -b'
 abbr gcp 'git cherry-pick'
 abbr gd 'git diff'
 abbr gf 'git fetch'
@@ -150,9 +150,13 @@ set -x GPG_TTY (tty)
 # PATH #
 ########
 
-# set PATH $PATH /opt/android-studio/bin 
-# set PATH $PATH /opt/gradle/gradle-6.8.2/bin
-set PATH $PATH /usr/lib/dart/bin
+# Editor variable
 set -gx EDITOR /usr/bin/nvim
+
+# deno (Javascript LSP)
+set PATH $PATH /home/joni/.deno/bin
+
+# Flutter
+set PATH $PATH /usr/lib/dart/bin
 set -gx JAVA_OPTS '-XX:+IgnoreUnrecognizedVMOptions'
 set -gx ANDROID_SDK_ROOT /opt/android-sdk
