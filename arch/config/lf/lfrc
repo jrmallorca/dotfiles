@@ -2,13 +2,15 @@
 # Settings #
 ############
 
-set shell fish
-set icons
-set hidden true
-set ignorecase true
-set smartcase true
-set drawbox
-set promptfmt "\033[38;5;250m%d%f"
+set shell fish                     # Set which shell commands to use
+set relativenumber true            # Show number of line relative to current line
+set number true                    # Show number on current line
+set icons                          # Show icons before list items
+set hidden true                    # Show hidden files
+set ignorecase true                # Ignore case when searching
+set smartcase true                 # Override 'ignorecase' when search include uppercase
+set drawbox                        # Draw boxes around panes
+set promptfmt "\033[38;5;250m%d%f" # Format of prompt show in top line
 
 #############
 # Functions #
@@ -16,38 +18,30 @@ set promptfmt "\033[38;5;250m%d%f"
 
 # Navigation
 
-cmd fzf_current_dir ${{
-    # Get current directory path
-    set -l current_dir (pwd)
-    # Get current directory name to be the header
-    set -l fzf_header (basename "$current_dir")
-    # Find child directories in current directory, direct error results into
-    # /dev/null and pipe remaining output to fzf
-    set -l res (find . -maxdepth 1 2>/dev/null | fzf --header="$fzf_header")
-    # If results are directories, go to it
-    if [ -d "$res" ]
-        set cmd "z"
-    else 
-        set cmd "select"                                                       
-    end
-    lf -remote "send $id $cmd \"$res\""
-}}
+# Fuzzy find a file/directory and select/enter it
+cmd fuzzy_find ${{
+    set -l current_dir (pwd)                    # Get current directory path
+    set -l fzf_header (basename "$current_dir") # Get current directory name to be the header
+    set -l flags --hidden                       # Set args to show hidden files/directories
 
-cmd fzf_recursive ${{
-    # Get current directory path
-    set -l current_dir (pwd)
-    # Get current directory name to be the header
-    set -l fzf_header (basename "$current_dir")
-    # Find descendant files and directories in current directory, direct error results
-    # into /dev/null and pipe remaining output to fzf. What is selected will determine $res
-    set -l res (find . 2>/dev/null | fzf --header="$fzf_header")
-    # If result is a directory, go to it
-    if [ -d "$res" ]
-        set cmd "z"
-    # Else hover over result and go to its directory if necessary
-    else 
-        set cmd "select"                                                       
+    # Check if we should recursively find files and directories
+    if count $argv > /dev/null
+        and [ "$argv[1]" = "--non-recursive" ]
+        set -a flags --max-depth 1
     end
+
+    # Find descendant directories from current directory, direct error results into
+    # /dev/null and pipe remaining output to fzf
+    set -l res (fd . $flags | fzf --header=$fzf_header)
+
+    # If result is a directory, enter it.
+    # Else, go to the file's directory and highlight it
+    if [ -d $res ]
+        set cmd "cd"
+    else 
+        set cmd "select" 
+    end
+
     lf -remote "send $id $cmd \"$res\""
 }}
 
@@ -324,26 +318,6 @@ cmd ssde ${{
     find_cmd | fzf | xargs -r sudoedit
 }}
 
-#cmd bulk-rename ${{
-    #old="$(mktemp)"
-    #new="$(mktemp)"
-    #[ -n "$fs" ] && fs="$(ls)"
-    #printf '%s\n' "$fs" >"$old"
-    #printf '%s\n' "$fs" >"$new"
-    #$EDITOR "$new"
-    #[ "$(wc -l "$new")" -ne "$(wc -l "$old")" ] && exit
-    #paste "$old" "$new" | while IFS= read -r names; do
-        #src="$(printf '%s' "$names" | cut -f1)"
-        #dst="$(printf '%s' "$names" | cut -f2)"
-        #if [ "$src" = "$dst" ] || [ -e "$dst" ]; then
-            #continue
-        #fi
-        #mv -- "$src" "$dst"
-    #done
-    #rm -- "$old" "$new"
-    #lf -remote "send $id unselect"
-#}}
-
 ###############
 # Keybindings #
 ###############
@@ -406,8 +380,8 @@ map O new-instance
 
 # Navigation
 
-map F fzf_current_dir
-map f fzf_recursive
+map F fuzzy_find --non-recursive
+map f fuzzy_find
 map <backspace2> updir
 map <enter> open
 
