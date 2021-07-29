@@ -193,6 +193,9 @@ flutter:
 	sudo setfacl -R -m g:android-sdk:rwx /opt/android-sdk
 	sudo setfacl -d -m g:android-sdk:rwX /opt/android-sdk
 
+lsp:
+	curl -fsSL https://deno.land/x/install/install.sh | sh
+
 # Extra
 # -----------------------------------------------------------------------------
 
