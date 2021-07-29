@@ -35,41 +35,58 @@ cmd fuzzy_find ${{
     set -l res (fd . $flags | fzf --header=$fzf_header)
 
     # If result is a directory, enter it.
+    # Add it in the zoxide database as well
     # Else, go to the file's directory and highlight it
-    if [ -d $res ]
-        set cmd "cd"
+    if count $res > /dev/null
+        and [ -d $res ]
+        lf -remote "send $id cd \"$res\""
+        zoxide add $res
     else 
-        set cmd "select" 
+        lf -remote "send $id select \"$res\""
     end
 
-    lf -remote "send $id $cmd \"$res\""
 }}
 
+# Change directory and add to zoxide
+cmd z %{{
+    zoxide add $argv[1]                   # Add to zoxide database
+    lf -remote "send $id cd \"$argv[1]\"" # Change to selected directory
+}}
+
+# Go to the root of the git repository
+cmd git_root %{{
+    set -l root_dir (git rev-parse --show-toplevel) # Get root directory
+
+    # Check if we're in a git repository and go to root directory if so
+    # Add it in the zoxide database as well
+    if [ -d "$root_dir" ]
+        lf -remote "send $id cd \"$root_dir\""
+        zoxide-add $root_dir
+    else
+        echo "Error: Not in a git directory"
+    end
+}}
+
+# Copy the path of selected file
 cmd copy_path %{{
     set -l file_path (readlink -f "$f")
     echo -n "$file_path" 2>/dev/null | xclip -selection clipboard >/dev/null 2>&1
     notify-send "Copied to Clipboard" "$file_path"
 }}
 
-cmd git_root %{{
-    set -l root_dir (git rev-parse --show-toplevel 2>/dev/null)
-    if [ -d "$root_dir" ]
-        lf -remote "send $id z \"$root_dir\""
-    else
-        echo "Error: Not in a git directory"
-    end
-}}
-
+# View lf in single pane mode
 cmd single_pane &{{
     lf -remote "send $id set ratios 1"
 }}
 
+# View lf in triple pane mode
 cmd triple_pane &{{
     lf -remote "send $id set ratios 1:2:3"
 }}
 
-# -- Open
+# Open
 
+# Run if selected file is executable
 cmd run ${{
     [ -x "$f" ] && "$f"
 }}
@@ -122,66 +139,69 @@ cmd open-with %{{
     fi
 }}
 
-# New File / Directory
+# New file/directory
 
+# Create new directory
 cmd mkdir %{{
-    echo -n "Directory Name: "
-    read input
-    mkdir "$input"
+    echo -n "Directory Name: " # Indicate creation of new directory
+    read input                 # Get user input of directory name
+    mkdir "$input"             # Use input to create new directory
 }}
 
+# Create empty file
 cmd mkfile %{{
-    echo -n "Filename: "
-    read input
-    touch "$input"
-    lf -remote 'send reload'
+    echo -n "Filename: "     # Indicate creation of new file
+    read input               # Get user input of file name
+    touch "$input"           # Use input to create new file
+    lf -remote 'send reload' # Reload lf
 }}
 
+# Create executable script
 cmd mkscript %{{
-    echo -n "Script name: "
-    read input
-    echo '#!/bin/sh' > "$input"
-    chmod +x "$input"
-    lf -remote 'send reload'
+    echo -n "Script name: "     # Indicate creation of new script
+    read input                  # Get user input of script name
+    echo '#!/bin/sh' > "$input" # Echo shell to use in script
+    chmod +x "$input"           # Make script executable
+    lf -remote 'send reload'    # Reload lf
 }}
 
 # File Permissions
 
+# Make the file executable
 cmd make_executable %{{
-    set -l num_files (echo "$fx" | wc -l)
-    set -l i 1
+    set -l num_files (echo "$fx" | wc -l) # Count amount of selected files
+    set -l i 1                            # Set index to 1
 
-    while [ $i -le $num_files ]
-        set -l file (echo "$fx" | sed -n "$i p")
-
-        chmod +x "$file"
-
-        set i (math "$i + 1")
+    while [ $i -le $num_files ]                  # While file is a symbolic link and exists
+        set -l file (echo "$fx" | sed -n "$i p") # Get the i-th file in selected files
+        chmod +x "$file"                         # Make file executable
+        set i (math "$i + 1")                    # Increment index
     end
 
-    lf -remote 'send reload'
+    lf -remote 'send reload' # Reload lf
 }}
 
 # Trash
 
+# Trash the selected files
 cmd trash %{{
-    set -l num_files (echo "$fx" | wc -l)
-    set -l i 1
+    set -l num_files (echo "$fx" | wc -l) # Count amount of selected files
+    set -l i 1                            # Set index to 1
 
-    while [ $i -le $num_files ]
-        set -l file (echo "$fx" | sed -n "$i p")
-
-        trash-put "$file"
-
-        set i (math "$i + 1")
+    while [ $i -le $num_files ]                  # While file is a symbolic link and exists
+        set -l file (echo "$fx" | sed -n "$i p") # Get the i-th file in selected files
+        trash-put "$file"                        # Trash the file
+        set i (math "$i + 1")                    # Increment iindex
     end
 }}
 
+# List the files in trash
 cmd tl ${{
     trash-list
     read -rsn1 -p "Press any key to continue."
 }}
 
+# Restore files in the trash
 cmd tres ${{
     trash-restore
 }}
@@ -197,59 +217,93 @@ cmd clt %trash-empty
 
 # Git
 
+# Git status
 cmd gs ${{
-    set -l is_git (git rev-parse --git-dir 2>/dev/null)
+    set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
+
+    # If it is a git directory, git status
     if [ -n "$is_git" ]
         git status
         read -rsn1 -p "Press any key to continue."
+    else
+        echo "fatal: not a git repository (or any of the parent directories): .git"
     end
 }}
 
 cmd gp ${{
-    set -l is_git (git rev-parse --git-dir 2>/dev/null)
+    set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
+
+    # If it is a git directory, git push
     if [ -n "$is_git" ]
         git push
         read -rsn1 -p "Press any key to continue."
+    else
+        echo "fatal: not a git repository (or any of the parent directories): .git"
     end
 }}
 
 cmd gpl ${{
-    set -l is_git (git rev-parse --git-dir 2>/dev/null)
+    set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
+
+    # If it is a git directory, git pull
     if [ -n "$is_git" ]
         git pull
         read -rsn1 -p "Press any key to continue."
+    else
+        echo "fatal: not a git repository (or any of the parent directories): .git"
     end
 }}
 
-cmd ga ${{
-    set -l is_git (git rev-parse --git-dir 2>/dev/null)
+cmd ga. ${{
+    set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
+
+    # If it is a git directory, git add everything in current directory
     if [ -n "$is_git" ]
         git add .
         read -rsn1 -p "Press any key to continue."
+    else
+        echo "fatal: not a git repository (or any of the parent directories): .git"
+    end
+}}
+
+cmd gaa ${{
+    set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
+
+    # If it is a git directory, git add everything in git directory
+    if [ -n "$is_git" ]
+        git add -A
+        read -rsn1 -p "Press any key to continue."
+    else
+        echo "fatal: not a git repository (or any of the parent directories): .git"
     end
 }}
 
 cmd gc ${{
-    set -l is_git (git rev-parse --git-dir 2>/dev/null)
+    set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
+
+    # If it is a git directory, input the commit message and commit
     if [ -n "$is_git" ]
-        echo -n "git commit -am "
-        read input
-        eval "git commit -am $input"
+        echo -n "git commit -S -m "    # Indicate user will commit
+        read input                     # Get user input of commit message
+        eval "git commit -S -m $input" # Git commit
         read -rsn1 -p "Press any key to continue."
+    else
+        echo "fatal: not a git repository (or any of the parent directories): .git"
     end
 }}
 
 # Archives
 
+# Extract compressed files based on the file ending
 cmd extract %{{
-    set -l num_files (echo "$fx" | wc -l)
-    set -l i 1
+    set -l num_files (echo "$fx" | wc -l) # Count amount of selected files
+    set -l i 1                            # Set index to 1
 
-    while [ $i -le $num_files ]
-        set -l file (echo "$fx" | sed -n "$i p")
+    while [ $i -le $num_files ]                  # While file is a symbolic link and exists
+        set -l file (echo "$fx" | sed -n "$i p") # Get the i-th file in selected files
 
+        # Unzip compressed file based on file ending
         switch "$file"
-
             case "*.tar.bz2"
                 tar xjf "$file"
             case "*.tar.gz"
@@ -282,7 +336,7 @@ cmd extract %{{
                 echo "$file: Extraction Failed"
         end
 
-        set i (math "$i + 1")
+        set i (math "$i + 1") # Increment index
     end
 }}
 
@@ -293,7 +347,10 @@ cmd extract %{{
 # Search and Edit
 cmd se ${{
     function find_cmd
-        set -l is_fd (command -v fd)
+        set -l is_fd (command -v fd) # Check if fd command has been installed
+
+        # If fd command exists, execute
+        # Else use find
         if [ -n "$is_fd"]
             fd . -H -I -t f
         else
@@ -301,13 +358,16 @@ cmd se ${{
         end
     end
 
-    find_cmd | fzf | xargs -r "$EDITOR"
+    find_cmd | fzf | xargs -r "$EDITOR" # Filter fd list through fzf and edit selected file
 }}
 
 # Search and sudoedit
 cmd ssde ${{
     function find_cmd
-        set -l is_fd (command -v fd)
+        set -l is_fd (command -v fd) # Check if fd command has been installed
+
+        # If fd command exists, execute
+        # Else use find
         if [ -n "$is_fd"]
             fd . -H -I -t f
         else
@@ -315,7 +375,7 @@ cmd ssde ${{
         end
     end
 
-    find_cmd | fzf | xargs -r sudoedit
+    find_cmd | fzf | xargs -r sudoedit # Filter fd list through fzf and sudoedit selected file
 }}
 
 ###############
@@ -335,7 +395,6 @@ map f
 
 # Commands
 
-map R bulk-rename
 map p paste
 map y copy
 map x cut
@@ -382,41 +441,18 @@ map O new-instance
 
 map F fuzzy_find --non-recursive
 map f fuzzy_find
-map <backspace2> updir
-map <enter> open
 
-# Change [ c ]
+# Common directories
 
-# - Directory [ z ]
-
-map zR z /
+map zr z /
 map zh z ~/
-map zc z ~/other
+map zc z ~/dotfiles/arch
 map zC z ~/.config
-map zH z ~/.cache
-map zdw z ~/downloads
-map zD z ~/documents
-map zw z ~/wiki
-map zv z ~/videos
-map zp z ~/projects
-map zP z ~/pictures
-map zS z ~/pictures/screenshots
-map zs z ~/other/.scripts
-map zb z ~/other/bookmarks
-map zW z ~/other/dotfiles/wallpapers
+map zdw z ~/Downloads
 map zE z /etc
 map zU z /usr
 map zl z ~/.local
 map zn z ~/notes
-map zmm z /mnt
-map zme z /mnt/e
-map zmf z /mnt/f
-map zmg z /mnt/g
-map zma z /media
+map zmp z /mnt/phone
 map zmd z /mnt/d
-map zmh z ~/mnt
-map zmp z ~/mnt/phone
-map zt z ~/.trash
-map zr z ~/other/.src
-map zu z ~/uni
-map zG git_root
+map zg git_root
