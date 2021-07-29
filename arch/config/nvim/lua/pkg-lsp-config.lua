@@ -28,12 +28,23 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- Enable the following language servers
-local servers = {}
+local servers = { "denols" }
 for _, lsp in ipairs(servers) do
+  if (lsp == "denols")
+  then
+    nvim_lsp[lsp].setup {
+      on_attach = on_attach,
+      capabilities = capabilities,
+      init_options = {
+        lint = true
+      }
+    }
+  else
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
     capabilities = capabilities,
   }
+  end
 end
 
 -- Example custom server
