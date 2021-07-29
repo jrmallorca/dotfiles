@@ -22,12 +22,8 @@ require'compe'.setup {
 
   source = {
     path = true;
-    buffer = true;
-    calc = true;
-    nvim_lsp = true;
     nvim_lua = true;
-    vsnip = true;
-    ultisnips = true;
+    nvim_lsp = true;
     luasnip = true;
   };
 }
@@ -43,21 +39,28 @@ end
 
 -- Use (s-)tab to:
 --- move to prev/next item in completion menuone
+--- jump to prev/next snippet's placeholder
+local luasnip = require 'luasnip'
+
 _G.tab_complete = function()
   if vim.fn.pumvisible() == 1 then
-    return t "<C-n>"
+    return t '<C-n>'
+  elseif luasnip.expand_or_jumpable() then
+    return t '<Plug>luasnip-expand-or-jump'
   elseif check_back_space() then
-    return t "<Tab>"
+    return t '<Tab>'
   else
     return vim.fn['compe#complete']()
   end
 end
+
 _G.s_tab_complete = function()
   if vim.fn.pumvisible() == 1 then
-    return t "<C-p>"
+    return t '<C-p>'
+  elseif luasnip.jumpable(-1) then
+    return t '<Plug>luasnip-jump-prev'
   else
-    -- If <S-Tab> is not working in your terminal, change it to <C-h>
-    return t "<S-Tab>"
+    return t '<S-Tab>'
   end
 end
 

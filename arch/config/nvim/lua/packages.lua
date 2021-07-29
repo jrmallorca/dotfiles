@@ -36,6 +36,7 @@ require('packer').startup(function()
   -- Flutter tools
   use {'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim'}
   use 'hrsh7th/nvim-compe'      -- Autocompletion plugin
+  use 'L3MON4D3/LuaSnip'        -- Snippets plugin
   use {                         -- Surround with pairs
     "blackCauldron7/surround.nvim",
     config = function()
