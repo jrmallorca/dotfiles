@@ -76,7 +76,7 @@ cmd git_root %{{
         lf -remote "send $id cd \"$root_dir\""
         zoxide-add $root_dir
     else
-        echo "Error: Not in a git directory"
+        echo "fatal: not a git repository (or any of the parent directories): .git"
     end
 }}
 
