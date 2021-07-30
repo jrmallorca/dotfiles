@@ -73,8 +73,8 @@ cmd fuzzy_find ${{
 }}
 
 # Change directory and add to zoxide
-cmd z %{{
-    zoxide add $argv[1]                   # Add to zoxide database
+cmd z &{{
+    zoxide add "$argv[1]"                 # Add to zoxide database
     lf -remote "send $id cd \"$argv[1]\"" # Change to selected directory
 }}
 
