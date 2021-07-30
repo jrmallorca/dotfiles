@@ -50,12 +50,14 @@ function gcl -d 'Clone a repository with using a username and repository name' -
 end
 
 function gsetup -d 'Set up a new repository using a repository name'
-    set repository (basename $PWD)
-    git init
-    git add -A
-    git commit -m "Initial commit"
-    git remote add origin git@github.com:jrmallorca/$repository.git
-    git push -u origin main
+    set repository (basename $PWD) # Assume repository name is the same in GitHub
+    set username jrmallorca        # Set username in GitHub
+    git init                       # Initialise repository
+    git add -A                     # Add all changes in repository
+    git commit -m "Initial commit" # Commit all changes
+    git remote add origin \        # Link remote repository
+        git@github.com:$username/$repository.git
+    git push -u origin main        # Push all changes to remote repository
 end
 
 #################
@@ -76,25 +78,24 @@ abbr mntph 'simple-mtpfs --device 1 /mnt/phone/'
 abbr umntph 'fusermount -u /mnt/phone/'
 
 # Changing directories
-abbr zr 'z /'
-abbr zh 'z ~/'
-abbr zp 'z ~/Projects'
-abbr z. 'z ~/dotfiles/arch'
-abbr zc 'z ~/.config'
-abbr zdw 'z ~/Downloads'
-abbr zE 'z /etc'
-abbr zU 'z /usr'
-abbr zmd 'z /mnt/d'
-abbr zmdn 'z ~/mnt/d/Notes'
-abbr zmdu 'z ~/mnt/d/University'
-abbr zmp 'z /mnt/phone'
+abbr zr 'z / && lf'
+abbr zh 'z ~/ && lf'
+abbr zp 'z ~/Projects && lf'
+abbr z. 'z ~/dotfiles/arch && lf'
+abbr zc 'z ~/.config && lf'
+abbr zdw 'z ~/Downloads && lf'
+abbr zE 'z /etc && lf'
+abbr zU 'z /usr && lf'
+abbr zmd 'z /mnt/d && lf'
+abbr zmdn 'z ~/mnt/d/Notes && lf'
+abbr zmdu 'z ~/mnt/d/University && lf'
+abbr zmp 'z /mnt/phone && lf'
 
 # Search and edit
-abbr v. 'z ~/dotfiles/arch ; vf'
-abbr vws 'z ~/dotfiles/workspaces ; vf'
-abbr vuni 'z /mnt/d/University ; vf'
-abbr vno 'z /mnt/d/Notes ; vf'
-abbr vpro 'z ~/Projects ; vf'
+abbr v. 'z ~/dotfiles/arch && lf -command search_edit'
+abbr vmdu 'z /mnt/d/University && lf -command search_edit'
+abbr vmdn 'z /mnt/d/Notes && lf -command search_edit'
+abbr vp 'z ~/Projects && lf -command search_edit'
 
 # TMUX
 abbr t 'tmux'
