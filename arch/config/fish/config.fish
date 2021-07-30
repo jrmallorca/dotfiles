@@ -30,6 +30,17 @@ function zf -d 'Finds file in current directory and changes to that directory'
     commandline -f execute # Press enter
 end
 
+function grt -d 'Go to the root of the git repository'
+    set -l root_dir (git rev-parse --show-toplevel) # Get root directory
+
+    # Check if we're in a git repository and go to root directory if so
+    if [ -d "$root_dir" ]
+        z $root_dir
+    else
+        echo "fatal: not a git repository (or any of the parent directories): .git"
+    end
+end
+
 function gcl -d 'Clone a repository with using a username and repository name' -a username repository
     if set -q username[1] repository[1]
         git clone git@github.com:$username/$repository.git
@@ -65,12 +76,18 @@ abbr mntph 'simple-mtpfs --device 1 /mnt/phone/'
 abbr umntph 'fusermount -u /mnt/phone/'
 
 # Changing directories
-abbr md 'z /mnt/d'
-abbr uni 'z /mnt/d/University'
-abbr no 'z /mnt/d/Notes'
-abbr cfg 'z ~/.config'
-abbr dot 'z ~/dotfiles/arch'
-abbr pro 'z ~/Projects'
+abbr zr 'z /'
+abbr zh 'z ~/'
+abbr zp 'z ~/Projects'
+abbr z. 'z ~/dotfiles/arch'
+abbr zc 'z ~/.config'
+abbr zdw 'z ~/Downloads'
+abbr zE 'z /etc'
+abbr zU 'z /usr'
+abbr zmd 'z /mnt/d'
+abbr zmdn 'z ~/mnt/d/Notes'
+abbr zmdu 'z ~/mnt/d/University'
+abbr zmp 'z /mnt/phone'
 
 # Search and edit
 abbr v. 'z ~/dotfiles/arch ; vf'
@@ -78,11 +95,6 @@ abbr vws 'z ~/dotfiles/workspaces ; vf'
 abbr vuni 'z /mnt/d/University ; vf'
 abbr vno 'z /mnt/d/Notes ; vf'
 abbr vpro 'z ~/Projects ; vf'
-abbr z. 'z ~/dotfiles/arch ; zf'
-abbr zws 'z ~/dotfiles/workspaces ; zf'
-abbr zuni 'z /mnt/d/University ; zf'
-abbr zno 'z /mnt/d/Notes ; zf'
-abbr zpro 'z ~/Projects ; zf'
 
 # TMUX
 abbr t 'tmux'
