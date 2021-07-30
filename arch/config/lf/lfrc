@@ -16,6 +16,18 @@ set promptfmt "\033[38;5;250m%d%f" # Format of prompt show in top line
 # Functions #
 #############
 
+# Toggle settings
+
+# View lf in single pane mode
+cmd single_pane &{{
+    lf -remote "send $id set ratios 1"
+}}
+
+# View lf in triple pane mode
+cmd triple_pane &{{
+    lf -remote "send $id set ratios 1:2:3"
+}}
+
 # Navigation
 
 # Fuzzy find a file/directory and select/enter it
@@ -85,16 +97,6 @@ cmd copy_path %{{
     set -l file_path (readlink -f "$f")
     echo -n "$file_path" 2>/dev/null | xclip -selection clipboard >/dev/null 2>&1
     notify-send "Copied to Clipboard" "$file_path"
-}}
-
-# View lf in single pane mode
-cmd single_pane &{{
-    lf -remote "send $id set ratios 1"
-}}
-
-# View lf in triple pane mode
-cmd triple_pane &{{
-    lf -remote "send $id set ratios 1:2:3"
 }}
 
 # Open
@@ -353,18 +355,16 @@ cmd extract %{{
     end
 }}
 
-############
-# Commands #
-############
+# Editing
 
 # Search and Edit
-cmd se ${{
+cmd search_edit ${{
     function find_cmd
         set -l has_fd (command -v fd) # Check if fd command has been installed
 
         # If fd command exists, execute
         # Else use find
-        if [ -n "$has_fd"]
+        if [ -n "$has_fd" ]
             fd . -H -I -t f
         else
             find . -type f
@@ -375,13 +375,13 @@ cmd se ${{
 }}
 
 # Search and sudoedit
-cmd ssde ${{
+cmd search_sudoedit ${{
     function find_cmd
         set -l has_fd (command -v fd) # Check if fd command has been installed
 
         # If fd command exists, execute
         # Else use find
-        if [ -n "$has_fd"]
+        if [ -n "$has_fd" ]
             fd . -H -I -t f
         else
             find . -type f
