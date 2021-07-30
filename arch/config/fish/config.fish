@@ -16,18 +16,35 @@ zoxide init fish | source
 #############
 
 function vf -d 'Finds file in current directory and executes nvim'
-    commandline -i "nvim " # Insert "nvim "
+    commandline -i "nvim "   # Insert "nvim "
     __fzf_search_current_dir # Find file in current directory
+
     if test (count (commandline --tokenize)) = 2 # If found something...
-        commandline -f execute # Press enter
-    else
-        commandline -r "" # Clear commandline buffer
+        commandline -f execute                   # Press enter
+    else                                         # Else if nothing was selected
+        commandline -r ""                        # Clear commandline buffer
     end
 end
 
 function zf -d 'Finds file in current directory and changes to that directory'
     __fzf_search_current_dir # Find file in current directory
-    commandline -f execute # Press enter
+    commandline -f execute   # Press enter
+end
+
+function cdf -d 'Go to last directory before quitting lf'
+    set -l temp (mktemp) # Create a temporary file
+
+    lf -last-dir-path "$temp" $argv # Put the last directory before quitting into temp
+                                    # and listen for other flags
+
+    if [ -f "$temp" ]             # Check if temp is a file
+        set -l dest (cat "$temp") # Get destination from temp
+        rm "$temp"                # Remove temp
+
+        if [ -d "$dest" ]         # Check if destination is a directory
+            z "$dest"             # Change directory to destination
+        end
+    end
 end
 
 function grt -d 'Go to the root of the git repository'
@@ -42,6 +59,7 @@ function grt -d 'Go to the root of the git repository'
 end
 
 function gcl -d 'Clone a repository with using a username and repository name' -a username repository
+    # Check if username and repository are non-empty then git clone
     if set -q username[1] repository[1]
         git clone git@github.com:$username/$repository.git
     else
@@ -78,24 +96,24 @@ abbr mntph 'simple-mtpfs --device 1 /mnt/phone/'
 abbr umntph 'fusermount -u /mnt/phone/'
 
 # Changing directories
-abbr zr 'z / && lf'
-abbr zh 'z ~/ && lf'
-abbr zp 'z ~/Projects && lf'
-abbr z. 'z ~/dotfiles/arch && lf'
-abbr zc 'z ~/.config && lf'
-abbr zdw 'z ~/Downloads && lf'
-abbr zE 'z /etc && lf'
-abbr zU 'z /usr && lf'
-abbr zmd 'z /mnt/d && lf'
-abbr zmdn 'z ~/mnt/d/Notes && lf'
-abbr zmdu 'z ~/mnt/d/University && lf'
-abbr zmp 'z /mnt/phone && lf'
+abbr zr 'z / && cdf'
+abbr zh 'z ~/ && cdf'
+abbr zp 'z ~/Projects && cdf'
+abbr z. 'z ~/dotfiles/arch && cdf'
+abbr zc 'z ~/.config && cdf'
+abbr zdw 'z ~/Downloads && cdf'
+abbr zE 'z /etc && cdf'
+abbr zU 'z /usr && cdf'
+abbr zmd 'z /mnt/d && cdf'
+abbr zmdn 'z ~/mnt/d/Notes && cdf'
+abbr zmdu 'z ~/mnt/d/University && cdf'
+abbr zmp 'z /mnt/phone && cdf'
 
 # Search and edit
-abbr v. 'z ~/dotfiles/arch && lf -command search_edit'
-abbr vmdu 'z /mnt/d/University && lf -command search_edit'
-abbr vmdn 'z /mnt/d/Notes && lf -command search_edit'
-abbr vp 'z ~/Projects && lf -command search_edit'
+abbr v. 'z ~/dotfiles/arch && cdf -command search_edit'
+abbr vmdu 'z /mnt/d/University && cdf -command search_edit'
+abbr vmdn 'z /mnt/d/Notes && cdf -command search_edit'
+abbr vp 'z ~/Projects && cdf -command search_edit'
 
 # TMUX
 abbr t 'tmux'
