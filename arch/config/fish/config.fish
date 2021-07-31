@@ -132,7 +132,7 @@ abbr nu 'nmcli c up'
 abbr nc 'nmcli -a d wifi connect'
 
 # Git
-abbr ga 'git ls-files --modified --others --exclude-standard | fzf --ansi --multi --print0 --preview"bat {-1} --color=always" | xargs --null --open-tty git add'
+abbr ga 'git ls-files --modified --others --exclude-standard | fzf --ansi --multi --print0 --preview="bat {-1} --color=always" | xargs --null --open-tty git add'
 abbr ga. 'git add .'
 abbr gaa 'git add -A'
 abbr gb 'git branch'
