@@ -55,8 +55,7 @@ cmd fuzzy_find ${{
         end
     end
 
-    # Find descendant directories from current directory, direct error results into
-    # /dev/null and pipe remaining output to fzf
+    # Find descendant directories from current directory pipe remaining output to fzf
     set -l res ($find_cmd . $flags | fzf --header=$fzf_header)
 
     # If result is a directory, enter it.
@@ -86,7 +85,7 @@ cmd git_root %{{
     # Add it in the zoxide database as well
     if [ -d "$root_dir" ]
         lf -remote "send $id cd \"$root_dir\""
-        zoxide-add $root_dir
+        zoxide add $root_dir
     else
         echo "fatal: not a git repository (or any of the parent directories): .git"
     end
@@ -213,7 +212,7 @@ cmd trash %{{
 # List the files in trash
 cmd tl ${{
     trash-list
-    read -rsn1 -p "Press any key to continue."
+    read --silent --nchars=1 --prompt-str="Press any key to continue."
 }}
 
 # Restore files in the trash
@@ -239,7 +238,7 @@ cmd gs ${{
     # If it is a git directory, git status
     if [ -n "$is_git" ]
         git status
-        read -rsn1 -p "Press any key to continue."
+        read --silent --nchars=1 --prompt-str="Press any key to continue."
     else
         echo "fatal: not a git repository (or any of the parent directories): .git"
     end
@@ -251,7 +250,7 @@ cmd gp ${{
     # If it is a git directory, git push
     if [ -n "$is_git" ]
         git push
-        read -rsn1 -p "Press any key to continue."
+        read --silent --nchars=1 --prompt-str="Press any key to continue."
     else
         echo "fatal: not a git repository (or any of the parent directories): .git"
     end
@@ -263,7 +262,7 @@ cmd gpl ${{
     # If it is a git directory, git pull
     if [ -n "$is_git" ]
         git pull
-        read -rsn1 -p "Press any key to continue."
+        read --silent --nchars=1 --prompt-str="Press any key to continue."
     else
         echo "fatal: not a git repository (or any of the parent directories): .git"
     end
@@ -275,7 +274,7 @@ cmd ga. ${{
     # If it is a git directory, git add everything in current directory
     if [ -n "$is_git" ]
         git add .
-        read -rsn1 -p "Press any key to continue."
+        read --silent --nchars=1 --prompt-str="Press any key to continue."
     else
         echo "fatal: not a git repository (or any of the parent directories): .git"
     end
@@ -287,7 +286,7 @@ cmd gaa ${{
     # If it is a git directory, git add everything in git directory
     if [ -n "$is_git" ]
         git add -A
-        read -rsn1 -p "Press any key to continue."
+        read --silent --nchars=1 --prompt-str="Press any key to continue."
     else
         echo "fatal: not a git repository (or any of the parent directories): .git"
     end
@@ -301,7 +300,7 @@ cmd gc ${{
         echo -n "git commit -S -m "    # Indicate user will commit
         read input                     # Get user input of commit message
         eval "git commit -S -m $input" # Git commit
-        read -rsn1 -p "Press any key to continue."
+        read --silent --nchars=1 --prompt-str="Press any key to continue."
     else
         echo "fatal: not a git repository (or any of the parent directories): .git"
     end
@@ -357,38 +356,76 @@ cmd extract %{{
 
 # Editing
 
-# Search and Edit
+# Search for file, go to its git root directory if possible and edit
 cmd search_edit ${{
-    function find_cmd
-        set -l has_fd (command -v fd) # Check if fd command has been installed
+    set -l has_fd (command -v fd) # Check if fd command has been installed
+    set -l find_cmd               # Declare find command
 
-        # If fd command exists, execute
-        # Else use find
-        if [ -n "$has_fd" ]
-            fd . -H -I -t f
-        else
-            find . -type f
-        end
+    # If fd command exists, execute
+    # Else use find
+    if [ -n "$has_fd" ]
+        set find_cmd fd . --hidden --no-ignore --type file
+    else
+        set find_cmd find . -type f
     end
 
-    find_cmd | fzf | xargs -r "$EDITOR" # Filter fd list through fzf and edit selected file
+    set -l res ($find_cmd | fzf) # Find files and directories in descendant
+                                 # directories to pipe into fzf
+
+    # Check if the result is non-empty
+    if count $res > /dev/null
+        set -l res_dir (dirname "$res") # Get result's path to its directory
+
+        cd "$res_dir"                                                        # Change to result's directory
+        set -l res_path (realpath --canonicalize-existing (basename "$res")) # Get result's absolute path
+        set -l root_dir (git rev-parse --quiet --show-toplevel)              # Get git root directory
+
+        # Check if we're in a git repository and go to root directory if so
+        # Add it in the zoxide database as well
+        if [ -d "$root_dir" ]
+            lf -remote "send $id cd \"$root_dir\""
+            zoxide add "$root_dir"
+            cd "$root_dir" && "$EDITOR" "$res_path"
+        else
+            "$EDITOR" "$res_path"
+        end
+    end
 }}
 
-# Search and sudoedit
+# Search for file, go to its git root directory if possible and sudoedit
 cmd search_sudoedit ${{
-    function find_cmd
-        set -l has_fd (command -v fd) # Check if fd command has been installed
+    set -l has_fd (command -v fd) # Check if fd command has been installed
+    set -l find_cmd               # Declare find command
 
-        # If fd command exists, execute
-        # Else use find
-        if [ -n "$has_fd" ]
-            fd . -H -I -t f
-        else
-            find . -type f
-        end
+    # If fd command exists, execute
+    # Else use find
+    if [ -n "$has_fd" ]
+        set find_cmd fd . --hidden --no-ignore --type file
+    else
+        set find_cmd find . -type f
     end
 
-    find_cmd | fzf | xargs -r sudoedit # Filter fd list through fzf and sudoedit selected file
+    set -l res ($find_cmd | fzf) # Find files and directories in descendant
+                                 # directories to pipe into fzf
+
+    # Check if the result is non-empty
+    if count $res > /dev/null
+        set -l res_dir (dirname "$res") # Get result's path to its directory
+
+        cd "$res_dir"                                                        # Change to result's directory
+        set -l res_path (realpath --canonicalize-existing (basename "$res")) # Get result's absolute path
+        set -l root_dir (git rev-parse --quiet --show-toplevel)              # Get root directory
+
+        # Check if we're in a git repository and go to root directory if so
+        # Add it in the zoxide database as well
+        if [ -d "$root_dir" ]
+            lf -remote "send $id cd \"$root_dir\""
+            zoxide add "$root_dir"
+            cd "$root_dir" && sudoedit "$res_path"
+        else
+            sudoedit "$res_path"
+        end
+    end
 }}
 
 ###############
@@ -397,14 +434,12 @@ cmd search_sudoedit ${{
 
 # Disable Defaults
 
-map <esc> cmd-escape
-map m
-map "'"
-map '"'
-map d
-map c
-map e
-map f
+map m   # Disable mark-save
+map "'" # Disable mark-load
+map '"' # Disable mark-remove
+map d   # Disable cut
+map c   # Disable clear
+map f   # Disable find
 
 # Commands
 
@@ -412,7 +447,7 @@ map p paste
 map y copy
 map x cut
 map chx chmodx
-map e gui
+map g gui
 map Y copy_path
 
 # Delete
@@ -453,6 +488,8 @@ map O new-instance
 
 map F fuzzy_find --non-recursive
 map f fuzzy_find
+map E search_sudoedit
+map e search_edit
 
 # Common directories
 
