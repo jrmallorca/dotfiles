@@ -56,7 +56,8 @@ cmd fuzzy_find ${{
     end
 
     # Find descendant directories from current directory pipe remaining output to fzf
-    set -l res ($find_cmd . $flags | fzf --header=$fzf_header)
+    set -l preview bat {-1} --color=always # Set the preview command of fzf
+    set -l res ($find_cmd . $flags | fzf --ansi --header=$fzf_header --preview="$preview")
 
     # If result is a directory, enter it.
     # Add it in the zoxide database as well
@@ -237,25 +238,22 @@ cmd ga ${{
 
     # If it is a git directory, fzf modified and untracked files and git add those selected
     if [ -n "$is_git" ]
-        # Look for modified and untracked files
-        # FZF with multi select on results
-        # Git add selected items
-        git ls-files --modified --others --exclude-standard --deduplicate |
-            fzf --multi --print0 |
-            xargs --null --open-tty git add
+        set -l preview bat {-1} --color=always                              # Set the preview command of fzf
+        git ls-files --modified --others --exclude-standard --deduplicate | # Look for modified and untracked files
+            fzf --ansi --multi --print0 --preview="$preview" |              # FZF with multi select on results
+            xargs --null --open-tty git add                                 # Git add selected items
     else
         echo "fatal: not a git repository (or any of the parent directories): .git"
     end
 }}
 
 # Git add all in current directory
-cmd ga. ${{
+cmd ga. !{{
     set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
 
     # If it is a git directory, git add everything in current directory
     if [ -n "$is_git" ]
         git add .
-        read --silent --nchars=1 --prompt-str="Press any key to continue."
     else
         echo "fatal: not a git repository (or any of the parent directories): .git"
     end
@@ -275,7 +273,7 @@ cmd gaa ${{
 }}
 
 # Git commit
-cmd gc ${{
+cmd gc !{{
     set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
 
     # If it is a git directory, input the commit message and commit
@@ -283,7 +281,6 @@ cmd gc ${{
         echo -n "git commit -S -m "    # Indicate user will commit
         read input                     # Get user input of commit message
         eval "git commit -S -m $input" # Git commit
-        read --silent --nchars=1 --prompt-str="Press any key to continue."
     else
         echo "fatal: not a git repository (or any of the parent directories): .git"
     end
@@ -295,14 +292,14 @@ cmd gco ${{
 
     # If it is a git directory, git checkout the selected branch
     if [ -n "$is_git" ]
-        git branch | fzf | xargs git checkout
+        git branch | fzf --ansi | xargs git checkout
     else
         echo "fatal: not a git repository (or any of the parent directories): .git"
     end
 }}
 
 # Create a new git branch and git checkout
-cmd gcob ${{
+cmd gcob &{{
     set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
 
     # If it is a git directory, create a new git branch and git checkout
@@ -319,58 +316,53 @@ cmd gd ${{
 
     # If it is a git directory, git diff selected files
     if [ -n "$is_git" ]
-        # Look for modified and untracked files
-        # FZF with multi select on results
-        # Git diff selected items
-        git ls-files --modified --others --exclude-standard --deduplicate |
-            fzf --multi --print0 |
-            xargs --null --open-tty git diff
+        cd (git rev-parse --show-toplevel)                   # Go to git root directory
+        set -l preview git diff $argv --color=always -- {-1} # Set the preview command of fzf 
+        git diff $argv --name-only |                         # Get git diffs
+            fzf --multi --ansi --preview="$preview"          # Pipe diffs into fzf
     else
         echo "fatal: not a git repository (or any of the parent directories): .git"
     end
 }}
 
 # Git push
-cmd gp ${{
+cmd gp !{{
     set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
 
     # If it is a git directory, git push
     if [ -n "$is_git" ]
         git push
-        read --silent --nchars=1 --prompt-str="Press any key to continue."
     else
         echo "fatal: not a git repository (or any of the parent directories): .git"
     end
 }}
 
 # Git pull
-cmd gpl ${{
+cmd gpl !{{
     set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
 
     # If it is a git directory, git pull
     if [ -n "$is_git" ]
         git pull
-        read --silent --nchars=1 --prompt-str="Press any key to continue."
     else
         echo "fatal: not a git repository (or any of the parent directories): .git"
     end
 }}
 
 # Git status
-cmd gs ${{
+cmd gs !{{
     set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
 
     # If it is a git directory, git status
     if [ -n "$is_git" ]
         git status
-        read --silent --nchars=1 --prompt-str="Press any key to continue."
     else
         echo "fatal: not a git repository (or any of the parent directories): .git"
     end
 }}
 
 # Show commit history
-cmd gg ${{
+cmd gg !{{
     set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
 
     # If it is a git directory, show commit history
@@ -445,8 +437,9 @@ cmd search_edit ${{
         set find_cmd find . -type f
     end
 
-    set -l res ($find_cmd | fzf) # Find files and directories in descendant
-                                 # directories to pipe into fzf
+    set -l preview bat {-1} --color=always                   # Set the preview command of fzf
+    set -l res ($find_cmd | fzf --ansi --preview="$preview") # Find files and directories in descendant
+                                                             # directories to pipe into fzf
 
     # Check if the result is non-empty
     if count $res > /dev/null
@@ -481,7 +474,7 @@ cmd search_sudoedit ${{
         set find_cmd find . -type f
     end
 
-    set -l res ($find_cmd | fzf) # Find files and directories in descendant
+    set -l res ($find_cmd | fzf --ansi) # Find files and directories in descendant
                                  # directories to pipe into fzf
 
     # Check if the result is non-empty
