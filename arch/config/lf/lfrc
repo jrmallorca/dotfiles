@@ -327,6 +327,21 @@ cmd gd ${{
     end
 }}
 
+# Git diff --cached
+cmd gdc ${{
+    set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
+
+    # If it is a git directory, git diff selected files
+    if [ -n "$is_git" ]
+        cd (git rev-parse --show-toplevel)                            # Go to git root directory
+        set -l preview git diff $argv --cached --color=always -- {-1} # Set the preview command of fzf 
+        git diff $argv --cached --name-only |                         # Get git diffs
+            fzf --multi --ansi --preview="$preview"                   # Pipe diffs into fzf
+    else
+        echo "fatal: not a git repository (or any of the parent directories): .git"
+    end
+}}
+
 # Git push
 cmd gp ${{
     set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
