@@ -8,6 +8,7 @@
 
 # Transfer configuration files.
 configuration:
+	rm ~/.config/fish/fish_variables
 	cp -a config/. ~/.config/
 	cp .tmux.conf .xinitrc ~/
 
