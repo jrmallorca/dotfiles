@@ -231,43 +231,24 @@ cmd clt %trash-empty
 
 # Git
 
-# Git status
-cmd gs ${{
+# Git add provided arguments
+cmd ga ${{
     set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
 
-    # If it is a git directory, git status
+    # If it is a git directory, fzf modified and untracked files and git add those selected
     if [ -n "$is_git" ]
-        git status
-        read --silent --nchars=1 --prompt-str="Press any key to continue."
+        # Look for modified and untracked files
+        # FZF with multi select on results
+        # Git add selected items
+        git ls-files --modified --others --exclude-standard --deduplicate |
+            fzf --multi --print0 |
+            xargs --null --open-tty git add
     else
         echo "fatal: not a git repository (or any of the parent directories): .git"
     end
 }}
 
-cmd gp ${{
-    set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
-
-    # If it is a git directory, git push
-    if [ -n "$is_git" ]
-        git push
-        read --silent --nchars=1 --prompt-str="Press any key to continue."
-    else
-        echo "fatal: not a git repository (or any of the parent directories): .git"
-    end
-}}
-
-cmd gpl ${{
-    set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
-
-    # If it is a git directory, git pull
-    if [ -n "$is_git" ]
-        git pull
-        read --silent --nchars=1 --prompt-str="Press any key to continue."
-    else
-        echo "fatal: not a git repository (or any of the parent directories): .git"
-    end
-}}
-
+# Git add all in current directory
 cmd ga. ${{
     set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
 
@@ -280,6 +261,7 @@ cmd ga. ${{
     end
 }}
 
+# Git add all
 cmd gaa ${{
     set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
 
@@ -292,6 +274,7 @@ cmd gaa ${{
     end
 }}
 
+# Git commit
 cmd gc ${{
     set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
 
@@ -305,6 +288,99 @@ cmd gc ${{
         echo "fatal: not a git repository (or any of the parent directories): .git"
     end
 }}
+
+# Git checkout
+cmd gco ${{
+    set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
+
+    # If it is a git directory, git checkout the selected branch
+    if [ -n "$is_git" ]
+        git branch | fzf | xargs git checkout
+    else
+        echo "fatal: not a git repository (or any of the parent directories): .git"
+    end
+}}
+
+# Create a new git branch and git checkout
+cmd gcob ${{
+    set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
+
+    # If it is a git directory, create a new git branch and git checkout
+    if [ -n "$is_git" ]
+        git checkout -b $argv
+    else
+        echo "fatal: not a git repository (or any of the parent directories): .git"
+    end
+}}
+
+# Git diff
+cmd gd ${{
+    set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
+
+    # If it is a git directory, git diff selected files
+    if [ -n "$is_git" ]
+        # Look for modified and untracked files
+        # FZF with multi select on results
+        # Git diff selected items
+        git ls-files --modified --others --exclude-standard --deduplicate |
+            fzf --multi --print0 |
+            xargs --null --open-tty git diff
+    else
+        echo "fatal: not a git repository (or any of the parent directories): .git"
+    end
+}}
+
+# Git push
+cmd gp ${{
+    set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
+
+    # If it is a git directory, git push
+    if [ -n "$is_git" ]
+        git push
+        read --silent --nchars=1 --prompt-str="Press any key to continue."
+    else
+        echo "fatal: not a git repository (or any of the parent directories): .git"
+    end
+}}
+
+# Git pull
+cmd gpl ${{
+    set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
+
+    # If it is a git directory, git pull
+    if [ -n "$is_git" ]
+        git pull
+        read --silent --nchars=1 --prompt-str="Press any key to continue."
+    else
+        echo "fatal: not a git repository (or any of the parent directories): .git"
+    end
+}}
+
+# Git status
+cmd gs ${{
+    set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
+
+    # If it is a git directory, git status
+    if [ -n "$is_git" ]
+        git status
+        read --silent --nchars=1 --prompt-str="Press any key to continue."
+    else
+        echo "fatal: not a git repository (or any of the parent directories): .git"
+    end
+}}
+
+# Show commit history
+cmd gg ${{
+    set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
+
+    # If it is a git directory, show commit history
+    if [ -n "$is_git" ]
+        git log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"
+    else
+        echo "fatal: not a git repository (or any of the parent directories): .git"
+    end
+}}
+
 
 # Archives
 
