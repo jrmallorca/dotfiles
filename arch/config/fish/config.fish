@@ -65,8 +65,8 @@ abbr prm 'paru -Rs'
 # (Un)mounting
 abbr mntd 'sudo mount /dev/sda1 /mnt/d'
 abbr umntd 'sudo umount /mnt/d'
-abbr mntph 'simple-mtpfs --device 1 /mnt/phone/'
-abbr umntph 'fusermount -u /mnt/phone/'
+abbr mntp 'simple-mtpfs --device 1 /mnt/phone/'
+abbr umntp 'fusermount -u /mnt/phone/'
 
 # Changing directories
 abbr zr 'z / && cdf'
@@ -81,13 +81,14 @@ abbr zmd 'z /mnt/d && cdf'
 abbr zmdn 'z ~/mnt/d/Notes && cdf'
 abbr zmdu 'z ~/mnt/d/University && cdf'
 abbr zmp 'z /mnt/phone && cdf'
-abbr zg 'z (git rev-parse --show-toplevel)'
+abbr zg 'z (git rev-parse --show-toplevel) && cdf'
 
 # Find and edit
 abbr e. 'z ~/dotfiles/arch && cdf -command search_edit'
 abbr emdu 'z /mnt/d/University && cdf -command search_edit'
 abbr emdn 'z /mnt/d/Notes && cdf -command search_edit'
 abbr ep 'z ~/Projects && cdf -command search_edit'
+abbr eg 'z (git rev-parse --show-toplevel) && cdf -command search_edit'
 
 # TMUX
 abbr t 'tmux'
@@ -105,7 +106,7 @@ abbr s 'z ~/scli && ./scli'
 
 # Editor
 abbr se 'sudoedit'
-abbr v 'nvim'
+abbr e 'nvim'
 
 # Dotfiles
 abbr mc 'z ~/dotfiles/arch && make configuration && prevd'
@@ -120,14 +121,14 @@ abbr nc 'nmcli -a d wifi connect'
 abbr stocks ticker -w AMD,AAPL,CRSP,CRSR,GME,AMC,SQ,NIO --show-fundamentals --show-separator
 
 # Git
-abbr ga 'git add'
+abbr ga 'git ls-files --modified --others --exclude-standard | fzf --multi --print0 | xargs --null --open-tty git add'
 abbr ga. 'git add .'
 abbr gaa 'git add -A'
 abbr gb 'git branch'
 abbr gbl 'git blame'
 abbr gc 'git commit -S -m'
 abbr gca 'git commit --amend -S -m'
-abbr gco 'git checkout'
+abbr gco 'git branch | fzf | xargs git checkout'
 abbr gcob 'git checkout -b'
 abbr gcp 'git cherry-pick'
 abbr gd 'git diff'
