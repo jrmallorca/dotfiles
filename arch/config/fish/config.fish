@@ -31,6 +31,20 @@ function cdf -d 'Go to last directory before quitting lf'
     end
 end
 
+function gd -d 'Git diff'
+    set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
+
+    # If it is a git directory, git diff selected files
+    if [ -n "$is_git" ]
+        cd (git rev-parse --show-toplevel)                   # Go to git root directory
+        set -l preview git diff $argv --color=always -- {-1} # Set the preview command of fzf 
+        git diff $argv --name-only |                         # Get git diffs
+            fzf --multi --ansi --preview="$preview"          # Pipe diffs into fzf
+    else
+        echo "fatal: not a git repository (or any of the parent directories): .git"
+    end
+end
+
 function gcl -d 'Clone a repository with using a username and repository name' -a username repository
     # Check if username and repository are non-empty then git clone
     if set -q username[1] repository[1]
@@ -117,21 +131,17 @@ abbr nd 'nmcli c down'
 abbr nu 'nmcli c up'
 abbr nc 'nmcli -a d wifi connect'
 
-# Stocks
-abbr stocks ticker -w AMD,AAPL,CRSP,CRSR,GME,AMC,SQ,NIO --show-fundamentals --show-separator
-
 # Git
-abbr ga 'git ls-files --modified --others --exclude-standard | fzf --multi --print0 | xargs --null --open-tty git add'
+abbr ga 'git ls-files --modified --others --exclude-standard | fzf --ansi --multi --print0 --preview"bat {-1} --color=always" | xargs --null --open-tty git add'
 abbr ga. 'git add .'
 abbr gaa 'git add -A'
 abbr gb 'git branch'
 abbr gbl 'git blame'
 abbr gc 'git commit -S -m'
 abbr gca 'git commit --amend -S -m'
-abbr gco 'git branch | fzf | xargs git checkout'
+abbr gco 'git branch | fzf --ansi | xargs git checkout'
 abbr gcob 'git checkout -b'
 abbr gcp 'git cherry-pick'
-abbr gd 'git diff'
 abbr gf 'git fetch'
 abbr gl 'git log'
 abbr gm 'git merge'
