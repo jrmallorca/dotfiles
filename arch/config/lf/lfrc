@@ -2,6 +2,11 @@
 # Settings #
 ############
 
+# Image previewer
+set previewer stpv
+set cleaner stpvimgclr
+&stpvimg --listen $id
+
 set shell fish                     # Set which shell commands to use
 set relativenumber true            # Show number of line relative to current line
 set number true                    # Show number on current line

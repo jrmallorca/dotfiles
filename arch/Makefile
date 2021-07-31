@@ -173,7 +173,20 @@ vm:
 	sudo gpasswd -aG vboxusers $USER
 
 torrent:
-	paru -Syu  qbittorrent
+	paru -Syu --needed qbittorrent
+
+lf:
+	paru -Syu --needed lf ueberzug chafa
+	cd ~/git-installs && \
+		git clone git@github.com:Naheel-Azawy/stpv.git && \
+		git clone git@github.com:exiftool/exiftool.git
+	cd ~/git-installs/stpv && \
+		sudo make install
+	cd ~/git-installs/exiftool && \
+		perl Makefile.PL
+		make
+		make test
+		sudo make install
 
 # Programming
 # -----------------------------------------------------------------------------
