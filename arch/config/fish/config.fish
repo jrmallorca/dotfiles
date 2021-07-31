@@ -15,22 +15,6 @@ zoxide init fish | source
 # FUNCTIONS #
 #############
 
-function vf -d 'Finds file in current directory and executes nvim'
-    commandline -i "nvim "   # Insert "nvim "
-    __fzf_search_current_dir # Find file in current directory
-
-    if test (count (commandline --tokenize)) = 2 # If found something...
-        commandline -f execute                   # Press enter
-    else                                         # Else if nothing was selected
-        commandline -r ""                        # Clear commandline buffer
-    end
-end
-
-function zf -d 'Finds file in current directory and changes to that directory'
-    __fzf_search_current_dir # Find file in current directory
-    commandline -f execute   # Press enter
-end
-
 function cdf -d 'Go to last directory before quitting lf'
     set -l temp (mktemp) # Create a temporary file
 
@@ -44,17 +28,6 @@ function cdf -d 'Go to last directory before quitting lf'
         if [ -d "$dest" ]         # Check if destination is a directory
             z "$dest"             # Change directory to destination
         end
-    end
-end
-
-function grt -d 'Go to the root of the git repository'
-    set -l root_dir (git rev-parse --show-toplevel) # Get root directory
-
-    # Check if we're in a git repository and go to root directory if so
-    if [ -d "$root_dir" ]
-        z $root_dir
-    else
-        echo "fatal: not a git repository (or any of the parent directories): .git"
     end
 end
 
@@ -108,12 +81,13 @@ abbr zmd 'z /mnt/d && cdf'
 abbr zmdn 'z ~/mnt/d/Notes && cdf'
 abbr zmdu 'z ~/mnt/d/University && cdf'
 abbr zmp 'z /mnt/phone && cdf'
+abbr zg 'z (git rev-parse --show-toplevel)'
 
-# Search and edit
-abbr v. 'z ~/dotfiles/arch && cdf -command search_edit'
-abbr vmdu 'z /mnt/d/University && cdf -command search_edit'
-abbr vmdn 'z /mnt/d/Notes && cdf -command search_edit'
-abbr vp 'z ~/Projects && cdf -command search_edit'
+# Find and edit
+abbr e. 'z ~/dotfiles/arch && cdf -command search_edit'
+abbr emdu 'z /mnt/d/University && cdf -command search_edit'
+abbr emdn 'z /mnt/d/Notes && cdf -command search_edit'
+abbr ep 'z ~/Projects && cdf -command search_edit'
 
 # TMUX
 abbr t 'tmux'
