@@ -282,7 +282,7 @@ cmd gc ${{
 
     # If it is a git directory, input the commit message and commit
     if [ -n "$is_git" ]
-        git commit -S -m "$argv"
+        git commit -S -m "\"$argv\""
     else
         echo "fatal: not a git repository (or any of the parent directories): .git"
     end
@@ -364,7 +364,7 @@ cmd gs !{{
 }}
 
 # Show commit history
-cmd gg !{{
+cmd gg ${{
     set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
 
     # If it is a git directory, show commit history
@@ -514,6 +514,7 @@ map f   # Disable find
 
 # Commands
 
+map mc &{{ cd ~/dotfiles/arch && make configuration }}
 map p paste
 map y copy
 map x cut
