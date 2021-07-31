@@ -253,7 +253,7 @@ cmd ga ${{
 }}
 
 # Git add all in current directory
-cmd ga. !{{
+cmd ga. ${{
     set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
 
     # If it is a git directory, git add everything in current directory
@@ -271,21 +271,18 @@ cmd gaa ${{
     # If it is a git directory, git add everything in git directory
     if [ -n "$is_git" ]
         git add -A
-        read --silent --nchars=1 --prompt-str="Press any key to continue."
     else
         echo "fatal: not a git repository (or any of the parent directories): .git"
     end
 }}
 
 # Git commit
-cmd gc !{{
+cmd gc ${{
     set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
 
     # If it is a git directory, input the commit message and commit
     if [ -n "$is_git" ]
-        echo -n "git commit -S -m "    # Indicate user will commit
-        read input                     # Get user input of commit message
-        eval "git commit -S -m $input" # Git commit
+        git commit -S -m "$argv"
     else
         echo "fatal: not a git repository (or any of the parent directories): .git"
     end
@@ -331,7 +328,7 @@ cmd gd ${{
 }}
 
 # Git push
-cmd gp !{{
+cmd gp ${{
     set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
 
     # If it is a git directory, git push
@@ -343,7 +340,7 @@ cmd gp !{{
 }}
 
 # Git pull
-cmd gpl !{{
+cmd gpl ${{
     set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
 
     # If it is a git directory, git pull
@@ -521,7 +518,7 @@ map p paste
 map y copy
 map x cut
 map chx chmodx
-map g gui
+#map g gui
 map Y copy_path
 
 # Delete
