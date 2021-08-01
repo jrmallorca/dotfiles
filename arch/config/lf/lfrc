@@ -14,7 +14,7 @@ set icons                          # Show icons before list items
 set hidden true                    # Show hidden files
 set ignorecase true                # Ignore case when searching
 set smartcase true                 # Override 'ignorecase' when search include uppercase
-set drawbox                        # Draw boxes around panes
+#set drawbox                        # Draw boxes around panes
 set promptfmt "\033[38;5;250m%d%f" # Format of prompt show in top line
 
 #############
@@ -243,7 +243,7 @@ cmd ga ${{
 
     # If it is a git directory, fzf modified and untracked files and git add those selected
     if [ -n "$is_git" ]
-        set -l preview bat {-1} --color=always                              # Set the preview command of fzf
+        set -l preview git diff $argv --color=always -- {-1}                # Set the preview command of fzf 
         git ls-files --modified --others --exclude-standard --deduplicate | # Look for modified and untracked files
             fzf --ansi --multi --print0 --preview="$preview" |              # FZF with multi select on results
             xargs --null --open-tty git add                                 # Git add selected items
