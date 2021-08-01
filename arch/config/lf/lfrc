@@ -282,7 +282,7 @@ cmd gc ${{
 
     # If it is a git directory, input the commit message and commit
     if [ -n "$is_git" ]
-        git commit -S -m "\"$argv\""
+        git commit -S -m "$argv"
     else
         echo "fatal: not a git repository (or any of the parent directories): .git"
     end
@@ -549,7 +549,7 @@ map z
 
 # UI
 map zz single_pane
-map zZ triple_pane
+map zz triple_pane
 
 # Action [ a ]
 
@@ -571,15 +571,31 @@ map on open-new-window
 map oo open-with
 map O new-instance
 
-# Navigation
+# Find files and directories
 
 map F fuzzy_find --non-recursive
 map f fuzzy_find
-map E search_sudoedit
-map e search_edit
+map Ef search_sudoedit
+map ef search_edit
 
 # Common directories
 
+# Edit
+map er :z /; search_edit
+map eh :z ~/; search_edit
+map ep :z ~/Projects; search_edit
+map e. :z ~/dotfiles/arch; search_edit
+map ec :z ~/.config; search_edit
+map edw :z ~/Downloads; search_edit
+map eE :z /etc; search_edit
+map eU :z /usr; search_edit
+map emd :z /mnt/d; search_edit
+map emdn :z ~/mnt/d/Notes; search_edit
+map emdu :z ~/mnt/d/University; search_edit
+map emp :z /mnt/phone; search_edit
+map eg :git_root; search_edit
+
+# Navigate
 map zr z /
 map zh z ~/
 map zp z ~/Projects

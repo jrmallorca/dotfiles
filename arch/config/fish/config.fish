@@ -82,7 +82,26 @@ abbr umntd 'sudo umount /mnt/d'
 abbr mntp 'simple-mtpfs --device 1 /mnt/phone/'
 abbr umntp 'fusermount -u /mnt/phone/'
 
-# Changing directories
+# Find files and directories
+
+# Common directories
+
+# Edit
+abbr er 'z / && cdf -command search_edit'
+abbr eh 'z ~/ && cdf -command search_edit'
+abbr ep 'z ~/Projects && cdf -command search_edit'
+abbr e. 'z ~/dotfiles/arch && cdf -command search_edit'
+abbr ec 'z ~/.config && cdf -command search_edit'
+abbr edw 'z ~/Downloads && cdf -command search_edit'
+abbr eE 'z /etc && cdf -command search_edit'
+abbr eU 'z /usr && cdf -command search_edit'
+abbr emd 'z /mnt/d && cdf -command search_edit'
+abbr emdn 'z ~/mnt/d/Notes && cdf -command search_edit'
+abbr emdu 'z ~/mnt/d/University && cdf -command search_edit'
+abbr emp 'z /mnt/phone && cdf -command search_edit'
+abbr eg 'z (git rev-parse --show-toplevel) && cdf -command search_edit'
+
+# Navigate
 abbr zr 'z / && cdf'
 abbr zh 'z ~/ && cdf'
 abbr zp 'z ~/Projects && cdf'
@@ -96,13 +115,6 @@ abbr zmdn 'z ~/mnt/d/Notes && cdf'
 abbr zmdu 'z ~/mnt/d/University && cdf'
 abbr zmp 'z /mnt/phone && cdf'
 abbr zg 'z (git rev-parse --show-toplevel) && cdf'
-
-# Find and edit
-abbr e. 'z ~/dotfiles/arch && cdf -command search_edit'
-abbr emdu 'z /mnt/d/University && cdf -command search_edit'
-abbr emdn 'z /mnt/d/Notes && cdf -command search_edit'
-abbr ep 'z ~/Projects && cdf -command search_edit'
-abbr eg 'z (git rev-parse --show-toplevel) && cdf -command search_edit'
 
 # TMUX
 abbr t 'tmux'
