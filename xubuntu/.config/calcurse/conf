@@ -1,3 +1,0 @@
-notification.command=calcurse --next | xargs -0 notify-send "Appointment"
-daemon.enable=yes
-notification.warning=300
