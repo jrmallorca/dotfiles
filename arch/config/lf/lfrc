@@ -14,7 +14,6 @@ set icons                          # Show icons before list items
 set hidden true                    # Show hidden files
 set ignorecase true                # Ignore case when searching
 set smartcase true                 # Override 'ignorecase' when search include uppercase
-#set drawbox                        # Draw boxes around panes
 set promptfmt "\033[38;5;250m%d%f" # Format of prompt show in top line
 
 #############
