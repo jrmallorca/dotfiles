@@ -65,7 +65,7 @@ necessary:
 	# systemctl enable reflector.timer
 
 necessary-paru:
-	paru -Syu daemon clight lf devour zoxide
+	paru -Syu daemon clight lf devour zoxide picom
 
 # Mount the D drive from Windows
 mountd:
@@ -81,6 +81,7 @@ lightdm:
 		lightdm-webkit-theme-sequoia-git
 	systemctl enable lightdm
 
+# Ly display manager
 ly:
 	paru -Syu --needed ly
 	sudo systemctl enable ly.service
@@ -108,36 +109,6 @@ signal:
 	paru -Syu --needed signal-cli
 	pip install urwid
 	cd ~ && git clone https://github.com/isamert/scli.git
-
-# UNTESTED and probably doesn't work with 2nd line due to fish
-# Should probably make it a script?
-# Should check if there's no existing SSH key
-gitsshkeys:
-	ssh-keygen -t ed25519 -C "48072014+jrmallorca@users.noreply.github.com"
-	eval "$(ssh-agent -s)"
-	ssh-add ~/.ssh/id_ed25519
-	xclip -selection clipboard < ~/.ssh/id_ed25519.pub
-
-# INCOMPLETE and doesn't do the last 2 lines in git docs
-gitgpgkeys:
-	git config --global gpg.program gpg2
-	gpg2 --full-generate-key
-	gpg2 --list-secret-keys --keyid-format LONG
-
-# Doesn't work in Makefile
-fisher:
-	curl -sL https://git.io/fisher | . && fisher install jorgebucaran/fisher
-
-spacefish:
-	paru -Syu --needed powerline-fonts
-	fisher install matchai/spacefish
-
-fisherplugins:
-	fisher install PatrickF1/fzf.fish
-
-# Install picom (compositor)
-picom:
-	paru -Syu picom
 
 # weechat (CLI messaging) and bitlbee (For facebook and other stuff)
 # http://thedarnedestthing.com/weechat%20+%20bitlbee
@@ -209,6 +180,43 @@ flutter:
 
 lsp:
 	curl -fsSL https://deno.land/x/install/install.sh | sh
+
+# Git
+# -----------------------------------------------------------------------------
+
+gitdiff:
+	paru -Syu --needed diff-so-fancy
+	# Use diff-so-fancy for all diff output
+	git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
+	git config --global interactive.diffFilter "diff-so-fancy --patch"
+	# Use better colors for diff output
+	git config --global color.ui true
+	git config --global color.diff-highlight.oldNormal    "red bold"
+	git config --global color.diff-highlight.oldHighlight "red bold 52"
+	git config --global color.diff-highlight.newNormal    "green bold"
+	git config --global color.diff-highlight.newHighlight "green bold 22"
+	git config --global color.diff.meta       "11"
+	git config --global color.diff.frag       "magenta bold"
+	git config --global color.diff.func       "146 bold"
+	git config --global color.diff.commit     "yellow bold"
+	git config --global color.diff.old        "red bold"
+	git config --global color.diff.new        "green bold"
+	git config --global color.diff.whitespace "red reverse"
+
+# UNTESTED and probably doesn't work with 2nd line due to fish
+# Should probably make it a script?
+# Should check if there's no existing SSH key
+gitsshkeys:
+	ssh-keygen -t ed25519 -C "48072014+jrmallorca@users.noreply.github.com"
+	eval "$(ssh-agent -s)"
+	ssh-add ~/.ssh/id_ed25519
+	xclip -selection clipboard < ~/.ssh/id_ed25519.pub
+
+# INCOMPLETE and doesn't do the last 2 lines in git docs
+gitgpgkeys:
+	git config --global gpg.program gpg2
+	gpg2 --full-generate-key
+	gpg2 --list-secret-keys --keyid-format LONG
 
 # Extra
 # -----------------------------------------------------------------------------
