@@ -1,7 +1,6 @@
 #!/bin/sh
 
-# Open Neovim in a terminal. Pass the path of a file as an argument to open it
-# in Neovim.
+# Open lf in a terminal
 
 if [ -n "$1" ]
 then
@@ -26,4 +25,4 @@ else
     fi
 fi
 
-alacritty -e sh -c "sleep 0.5 && lf '$args'"
+alacritty --command sh -c "lf '$args'"
