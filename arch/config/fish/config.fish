@@ -87,6 +87,7 @@ abbr umntp 'fusermount -u /mnt/phone/'
 # Common directories
 
 # Edit
+abbr ef 'cdf -command search_edit'
 abbr er 'z / && cdf -command search_edit'
 abbr eh 'z ~/ && cdf -command search_edit'
 abbr ep 'z ~/Projects && cdf -command search_edit'
