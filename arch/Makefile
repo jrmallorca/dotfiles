@@ -53,7 +53,7 @@ necessary:
 		unclutter tlp feh mpv ffmpeg youtube-dl googler alsa-utils zathura \
 		zathura-pdf-mupdf clight nodejs npm python python-pip autotiling \
 		dunst flameshot buku lxappearance-gtk3 gtk3 libinput xorg-xinput tmux \
-		github-cli bluez bluez-utils blueman lf devour zoxide ttc-iosevka-aile \
+		github-cli bluez bluez-utils blueman ttc-iosevka-aile trash-cli \
 		ttc-iosevka-ss14
 	npm install -g neovim
 	pip install pynvim
@@ -83,7 +83,7 @@ lightdm:
 
 ly:
 	paru -Syu --needed ly
-	sudo ssystemctl enable ly.service
+	sudo systemctl enable ly.service
 	sudo systemctl disable getty@tty2.service
 	cd ~/ && chmod +x .xinitrc
 
