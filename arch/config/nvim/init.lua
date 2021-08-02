@@ -10,3 +10,4 @@ require('pkg-flutter-tools') -- Flutter tools package
 require('pkg-lsp-config')    -- LSP package
 require('pkg-nvim-compe')    -- Auto-completion package
 require('pkg-lightspeed')    -- 2 character search package
+require('pkg-autopairs')     -- Autopairs package
