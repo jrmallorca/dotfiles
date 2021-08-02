@@ -56,9 +56,9 @@ cmd fuzzy_find ${{
         end
     end
 
-    # Find descendant directories from current directory pipe remaining output to fzf
-    set -l preview bat {-1} --color=always # Set the preview command of fzf
-    set -l res ($find_cmd . $flags | fzf --ansi --header="$fzf_header" --preview="$preview")
+    # Find files/directories from current directory pipe remaining output to fzf
+    set -l preview bat {-1} --number --color=always # Set the preview command of fzf
+    set -l res ($find_cmd . $flags | fzf --ansi --header=$fzf_header --preview="$preview")
 
     # If result is a directory, enter it.
     # Add it in the zoxide database as well
@@ -217,27 +217,11 @@ cmd tl !trash-list
 # Restore files in the trash
 cmd tres $trash-restore
 
-# FZF remove files from trash
 cmd trm ${{
-    set -l fzf_header Trash                # Get current directory name to be the header
-    set -l preview bat {-1} --color=always # Set the preview command of fzf
-    set -l has_fd (command -v fd)          # Check if fd command has been installed
-    set -l find_cmd                        # Declare find_cmd
-
-    # Check if we should use find or fd
-    if [ -n "$has_fd" ]
-        set find_cmd fd . --hidden --max-depth 1
-    else
-        set find_cmd find . -maxdepth 1
-    end
-
-    # Find descendant directories from current directory pipe remaining output to fzf
-    set -l res ($find_cmd | fzf --ansi --header="$fzf_header" --preview="$preview")
-
-    # If result is non-empty, delete it
-    if count $res > /dev/null
-        trash-rm "$res"
-    end
+    trash-list
+    echo -n "trash-rm "
+    read input
+    trash-rm "$input"
 }}
 
 cmd clt %trash-empty
@@ -250,7 +234,7 @@ cmd ga ${{
 
     # If it is a git directory, fzf modified and untracked files and git add those selected
     if [ -n "$is_git" ]
-        set -l preview git diff $argv --color=always -- {-1}                # Set the preview command of fzf 
+        set -l preview "git diff --color=always -- {-1} | diff-so-fancy"    # Set the preview command of fzf 
         git ls-files --modified --others --exclude-standard --deduplicate | # Look for modified and untracked files
             fzf --ansi --multi --print0 --preview="$preview" |              # FZF with multi select on results
             xargs --null --open-tty git add                                 # Git add selected items
@@ -325,10 +309,10 @@ cmd gd ${{
 
     # If it is a git directory, git diff selected files
     if [ -n "$is_git" ]
-        cd (git rev-parse --show-toplevel)                   # Go to git root directory
-        set -l preview git diff $argv --color=always -- {-1} # Set the preview command of fzf 
-        git diff $argv --name-only |                         # Get git diffs
-            fzf --multi --ansi --preview="$preview"          # Pipe diffs into fzf
+        cd (git rev-parse --show-toplevel)                                     # Go to git root directory
+        set -l preview "git diff $argv --color=always -- {-1} | diff-so-fancy" # Set the preview command of fzf 
+        git diff $argv --name-only |                                           # Get git diffs
+            fzf --multi --ansi --preview="$preview"                            # Pipe diffs into fzf
     else
         echo "fatal: not a git repository (or any of the parent directories): .git"
     end
@@ -340,10 +324,10 @@ cmd gdc ${{
 
     # If it is a git directory, git diff selected files
     if [ -n "$is_git" ]
-        cd (git rev-parse --show-toplevel)                            # Go to git root directory
-        set -l preview git diff $argv --cached --color=always -- {-1} # Set the preview command of fzf 
-        git diff $argv --cached --name-only |                         # Get git diffs
-            fzf --multi --ansi --preview="$preview"                   # Pipe diffs into fzf
+        cd (git rev-parse --show-toplevel)                                              # Go to git root directory
+        set -l preview "git diff $argv --cached --color=always -- {-1} | diff-so-fancy" # Set the preview command of fzf 
+        git diff $argv --cached --name-only |                                           # Get git diffs
+            fzf --multi --ansi --preview="$preview"                                     # Pipe diffs into fzf
     else
         echo "fatal: not a git repository (or any of the parent directories): .git"
     end
@@ -461,7 +445,7 @@ cmd search_edit ${{
         set find_cmd find . -type f
     end
 
-    set -l preview bat {-1} --color=always                   # Set the preview command of fzf
+    set -l preview bat {-1} --number --color=always          # Set the preview command of fzf
     set -l res ($find_cmd | fzf --ansi --preview="$preview") # Find files and directories in descendant
                                                              # directories to pipe into fzf
 
