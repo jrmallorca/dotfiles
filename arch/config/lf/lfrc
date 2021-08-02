@@ -109,7 +109,7 @@ cmd run ${{
 
 cmd new-instance %{{
     set -l current_dir (pwd)
-    setsid -f ~/dotfiles/arch/scripts/open-lf "$current_dir"
+    setsid -f ~/dotfiles/arch/scripts/open-lf "$current_dir" >/dev/null 2>&1
 }}
 
 cmd open ${{
