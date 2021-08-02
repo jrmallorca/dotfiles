@@ -24,14 +24,10 @@ set promptfmt "\033[38;5;250m%d%f" # Format of prompt show in top line
 # Toggle settings
 
 # View lf in single pane mode
-cmd single_pane &{{
-    lf -remote "send $id set ratios 1"
-}}
+cmd single_pane &lf -remote "send $id set ratios 1"
 
 # View lf in triple pane mode
-cmd triple_pane &{{
-    lf -remote "send $id set ratios 1:2:3"
-}}
+cmd triple_pane &lf -remote "send $id set ratios 1:2:3"
 
 # Navigation
 
@@ -62,7 +58,7 @@ cmd fuzzy_find ${{
 
     # Find descendant directories from current directory pipe remaining output to fzf
     set -l preview bat {-1} --color=always # Set the preview command of fzf
-    set -l res ($find_cmd . $flags | fzf --ansi --header=$fzf_header --preview="$preview")
+    set -l res ($find_cmd . $flags | fzf --ansi --header="$fzf_header" --preview="$preview")
 
     # If result is a directory, enter it.
     # Add it in the zoxide database as well
@@ -216,21 +212,32 @@ cmd trash %{{
 }}
 
 # List the files in trash
-cmd tl ${{
-    trash-list
-    read --silent --nchars=1 --prompt-str="Press any key to continue."
-}}
+cmd tl !trash-list
 
 # Restore files in the trash
-cmd tres ${{
-    trash-restore
-}}
+cmd tres $trash-restore
 
+# FZF remove files from trash
 cmd trm ${{
-    trash-list
-    echo -n "trash-rm "
-    read input
-    trash-rm "$input"
+    set -l fzf_header Trash                # Get current directory name to be the header
+    set -l preview bat {-1} --color=always # Set the preview command of fzf
+    set -l has_fd (command -v fd)          # Check if fd command has been installed
+    set -l find_cmd                        # Declare find_cmd
+
+    # Check if we should use find or fd
+    if [ -n "$has_fd" ]
+        set find_cmd fd . --hidden --max-depth 1
+    else
+        set find_cmd find . -maxdepth 1
+    end
+
+    # Find descendant directories from current directory pipe remaining output to fzf
+    set -l res ($find_cmd | fzf --ansi --header="$fzf_header" --preview="$preview")
+
+    # If result is non-empty, delete it
+    if count $res > /dev/null
+        trash-rm "$res"
+    end
 }}
 
 cmd clt %trash-empty
@@ -575,25 +582,11 @@ map O new-instance
 
 map F fuzzy_find --non-recursive
 map f fuzzy_find
-map Ef search_sudoedit
-map ef search_edit
+
+map E search_sudoedit
+map e search_edit
 
 # Common directories
-
-# Edit
-map er :z /; search_edit
-map eh :z ~/; search_edit
-map ep :z ~/Projects; search_edit
-map e. :z ~/dotfiles/arch; search_edit
-map ec :z ~/.config; search_edit
-map edw :z ~/Downloads; search_edit
-map eE :z /etc; search_edit
-map eU :z /usr; search_edit
-map emd :z /mnt/d; search_edit
-map emdn :z ~/mnt/d/Notes; search_edit
-map emdu :z ~/mnt/d/University; search_edit
-map emp :z /mnt/phone; search_edit
-map eg :git_root; search_edit
 
 # Navigate
 map zr z /
