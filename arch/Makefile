@@ -91,6 +91,7 @@ ly:
 betterlockscreen:
 	paru -Syu --needed betterlockscreen
 	betterlockscreen -u "~/dotfiles/backgrounds/"
+	systemctl enable betterlockscreen@$USER
 
 # Install Vim-Plug. NeoVim configs must be set up.
 vim-plug:

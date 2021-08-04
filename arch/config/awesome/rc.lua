@@ -231,7 +231,7 @@ local systemmap = {
     { "s", awesome.restart, "Restart awesome" },
 
     { "h", function() awful.spawn("betterlockscreen -l blur") end, "Lock screen" },
-    { "j", function() awful.spawn("betterlockscreen -s blur") end, "Suspend" },
+    { "j", function() awful.spawn("systemctl suspend") end, "Suspend" },
     { "k", function() awful.spawn("systemctl reboot") end, "Restart" },
     { "l", function() awful.spawn("systemctl poweroff") end, "Shut down" },
 }
