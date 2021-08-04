@@ -129,7 +129,7 @@ abbr rmtr 'rm -rf ~/.tmux/resurrect/*'
 # Chat
 abbr we 'weechat'
 abbr wh 'whatscli'
-abbr s 'z ~/scli && ./scli'
+abbr s 'scli'
 
 # Editor
 abbr se 'sudoedit'
@@ -184,8 +184,11 @@ set -x GPG_TTY (tty)
 # Editor variable
 set -gx EDITOR /usr/bin/nvim
 
-# deno (Javascript LSP)
+# scli
 set PATH $PATH /home/joni/.deno/bin
+
+# deno (Javascript LSP)
+set PATH $PATH /home/joni/git-installs/scli
 
 # Flutter
 set PATH $PATH /usr/lib/dart/bin
