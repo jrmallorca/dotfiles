@@ -173,7 +173,7 @@ abbr gresign 'git rebase --exec \'git commit --amend --no-edit -n -S\' -i'
 
 # GitHub CLI
 abbr ghil 'gh issue list'
-abbr ghprc 'gh pr create --assignee @me --project "" --base main --title "" --body "" --web'
+abbr ghprc 'gh pr create --assignee @me --base BRANCH --title "" --body "" --web'
 
 set -x GPG_TTY (tty)
 
