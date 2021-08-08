@@ -28,7 +28,7 @@ require("true-zen").setup({
 			custome_bg = "",
 			bg_configuration = true,
 			affected_higroups = {NonText = {}, FoldColumn = {}, ColorColumn = {}, VertSplit = {}, StatusLine = {}, StatusLineNC = {}, SignColumn = {}},
-            quit = "close"
+      quit = "close"
 		},
 		focus = {
 			margin_of_error = 5,
@@ -39,7 +39,7 @@ require("true-zen").setup({
 		vim_gitgutter = false,
 		galaxyline = false,
 		tmux = false,
-		gitsigns = false,
+		gitsigns = true,
 		nvim_bufferline = false,
 		limelight = false,
 		vim_airline = false,
@@ -49,7 +49,7 @@ require("true-zen").setup({
 		lualine = false,
 	},
 	misc = {
-		on_off_commands = false,
+		on_off_commands = true,
 		ui_elements_commands = false,
 		cursor_by_mode = true,
 	}

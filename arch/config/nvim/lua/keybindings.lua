@@ -12,13 +12,11 @@ vim.api.nvim_set_keymap('n', '<Bslash>x', [[<Cmd>wqa<CR>]], { noremap = true, si
 
 -- TrueZen --
 -- Leader1 = Ataraxis mode
--- Leader2 = Resize Ataraxis mode
--- Leader3 = Minimalist mode
--- Leader4 = Focus mode
-vim.api.nvim_set_keymap('n', '<Leader>1', [[<Cmd>TZAtaraxis<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>2', [[<Cmd>TZAtaraxis<CR><Cmd>TZAtaraxis<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>3', [[<Cmd>TZMinimalist<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>4', [[<Cmd>TZFocus<CR>]], { noremap = true, silent = true })
+-- Leader2 = Minimalist mode
+-- Leader3 = Focus mode
+vim.api.nvim_set_keymap('n', '<Leader>1', [[<Cmd>TZAtaraxisOff<CR><Cmd>TZMinimalistOff<CR><Cmd>TZFocusOff<CR><Cmd>TZAtaraxisOn<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>2', [[<Cmd>TZAtaraxisOff<CR><Cmd>TZMinimalistOff<CR><Cmd>TZFocusOff<CR><Cmd>TZMinimalistOn<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>3', [[<Cmd>TZFocus<CR>]], { noremap = true, silent = true })
 
 -- Snap --
 -- \\  = Find files within current and child directories
