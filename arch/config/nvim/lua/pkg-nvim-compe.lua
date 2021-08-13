@@ -25,6 +25,7 @@ require'compe'.setup {
     nvim_lua = true;
     nvim_lsp = true;
     luasnip = true;
+    neorg = true;
   };
 }
 

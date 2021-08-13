@@ -44,4 +44,9 @@ require('packer').startup(function()
   use 'windwp/nvim-autopairs'      -- Autopairs plugin
   use 'ggandor/lightspeed.nvim'    -- 2 character search
   use 'winston0410/commented.nvim' -- Comment blocks of code
+  -- Neovim org mode (Notes and organisation)
+  use {
+    "vhyrro/neorg",
+    requires = "nvim-lua/plenary.nvim",
+  }
 end)
