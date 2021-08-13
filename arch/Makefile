@@ -65,7 +65,7 @@ necessary:
 	# systemctl enable reflector.timer
 
 necessary-paru:
-	paru -Syu daemon clight lf devour zoxide picom
+	paru -Syu daemon clight lf devour zoxide picom nerd-fonts-iosevka
 
 # Mount the D drive from Windows
 mountd:
