@@ -20,8 +20,8 @@ require("true-zen").setup({
 		ataraxis = {
 			left_padding = 32,
 			right_padding = 32,
-			top_padding = 1,
-			bottom_padding = 1,
+			top_padding = 0,
+			bottom_padding = 0,
 			ideal_writing_area_width = {80, 200},
 			just_do_it_for_me = false,
 			keep_default_fold_fillchars = true,
