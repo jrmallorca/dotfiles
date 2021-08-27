@@ -4,6 +4,17 @@ local Rule = require('nvim-autopairs.rule')
 npairs.setup({
     enable_check_bracket_line = false, -- If next character is a close pairs and it doesn't have an open pairs in
                                        -- same line then don't add a close pairs
+
+    fast_wrap = {
+      map = '<M-e>',
+      chars = { '{', '[', '(', '"', "'" },
+      pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], '%s+', ''),
+      end_key = '$',
+      keys = 'qwertyuiopzxcvbnmasdfghjkl',
+      check_comma = true,
+      hightlight = 'Search'
+    },
+
     check_ts = true,
     ts_config = {
         lua = {'string'},-- it will not add pair on that treesitter node
