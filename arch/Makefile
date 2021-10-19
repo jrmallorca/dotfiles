@@ -164,12 +164,12 @@ lf:
 # -----------------------------------------------------------------------------
 
 java:
-	paru -Syu jre-openjdk jdk-openjdk #jdk8-openjdk
+	paru -Syu jre-openjdk jdk-openjdk maven
 
 flutter:
 	paru -Syu --needed jdk8-openjdk simple-mtpfs flutter android-sdk \
 		android-sdk-platform-tools android-sdk-build-tools android-platform \
-		scrcpy
+		android-sdk-cmdline-tools-latest scrcpy
 	sudo groupadd flutterusers
 	sudo gpasswd -a $USER flutterusers
 	sudo chown -R :flutterusers /opt/flutter
@@ -181,6 +181,7 @@ flutter:
 
 lsp:
 	curl -fsSL https://deno.land/x/install/install.sh | sh
+	paru -Syu jdtls
 
 # Git
 # -----------------------------------------------------------------------------
