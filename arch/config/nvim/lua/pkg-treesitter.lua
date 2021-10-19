@@ -1,6 +1,6 @@
 -- Parsers must be installed manually via :TSInstall
 require('nvim-treesitter.configs').setup {
-	ensure_installed = { "norg", "dart", "lua", "javascript" },
+	ensure_installed = { "norg", "dart", "lua", "javascript", "c_sharp", "java"},
   highlight = {
     enable = true, -- false will disable the whole extension
   },
