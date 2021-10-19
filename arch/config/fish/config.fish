@@ -73,7 +73,8 @@ end
 abbr xx 'chmod +x'
 
 # Multihead
-abbr xr 'xrandr --output "eDP1" --auto --output "HDMI-1-1" --auto --above "eDP1"'
+abbr xr1 'xrandr --output "eDP1" --auto --output "HDMI-1-1" --auto --above "eDP1"'
+abbr xr2 'xrandr --output "eDP1" --auto --output "HDMI-1-2" --auto --above "eDP1"'
 
 # paru
 abbr p 'paru -Syu'
@@ -189,13 +190,13 @@ set -x GPG_TTY (tty)
 # Editor variable
 set -gx EDITOR /usr/bin/nvim
 
-# scli
-set PATH $PATH /home/joni/.deno/bin
-
 # deno (Javascript LSP)
-set PATH $PATH /home/joni/git-installs/scli
+fish_add_path /home/joni/.deno/bin
+
+# scli (Signal CLI)
+fish_add_path /home/joni/git-installs/scli
 
 # Flutter
-set PATH $PATH /usr/lib/dart/bin
+fish_add_path /usr/lib/dart/bin
 set -gx JAVA_OPTS '-XX:+IgnoreUnrecognizedVMOptions'
 set -gx ANDROID_SDK_ROOT /opt/android-sdk
