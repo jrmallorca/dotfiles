@@ -225,7 +225,7 @@ gitgpgkeys:
 
 # Microsoft Teams
 teams:
-	paru -Syu teams
+	paru -Syu teams-for-linux
 
 # Stock watcher
 ticker:
