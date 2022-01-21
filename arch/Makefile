@@ -54,7 +54,7 @@ necessary:
 		zathura-pdf-mupdf clight nodejs npm python python-pip autotiling \
 		dunst flameshot buku lxappearance-gtk3 gtk3 libinput xorg-xinput tmux \
 		github-cli bluez bluez-utils blueman ttc-iosevka-aile trash-cli \
-		ttc-iosevka-ss14
+		ttc-iosevka-ss14 nvidia
 	npm install -g neovim
 	pip install pynvim
 	# systemctl enable NetworkManager
@@ -223,9 +223,9 @@ gitgpgkeys:
 # Extra
 # -----------------------------------------------------------------------------
 
-# Microsoft Teams
-teams:
-	paru -Syu teams-for-linux
+# (Proprietary) Communication apps
+coms:
+	paru -Syu teams-for-linux discord
 
 # Stock watcher
 ticker:
