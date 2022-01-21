@@ -15,7 +15,7 @@ zoxide init fish | source
 # FUNCTIONS #
 #############
 
-function cdf -d 'Go to last directory before quitting lf'
+function zf -d 'Go to last directory before quitting lf'
     set -l temp (mktemp) # Create a temporary file
 
     lf -last-dir-path "$temp" $argv # Put the last directory before quitting into temp
@@ -73,8 +73,7 @@ end
 abbr xx 'chmod +x'
 
 # Multihead
-abbr xr1 'xrandr --output "eDP1" --auto --output "HDMI-1-1" --auto --above "eDP1"'
-abbr xr2 'xrandr --output "eDP1" --auto --output "HDMI-1-2" --auto --above "eDP1"'
+abbr xr 'xrandr --output "eDP1" --auto --output "HDMI-1-0" --auto --above "eDP1"'
 
 # paru
 abbr p 'paru -Syu'
@@ -91,37 +90,37 @@ abbr umntp 'fusermount -u /mnt/phone/'
 # Common directories
 
 # Edit
-abbr ef 'cdf -command search_edit'
-abbr er 'z / && cdf -command search_edit'
-abbr en 'z ~/neorg && cdf -command search_edit'
-abbr eh 'z ~/ && cdf -command search_edit'
-abbr ep 'z ~/Projects && cdf -command search_edit'
-abbr e. 'z ~/dotfiles/arch && cdf -command search_edit'
-abbr ec 'z ~/.config && cdf -command search_edit'
-abbr edw 'z ~/Downloads && cdf -command search_edit'
-abbr eE 'z /etc && cdf -command search_edit'
-abbr eU 'z /usr && cdf -command search_edit'
-abbr emd 'z /mnt/d && cdf -command search_edit'
-abbr emdn 'z ~/mnt/d/Notes && cdf -command search_edit'
-abbr emdu 'z ~/mnt/d/University && cdf -command search_edit'
-abbr emp 'z /mnt/phone && cdf -command search_edit'
-abbr eg 'z (git rev-parse --show-toplevel) && cdf -command search_edit'
+abbr ef 'zf -command search_edit'
+abbr er 'z / && zf -command search_edit'
+abbr en 'z ~/neorg && zf -command search_edit'
+abbr eh 'z ~/ && zf -command search_edit'
+abbr ep 'z ~/Projects && zf -command search_edit'
+abbr e. 'z ~/dotfiles/arch && zf -command search_edit'
+abbr ec 'z ~/.config && zf -command search_edit'
+abbr edw 'z ~/Downloads && zf -command search_edit'
+abbr eE 'z /etc && zf -command search_edit'
+abbr eU 'z /usr && zf -command search_edit'
+abbr emd 'z /mnt/d && zf -command search_edit'
+abbr emdn 'z ~/mnt/d/Notes && zf -command search_edit'
+abbr emdu 'z ~/mnt/d/University && zf -command search_edit'
+abbr emp 'z /mnt/phone && zf -command search_edit'
+abbr eg 'z (git rev-parse --show-toplevel) && zf -command search_edit'
 
 # Navigate
-abbr zr 'z / && cdf'
-abbr zh 'z ~/ && cdf'
-abbr zn 'z ~/neorg && cdf'
-abbr zp 'z ~/Projects && cdf'
-abbr z. 'z ~/dotfiles/arch && cdf'
-abbr zc 'z ~/.config && cdf'
-abbr zdw 'z ~/Downloads && cdf'
-abbr zE 'z /etc && cdf'
-abbr zU 'z /usr && cdf'
-abbr zmd 'z /mnt/d && cdf'
-abbr zmdn 'z ~/mnt/d/Notes && cdf'
-abbr zmdu 'z ~/mnt/d/University && cdf'
-abbr zmp 'z /mnt/phone && cdf'
-abbr zg 'z (git rev-parse --show-toplevel) && cdf'
+abbr zr 'z / && zf'
+abbr zh 'z ~/ && zf'
+abbr zn 'z ~/neorg && zf'
+abbr zp 'z ~/Projects && zf'
+abbr z. 'z ~/dotfiles/arch && zf'
+abbr zc 'z ~/.config && zf'
+abbr zdw 'z ~/Downloads && zf'
+abbr zE 'z /etc && zf'
+abbr zU 'z /usr && zf'
+abbr zmd 'z /mnt/d && zf'
+abbr zmdn 'z ~/mnt/d/Notes && zf'
+abbr zmdu 'z ~/mnt/d/University && zf'
+abbr zmp 'z /mnt/phone && zf'
+abbr zg 'z (git rev-parse --show-toplevel) && zf'
 
 # TMUX
 abbr t 'tmux'
@@ -162,7 +161,7 @@ abbr gco 'git branch | fzf --ansi | xargs git checkout'
 abbr gcob 'git checkout -b'
 abbr gcp 'git cherry-pick'
 abbr gd 'git diff --name-only | fzf --multi --ansi --preview="git diff --color=always -- {-1} | diff-so-fancy"'
-abbr gd 'git diff --cached --name-only | fzf --multi --ansi --preview="git diff --cached --color=always -- {-1} | diff-so-fancy"'
+abbr gdc 'git diff --cached --name-only | fzf --multi --ansi --preview="git diff --cached --color=always -- {-1} | diff-so-fancy"'
 abbr gf 'git fetch'
 abbr gl 'git log'
 abbr gm 'git merge'
