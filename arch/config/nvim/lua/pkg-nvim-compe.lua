@@ -69,3 +69,20 @@ vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+
+-- Get the current Neorg state
+local neorg = require('neorg')
+
+--- Loads the Neorg completion module
+local function load_completion()
+    neorg.modules.load_module("core.norg.completion", nil, {
+        engine = "nvim-cmp" -- Choose your completion engine here
+    })
+end
+
+-- If Neorg is loaded already then don't hesitate and load the completion
+if neorg.is_loaded() then
+    load_completion()
+else -- Otherwise wait until Neorg gets started and load the completion module then
+    neorg.callbacks.on_event("core.started", load_completion)
+end
