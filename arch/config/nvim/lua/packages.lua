@@ -49,4 +49,11 @@ require('packer').startup(function()
     "vhyrro/neorg",
     requires = "nvim-lua/plenary.nvim",
   }
+  use {                            -- Testing
+    "rcarriga/vim-ultest",
+    requires = {
+      "vim-test/vim-test"
+    },
+    run = ":UpdateRemotePlugins"
+  }
 end)
