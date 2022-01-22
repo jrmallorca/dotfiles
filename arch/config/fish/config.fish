@@ -131,6 +131,10 @@ abbr tat 'tmux attach-session -t'
 abbr tk 'tmux kill-session'
 abbr rmtr 'rm -rf ~/.tmux/resurrect/*'
 
+# Java versions
+abbr j11 'sudo archlinux-java set java-11-openjdk'
+abbr j17 'sudo archlinux-java set java-17-openjdk'
+
 # Chat
 abbr we 'weechat'
 abbr wh 'whatscli'
