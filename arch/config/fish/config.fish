@@ -162,6 +162,7 @@ abbr gbl 'git blame'
 abbr gc 'git commit -S -m'
 abbr gca 'git commit --amend -S -m'
 abbr gco 'git branch | fzf --ansi | xargs git checkout'
+abbr gcoc 'git log --oneline | fzf --ansi | head -n1 | awk \'{print $1;}\' | xargs git checkout'
 abbr gcob 'git checkout -b'
 abbr gcp 'git cherry-pick'
 abbr gd 'git diff --name-only | fzf --multi --ansi --preview="git diff --color=always -- {-1} | diff-so-fancy"'
@@ -174,6 +175,7 @@ abbr gpf 'git push --force-with-lease'
 abbr gpl 'git pull'
 abbr gplrom 'git pull --rebase origin main'
 abbr gr 'git remote'
+abbr grop 'git remote prune origin --dry-run'
 abbr grb 'git rebase'
 abbr gs 'git status'
 abbr gst 'git stash'
@@ -181,8 +183,11 @@ abbr gg 'git log --graph --full-history --all --color --pretty=format:"%x1b[31m%
 abbr gresign 'git rebase --exec \'git commit --amend --no-edit -n -S\' -i'
 
 # GitHub CLI
+abbr ghi 'gh issue'
+abbr ghic 'gh issue create --assignee @me'
 abbr ghil 'gh issue list'
-abbr ghprc 'gh pr create --assignee @me --base BRANCH --title "" --body "" --web'
+abbr ghpr 'gh pr'
+abbr ghprc 'gh pr create --assignee @me --base'
 
 set -x GPG_TTY (tty)
 
