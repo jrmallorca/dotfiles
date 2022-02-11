@@ -13,7 +13,7 @@ configuration:
 	cp .tmux.conf .xinitrc ~/
 
 input:
-	sudo cp 40-libinput.conf /usr/share/X11/xorg.conf.d/
+	sudo cp 40-libinput.conf /etc/X11/xorg.conf.d/
 
 # Transfer cron jobs
 cron:
@@ -51,7 +51,7 @@ necessary:
 		xorg-xinit i3-gaps i3status i3lock perl-anyevent-i3 i3-resurrect xss-lock \
 		dmenu fish curl wget daemon xclip xsel xdotool fzf fd bat ripgrep xcape \
 		unclutter tlp feh mpv ffmpeg youtube-dl googler alsa-utils zathura \
-		zathura-pdf-mupdf clight npm python python-pip autotiling \
+		zathura-pdf-mupdf clight nodejs npm python python-pip autotiling \
 		dunst flameshot buku lxappearance-gtk3 gtk3 libinput xorg-xinput tmux \
 		github-cli bluez bluez-utils blueman ttc-iosevka-aile trash-cli \
 		ttc-iosevka-ss14 nvidia
