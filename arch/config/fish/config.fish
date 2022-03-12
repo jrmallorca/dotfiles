@@ -73,7 +73,7 @@ end
 abbr xx 'chmod +x'
 
 # Multihead
-abbr xr 'xrandr --output "eDP1" --auto --output "HDMI-1-0" --auto --above "eDP1"'
+abbr xr 'xrandr --output "eDP1" --auto --output "HDMI-1-0" --auto --left-of "eDP1"'
 
 # paru
 abbr p 'paru -Syu'
