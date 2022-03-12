@@ -226,6 +226,10 @@ gitgpgkeys:
 # Extra
 # -----------------------------------------------------------------------------
 
+# Configures mimes for xdg-open
+mime:
+	xdg-mime default org.pwmt.zathura.desktop application/pdf
+
 # (Proprietary) Communication apps
 coms:
 	paru -Syu teams-for-linux discord
