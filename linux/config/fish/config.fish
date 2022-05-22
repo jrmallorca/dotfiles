@@ -109,16 +109,17 @@ abbr eg 'z (git rev-parse --show-toplevel) && zf -command search_edit'
 # Navigate
 abbr zr 'z / && zf'
 abbr zh 'z ~/ && zf'
+abbr zH 'z $USERPROFILE && zf'
 abbr zn 'z ~/neorg && zf'
 abbr zp 'z ~/Projects && zf'
-abbr z. 'z ~/dotfiles/arch && zf'
+abbr z. 'z ~/dotfiles && zf'
 abbr zc 'z ~/.config && zf'
 abbr zdw 'z ~/Downloads && zf'
+abbr zDw 'z $USERPROFILE/Downloads && zf'
 abbr zE 'z /etc && zf'
 abbr zU 'z /usr && zf'
+abbr zmc 'z /mnt/c && zf'
 abbr zmd 'z /mnt/d && zf'
-abbr zmdn 'z ~/mnt/d/Notes && zf'
-abbr zmdu 'z ~/mnt/d/University && zf'
 abbr zmp 'z /mnt/phone && zf'
 abbr zg 'z (git rev-parse --show-toplevel) && zf'
 
@@ -194,6 +195,9 @@ set -x GPG_TTY (tty)
 ########
 # PATH #
 ########
+
+# Windows variable
+set -gx USERPROFILE (wslpath (wslvar USERPROFILE))
 
 # Editor variable
 set -gx EDITOR /usr/bin/nvim
