@@ -519,7 +519,7 @@ map f   # Disable find
 
 # Commands
 
-map mc &{{ cd ~/dotfiles/arch && make configuration }}
+map mc &{{ cd ~/dotfiles && make configuration }}
 map p paste
 map y copy
 map x cut

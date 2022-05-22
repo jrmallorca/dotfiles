@@ -145,7 +145,7 @@ abbr se 'sudoedit'
 abbr e 'nvim'
 
 # Dotfiles
-abbr mc 'z ~/dotfiles/arch && make configuration && prevd'
+abbr mc 'z ~/dotfiles && make configuration && prevd'
 
 # nmcli
 abbr ns 'nmcli c show'
