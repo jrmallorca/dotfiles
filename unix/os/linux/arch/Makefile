@@ -42,7 +42,7 @@ paru:
 	sudo rm -rf ~/paru/
 
 # Necessary
-necessary:
+necessary: paru
 	paru -Syu --needed grub base-devel reflector firefox \
 		intel-ucode amd-ucode git neovim networkmanager network-manager-applet \
 		xf86-video-amdgpu xf86-video-ati xf86-video-intel xf86-video-nouveau \
@@ -95,11 +95,6 @@ betterlockscreen:
 	betterlockscreen -u "~/dotfiles/backgrounds/"
 	systemctl enable betterlockscreen@$USER
 
-# Install Vim-Plug. NeoVim configs must be set up.
-vim-plug:
-	curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-    	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
 # Signal
 signal:
 	gpg --keyserver keyserver.ubuntu.com --recv-key FA10826A74907F9EC6BBB7FC2BA2CD21B5B09570
@@ -144,7 +139,7 @@ spotify:
 vm:
 	paru -Syu --needed virtualbox virtualbox-guest-iso virtualbox-ext-oracle
 	sudo modprobe vboxdrv
-	sudo gpasswd -aG vboxusers $USER
+	sudo gpasswd -aG vboxusers $$USER
 
 torrent:
 	paru -Syu --needed qbittorrent
@@ -173,11 +168,11 @@ flutter:
 		android-sdk-platform-tools android-sdk-build-tools android-platform \
 		android-sdk-cmdline-tools-latest scrcpy
 	sudo groupadd flutterusers
-	sudo gpasswd -a $USER flutterusers
+	sudo gpasswd -a $$USER flutterusers
 	sudo chown -R :flutterusers /opt/flutter
 	sudo chmod -R g+w /opt/flutter/
 	sudo groupadd android-sdk
-	sudo gpasswd -a $USER android-sdk
+	sudo gpasswd -a $$USER android-sdk
 	sudo setfacl -R -m g:android-sdk:rwx /opt/android-sdk
 	sudo setfacl -d -m g:android-sdk:rwX /opt/android-sdk
 
