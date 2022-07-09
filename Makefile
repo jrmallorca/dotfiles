@@ -18,4 +18,4 @@ mac:
 
 wsl-ubuntu:
 	cd ./windows && make configuration
-	cd ./unix/os/linux/ubuntu-20.04 && make configuration
+	cd ./unix/os/linux/ubuntu-20.04 && make configuration-wsl
