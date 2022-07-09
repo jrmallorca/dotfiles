@@ -5,4 +5,9 @@ fish_vi_key_bindings
 set fish_greeting
 
 # Replace cd with z
-/opt/homebrew/bin/zoxide init fish | source
+if [ "$OSTYPE" = "MacOS" ]
+    /opt/homebrew/bin/zoxide init fish | source
+else
+    /usr/bin/zoxide init fish | source
+end
+
