@@ -7,11 +7,11 @@
 # -----------------------------------------------------------------------------
 
 # Transfer config files.
-configuration-wsl:
-	cp -a ./../../config/. ~/.config/
-
 configuration: configuration-wsl
 	cp -a ./../config/. ~/.config/
+
+configuration-wsl:
+	cp -a ./../../config/. ~/.config/
 
 # -----------------------------------------------------------------------------
 # Programs
