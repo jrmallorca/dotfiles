@@ -47,10 +47,10 @@ if not set -q MY_ABBR_SET
     abbr eg 'z (git rev-parse --show-toplevel) && zf -command search_edit'
 
     if [ "$OSTYPE" = "WSL" ]
-        abbr e. 'z $USERPROFILE/dotfiles-work && zf -command search_edit'
+        abbr e. 'z $USERPROFILE/dotfiles && zf -command search_edit'
         abbr ep 'z $USERPROFILE/projects && zf -command search_edit'
     else
-        abbr e. 'z ~/dotfiles-work && zf -command search_edit'
+        abbr e. 'z ~/dotfiles && zf -command search_edit'
         abbr ep 'z ~/projects && zf -command search_edit'
     end
 
@@ -65,12 +65,12 @@ if not set -q MY_ABBR_SET
     abbr zg 'z (git rev-parse --show-toplevel) && zf'
 
     if [ "$OSTYPE" = "WSL" ]
-        abbr z. 'z $USERPROFILE/dotfiles-work && zf'
+        abbr z. 'z $USERPROFILE/dotfiles && zf'
         abbr zh 'z $USERPROFILE && zf'
         abbr zp 'z $USERPROFILE/projects && zf'
         abbr zDw 'z $USERPROFILE/Downloads && zf'
     else
-        abbr z. 'z ~/dotfiles-work && zf'
+        abbr z. 'z ~/dotfiles && zf'
         abbr zh 'z ~/ && zf'
         abbr zp 'z ~/projects && zf'
     end
