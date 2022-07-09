@@ -1,8 +1,3 @@
-# Paths
-# deno (Javascript LSP)
-fish_add_path $HOME/.deno/bin
-
-# Variables
 # OS Type
 switch (uname)
     case Linux
@@ -17,10 +12,9 @@ switch (uname)
         end
 end
 
-# GPG
-set -x GPG_TTY (tty)
-
-if [ "$OSTYPE" = "MacOS" ]
+if [ "$OSTYPE" = "Linux" ]
+    fish_add_path $HOME/git-installs/scli
+else if [ "$OSTYPE" = "MacOS" ]
     set -gx EDITOR /opt/homebrew/bin/nvim
     fish_add_path /opt/homebrew/bin
 else if [ "$OSTYPE" = "WSL" ]
@@ -33,3 +27,6 @@ end
 # Zoxide
 set -gx _ZO_ECHO '1'
 set -gx _ZO_DATA_DIR $HOME/.local/share
+
+# GPG
+set -x GPG_TTY (tty)
