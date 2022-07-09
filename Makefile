@@ -7,18 +7,21 @@
 # -----------------------------------------------------------------------------
 
 # Transfer config files.
-arch: personal
-	cd ./unix/os/linux/arch && make configuration
+windows:
+	cd ./windows && make configuration
 
-ubuntu: personal
-	cd ./unix/os/linux/ubuntu-20.04 && make configuration
-
-mac: personal
+mac: unix personal
 	cd ./unix/os/mac && make configuration
 
-wsl-ubuntu: personal
-	cd ./windows && make configuration
-	cd ./unix/os/linux/ubuntu-20.04 && make configuration-wsl
+arch: unix personal
+	cd ./unix/os/linux/arch && make configuration
+
+ubuntu: unix personal
+	cd ./unix/os/linux/ubuntu-20.04 && make configuration
+
+wsl-ubuntu: windows ubuntu
+
+wsl-arch: windows arch
 
 # Helpers
 # -----------------------------------------------------------------------------
@@ -27,3 +30,6 @@ wsl-ubuntu: personal
 # variable becomes malicious (e.g., `rm -rf /`).
 personal:
 	test "$$IS_PERSONAL" = 'true' && cp -a ./config-personal/. ~/.config/
+
+unix:
+	cp -a ./unix/config/. ~/.config/

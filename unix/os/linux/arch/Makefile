@@ -7,12 +7,9 @@
 # -----------------------------------------------------------------------------
 
 # Transfer config files.
-configuration: configuration-wsl
+configuration:
 	cp -a ./../config/. ~/.config/
 	cp .xinitrc ~/
-
-configuration-wsl:
-	cp -a ./../../config/. ~/.config/
 
 input:
 	sudo cp 40-libinput.conf /etc/X11/xorg.conf.d/
