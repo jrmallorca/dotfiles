@@ -30,3 +30,6 @@ set -gx _ZO_DATA_DIR $HOME/.local/share
 
 # GPG
 set -x GPG_TTY (tty)
+
+# nvm.fish
+set -x nvm_default_version lts
