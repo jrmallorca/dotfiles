@@ -10,26 +10,36 @@
 windows:
 	cd ./windows && make configuration
 
-mac: unix personal
-	cd ./unix/os/mac && make configuration
-
-arch: unix personal
+wsl-arch: windows unix is-personal
 	cd ./unix/os/linux/arch && make configuration
 
-ubuntu: unix personal
+wsl-ubuntu: windows unix is-personal
 	cd ./unix/os/linux/ubuntu-20.04 && make configuration
 
-wsl-ubuntu: windows ubuntu
+mac: unix is-personal
+	cd ./unix/os/mac && make configuration
 
-wsl-arch: windows arch
+arch: unix linux-gui is-personal
+	cd ./unix/os/linux/arch && make configuration
+
+ubuntu: unix linux-gui is-personal
+	cd ./unix/os/linux/ubuntu-20.04 && make configuration
 
 # Helpers
 # -----------------------------------------------------------------------------
 
 # Use `test` instead of directly calling `$IS_PERSONAL` just in case the
 # variable becomes malicious (e.g., `rm -rf /`).
-personal:
-	test "$$IS_PERSONAL" = 'true' && cp -a ./config-personal/. ~/.config/
+is-personal:
+	test "$$IS_PERSONAL" = 'true' && cp -a ./unix/config-personal/. ~/.config/
 
+personal:
+	cp -a ./unix/config-personal/. ~/.config/
+
+# Make should never assume that unix (the directory) is up to date
+.PHONY: unix
 unix:
 	cp -a ./unix/config/. ~/.config/
+
+linux-gui:
+	cp -a ./unix/os/linux/config/. ~/.config/
