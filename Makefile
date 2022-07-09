@@ -7,12 +7,15 @@
 # -----------------------------------------------------------------------------
 
 # Transfer config files.
+arch:
+	cd ./unix/os/linux/arch && make configuration
+
 ubuntu:
-	cd ./unix/ubuntu-20.04 && make configuration
+	cd ./unix/os/linux/ubuntu-20.04 && make configuration
 
 mac:
-	cd ./unix/mac && make configuration
+	cd ./unix/os/mac && make configuration
 
 wsl-ubuntu:
 	cd ./windows && make configuration
-	cd ./unix/ubuntu-20.04 && make configuration
+	cd ./unix/os/linux/ubuntu-20.04 && make configuration
