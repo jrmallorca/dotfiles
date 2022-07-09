@@ -6,11 +6,13 @@
 # Dot Files
 # -----------------------------------------------------------------------------
 
-# Transfer configuration files.
-configuration:
-	rm ~/.config/fish/fish_variables
+# Transfer config files.
+configuration: configuration-wsl
 	cp -a ./../config/. ~/.config/
-	cp .tmux.conf .xinitrc ~/
+	cp .xinitrc ~/
+
+configuration-wsl:
+	cp -a ./../../config/. ~/.config/
 
 input:
 	sudo cp 40-libinput.conf /etc/X11/xorg.conf.d/
