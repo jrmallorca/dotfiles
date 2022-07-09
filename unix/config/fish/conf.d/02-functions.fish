@@ -17,9 +17,9 @@ end
 function mc -d 'Make configuration based on current OS'
     switch $OSTYPE
         case Linux
-            abbr mc 'z ~/dotfiles-work && make ubuntu && prevd'
+            abbr mc 'z ~/dotfiles && make arch && prevd'
         case MacOS
-            abbr mc 'z ~/dotfiles-work && make mac && prevd'
+            abbr mc 'z ~/dotfiles && make mac && prevd'
         case WSL
             abbr mc 'z $USERPROFILE/dotfiles-work/ && make wsl-ubuntu && prevd'
         case '*'
