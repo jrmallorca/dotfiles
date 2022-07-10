@@ -28,6 +28,8 @@ end
 set -gx _ZO_ECHO '1'
 set -gx _ZO_DATA_DIR $HOME/.local/share
 
+set -gx EDITOR nvim
+
 # GPG
 set -x GPG_TTY (tty)
 
