@@ -7,6 +7,7 @@
 # -----------------------------------------------------------------------------
 
 # Transfer config files.
+.PHONY: windows
 windows:
 	cd ./windows && make configuration
 
@@ -31,7 +32,7 @@ ubuntu: unix linux-gui is-personal
 # Use `test` instead of directly calling `$IS_PERSONAL` just in case the
 # variable becomes malicious (e.g., `rm -rf /`).
 is-personal:
-	test "$$IS_PERSONAL" = 'true' && cp -a ./unix/config-personal/. ~/.config/
+	-test "$$IS_PERSONAL" = 'true' && cp -a ./unix/config-personal/. ~/.config/
 
 personal:
 	cp -a ./unix/config-personal/. ~/.config/
