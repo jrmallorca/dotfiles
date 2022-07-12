@@ -39,6 +39,7 @@ require('packer').startup(function()
   use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
   use 'hrsh7th/cmp-nvim-lsp' -- Make Neovim use cmp for LSP
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
+  use "rafamadriz/friendly-snippets" -- Pre-existing VSCode snippets
   use 'windwp/nvim-autopairs' -- Autopairs plugin
   use 'ggandor/lightspeed.nvim' -- 2 character search
   use 'winston0410/commented.nvim' -- Comment blocks of code
