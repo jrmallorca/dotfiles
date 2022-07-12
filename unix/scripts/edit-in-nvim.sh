@@ -5,7 +5,8 @@
 
 #!/bin/bash
 
-TERM=alacritty # Set terminal as alacritty
+TERM="alacritty" # Set terminal as alacritty
+TERM_FLAGS="--config-file $HOME/.config/alacritty/pop-up.yml -e"
 
 # (Linux only) Get highlighted text (Primary selection)
 if [ "$OSTYPE" == "Linux" ]; then
@@ -21,7 +22,7 @@ TMP_FILE=$TMP_DIR/edit-in-nvim.txt # Make temporary file as .txt for vim formatt
 
 touch $TMP_FILE                    # Create file in temporary directory
 echo "$SELECTED_TEXT" >> $TMP_FILE # Put text into temporary file
-$TERM -e $EDITOR $TMP_FILE         # Start new terminal to edit file
+$TERM $TERM_FLAGS $EDITOR $TMP_FILE         # Start new terminal to edit file
 
 # Get contents of file and copy into clipboard
 # TODO: Conditionally remove file to retain info just in case?
