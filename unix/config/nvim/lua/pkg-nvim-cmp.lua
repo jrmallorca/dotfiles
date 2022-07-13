@@ -1,5 +1,6 @@
 -- Setup nvim-cmp.
-local cmp = require'cmp'
+local cmp = require('cmp')
+local luasnip = require('luasnip')
 
 local has_words_before = function()
   local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
@@ -7,13 +8,13 @@ local has_words_before = function()
 end
 
 -- Load snippets from VSCode
-require("luasnip.loaders.from_vscode").lazy_load()
+require('luasnip.loaders.from_vscode').lazy_load()
 
 cmp.setup({
   snippet = {
     -- REQUIRED - you must specify a snippet engine
     expand = function(args)
-      require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      luasnip.lsp_expand(args.body) -- For `luasnip` users.
       -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
     end,
   },
