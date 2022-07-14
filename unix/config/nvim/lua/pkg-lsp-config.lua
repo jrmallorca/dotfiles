@@ -64,4 +64,25 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
 end
 
 -- Get rid of "Undefined global `vim`" error.
-lspconfig.sumneko_lua.setup{ settings = { Lua = { diagnostics = { globals = { 'vim' } } } } }
+lspconfig.sumneko_lua.setup{
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+      },
+      completion = {
+        callSnippet = 'Replace',
+      },
+      diagnostics = {
+        enable = true,
+        globals = {'vim', 'use'},
+      },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file('', true),
+        maxPreload = 10000,
+        preloadFileSize = 10000,
+      },
+      telemetry = {enable = false},
+    },
+  }
+}
