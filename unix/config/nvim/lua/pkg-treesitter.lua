@@ -11,6 +11,8 @@ require('nvim-treesitter.configs').setup {
     "fish",
     -- Languages
     "lua",
+    "html",
+    "css",
     "javascript",
     "json",
     "yaml"
