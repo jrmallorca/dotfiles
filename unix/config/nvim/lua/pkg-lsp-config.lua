@@ -32,11 +32,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
 end
 
-local lsp_flags = {
-  -- This is the default in Nvim 0.7+
-  debounce_text_changes = 150,
-}
-
 -- Completion (nvim-cmp)
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
@@ -58,31 +53,34 @@ lspconfig.util.default_config = vim.tbl_extend(
 
 -- 3. Loop through all of the installed servers and set it up via lspconfig
 for _, server in ipairs(lsp_installer.get_installed_servers()) do
-  lspconfig[server.name].setup {
-    capabilities = capabilities
-  }
+  if server.name == "sumneko_lua" then
+    lspconfig[server.name].setup {
+      capabilities = capabilities,
+      settings = {
+        Lua = {
+          runtime = {
+            -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+            version = 'LuaJIT',
+          },
+          diagnostics = {
+            -- Get the language server to recognize the `vim` global
+            globals = {'vim'},
+          },
+          workspace = {
+            -- Make the server aware of Neovim runtime files
+            library = vim.api.nvim_get_runtime_file("", true),
+          },
+          -- Do not send telemetry data containing a randomized but unique identifier
+          telemetry = {
+            enable = false,
+          },
+        },
+      },
+    }
+  else
+    lspconfig[server.name].setup {
+      capabilities = capabilities
+    }
+  end
 end
 
--- Get rid of "Undefined global `vim`" error.
-lspconfig.sumneko_lua.setup{
-  settings = {
-    Lua = {
-      runtime = {
-        version = 'LuaJIT',
-      },
-      completion = {
-        callSnippet = 'Replace',
-      },
-      diagnostics = {
-        enable = true,
-        globals = {'vim', 'use'},
-      },
-      workspace = {
-        library = vim.api.nvim_get_runtime_file('', true),
-        maxPreload = 10000,
-        preloadFileSize = 10000,
-      },
-      telemetry = {enable = false},
-    },
-  }
-}
