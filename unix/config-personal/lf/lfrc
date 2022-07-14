@@ -242,7 +242,7 @@ cmd ga ${{
         set -l preview "git diff --color=always -- {-1} | diff-so-fancy"    # Set the preview command of fzf 
         git ls-files --modified --others --exclude-standard --deduplicate | # Look for modified and untracked files
             fzf --ansi --multi --print0 --preview="$preview" |              # FZF with multi select on results
-            xargs --null --open-tty git add                                 # Git add selected items
+            xargs -0 -o git add                                             # Git add selected items
     else
         echo "fatal: not a git repository (or any of the parent directories): .git"
     end
