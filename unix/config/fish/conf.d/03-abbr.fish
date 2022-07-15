@@ -3,6 +3,7 @@ if not set -q MY_ABBR_SET
 
     # General
     abbr xx 'chmod +x'
+    abbr mc 'sh $HOME/dotfiles/unix/scripts/make-config.sh'
 
     # Multihead
     if [ "$OSTYPE" = "Linux" ]
