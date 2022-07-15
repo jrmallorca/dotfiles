@@ -525,7 +525,7 @@ map f   # Disable find
 
 # Commands
 
-map mc &{{ cd ~/dotfiles && make configuration }}
+map mc $sh $HOME/dotfiles/unix/scripts/make-config.sh
 map p paste
 map y copy
 map x cut
