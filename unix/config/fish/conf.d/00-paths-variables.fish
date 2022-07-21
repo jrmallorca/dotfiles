@@ -16,9 +16,13 @@ if [ "$OSTYPE" = "Linux" ]
     fish_add_path $HOME/git-installs/scli
 else if [ "$OSTYPE" = "MacOS" ]
     set -gx EDITOR /opt/homebrew/bin/nvim
+
     fish_add_path /opt/homebrew/bin
+    fish_add_path /usr/local/share/dotnet/x64
+    fish_add_path /Users/JonquilIsys.Mallorca/Library/Python/3.8/bin
 else if [ "$OSTYPE" = "WSL" ]
     set -gx USERPROFILE (wslpath (wslvar USERPROFILE))
+
     fish_add_path RUST_SRC_PATH $HOME/.cargo/bin
 else
     set -gx EDITOR /usr/bin/nvim
