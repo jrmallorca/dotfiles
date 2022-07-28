@@ -250,3 +250,8 @@ maccat:
 	VBoxManage setextradata "maccat" "VBoxInternal/Devices/smc/0/Config/DeviceKey" "ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc"
 	VBoxManage setextradata "maccat" "VBoxInternal/Devices/smc/0/Config/GetKeyFromRealSMC" 1
 	VBoxManage setextradata "maccat" VBoxInternal2/EfiGraphicsResolution 1920x1080
+
+# QMK Firmware for keyboards
+qmk:
+	paru -Syu --needed --noconfirm git python-pip libffi
+	python3 -m pip install --user qmk
