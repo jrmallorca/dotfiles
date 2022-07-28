@@ -255,3 +255,4 @@ maccat:
 qmk:
 	paru -Syu --needed --noconfirm git python-pip libffi
 	python3 -m pip install --user qmk
+	cd ~ && git clone --recurse-submodules git@github.com:jrmallorca/qmk_firmware.git
