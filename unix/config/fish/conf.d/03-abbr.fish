@@ -6,7 +6,7 @@ if not set -q MY_ABBR_SET
 
     # Multihead
     if [ "$OSTYPE" = "Linux" ]
-        abbr xr 'xrandr --output "eDP1" --auto --output "HDMI-1-0" --auto --above "eDP1"'
+        abbr xr 'xrandr --output "eDP1" --auto --output "HDMI-1-0" --auto --left-of "eDP1"'
     end
 
     # Package manager
