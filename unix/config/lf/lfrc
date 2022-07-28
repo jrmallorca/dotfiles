@@ -526,7 +526,7 @@ map f   # Disable find
 
 # Commands
 
-map mc !{{mc}}
+map mc &{{ cd ~/dotfiles && make configuration }}
 map p paste
 map y copy
 map x cut
