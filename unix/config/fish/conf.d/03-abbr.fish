@@ -7,7 +7,7 @@ if not set -q MY_ABBR_SET
 
     # Multihead
     if [ "$OSTYPE" = "Linux" ]
-        abbr xr 'xrandr --output "eDP1" --auto --output "HDMI-1-0" --auto --above "eDP1"'
+        abbr xr 'xrandr --output "eDP1" --auto --output "HDMI-1-0" --auto --left-of "eDP1"'
     end
 
     # Package manager
@@ -144,4 +144,10 @@ if not set -q MY_ABBR_SET
     abbr ghil 'gh issue list'
     abbr ghpr 'gh pr'
     abbr ghprc 'gh pr create --assignee @me --base'
+
+    # QMK
+    abbr qc 'qmk compile'
+    abbr qf 'qmk flash'
+    abbr qc2j 'qmk c2json -km jrmallorca -kb rgbkb/sol3 -o jrmallorca.json ~/qmk_firmware/keyboards/rgbkb/sol3/keymaps/jrmallorca/keymap.c'
+    abbr qj2c 'qmk json2c -o ~/qmk_firmware/keyboards/rgbkb/sol3/keymaps/jrmallorca/keymap.c'
 end

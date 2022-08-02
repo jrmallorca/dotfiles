@@ -14,6 +14,7 @@ end
 
 if [ "$OSTYPE" = "Linux" ]
     fish_add_path $HOME/git-installs/scli
+    fish_add_path $HOME/.local/bin
 else if [ "$OSTYPE" = "MacOS" ]
     set -gx EDITOR /opt/homebrew/bin/nvim
 
