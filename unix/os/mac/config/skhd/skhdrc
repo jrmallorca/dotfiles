@@ -4,16 +4,16 @@ cmd - return : open -n /Applications/Alacritty.app
 cmd - e : sh ~/dotfiles/unix/scripts/edit-in-nvim.sh
 
 # Focus window
-alt - h : yabai -m window --focus west
-alt - j : yabai -m window --focus south
-alt - k : yabai -m window --focus north
-alt - l : yabai -m window --focus east
+alt - left : yabai -m window --focus west
+alt - down : yabai -m window --focus south
+alt - up : yabai -m window --focus north
+alt - right : yabai -m window --focus east
 
 # Swap window
-shift + alt - h : yabai -m window --swap west
-shift + alt - j : yabai -m window --swap south
-shift + alt - k : yabai -m window --swap north
-shift + alt - l : yabai -m window --swap east
+shift + alt - left : yabai -m window --swap west
+shift + alt - down : yabai -m window --swap south
+shift + alt - u : yabai -m window --swap north
+shift + alt - right : yabai -m window --swap east
 
 # Balance size of windows
 # 0x18 = '='
@@ -26,7 +26,7 @@ alt - 0x18 : yabai -m space --balance
 # shift + alt - left   : yabai -m window --grid 1:2:0:0:1:1
 
 # Create desktop, move window to new desktop, and follow focus to window in new desktop
-ctrl + alt - n : yabai -m space --create && \
+meh - n : yabai -m space --create && \
                  set index (yabai -m query --spaces --display | jq 'map(select(."is-native-fullscreen" == false))[-1].index') && \
                  yabai -m window --space "$index" && \
                  yabai -m space --focus "$index"
@@ -39,7 +39,7 @@ ctrl + alt - n : yabai -m space --create && \
 # - Else, go to first space
 # ```
 # and vice versa
-ctrl + alt - h : if [ \
+ctrl + alt - left : if [ \
                      (yabai -m query --spaces --space | jq '.index' ) != \
                      (yabai -m query --displays --display | jq '.spaces[0]') \
                      ]; \
@@ -47,7 +47,7 @@ ctrl + alt - h : if [ \
                  else; \
                      yabai -m space --focus (yabai -m query --displays --display | jq '.spaces[-1]'); \
                  end
-ctrl + alt - l : if [ \
+ctrl + alt - right : if [ \
                      (yabai -m query --spaces --space | jq '.index' ) != \
                      (yabai -m query --displays --display | jq '.spaces[-1]') \
                      ]; \
@@ -64,7 +64,7 @@ ctrl + alt - l : if [ \
 # - Else, move window to first space and focus
 # ```
 # and vice versa
-ctrl + shift + alt - h : if [ \
+meh - left : if [ \
                              (yabai -m query --spaces --space | jq '.index' ) != \
                              (yabai -m query --displays --display | jq '.spaces[0]') \
                              ]; \
@@ -74,7 +74,7 @@ ctrl + shift + alt - h : if [ \
                              yabai -m window --space (yabai -m query --displays --display | jq '.spaces[-1]'); \
                              yabai -m space --focus (yabai -m query --displays --display | jq '.spaces[-1]'); \
                          end
-ctrl + shift + alt - l : if [ \
+meh - right : if [ \
                              (yabai -m query --spaces --space | jq '.index' ) != \
                              (yabai -m query --displays --display | jq '.spaces[-1]') \
                              ]; \
@@ -86,18 +86,18 @@ ctrl + shift + alt - l : if [ \
                          end
 
 # Move window to displays and follow focus
-ctrl + shift + alt - j : yabai -m window --display prev || \
+meh - down : yabai -m window --display prev || \
                          yabai -m window --display last && \
                          yabai -m display --focus prev || \
                          yabai -m display --focus last
-ctrl + shift + alt - k : yabai -m window --display next || \
+meh - up : yabai -m window --display next || \
                          yabai -m window --display first && \
                          yabai -m display --focus next || \
                          yabai -m display --focus first
 
 # Focus on displays
-ctrl + alt - j : yabai -m display --focus prev || yabai -m display --focus last
-ctrl + alt - k : yabai -m display --focus next || yabai -m display --focus first
+ctrl + alt - down : yabai -m display --focus prev || yabai -m display --focus last
+ctrl + alt - up : yabai -m display --focus next || yabai -m display --focus first
 
 # move floating window
 # shift + ctrl - a : yabai -m window --move rel:-20:0
