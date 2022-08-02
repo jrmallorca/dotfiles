@@ -14,19 +14,6 @@ function abbr-erase-all --description 'Erase all abbreviations'
     set -q MY_ABBR_SET && set -e MY_ABBR_SET
 end
 
-function mc -d 'Make configuration based on current OS'
-    switch $OSTYPE
-        case Linux
-            abbr mc 'z ~/dotfiles && make arch && prevd'
-        case MacOS
-            abbr mc 'z ~/dotfiles && make mac && prevd'
-        case WSL
-            abbr mc 'z $USERPROFILE/dotfiles-work/ && make wsl-ubuntu && prevd'
-        case '*'
-            echo "Could not detect appropriate configuration for current OS"
-    end
-end
-
 function gcl -d 'Clone a repository with using a username and repository name' -a username repository
     # Check if username and repository are non-empty then git clone
     if set -q username[1] repository[1]
