@@ -38,9 +38,8 @@ if not set -q MY_ABBR_SET
     abbr ef 'zf -command search_edit'
     abbr er 'z / && zf -command search_edit'
     abbr en 'z ~/neorg && zf -command search_edit'
-    abbr eh 'z ~/ && zf -command search_edit'
     abbr ec 'z ~/.config && zf -command search_edit'
-    abbr edw 'z ~/Downloads && zf -command search_edit'
+    abbr eq 'z ~/qmk_firmware && zf -command search_edit'
     abbr eE 'z /etc && zf -command search_edit'
     abbr eU 'z /usr && zf -command search_edit'
     abbr emc 'z /mnt/c && zf -command search_edit'
@@ -49,17 +48,21 @@ if not set -q MY_ABBR_SET
 
     if [ "$OSTYPE" = "WSL" ]
         abbr e. 'z $USERPROFILE/dotfiles && zf -command search_edit'
+        abbr eh 'z $USERPROFILE && zf -command search_edit'
         abbr ep 'z $USERPROFILE/projects && zf -command search_edit'
+        abbr edw 'z $USERPROFILE/Downloads && zf -command search_edit'
     else
         abbr e. 'z ~/dotfiles && zf -command search_edit'
+        abbr eh 'z ~/ && zf -command search_edit'
         abbr ep 'z ~/projects && zf -command search_edit'
+        abbr edw 'z ~/Downloads && zf -command search_edit'
     end
 
     # Navigate
     abbr zr 'z / && zf'
     abbr zn 'z ~/neorg && zf'
     abbr zc 'z ~/.config && zf'
-    abbr zdw 'z ~/Downloads && zf'
+    abbr zq 'z ~/qmk_firmware && zf'
     abbr zE 'z /etc && zf'
     abbr zU 'z /usr && zf'
     abbr zmc 'z /mnt/c && zf'
@@ -69,11 +72,12 @@ if not set -q MY_ABBR_SET
         abbr z. 'z $USERPROFILE/dotfiles && zf'
         abbr zh 'z $USERPROFILE && zf'
         abbr zp 'z $USERPROFILE/projects && zf'
-        abbr zDw 'z $USERPROFILE/Downloads && zf'
+        abbr zdw 'z $USERPROFILE/Downloads && zf'
     else
         abbr z. 'z ~/dotfiles && zf'
         abbr zh 'z ~/ && zf'
         abbr zp 'z ~/projects && zf'
+        abbr zdw 'z ~/Downloads && zf'
     end
 
     # TMUX
