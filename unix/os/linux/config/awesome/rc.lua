@@ -278,37 +278,37 @@ globalkeys = gears.table.join(
               {description = "go back", group = "tag"}),
 
     -- Moving window focus works between desktops
-    awful.key({ modkey,           }, "j", function ()
+    awful.key({ modkey,           }, "Down", function ()
       awful.client.focus.global_bydirection("down")
     end,
     {description = "focus next window up", group = "client"}),
-    awful.key({ modkey,           }, "k", function ()
+    awful.key({ modkey,           }, "Up", function ()
       awful.client.focus.global_bydirection("up")
     end,
     {description = "focus next window down", group = "client"}),
-    awful.key({ modkey,           }, "l", function ()
+    awful.key({ modkey,           }, "Right", function ()
       awful.client.focus.global_bydirection("right")
     end,
     {description = "focus next window right", group = "client"}),
-    awful.key({ modkey,           }, "h", function ()
+    awful.key({ modkey,           }, "Left", function ()
       awful.client.focus.global_bydirection("left")
     end,
     {description = "focus next window left", group = "client"}),
 
     -- Moving windows between positions works between desktops
-    awful.key({ modkey, "Shift"   }, "h", function ()
+    awful.key({ modkey, "Shift"   }, "Left", function ()
       awful.client.swap.global_bydirection("left")
     end,
     {description = "swap with left client", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "l", function ()
+    awful.key({ modkey, "Shift"   }, "Right", function ()
       awful.client.swap.global_bydirection("right")
     end,
     {description = "swap with right client", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "j", function ()
+    awful.key({ modkey, "Shift"   }, "Down", function ()
       awful.client.swap.global_bydirection("down")
     end,
     {description = "swap with down client", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "k", function ()
+    awful.key({ modkey, "Shift"   }, "Up", function ()
       awful.client.swap.global_bydirection("up")
     end,
     {description = "swap with up client", group = "client"}),
@@ -327,9 +327,9 @@ globalkeys = gears.table.join(
     ),
 
     -- Layout manipulation
-    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
+    awful.key({ modkey, "Control" }, "Down", function () awful.screen.focus_relative( 1) end,
               {description = "focus the next screen", group = "screen"}),
-    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
+    awful.key({ modkey, "Control" }, "Up", function () awful.screen.focus_relative(-1) end,
               {description = "focus the previous screen", group = "screen"}),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
@@ -352,9 +352,9 @@ globalkeys = gears.table.join(
     -- awful.key({ modkey, "Shift"   }, "q", awesome.quit,
     --        {description = "quit awesome", group = "awesome"}),
 
-    awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1, nil, true)    end,
+    awful.key({ modkey, "Control" }, "Left",     function () awful.tag.incncol( 1, nil, true)    end,
               {description = "increase the number of columns", group = "layout"}),
-    awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
+    awful.key({ modkey, "Control" }, "Right",     function () awful.tag.incncol(-1, nil, true)    end,
               {description = "decrease the number of columns", group = "layout"}),
 
     -- Layout selections
@@ -653,3 +653,36 @@ if autorun then
        awful.spawn(autorunApps[app])
    end
 end
+
+-- battery warning
+-- created by bpdp
+
+local function trim(s)
+  return s:find'^%s*$' and '' or s:match'^%s*(.*%S)'
+end
+
+local function bat_notification()
+  
+  local f_capacity = assert(io.open("/sys/class/power_supply/BAT0/capacity", "r"))
+  local f_status = assert(io.open("/sys/class/power_supply/BAT0/status", "r"))
+
+  local bat_capacity = tonumber(f_capacity:read("*all"))
+  local bat_status = trim(f_status:read("*all"))
+
+  if (bat_capacity <= 20 and bat_status == "Discharging") then
+    naughty.notify({ title      = "Battery Warning"
+      , text       = "Battery low! " .. bat_capacity .."%" .. " left!"
+      , fg="#ff0000"
+      , bg="#deb887"
+      , timeout    = 15
+      , position   = "bottom_left"
+    })
+  end
+end
+
+battimer = timer({timeout = 120})
+battimer:connect_signal("timeout", bat_notification)
+battimer:start()
+
+-- end here for battery warning
+
