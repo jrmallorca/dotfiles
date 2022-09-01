@@ -20,10 +20,11 @@ map('n', '<Bslash>x', [[<Cmd>wqa<CR>]], opts)
 -- <Leader>2 = Minimalist mode
 -- <Leader>3 = Focus mode
 -- <Leader>4 = Turn off TrueZen
-map('n', '<Leader>1', [[<Cmd>TZAtaraxisOff<CR><Cmd>TZMinimalistOff<CR><Cmd>TZFocusOff<CR><Cmd>TZAtaraxisOn<CR>]], opts)
-map('n', '<Leader>2', [[<Cmd>TZAtaraxisOff<CR><Cmd>TZMinimalistOff<CR><Cmd>TZFocusOff<CR><Cmd>TZMinimalistOn<CR>]], opts)
-map('n', '<Leader>3', [[<Cmd>TZFocus<CR>]], opts)
-map('n', '<Leader>4', [[<Cmd>TZAtaraxisOff<CR><Cmd>TZMinimalistOff<CR><Cmd>TZFocusOff<CR>]], opts)
+map("n", "<leader>zn", ":TZNarrow<CR>", {})
+map("v", "<leader>zn", ":'<,'>TZNarrow<CR>", {})
+map("n", "<leader>zf", ":TZFocus<CR>", {})
+map("n", "<leader>zm", ":TZMinimalist<CR>", {})
+map("n", "<leader>za", ":TZAtaraxis<CR>", {})
 
 -- Fuzzy finder --
 -- \\  = Find files within current and child directories

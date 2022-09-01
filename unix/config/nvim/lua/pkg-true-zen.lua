@@ -1,58 +1,80 @@
 require("true-zen").setup({
-	ui = {
-		bottom = {
-			laststatus = 0,
-			ruler = false,
-			showmode = false,
-			showcmd = true,
-			cmdheight = 1,
-		},
-		top = {
-			showtabline = 0,
-		},
-		left = {
-			number = true,
-			relativenumber = true,
-			signcolumn = "yes",
-		},
-	},
-	modes = {
+	modes = { -- configurations per mode
 		ataraxis = {
-			left_padding = 32,
-			right_padding = 32,
-			top_padding = 0,
-			bottom_padding = 0,
-			ideal_writing_area_width = {80, 200},
-			just_do_it_for_me = false,
-			keep_default_fold_fillchars = true,
-			custome_bg = "",
-			bg_configuration = true,
-			affected_higroups = {NonText = {}, FoldColumn = {}, ColorColumn = {}, VertSplit = {}, StatusLine = {}, StatusLineNC = {}, SignColumn = {}},
-      quit = "close"
+			shade = "dark", -- if `dark` then dim the padding windows, otherwise if it's `light` it'll brighten said windows
+			backdrop = 0, -- percentage by which padding windows should be dimmed/brightened. Must be a number between 0 and 1. Set to 0 to keep the same background color
+			minimum_writing_area = { -- minimum size of main window
+				width = 70,
+				height = 44,
+			},
+			quit_untoggles = true, -- type :q or :qa to quit Ataraxis mode
+			padding = { -- padding windows
+				left = 32,
+				right = 32,
+				top = 0,
+				bottom = 0,
+			},
+			callbacks = { -- run functions when opening/closing Ataraxis mode
+				open_pre = nil,
+				open_pos = nil,
+				close_pre = nil,
+				close_pos = nil
+			},
+		},
+		minimalist = {
+			ignored_buf_types = { "nofile" }, -- save current options from any window except ones displaying these kinds of buffers
+			options = { -- options to be disabled when entering Minimalist mode
+				number = true,
+				relativenumber = true,
+				showtabline = 0,
+				signcolumn = "yes",
+        statusline = "%#Normal#",
+				cmdheight = 1,
+				laststatus = 0,
+				showcmd = false,
+				showmode = false,
+				ruler = false,
+				numberwidth = 1
+			},
+			callbacks = { -- run functions when opening/closing Minimalist mode
+				open_pre = nil,
+				open_pos = nil,
+				close_pre = nil,
+				close_pos = nil
+			},
+		},
+		narrow = {
+			--- change the style of the fold lines. Set it to:
+			--- `informative`: to get nice pre-baked folds
+			--- `invisible`: hide them
+			--- function() end: pass a custom func with your fold lines. See :h foldtext
+			folds_style = "informative",
+			run_ataraxis = true, -- display narrowed text in a Ataraxis session
+			callbacks = { -- run functions when opening/closing Narrow mode
+				open_pre = nil,
+				open_pos = nil,
+				close_pre = nil,
+				close_pos = nil
+			},
 		},
 		focus = {
-			margin_of_error = 5,
-			focus_method = "experimental"
-		},
+			callbacks = { -- run functions when opening/closing Focus mode
+				open_pre = nil,
+				open_pos = nil,
+				close_pre = nil,
+				close_pos = nil
+			},
+		}
 	},
 	integrations = {
-		vim_gitgutter = false,
-		galaxyline = false,
-		tmux = false,
-		gitsigns = true,
-		nvim_bufferline = false,
-		limelight = false,
-		vim_airline = false,
-		vim_powerline = false,
-		vim_signify = false,
-		express_line = false,
-		lualine = false,
+		tmux = false, -- hide tmux status bar in (minimalist, ataraxis)
+		kitty = { -- increment font size in Kitty. Note: you must set `allow_remote_control socket-only` and `listen_on unix:/tmp/kitty` in your personal config (ataraxis)
+			enabled = false,
+			font = "+3"
+		},
+		twilight = false, -- enable twilight (ataraxis)
+		lualine = false -- hide nvim-lualine (ataraxis)
 	},
-	misc = {
-		on_off_commands = true,
-		ui_elements_commands = false,
-		cursor_by_mode = true,
-	}
 })
 
 -- Launch TrueZen at startup
