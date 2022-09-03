@@ -109,12 +109,15 @@ if not set -q MY_ABBR_SET
     abbr nc 'nmcli -a d wifi connect'
 
     # Git
+    abbr ga 'git ls-files --modified --others --exclude-standard --deduplicate | fzf --ansi --multi --print0 --preview="git diff --color=always -- {-1} | diff-so-fancy" | xargs -0 -o git add'
     abbr ga. 'git add .'
     abbr gaa 'git add -A'
     abbr gb 'git branch'
+    abbr gbd 'git branch -d'
     abbr gbl 'git blame'
     abbr gc 'git commit -S -m'
-    abbr gca 'git commit --amend -S -m'
+    abbr gca 'git commit --amend -S'
+    abbr gcam 'git commit --amend -S -m'
     abbr gco 'git branch | fzf --ansi | xargs git checkout'
     abbr gcoc 'git log --oneline | fzf --ansi | head -n1 | awk \'{print $1;}\' | xargs git checkout'
     abbr gcob 'git checkout -b'
@@ -128,19 +131,15 @@ if not set -q MY_ABBR_SET
     abbr gpf 'git push --force-with-lease'
     abbr gpl 'git pull'
     abbr gplrom 'git pull --rebase origin main'
-    abbr gr 'git remote'
-    abbr grop 'git remote prune origin --dry-run'
+    abbr gr 'git restore'
+    abbr grs 'git restore --staged'
+    abbr grop 'git remote prune origin'
     abbr grb 'git rebase'
     abbr gs 'git status'
     abbr gst 'git stash'
+    abbr gstp 'git stash pop'
     abbr gg 'git log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"'
     abbr gresign 'git rebase --exec \'git commit --amend --no-edit -n -S\' -i'
-
-    if [ "$OSTYPE" = "MacOS" ]
-        abbr ga 'git ls-files --modified --others --exclude-standard --deduplicate | fzf --ansi --multi --print0 --preview="git diff --color=always -- {-1} | diff-so-fancy" | xargs -0 -o git add'
-    else
-        abbr ga 'git ls-files --modified --others --exclude-standard --deduplicate | fzf --ansi --multi --print0 --preview="git diff --color=always -- {-1} | diff-so-fancy" | xargs --null --open-tty git add'
-    end
 
     # GitHub CLI
     abbr ghi 'gh issue'
