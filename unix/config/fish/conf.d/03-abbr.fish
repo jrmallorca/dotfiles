@@ -113,7 +113,7 @@ if not set -q MY_ABBR_SET
     abbr ga. 'git add .'
     abbr gaa 'git add -A'
     abbr gb 'git branch'
-    abbr gbd 'git branch -d'
+    abbr gbd 'git branch | fzf --ansi | xargs git branch -d'
     abbr gbl 'git blame'
     abbr gc 'git commit -S -m'
     abbr gca 'git commit --amend -S'
