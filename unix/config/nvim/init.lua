@@ -10,5 +10,4 @@ require('pkg-lsp-config')    -- LSP package
 require('pkg-nvim-cmp')      -- Auto-completion package
 require('pkg-autopairs')     -- Autopairs package
 require('pkg-commented')     -- Comment blocks of code package
-require('pkg-neorg')         -- Neovim org mode (notes and organisation)
 require('pkg-treesitter')    -- Treesitter package

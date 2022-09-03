@@ -1,10 +1,6 @@
 -- Parsers must be installed manually via :TSInstall
 require('nvim-treesitter.configs').setup {
 	ensure_installed = {
-    -- Norg
-    "norg",
-    "norg_meta",
-    "norg_table",
     -- System
     "make",
     "bash",
