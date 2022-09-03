@@ -27,7 +27,7 @@ require('packer').startup(function()
     }
   }
   use { -- Fuzzy finder
-    'nvim-telescope/telescope.nvim',
+    'nvim-telescope/telescope.nvim', tag = '0.1.0',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
   use { -- Highlight, edit, and navigate code using a fast incremental parsing library
