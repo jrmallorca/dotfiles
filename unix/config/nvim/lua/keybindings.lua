@@ -8,18 +8,11 @@ map('', '<Space>', '<Nop>', opts)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- \w = Save current file
--- \q = Quit
--- \x = Write all buffers and quit
-map('n', '<Bslash>w', [[<Cmd>w<CR>]], opts)
-map('n', '<Bslash>q', [[<Cmd>q<CR>]], opts)
-map('n', '<Bslash>x', [[<Cmd>wqa<CR>]], opts)
-
 -- TrueZen --
--- <Leader>1 = Ataraxis mode
--- <Leader>2 = Minimalist mode
--- <Leader>3 = Focus mode
--- <Leader>4 = Turn off TrueZen
+-- <Leader>zn = Narrow mode (Ataraxis on selected text)
+-- <Leader>za = Ataraxis mode (Center text)
+-- <Leader>zf = Focus mode (Focus on current buffer when split)
+-- <Leader>zm = Minimalist mode (Turn off distractions)
 map("n", "<leader>zn", ":TZNarrow<CR>", {})
 map("v", "<leader>zn", ":'<,'>TZNarrow<CR>", {})
 map("n", "<leader>zf", ":TZFocus<CR>", {})
@@ -28,11 +21,9 @@ map("n", "<leader>za", ":TZAtaraxis<CR>", {})
 
 -- Fuzzy finder --
 -- \\  = Find files within current and child directories
--- \fb = Find open files in buffers
 -- \/  = Find matching string within current and child directories
-map('n', '<Bslash><Bslash>', [[<Cmd>Telescope find_files<CR>]], opts)
-map('n', '<Bslash>fb', [[<Cmd>Telescope buffers<CR>]], opts)
-map('n', '<Bslash>/', [[<Cmd>Telescope live_grep<CR>]], opts)
+map('n', '<leader>ff', [[<Cmd>Telescope find_files<CR>]], opts)
+map('n', '<leader>f/', [[<Cmd>Telescope live_grep<CR>]], opts)
 
 -- Lightspeed
 -- Replace 's' with 'f'

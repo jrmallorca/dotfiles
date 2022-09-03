@@ -34,8 +34,8 @@ require('packer').startup(function()
       'nvim-treesitter/nvim-treesitter',
       run = ':TSUpdate'
   }
-  use 'neovim/nvim-lspconfig' -- Configurations for built-in LSP client
   use "williamboman/nvim-lsp-installer" -- Server installer for LSP
+  use 'neovim/nvim-lspconfig' -- Configurations for built-in LSP client
   use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
   use 'hrsh7th/cmp-nvim-lsp' -- Make Neovim use cmp for LSP
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
@@ -43,10 +43,6 @@ require('packer').startup(function()
   use 'windwp/nvim-autopairs' -- Autopairs plugin
   use 'ggandor/lightspeed.nvim' -- 2 character search
   use 'winston0410/commented.nvim' -- Comment blocks of code
-  use { -- Neovim org mode (Notes and organisation)
-    "vhyrro/neorg",
-    requires = "nvim-lua/plenary.nvim",
-  }
   use { -- Testing
     "nvim-neotest/neotest",
     requires = {
