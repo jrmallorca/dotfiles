@@ -78,4 +78,4 @@ require("true-zen").setup({
 })
 
 -- Launch TrueZen at startup
-vim.cmd("autocmd VimEnter * TZAtaraxis")
+vim.cmd("autocmd VimEnter * TZMinimalist")
