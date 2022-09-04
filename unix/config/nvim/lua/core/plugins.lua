@@ -37,6 +37,7 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim' -- Package manager
   use 'lewis6991/impatient.nvim' -- Reduce Neovim startup time
   use 'Pocco81/TrueZen.nvim' -- Better UI
+  use 'junegunn/limelight.vim' -- Dim surrounding text
   use { -- Display git signs
     'lewis6991/gitsigns.nvim',
     requires = {
