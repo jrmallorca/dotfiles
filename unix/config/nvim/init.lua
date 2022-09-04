@@ -14,11 +14,11 @@ for _, source in ipairs({
 	"plugins.telescope",
 	"plugins.gitsigns",
 	"plugins.true-zen",
-	"plugins.lsp-config",
+	"plugins.lspconfig",
 	"plugins.nvim-cmp",
-	"plugins.autopairs",
+	"plugins.nvim-autopairs",
 	"plugins.commented",
-	"plugins.treesitter",
+	"plugins.nvim-treesitter",
 }) do
 	local status_ok, fault = pcall(require, source)
 	if not status_ok then
