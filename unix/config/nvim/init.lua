@@ -7,7 +7,7 @@ for _, source in ipairs({
 	-- CORE
 	"core.plugins",
 	"core.settings",
-	"core.keybindings",
+	"core.keymaps",
 	"core.colors",
 
 	-- PLUGS
