@@ -62,10 +62,6 @@ return require('packer').startup(function(use)
   use { -- Navigation
     'phaazon/hop.nvim',
     branch = 'v2', -- optional but strongly recommended
-    config = function()
-      -- you can configure Hop the way you like here; see :h hop-config
-      require'hop'.setup { keys = 'arstneiozxcdhqwfpluyogm' }
-    end
   }
   use 'winston0410/commented.nvim' -- Comment blocks of code
   use { -- Testing

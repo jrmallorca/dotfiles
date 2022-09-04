@@ -20,6 +20,7 @@ for _, source in ipairs({
 	"plugins.nvim-autopairs",
 	"plugins.commented",
 	"plugins.nvim-treesitter",
+	"plugins.hop",
 }) do
 	local status_ok, fault = pcall(require, source)
 	if not status_ok then
