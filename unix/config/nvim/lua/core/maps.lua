@@ -8,7 +8,7 @@
 -- term_mode = "t"
 -- command_mode = "c"
 
-local map = vim.api.nvim_set_keymap
+local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 -- Remap space as leader key
@@ -21,29 +21,47 @@ vim.g.maplocalleader = ' '
 -- <Leader>za = Ataraxis mode (Center text)
 -- <Leader>zf = Focus mode (Focus on current buffer when split)
 -- <Leader>zm = Minimalist mode (Turn off distractions)
-map("n", "<leader>zn", ":TZNarrow<CR>", {})
-map("v", "<leader>zn", ":'<,'>TZNarrow<CR>", {})
-map("n", "<leader>zf", ":TZFocus<CR>", {})
-map("n", "<leader>zm", ":TZMinimalist<CR>", {})
-map("n", "<leader>za", ":TZAtaraxis<CR>", {})
+local truezen = require('true-zen')
+map('n', '<leader>zn', function()
+  local first = 0
+  local last = vim.api.nvim_buf_line_count(0)
+  truezen.narrow(first, last)
+end, opts)
+map('v', '<leader>zn', function()
+  local first = vim.fn.line('v')
+  local last = vim.fn.line('.')
+  truezen.narrow(first, last)
+end, opts)
+map('n', '<leader>zf', truezen.focus, opts)
+map('n', '<leader>zm', truezen.minimalist, opts)
+map('n', '<leader>za', truezen.ataraxis, opts)
 
 -- Fuzzy finder --
--- \\  = Find files within current and child directories
--- \/  = Find matching string within current and child directories
-map('n', '<leader>ff', [[<Cmd>Telescope find_files<CR>]], opts)
-map('n', '<leader>f/', [[<Cmd>Telescope live_grep<CR>]], opts)
+-- <Leader>ff = Find files within current and child directories
+-- <Leader>f/ = Find matching string within current and child directories
+local telescope = require('telescope.builtin')
+map('n', '<leader>ff', telescope.find_files, opts)
+map('n', '<leader>f/', telescope.live_grep, opts)
 
 -- Hop
--- Replace 's' with 'f'
-map("n" , "f", ":HopWord<CR>", opts)
-map("n" , "F", ":HopLineStart<CR>", opts)
+-- f = Go to word
+-- F = Go to line
+local hop = require('hop')
+map('n' , 'f', hop.hint_words, opts)
+map('n' , 'F', hop.hint_lines_skip_whitespace, opts)
 
--- Ultest
+-- Neotest
 -- ]t         = Find next failed test, direction up
 -- [t         = Find next failed test, direction down
 -- <Leader>tt = Test everything
 -- <Leader>tn = Test nearest to cursor
-map('n', ']t', [[<Plug>(ultest-next-fail)]], { silent = true })
-map('n', '[t', [[<Plug>(ultest-prev-fail)]], { silent = true })
-map('n', '<Leader>tt', [[<Plug>(ultest-run-file)]], { silent = true })
-map('n', '<Leader>tn', [[<Plug>(ultest-run-nearest)]], { silent = true })
+local test = require('neotest')
+-- map('n', ']t', [[<Plug>(ultest-next-fail)]], opts)
+-- map('n', '[t', [[<Plug>(ultest-prev-fail)]], opts)
+map('n', '<leader>tt', function()
+  test.run.run()
+end, opts)
+map('n', '<leader>tn', function()
+  test.run.run(vim.fn.expand("%"))
+end, opts)
+
