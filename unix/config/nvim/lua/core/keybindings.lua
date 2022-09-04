@@ -25,10 +25,10 @@ map("n", "<leader>za", ":TZAtaraxis<CR>", {})
 map('n', '<leader>ff', [[<Cmd>Telescope find_files<CR>]], opts)
 map('n', '<leader>f/', [[<Cmd>Telescope live_grep<CR>]], opts)
 
--- Lightspeed
+-- Hop
 -- Replace 's' with 'f'
-map('n', 'f', [[<Plug>Lightspeed_s]], { silent = true })
-map('n', 'F', [[<Plug>Lightspeed_S]], { silent = true })
+map("n" , "f", ":HopWord<CR>", opts)
+map("n" , "F", ":HopLineStart<CR>", opts)
 
 -- Ultest
 -- ]t         = Find next failed test, direction up

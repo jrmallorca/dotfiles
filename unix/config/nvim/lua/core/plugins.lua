@@ -58,7 +58,14 @@ return require('packer').startup(function(use)
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
   use "rafamadriz/friendly-snippets" -- Pre-existing VSCode snippets
   use 'windwp/nvim-autopairs' -- Autopairs plugin
-  use 'ggandor/lightspeed.nvim' -- 2 character search
+  use { -- Navigation
+    'phaazon/hop.nvim',
+    branch = 'v2', -- optional but strongly recommended
+    config = function()
+      -- you can configure Hop the way you like here; see :h hop-config
+      require'hop'.setup { keys = 'arstneiozxcdhqwfpluyogm' }
+    end
+  }
   use 'winston0410/commented.nvim' -- Comment blocks of code
   use { -- Testing
     "nvim-neotest/neotest",
