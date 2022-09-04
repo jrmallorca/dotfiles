@@ -8,6 +8,7 @@ for _, source in ipairs({
 	"core.plugins",
 	"core.opts",
 	"core.maps",
+	"core.cmds",
 	"core.colors",
 
 	-- PLUGS
