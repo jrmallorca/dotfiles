@@ -1,13 +1,27 @@
-require('core/settings')    -- Neovim settings
-require('core/keybindings') -- Keybindings
-require('core/colors')      -- Color settings
-require('core/plugins')     -- Installed packages
+local impatient_ok, impatient = pcall(require, "impatient")
+if impatient_ok then
+	impatient.enable_profile()
+end
 
-require('plugins/telescope')  -- Fuzzy finder
-require('plugins/gitsigns')   -- Gitsigns package
-require('plugins/true-zen')   -- TrueZen package
-require('plugins/lsp-config') -- LSP package
-require('plugins/nvim-cmp')   -- Auto-completion package
-require('plugins/autopairs')  -- Autopairs package
-require('plugins/commented')  -- Comment blocks of code package
-require('plugins/treesitter') -- Treesitter package
+for _, source in ipairs({
+	-- CORE
+	"core.plugins",
+	"core.settings",
+	"core.keybindings",
+	"core.colors",
+
+	-- PLUGS
+	"plugins.telescope",
+	"plugins.gitsigns",
+	"plugins.true-zen",
+	"plugins.lsp-config",
+	"plugins.nvim-cmp",
+	"plugins.autopairs",
+	"plugins.commented",
+	"plugins.treesitter",
+}) do
+	local status_ok, fault = pcall(require, source)
+	if not status_ok then
+		vim.api.nvim_err_writeln("Failed to load " .. source .. "\n\n" .. fault)
+	end
+end

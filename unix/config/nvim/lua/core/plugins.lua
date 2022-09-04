@@ -35,6 +35,7 @@ packer.init({
 -- Install your plugins here
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim' -- Package manager
+  use 'lewis6991/impatient.nvim' -- Reduce Neovim startup time
   use 'Pocco81/TrueZen.nvim' -- Better UI
   use { -- Display git signs
     'lewis6991/gitsigns.nvim',
