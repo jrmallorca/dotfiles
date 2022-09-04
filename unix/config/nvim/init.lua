@@ -1,13 +1,13 @@
-require('settings')    -- Neovim settings
-require('keybindings') -- Keybindings
-require('colors')      -- Color settings
+require('core/settings')    -- Neovim settings
+require('core/keybindings') -- Keybindings
+require('core/colors')      -- Color settings
+require('core/packages')          -- Installed packages
 
-require('packages')          -- Installed packages
-require('pkg-telescope')     -- Fuzzy finder
-require('pkg-gitsigns')      -- Gitsigns package
-require('pkg-true-zen')      -- TrueZen package
-require('pkg-lsp-config')    -- LSP package
-require('pkg-nvim-cmp')      -- Auto-completion package
-require('pkg-autopairs')     -- Autopairs package
-require('pkg-commented')     -- Comment blocks of code package
-require('pkg-treesitter')    -- Treesitter package
+require('plugins/telescope')     -- Fuzzy finder
+require('plugins/gitsigns')      -- Gitsigns package
+require('plugins/true-zen')      -- TrueZen package
+require('plugins/lsp-config')    -- LSP package
+require('plugins/nvim-cmp')      -- Auto-completion package
+require('plugins/autopairs')     -- Autopairs package
+require('plugins/commented')     -- Comment blocks of code package
+require('plugins/treesitter')    -- Treesitter package
