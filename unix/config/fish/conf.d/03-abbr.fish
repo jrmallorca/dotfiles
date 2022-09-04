@@ -91,7 +91,7 @@ if not set -q MY_ABBR_SET
 
     # Java versions
     abbr j11 'sudo archlinux-java set java-11-openjdk'
-    abbr j17 'sudo archlinux-java set java-17-openjdk'
+    abbr j18 'sudo archlinux-java set java-18-openjdk'
 
     # Chat
     abbr we 'weechat'
