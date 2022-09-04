@@ -44,3 +44,6 @@ vim.cmd [[set undofile]] -- Save undo history
 
 vim.o.completeopt = 'menuone,noinsert' -- Completion
 
+-- in millisecond, used for both CursorHold and CursorHoldI,
+-- use updatetime instead if not defined
+vim.g.cursorhold_updatetime = 100
