@@ -6,8 +6,8 @@ end
 for _, source in ipairs({
 	-- CORE
 	"core.plugins",
-	"core.settings",
-	"core.keymaps",
+	"core.opts",
+	"core.maps",
 	"core.colors",
 
 	-- PLUGS
