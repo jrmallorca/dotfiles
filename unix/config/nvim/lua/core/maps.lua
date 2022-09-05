@@ -47,8 +47,8 @@ map('n', '<leader>f/', telescope.live_grep, opts)
 -- f = Go to word
 -- F = Go to line
 local hop = require('hop')
-map('n' , 'f', hop.hint_words, opts)
-map('n' , 'F', hop.hint_lines_skip_whitespace, opts)
+map({ 'n', 'v' }, 'f', hop.hint_words, opts)
+map({ 'n', 'v' }, 'F', hop.hint_lines_skip_whitespace, opts)
 
 -- Neotest
 -- ]t         = Find next failed test, direction up
