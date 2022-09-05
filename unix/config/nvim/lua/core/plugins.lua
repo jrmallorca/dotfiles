@@ -53,8 +53,11 @@ return require('packer').startup(function(use)
       'nvim-treesitter/nvim-treesitter',
       run = ':TSUpdate'
   }
-  use "williamboman/nvim-lsp-installer" -- Server installer for LSP
-  use 'neovim/nvim-lspconfig' -- Configurations for built-in LSP client
+  use {
+      "williamboman/mason.nvim", -- Package manager of LSP servers, DAP servers, linters and formatters
+      "williamboman/mason-lspconfig.nvim", -- Server installer for LSP
+      "neovim/nvim-lspconfig", -- Configurations for built-in LSP client
+  }
   use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
   use 'hrsh7th/cmp-nvim-lsp' -- Make Neovim use cmp for LSP
   use 'L3MON4D3/LuaSnip' -- Snippets plugin

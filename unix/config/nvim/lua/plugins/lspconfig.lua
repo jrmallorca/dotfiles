@@ -36,11 +36,29 @@ end
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- LSP Servers
-local lsp_installer = require("nvim-lsp-installer")
+local lsp_installer = require("mason-lspconfig")
 local lspconfig = require("lspconfig")
 
 -- 1. Set up nvim-lsp-installer first!
-lsp_installer.setup {}
+require("mason").setup()
+lsp_installer.setup({
+  -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer@nightly", "sumneko_lua" }
+  -- This setting has no relation with the `automatic_installation` setting.
+  ensure_installed = {
+    "sumneko_lua", -- Lua
+    "marksman", -- Markdown
+    "bashls", -- Bash
+  },
+
+  -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
+  -- This setting has no relation with the `ensure_installed` setting.
+  -- Can either be:
+  --   - false: Servers are not automatically installed.
+  --   - true: All servers set up via lspconfig are automatically installed.
+  --   - { exclude: string[] }: All servers set up via lspconfig, except the ones provided in the list, are automatically installed.
+  --       Example: automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }
+  automatic_installation = true,
+})
 
 -- 2. (optional) Override the default configuration to be applied to all servers.
 lspconfig.util.default_config = vim.tbl_extend(
@@ -53,8 +71,8 @@ lspconfig.util.default_config = vim.tbl_extend(
 
 -- 3. Loop through all of the installed servers and set it up via lspconfig
 for _, server in ipairs(lsp_installer.get_installed_servers()) do
-  if server.name == "sumneko_lua" then
-    lspconfig[server.name].setup {
+  if server == "sumneko_lua" then
+    lspconfig[server].setup {
       capabilities = capabilities,
       settings = {
         Lua = {
@@ -78,7 +96,7 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
       },
     }
   else
-    lspconfig[server.name].setup {
+    lspconfig[server].setup {
       capabilities = capabilities
     }
   end
