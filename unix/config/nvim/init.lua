@@ -15,6 +15,7 @@ for _, source in ipairs({
 	"plugins.telescope",
 	"plugins.gitsigns",
 	"plugins.true-zen",
+	"plugins.mason",
 	"plugins.lspconfig",
 	"plugins.nvim-cmp",
 	"plugins.nvim-autopairs",
