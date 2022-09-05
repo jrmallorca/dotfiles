@@ -41,6 +41,7 @@ personal:
 .PHONY: unix
 unix:
 	cp -a ./unix/config/. ~/.config/
+	cp -a ./unix/.tmux.conf ~/
 
 linux-gui:
 	cp -a ./unix/os/linux/config/. ~/.config/
