@@ -52,6 +52,15 @@ return require('packer').startup(function(use)
   -- Functionality
   use { -- Highlight, edit, and navigate code using a fast incremental parsing library
     'nvim-treesitter/nvim-treesitter',
+  }
+  use {
+    'nvim-telescope/telescope.nvim', -- Fuzzy finder
+    tag = '0.1.0',
+  }
+
+  -- IDE functionality
+  use {
+    'nvim-treesitter/nvim-treesitter', -- Highlight, edit, and navigate code using a fast incremental parsing library
     run = ':TSUpdate',
   }
   use {
@@ -67,8 +76,8 @@ return require('packer').startup(function(use)
 
   -- Useful bindings
   use 'windwp/nvim-autopairs' -- Autopairs plugin
-  use { -- Navigation
-    'phaazon/hop.nvim',
+  use {
+    'phaazon/hop.nvim', -- Navigation
     branch = 'v2', -- optional but strongly recommended
   }
   use 'winston0410/commented.nvim' -- Comment blocks of code
