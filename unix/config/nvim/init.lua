@@ -17,6 +17,7 @@ for _, source in ipairs({
 	"plugins.true-zen",
 	"plugins.mason",
 	"plugins.lspconfig",
+	"plugins.null-ls",
 	"plugins.nvim-cmp",
 	"plugins.nvim-autopairs",
 	"plugins.commented",
