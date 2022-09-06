@@ -34,48 +34,44 @@ packer.init({
 
 -- Install your plugins here
 return require('packer').startup(function(use)
+  -- Requirements
   use 'wbthomason/packer.nvim' -- Package manager
   use 'lewis6991/impatient.nvim' -- Reduce Neovim startup time
-  use 'antoinemadec/FixCursorHold.nvim' -- Fix cursor hold autocmd events
+  use "nvim-lua/plenary.nvim" -- (Required for many plugins) Neovim functions helper
+  use 'antoinemadec/FixCursorHold.nvim' -- (Required for neotest) Fix cursor hold autocmd events
+
+  -- UI
   use 'Pocco81/TrueZen.nvim' -- Better UI
   use 'junegunn/limelight.vim' -- Dim surrounding text
-  use { -- Display git signs
-    'lewis6991/gitsigns.nvim',
-    requires = {
-      'nvim-lua/plenary.nvim'
-    }
-  }
+  use 'lewis6991/gitsigns.nvim' -- Display git signs 
   use { -- Fuzzy finder
-    'nvim-telescope/telescope.nvim', tag = '0.1.0',
-    requires = { {'nvim-lua/plenary.nvim'} }
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.0',
   }
+
+  -- Functionality
   use { -- Highlight, edit, and navigate code using a fast incremental parsing library
-      'nvim-treesitter/nvim-treesitter',
-      run = ':TSUpdate'
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
   }
   use {
-      "williamboman/mason.nvim", -- Package manager of LSP servers, DAP servers, linters and formatters
-      "williamboman/mason-lspconfig.nvim", -- Server installer for LSP
-      "neovim/nvim-lspconfig", -- Configurations for built-in LSP client
+    'williamboman/mason.nvim', -- Package manager of LSP servers, DAP servers, linters and formatters
+    'williamboman/mason-lspconfig.nvim', -- Server installer for LSP
+    'neovim/nvim-lspconfig', -- Configurations for built-in LSP client
   }
   use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
   use 'hrsh7th/cmp-nvim-lsp' -- Make Neovim use cmp for LSP
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
   use "rafamadriz/friendly-snippets" -- Pre-existing VSCode snippets
+  use 'nvim-neotest/neotest' -- Testing
+
+  -- Useful bindings
   use 'windwp/nvim-autopairs' -- Autopairs plugin
   use { -- Navigation
     'phaazon/hop.nvim',
     branch = 'v2', -- optional but strongly recommended
   }
   use 'winston0410/commented.nvim' -- Comment blocks of code
-  use { -- Testing
-    "nvim-neotest/neotest",
-    requires = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "antoinemadec/FixCursorHold.nvim"
-    }
-  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
