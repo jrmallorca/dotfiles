@@ -73,7 +73,7 @@ return require('packer').startup(function(use)
   }
   use 'hrsh7th/cmp-nvim-lsp' -- Make Neovim use cmp for LSP
   use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
-  use 'jose-elias-alvarez/null-ls.nvim' -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
+  -- use 'jose-elias-alvarez/null-ls.nvim' -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
   use 'L3MON4D3/LuaSnip' -- Snippets engine
   use 'rafamadriz/friendly-snippets' -- Pre-existing VSCode snippets
   use 'nvim-neotest/neotest' -- Testing
