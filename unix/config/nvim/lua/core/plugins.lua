@@ -61,7 +61,9 @@ return require('packer').startup(function(use)
 
   -- IDE functionality
   -- Setup explanation:
-  --    - mason installs the packages
+  --    - mason installs packages
+  --    - mason-lspconfig installs LSPs only
+  --    - nvim-lspconfig integrates the LSPs into Neovim
   --    - null-ls integrates the packages into Neovim
   use {
     'nvim-treesitter/nvim-treesitter', -- Highlight, edit, and navigate code using a fast incremental parsing library
