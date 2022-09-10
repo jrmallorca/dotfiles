@@ -4,6 +4,9 @@ local g = vim.g
 -- Vertical separator
 hl(0, "VertSplit", { cterm = vim.empty_dict() })
 
+-- Status line
+hl(0, "StatusLine", { ctermbg="NONE", cterm = vim.empty_dict() })
+
 -- Sign column
 hl(0, "SignColumn", { ctermbg = "NONE" })
 hl(0, "DiffAdd",    { ctermbg = "NONE" })
