@@ -1,5 +1,6 @@
 require("true-zen").setup({
 	modes = { -- configurations per mode
+
 		ataraxis = {
 			shade = "dark", -- if `dark` then dim the padding windows, otherwise if it's `light` it'll brighten said windows
 			backdrop = 0, -- percentage by which padding windows should be dimmed/brightened. Must be a number between 0 and 1. Set to 0 to keep the same background color
@@ -21,6 +22,7 @@ require("true-zen").setup({
 				close_pos = nil
 			},
 		},
+
 		minimalist = {
 			ignored_buf_types = { "nofile" }, -- save current options from any window except ones displaying these kinds of buffers
 			options = { -- options to be disabled when entering Minimalist mode
@@ -43,6 +45,7 @@ require("true-zen").setup({
 				close_pos = nil
 			},
 		},
+
 		narrow = {
 			--- change the style of the fold lines. Set it to:
 			--- `informative`: to get nice pre-baked folds
@@ -57,6 +60,7 @@ require("true-zen").setup({
 				close_pos = nil
 			},
 		},
+
 		focus = {
 			callbacks = { -- run functions when opening/closing Focus mode
 				open_pre = nil,
@@ -66,6 +70,7 @@ require("true-zen").setup({
 			},
 		}
 	},
+
 	integrations = {
 		tmux = false, -- hide tmux status bar in (minimalist, ataraxis)
 		kitty = { -- increment font size in Kitty. Note: you must set `allow_remote_control socket-only` and `listen_on unix:/tmp/kitty` in your personal config (ataraxis)
