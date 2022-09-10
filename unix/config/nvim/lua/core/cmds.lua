@@ -7,15 +7,16 @@
 -- nvim_do_autocmd          = Do one autocmd.
 -- nvim_get_autocmds        = Get autocmds that match the requirements.
 
-local api   = vim.api
+local api = vim.api
 
 -- Highlight on yank
 local yankGrp = api.nvim_create_augroup("YankHighlight", { clear = true })
 api.nvim_create_autocmd("TextYankPost", {
-    command = "silent! lua vim.highlight.on_yank()",
-    group = yankGrp,
+  command = "silent! lua vim.highlight.on_yank()",
+  group = yankGrp,
 })
 
 -- When entering Neovim
 api.nvim_create_autocmd({"VimEnter"}, {pattern = "*", command = "TZMinimalist"})
+api.nvim_create_autocmd({"VimEnter"}, {pattern = "*", command = "TZAtaraxis"})
 api.nvim_create_autocmd({"VimEnter"}, {pattern = "*", command = "Limelight"})
