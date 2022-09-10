@@ -6,8 +6,10 @@ local g = vim.g
 
 opt.shell = "/bin/bash" -- Use bash for scripts
 
+wo.statusline = "%F"
+
 o.hidden = true -- Hide buffer when abandoned instead of closing
-                    -- Do not save when switching buffers
+                -- Do not save when switching buffers
 
 o.updatetime = 250 -- Decrease update time
 
