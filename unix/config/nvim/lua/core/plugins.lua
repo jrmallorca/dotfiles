@@ -53,9 +53,7 @@ return require('packer').startup(function(use)
   }
 
   -- Functionality
-  use { -- Highlight, edit, and navigate code using a fast incremental parsing library
-    'nvim-treesitter/nvim-treesitter',
-  }
+  use 'nvim-treesitter/nvim-treesitter' -- Highlight, edit, and navigate code using a fast incremental parsing library
   use {
     'nvim-telescope/telescope.nvim', -- Fuzzy finder
     tag = '0.1.0',
