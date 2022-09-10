@@ -39,7 +39,7 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protoco
 local lsp_installer = require("mason-lspconfig")
 local lspconfig = require("lspconfig")
 
--- 1. Set up nvim-lsp-installer first!
+-- 1. Set up mason-lspconfig first!
 lsp_installer.setup({
   -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer@nightly", "sumneko_lua" }
   -- This setting has no relation with the `automatic_installation` setting.

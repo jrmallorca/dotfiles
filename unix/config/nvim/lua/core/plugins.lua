@@ -59,13 +59,16 @@ return require('packer').startup(function(use)
   }
 
   -- IDE functionality
+  -- Setup explanation:
+  --    - mason installs the packages
+  --    - null-ls integrates the packages into Neovim
   use {
     'nvim-treesitter/nvim-treesitter', -- Highlight, edit, and navigate code using a fast incremental parsing library
     run = ':TSUpdate',
   }
   use {
-    'williamboman/mason.nvim', -- Package manager of LSP servers, DAP servers, linters and formatters
-    'williamboman/mason-lspconfig.nvim', -- Server installer for LSP
+    'williamboman/mason.nvim', -- Package manager of language servers, DAP servers, linters and formatters
+    'williamboman/mason-lspconfig.nvim', -- Language server installer for mason
     'neovim/nvim-lspconfig', -- Configurations for built-in LSP client
   }
   use 'hrsh7th/cmp-nvim-lsp' -- Make Neovim use cmp for LSP
