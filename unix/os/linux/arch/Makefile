@@ -256,3 +256,9 @@ qmk:
 	paru -Syu --needed --noconfirm git python-pip libffi
 	python3 -m pip install --user qmk
 	cd ~ && git clone --recurse-submodules git@github.com:jrmallorca/qmk_firmware.git
+
+# Enable stenography in OS
+steno:
+	pip install rtf-tokenize
+	paru -Syu --needed --noconfirm plover-git plover_plugins_manager
+	sudo usermod -aG uucp $$USER
