@@ -217,6 +217,11 @@ gitgpgkeys:
 	gpg2 --full-generate-key
 	gpg2 --list-secret-keys --keyid-format LONG
 
+# P2P syncing
+syncthing:
+	paru -Syu syncthing
+	sudo systemctl enable syncthing@$$USER
+
 # Extra
 # -----------------------------------------------------------------------------
 
@@ -228,14 +233,9 @@ mime:
 coms:
 	paru -Syu teams-for-linux discord
 
-# Stock watcher
-ticker:
-	curl -Ls https://api.github.com/repos/achannarasappa/ticker/releases/latest \
-	| grep -wo "https.*linux-amd64*.tar.gz" \
-	| wget -qi - \
-	&& tar -xf ticker*.tar.gz \
-	&& chmod +x ./ticker \
-	&& sudo mv ticker /usr/local/bin/
+# (Proprietary) Note-taking application
+obsidian:
+	paru -Syu obsidian
 
 # -----------------------------------------------------------------------------
 # Programs
