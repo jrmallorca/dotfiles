@@ -687,3 +687,5 @@ battimer:start()
 
 -- end here for battery warning
 
+-- Fix for betterlockscreen
+package.loaded["naughty.dbus"] = {}
