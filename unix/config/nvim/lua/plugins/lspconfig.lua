@@ -46,7 +46,6 @@ lsp_installer.setup({
   ensure_installed = {
     "sumneko_lua", -- Lua
     "marksman", -- Markdown
-    "bashls", -- Bash
   },
 
   -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
@@ -95,6 +94,8 @@ lsp_installer.setup_handlers({
             workspace = {
               -- Make the server aware of Neovim runtime files
               library = vim.api.nvim_get_runtime_file("", true),
+              -- Remove annoying popup about luaassert
+              checkThirdParty = false,
             },
             -- Do not send telemetry data containing a randomized but unique identifier
             telemetry = {
