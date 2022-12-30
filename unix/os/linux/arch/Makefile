@@ -66,7 +66,9 @@ necessary: paru
 necessary-paru:
 	paru -Syu daemon clight lf devour zoxide picom nerd-fonts-iosevka
 
+fisher: SHELL:=/usr/bin/fish
 fisher:
+	curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 	fisher install jorgebucaran/nvm.fish
 
 # Mount the D drive from Windows
