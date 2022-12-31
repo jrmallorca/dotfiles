@@ -6,12 +6,12 @@ if not set -q MY_ABBR_SET
     abbr mc 'sh $HOME/dotfiles/unix/scripts/make-config.sh'
 
     # Multihead
-    if [ "$OSTYPE" = "Linux" ]
+    if [ "$OSTYPE" = Linux ]
         abbr xr 'xrandr --output "eDP1" --auto --output "HDMI-1-0" --auto --left-of "eDP1"'
     end
 
     # Package manager
-    if [ "$OSTYPE" = "Linux" ]
+    if [ "$OSTYPE" = Linux ]
         if type -q paru
             abbr p 'paru -Syu'
             abbr prm 'paru -Rs'
@@ -19,7 +19,7 @@ if not set -q MY_ABBR_SET
             abbr p 'sudo apt update && sudo apt upgrade && sudo apt install'
             abbr prm 'sudo apt autoremove && sudo apt remove'
         end
-    else if [ "$OSTYPE" = "MacOS" ]
+    else if [ "$OSTYPE" = MacOS ]
         abbr p 'brew upgrade && brew install'
         abbr prm 'brew uninstall'
     end
@@ -46,7 +46,7 @@ if not set -q MY_ABBR_SET
     abbr emph 'z /mnt/phone && zf -command search_edit'
     abbr eg 'z (git rev-parse --show-toplevel) && zf -command search_edit'
 
-    if [ "$OSTYPE" = "WSL" ]
+    if [ "$OSTYPE" = WSL ]
         abbr e. 'z $USERPROFILE/dotfiles && zf -command search_edit'
         abbr eh 'z $USERPROFILE && zf -command search_edit'
         abbr ep 'z $USERPROFILE/projects && zf -command search_edit'
@@ -68,7 +68,7 @@ if not set -q MY_ABBR_SET
     abbr zmc 'z /mnt/c && zf'
     abbr zg 'z (git rev-parse --show-toplevel) && zf'
 
-    if [ "$OSTYPE" = "WSL" ]
+    if [ "$OSTYPE" = WSL ]
         abbr z. 'z $USERPROFILE/dotfiles && zf'
         abbr zh 'z $USERPROFILE && zf'
         abbr zp 'z $USERPROFILE/projects && zf'
@@ -81,7 +81,7 @@ if not set -q MY_ABBR_SET
     end
 
     # TMUX
-    abbr t 'tmux'
+    abbr t tmux
     abbr tls 'tmux ls'
     abbr tn 'tmux new -s'
     abbr ta 'tmux attach-session'
@@ -94,13 +94,13 @@ if not set -q MY_ABBR_SET
     abbr j18 'sudo archlinux-java set java-18-openjdk'
 
     # Chat
-    abbr we 'weechat'
-    abbr wh 'whatscli'
-    abbr s 'scli'
+    abbr we weechat
+    abbr wh whatscli
+    abbr s scli
 
     # Editor
-    abbr se 'sudoedit'
-    abbr e 'nvim'
+    abbr se sudoedit
+    abbr e nvim
 
     # nmcli
     abbr ns 'nmcli c show'
@@ -130,7 +130,7 @@ if not set -q MY_ABBR_SET
     abbr gpl 'git pull'
     abbr gplrom 'git pull --rebase origin main'
     abbr gr 'git ls-files --modified --exclude-standard --deduplicate | fzf --ansi --multi --print0 --preview="git diff --color=always -- {-1} | diff-so-fancy" | xargs git restore'
-    abbr grs 'git diff --cached --name-only | fzf --multi --ansi --preview="git diff --cached --color=always -- {-1} | diff-so-fancy" | xargs -0 -o git restore --staged'
+    abbr grs 'git diff --cached --name-only | fzf --multi --ansi --preview="git diff --cached --color=always -- {-1} | diff-so-fancy" | xargs -o git restore --staged'
     abbr grpo 'git remote prune origin'
     abbr grb 'git rebase'
     abbr gs 'git status'
