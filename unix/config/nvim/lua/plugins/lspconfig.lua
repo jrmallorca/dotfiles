@@ -1,6 +1,6 @@
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=true }
+local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
@@ -14,14 +14,15 @@ local on_attach = function(client, bufnr)
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
   vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder,
+    bufopts)
   vim.keymap.set('n', '<space>wl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, bufopts)
@@ -30,10 +31,18 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+
+  if client.server_capabilities.document_formatting then
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      callback = function() vim.lsp.buf.format() end
+    })
+  end
 end
 
 -- Completion (nvim-cmp)
-local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp
+  .protocol
+  .make_client_capabilities())
 
 -- LSP Servers
 local lsp_installer = require("mason-lspconfig")
@@ -45,7 +54,7 @@ lsp_installer.setup({
   -- This setting has no relation with the `automatic_installation` setting.
   ensure_installed = {
     "sumneko_lua", -- Lua
-    "marksman", -- Markdown
+    "marksman" -- Markdown
   },
 
   -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
@@ -55,55 +64,46 @@ lsp_installer.setup({
   --   - true: All servers set up via lspconfig are automatically installed.
   --   - { exclude: string[] }: All servers set up via lspconfig, except the ones provided in the list, are automatically installed.
   --       Example: automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }
-  automatic_installation = true,
+  automatic_installation = true
 })
 
 -- 2. (optional) Override the default configuration to be applied to all servers.
-lspconfig.util.default_config = vim.tbl_extend(
-    "force",
-    lspconfig.util.default_config,
-    {
-        on_attach = on_attach
-    }
-)
+lspconfig.util.default_config = vim.tbl_extend("force",
+  lspconfig.util.default_config,
+  { on_attach = on_attach })
 
 -- 3. Loop through all of the installed servers and set it up
 lsp_installer.setup_handlers({
-    -- The first entry (without a key) will be the default handler
-    -- and will be called for each installed server that doesn't have
-    -- a dedicated handler.
-    function (server_name) -- default handler (optional)
-      lspconfig[server_name].setup {
-        capabilities = capabilities,
-      }
-    end,
-    -- Next, you can provide targeted overrides for specific servers.
-    ["sumneko_lua"] = function ()
-      lspconfig.sumneko_lua.setup {
-        capabilities = capabilities,
-        settings = {
-          Lua = {
-            runtime = {
-              -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-              version = 'LuaJIT',
-            },
-            diagnostics = {
-              -- Get the language server to recognize the `vim` global
-              globals = {'vim'},
-            },
-            workspace = {
-              -- Make the server aware of Neovim runtime files
-              library = vim.api.nvim_get_runtime_file("", true),
-              -- Remove annoying popup about luaassert
-              checkThirdParty = false,
-            },
-            -- Do not send telemetry data containing a randomized but unique identifier
-            telemetry = {
-              enable = false,
-            },
+  -- The first entry (without a key) will be the default handler
+  -- and will be called for each installed server that doesn't have
+  -- a dedicated handler.
+  function(server_name) -- default handler (optional)
+    lspconfig[server_name].setup { capabilities = capabilities }
+  end,
+  -- Next, you can provide targeted overrides for specific servers.
+  ["sumneko_lua"] = function()
+    lspconfig.sumneko_lua.setup {
+      capabilities = capabilities,
+      settings = {
+        Lua = {
+          runtime = {
+            -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+            version = 'LuaJIT'
           },
-        },
+          diagnostics = {
+            -- Get the language server to recognize the `vim` global
+            globals = { 'vim' }
+          },
+          workspace = {
+            -- Make the server aware of Neovim runtime files
+            library = vim.api.nvim_get_runtime_file("", true),
+            -- Remove annoying popup about luaassert
+            checkThirdParty = false
+          },
+          -- Do not send telemetry data containing a randomized but unique identifier
+          telemetry = { enable = false }
+        }
       }
-    end,
+    }
+  end
 })
-
