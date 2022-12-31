@@ -2,6 +2,8 @@
 # Arch Setup
 # -----------------------------------------------------------------------------
 
+.PHONY: all clean test
+
 # -----------------------------------------------------------------------------
 # Dot Files
 # -----------------------------------------------------------------------------
@@ -19,13 +21,13 @@ cron:
 	sudo cp mirrorlist /etc/cron.daily/
 
 # Transfer theme related files.
-theme:
-	sudo cp -a ../backgrounds/ /usr/share/
-	sudo cp -a ../themes/ /usr/share/
-	sudo cp -a ../icons/ /usr/share/
-	sudo cp -a ../fonts/ /usr/share/
-	sudo cp bitlbee.conf /etc/bitlbee/
-	sudo cp lightdm.conf /etc/lightdm/
+#  theme:
+	#  sudo cp -a ../backgrounds/ /usr/share/
+	#  sudo cp -a ../themes/ /usr/share/
+	#  sudo cp -a ../icons/ /usr/share/
+	#  sudo cp -a ../fonts/ /usr/share/
+	#  sudo cp bitlbee.conf /etc/bitlbee/
+	#  sudo cp lightdm.conf /etc/lightdm/
 
 # -----------------------------------------------------------------------------
 # Programs
@@ -34,6 +36,23 @@ theme:
 # Base
 # -----------------------------------------------------------------------------
 
+# Initialise setup
+init:
+	paru
+	base
+	tools
+	browser
+	terminal
+	shell
+	file-manager
+	window-manager
+	display-manager
+	compositor
+	lockscreen
+	theme
+	fonts
+	null-ls
+
 # paru (AUR Helper)
 paru:
 	sudo pacman -S --needed git base-devel
@@ -41,43 +60,83 @@ paru:
 		cd paru && makepkg -si
 	sudo rm -rf ~/paru/
 
-# Necessary
-necessary: paru
-	paru -Syu --needed grub base-devel reflector firefox \
-		intel-ucode amd-ucode git neovim networkmanager network-manager-applet \
+base:
+	paru -Syu --needed grub base-devel reflector \
+		intel-ucode amd-ucode networkmanager network-manager-applet \
 		xf86-video-amdgpu xf86-video-ati xf86-video-intel xf86-video-nouveau \
-		xf86-video-vesa xdg-utils xdg-user-dirs openssh alacritty xorg-server \
-		xorg-xinit i3-gaps i3status i3lock perl-anyevent-i3 i3-resurrect xss-lock \
-		dmenu fish curl wget daemon xclip xsel xdotool fzf fd bat ripgrep xcape \
-		unclutter tlp feh mpv ffmpeg youtube-dl googler alsa-utils zathura \
+		xf86-video-vesa xdg-utils xdg-user-dirs nvidia \
+		xorg-init xorg-server xorg-xinput \
+	systemctl enable NetworkManager
+	systemctl enable reflector.service
+	systemctl enable reflector.timer
+
+tools:
+	development
+	paru -Syu --needed unclutter tlp feh mpv ffmpeg youtube-dl googler zathura \
 		zathura-pdf-mupdf clight nodejs npm python python-pip autotiling \
-		dunst flameshot buku lxappearance-gtk3 gtk3 libinput xorg-xinput tmux \
-		github-cli bluez bluez-utils blueman ttc-iosevka-aile trash-cli \
-		ttc-iosevka-ss14 nvidia
+		dunst flameshot libinput zoxide trash-cli \
+		alsa-utils bluez bluez-utils blueman
+	systemctl enable tlp
+	systemctl enable clightd.service
+	systemctl enable bluetooth.service
+	mime
+
+development:
+	paru -Syu --needed git neovim github-cli tmux \
+		curl wget daemon xclip xsel xdotool fzf fd bat ripgrep xcape \
+		openssh
 	npm install -g neovim
 	pip install pynvim
-	# systemctl enable NetworkManager
-	# systemctl enable tlp
-	# systemctl enable clightd.service
-	# systemctl enable bluetooth.service
-	# systemctl enable reflector.service
-	# systemctl enable reflector.timer
 
-necessary-paru:
-	paru -Syu daemon clight lf devour zoxide picom nerd-fonts-iosevka
+# Configures mimes for xdg-open
+mime:
+	xdg-mime default org.pwmt.zathura.desktop application/pdf
 
-fisher: SHELL:=/usr/bin/fish
+browser:
+	paru -Syu --needed firefox
+
+terminal:
+	paru -Syu --needed alacritty
+
+shell:
+	paru -Syu --needed fish
+	fisher
+
 fisher:
+	SHELL:=/usr/bin/fish
 	curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 	fisher install jorgebucaran/nvm.fish
 
-# Mount the D drive from Windows
-mountd:
-	paru -Syu --needed ntfs-3g
-	sudo mkdir -p /mnt/d
-	echo "Copy this into etc/fstab: UUID=<uuid> /mnt/d ntfs uid=1000,gid=1000,umask=0022,sync,auto,rw 0 0"
-	echo "Get UUID from the following command: lsblk -o NAME,FSTYPE,UUID" 
-	echo "Do: sudo mount -av"
+file-manager:
+	lf
+
+lf:
+	paru -Syu --needed lf ueberzug chafa daemon devour
+	cd ~/git-installs && \
+		git clone git@github.com:Naheel-Azawy/stpv.git && \
+		git clone git@github.com:exiftool/exiftool.git
+	cd ~/git-installs/stpv && \
+		sudo make install
+	cd ~/git-installs/exiftool && \
+		perl Makefile.PL
+		make
+		make test
+		sudo make install
+
+window-manager:
+	# i3
+	awesome
+
+i3:
+	paru -Syu --needed i3-gaps i3status i3lock perl-anyevent-i3 i3-resurrect \
+		dmenu xss-lock
+
+awesome:
+	paru -Syu --needed awesome
+
+display-manager:
+	# lightdm
+	ly
 
 # Webkit2 greeter
 lightdm:
@@ -92,10 +151,37 @@ ly:
 	sudo systemctl disable getty@tty2.service
 	cd ~/ && chmod +x .xinitrc
 
+lockscreen:
+	betterlockscreen
+
 betterlockscreen:
 	paru -Syu --needed betterlockscreen
 	betterlockscreen -u "~/dotfiles/backgrounds/"
 	systemctl enable betterlockscreen@$USER
+
+compositor:
+	paru -Syu --needed picom
+
+theme:
+	paru -Syu --needed lxappearance-gtk3 gtk3
+
+fonts:
+	paru -Syu --needed ttc-iosevka-aile ttc-iosevka-ss14 nerd-fonts-iosevka
+
+# LSPs, linters and formatters
+null-ls:
+	paru -Syu --needed checkmake
+
+# Other
+# -----------------------------------------------------------------------------
+
+# Mount the D drive from Windows
+mountd:
+	paru -Syu --needed ntfs-3g
+	sudo mkdir -p /mnt/d
+	echo "Copy this into etc/fstab: UUID=<uuid> /mnt/d ntfs uid=1000,gid=1000,umask=0022,sync,auto,rw 0 0"
+	echo "Get UUID from the following command: lsblk -o NAME,FSTYPE,UUID"
+	echo "Do: sudo mount -av"
 
 # Signal
 signal:
@@ -146,19 +232,6 @@ vm:
 torrent:
 	paru -Syu --needed qbittorrent
 
-lf:
-	paru -Syu --needed lf ueberzug chafa
-	cd ~/git-installs && \
-		git clone git@github.com:Naheel-Azawy/stpv.git && \
-		git clone git@github.com:exiftool/exiftool.git
-	cd ~/git-installs/stpv && \
-		sudo make install
-	cd ~/git-installs/exiftool && \
-		perl Makefile.PL
-		make
-		make test
-		sudo make install
-
 # Programming
 # -----------------------------------------------------------------------------
 
@@ -177,10 +250,6 @@ flutter:
 	sudo gpasswd -a $$USER android-sdk
 	sudo setfacl -R -m g:android-sdk:rwx /opt/android-sdk
 	sudo setfacl -d -m g:android-sdk:rwX /opt/android-sdk
-
-lsp:
-	curl -fsSL https://deno.land/x/install/install.sh | sh
-	paru -Syu jdtls
 
 # Git
 # -----------------------------------------------------------------------------
@@ -226,10 +295,6 @@ syncthing:
 
 # Extra
 # -----------------------------------------------------------------------------
-
-# Configures mimes for xdg-open
-mime:
-	xdg-mime default org.pwmt.zathura.desktop application/pdf
 
 # (Proprietary) Communication apps
 coms:
