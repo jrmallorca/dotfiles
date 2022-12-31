@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if lsmod | grep -q acpi_call; then
-methods="
+	methods="
 \_SB.PCI0.P0P1.VGA._OFF
 \_SB.PCI0.P0P2.VGA._OFF
 \_SB_.PCI0.OVGA.ATPX
@@ -33,22 +33,22 @@ methods="
 \_SB.PCI0.AGP.VGA.PX02
 "
 
-for m in $methods; do
-    echo -n "Trying $m: "
-    echo $m > /proc/acpi/call
-    result=$(cat /proc/acpi/call)
-    case "$result" in
-        Error*)
-            echo "failed"
-        ;;
-        *)
-            echo "works!"
-            # break # try out outher methods too
-        ;;
-    esac
-done
+	for m in "${methods[@]}"; do
+		echo -n "Trying $m: "
+		echo "$m" >/proc/acpi/call
+		result=$(cat /proc/acpi/call)
+		case "$result" in
+		Error*)
+			echo "failed"
+			;;
+		*)
+			echo "works!"
+			# break # try out other methods too
+			;;
+		esac
+	done
 
 else
-    echo "The acpi_call module is not loaded, try running 'modprobe acpi_call' or 'insmod acpi_call.ko' as root"
-    exit 1
+	echo "The acpi_call module is not loaded, try running 'modprobe acpi_call' or 'insmod acpi_call.ko' as root"
+	exit 1
 fi
