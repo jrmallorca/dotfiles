@@ -38,23 +38,15 @@ cron:
 
 # Initialise setup
 init:
-	paru
-	base
-	tools
-	browser
-	terminal
-	shell
-	file-manager
-	window-manager
-	display-manager
-	compositor
-	lockscreen
-	theme
-	fonts
+	package-manager base tools
+	browser terminal shell
+	file-manager window-manager display-manager
+	compositor lockscreen
+	theme fonts
 	null-ls
 
 # paru (AUR Helper)
-paru:
+package-manager:
 	sudo pacman -S --needed git base-devel
 	cd ~ && git clone https://aur.archlinux.org/paru.git && \
 		cd paru && makepkg -si
@@ -72,7 +64,7 @@ base:
 
 tools:
 	development
-	paru -Syu --needed unclutter tlp feh mpv ffmpeg youtube-dl googler zathura \
+	paru -Syu --needed unclutter tlp feh mpv ffmpeg youtube-dl zathura \
 		zathura-pdf-mupdf clight nodejs npm python python-pip autotiling \
 		dunst flameshot libinput zoxide trash-cli \
 		alsa-utils bluez bluez-utils blueman
@@ -87,6 +79,26 @@ development:
 		openssh
 	npm install -g neovim
 	pip install pynvim
+	gitdiff
+
+gitdiff:
+	paru -Syu --needed diff-so-fancy
+	# Use diff-so-fancy for all diff output
+	git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
+	git config --global interactive.diffFilter "diff-so-fancy --patch"
+	# Use better colors for diff output
+	git config --global color.ui true
+	git config --global color.diff-highlight.oldNormal    "red bold"
+	git config --global color.diff-highlight.oldHighlight "red bold 52"
+	git config --global color.diff-highlight.newNormal    "green bold"
+	git config --global color.diff-highlight.newHighlight "green bold 22"
+	git config --global color.diff.meta       "11"
+	git config --global color.diff.frag       "magenta bold"
+	git config --global color.diff.func       "146 bold"
+	git config --global color.diff.commit     "yellow bold"
+	git config --global color.diff.old        "red bold"
+	git config --global color.diff.new        "green bold"
+	git config --global color.diff.whitespace "red reverse"
 
 # Configures mimes for xdg-open
 mime:
@@ -100,11 +112,17 @@ terminal:
 
 shell:
 	paru -Syu --needed fish
+	echo /usr/bin/fish | sudo tee -a /etc/shells
+	chsh -s /usr/bin/fish
 	fisher
 
 fisher:
 	SHELL:=/usr/bin/fish
 	curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+	fisher-plugins
+
+fisher-plugins:
+	SHELL:=/usr/bin/fish
 	fisher install jorgebucaran/nvm.fish
 
 file-manager:
@@ -251,27 +269,13 @@ flutter:
 	sudo setfacl -R -m g:android-sdk:rwx /opt/android-sdk
 	sudo setfacl -d -m g:android-sdk:rwX /opt/android-sdk
 
+# P2P syncing
+syncthing:
+	paru -Syu syncthing
+	sudo systemctl enable syncthing@$$USER
+
 # Git
 # -----------------------------------------------------------------------------
-
-gitdiff:
-	paru -Syu --needed diff-so-fancy
-	# Use diff-so-fancy for all diff output
-	git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
-	git config --global interactive.diffFilter "diff-so-fancy --patch"
-	# Use better colors for diff output
-	git config --global color.ui true
-	git config --global color.diff-highlight.oldNormal    "red bold"
-	git config --global color.diff-highlight.oldHighlight "red bold 52"
-	git config --global color.diff-highlight.newNormal    "green bold"
-	git config --global color.diff-highlight.newHighlight "green bold 22"
-	git config --global color.diff.meta       "11"
-	git config --global color.diff.frag       "magenta bold"
-	git config --global color.diff.func       "146 bold"
-	git config --global color.diff.commit     "yellow bold"
-	git config --global color.diff.old        "red bold"
-	git config --global color.diff.new        "green bold"
-	git config --global color.diff.whitespace "red reverse"
 
 # UNTESTED and probably doesn't work with 2nd line due to fish
 # Should probably make it a script?
@@ -287,11 +291,6 @@ gitgpgkeys:
 	git config --global gpg.program gpg2
 	gpg2 --full-generate-key
 	gpg2 --list-secret-keys --keyid-format LONG
-
-# P2P syncing
-syncthing:
-	paru -Syu syncthing
-	sudo systemctl enable syncthing@$$USER
 
 # Extra
 # -----------------------------------------------------------------------------
