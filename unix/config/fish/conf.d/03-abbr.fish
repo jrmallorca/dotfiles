@@ -37,9 +37,7 @@ if not set -q MY_ABBR_SET
     # Edit
     abbr ef 'zf -command search_edit'
     abbr er 'z / && zf -command search_edit'
-    abbr en 'z ~/neorg && zf -command search_edit'
     abbr ec 'z ~/.config && zf -command search_edit'
-    abbr eq 'z ~/qmk_firmware && zf -command search_edit'
     abbr eE 'z /etc && zf -command search_edit'
     abbr eU 'z /usr && zf -command search_edit'
     abbr emc 'z /mnt/c && zf -command search_edit'
@@ -60,9 +58,7 @@ if not set -q MY_ABBR_SET
 
     # Navigate
     abbr zr 'z / && zf'
-    abbr zn 'z ~/neorg && zf'
     abbr zc 'z ~/.config && zf'
-    abbr zq 'z ~/qmk_firmware && zf'
     abbr zE 'z /etc && zf'
     abbr zU 'z /usr && zf'
     abbr zmc 'z /mnt/c && zf'
@@ -88,15 +84,6 @@ if not set -q MY_ABBR_SET
     abbr tat 'tmux attach-session -t'
     abbr tk 'tmux kill-session'
     abbr rmtr 'rm -rf ~/.tmux/resurrect/*'
-
-    # Java versions
-    abbr j11 'sudo archlinux-java set java-11-openjdk'
-    abbr j18 'sudo archlinux-java set java-18-openjdk'
-
-    # Chat
-    abbr we weechat
-    abbr wh whatscli
-    abbr s scli
 
     # Editor
     abbr se sudoedit
@@ -147,10 +134,4 @@ if not set -q MY_ABBR_SET
     abbr ghil 'gh issue list'
     abbr ghpr 'gh pr'
     abbr ghprc 'gh pr create --assignee @me --base'
-
-    # QMK
-    abbr qc 'qmk compile'
-    abbr qf 'qmk flash'
-    abbr qc2j 'qmk c2json -km jrmallorca -kb rgbkb/sol3 -o jrmallorca.json ~/qmk_firmware/keyboards/rgbkb/sol3/keymaps/jrmallorca/keymap.c'
-    abbr qj2c 'qmk json2c -o ~/qmk_firmware/keyboards/rgbkb/sol3/keymaps/jrmallorca/keymap.c'
 end
