@@ -5,14 +5,14 @@ local g = vim.g
 hl(0, "VertSplit", { cterm = vim.empty_dict() })
 
 -- Status line
-hl(0, "StatusLine", { ctermbg="NONE", cterm = vim.empty_dict() })
+hl(0, "StatusLine", { ctermbg = "NONE", cterm = vim.empty_dict() })
 
 -- Sign column
 hl(0, "SignColumn", { ctermbg = "NONE" })
-hl(0, "DiffAdd",    { ctermbg = "NONE" })
+hl(0, "DiffAdd", { ctermbg = "NONE" })
 hl(0, "DiffDelete", { ctermbg = "NONE" })
 hl(0, "DiffChange", { ctermbg = "NONE" })
-hl(0, "DiffText",   { ctermbg = "NONE" })
+hl(0, "DiffText", { ctermbg = "NONE" })
 
 -- Configure Limelight
 g.limelight_conceal_ctermfg = 'gray'

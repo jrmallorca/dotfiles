@@ -64,4 +64,3 @@ end, opts)
 map('n', '<leader>tn', function()
   test.run.run(vim.fn.expand("%"))
 end, opts)
-

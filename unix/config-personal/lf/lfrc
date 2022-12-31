@@ -66,7 +66,7 @@ cmd fuzzy_find ${{
         and [ -d $res ]
         lf -remote "send $id cd \"$res\""
         zoxide add $res
-    else 
+    else
         lf -remote "send $id select \"$res\""
     end
 
@@ -239,7 +239,7 @@ cmd ga ${{
 
     # If it is a git directory, fzf modified and untracked files and git add those selected
     if [ -n "$is_git" ]
-        set -l preview "git diff --color=always -- {-1} | diff-so-fancy"    # Set the preview command of fzf 
+        set -l preview "git diff --color=always -- {-1} | diff-so-fancy"    # Set the preview command of fzf
         git ls-files --modified --others --exclude-standard --deduplicate | # Look for modified and untracked files
             fzf --ansi --multi --print0 --preview="$preview" |              # FZF with multi select on results
             xargs -0 -o git add                                             # Git add selected items
@@ -315,7 +315,7 @@ cmd gd ${{
     # If it is a git directory, git diff selected files
     if [ -n "$is_git" ]
         cd (git rev-parse --show-toplevel)                                     # Go to git root directory
-        set -l preview "git diff $argv --color=always -- {-1} | diff-so-fancy" # Set the preview command of fzf 
+        set -l preview "git diff $argv --color=always -- {-1} | diff-so-fancy" # Set the preview command of fzf
         git diff $argv --name-only |                                           # Get git diffs
             fzf --multi --ansi --preview="$preview"                            # Pipe diffs into fzf
     else
@@ -330,7 +330,7 @@ cmd gdc ${{
     # If it is a git directory, git diff selected files
     if [ -n "$is_git" ]
         cd (git rev-parse --show-toplevel)                                              # Go to git root directory
-        set -l preview "git diff $argv --cached --color=always -- {-1} | diff-so-fancy" # Set the preview command of fzf 
+        set -l preview "git diff $argv --cached --color=always -- {-1} | diff-so-fancy" # Set the preview command of fzf
         git diff $argv --cached --name-only |                                           # Get git diffs
             fzf --multi --ansi --preview="$preview"                                     # Pipe diffs into fzf
     else
@@ -426,7 +426,7 @@ cmd extract %{{
             case "*.tar.xz"
                 tar xf "$file"
             case "*.tar.zst"
-                unzstd "$file"      
+                unzstd "$file"
             case "*"
                 echo "$file: Extraction Failed"
         end
@@ -558,7 +558,7 @@ map n
 map nd mkdir
 map nf mkfile
 map ns mkscript
-map nn new_notes 
+map nn new_notes
 
 # Open [ o ]
 

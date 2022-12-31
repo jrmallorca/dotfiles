@@ -8,30 +8,31 @@ opt.shell = "/bin/bash" -- Use bash for scripts
 
 wo.statusline = "%F"
 
-o.hidden = true -- Hide buffer when abandoned instead of closing
-                -- Do not save when switching buffers
+-- Hide buffer when abandoned instead of closing
+-- Do not save when switching buffers
+o.hidden = true
 
 o.updatetime = 250 -- Decrease update time
 
 wo.relativenumber = true -- Show relative line numbers
-wo.number = true         -- Show actual line numbers (where the cursor is)
-wo.signcolumn = 'yes'    -- Display sign column
+wo.number = true -- Show actual line numbers (where the cursor is)
+wo.signcolumn = 'yes' -- Display sign column
 
-o.pastetoggle = "<F2>"      -- Toggle paste format via 'F2'
+o.pastetoggle = "<F2>" -- Toggle paste format via 'F2'
 o.clipboard = "unnamedplus" -- Yank to system clipboard
 
 o.expandtab = true -- Tabs become spaces
 bo.expandtab = true
-o.tabstop = 4      -- Tabs becomes 4 space width
+o.tabstop = 4 -- Tabs becomes 4 space width
 bo.tabstop = 4
-o.shiftwidth = 4   -- Indenting with '>' uses 4 space width
+o.shiftwidth = 4 -- Indenting with '>' uses 4 space width
 bo.shiftwidth = 4
 
-wo.wrap = false       -- Don't wrap lines
+wo.wrap = false -- Don't wrap lines
 wo.breakindent = true -- Preserve indentation within wrapped lines
-o.autoindent = true   -- Copy indent from current line when starting new line
+o.autoindent = true -- Copy indent from current line when starting new line
 bo.autoindent = true
-o.smartindent = true  -- Smart auto indentation
+o.smartindent = true -- Smart auto indentation
 bo.smartindent = true
 
 o.spelllang = "en_gb"

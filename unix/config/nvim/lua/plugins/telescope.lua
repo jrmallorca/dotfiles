@@ -19,7 +19,7 @@ local new_maker = function(filepath, bufnr, opts)
   }):sync()
 end
 
-require("telescope").setup{
+require("telescope").setup {
   defaults = {
     mappings = {
       i = {
