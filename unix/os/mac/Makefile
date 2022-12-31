@@ -2,6 +2,8 @@
 # MacOS Setup
 # -----------------------------------------------------------------------------
 
+.PHONY: all clean test
+
 # -----------------------------------------------------------------------------
 # Dot Files
 # -----------------------------------------------------------------------------
@@ -18,8 +20,8 @@ configuration:
 # Base
 # -----------------------------------------------------------------------------
 # Install main programs.
-necessary: SHELL:=/bin/bash
 necessary:
+	SHELL:=/bin/bash
 	curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
 	brew upgrade
 	brew install gnupg wget fzf fd bat ripgrep jq \
@@ -36,10 +38,10 @@ nvim:
 	brew install gcc
 	CC=gcc-11 nvim -c "TSInstall norg"
 
-fisher: SHELL:=/opt/homebrew/bin/fish
 fisher:
+	SHELL:=/opt/homebrew/bin/fish
 	curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 
-fisherplugins: SHELL:=/opt/homebrew/bin/fish
 fisherplugins:
+	SHELL:=/opt/homebrew/bin/fish
 	fisher install jorgebucaran/nvm.fish
