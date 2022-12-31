@@ -11,13 +11,13 @@ for _, source in ipairs({
 	"core.cmds",
 	"core.colors",
 
-	-- PLUGS
+	-- PLUGINS
 	"plugins.telescope",
 	"plugins.gitsigns",
 	"plugins.true-zen",
 	"plugins.mason",
+	"plugins.null-ls",
 	"plugins.lspconfig",
-	-- "plugins.null-ls",
 	"plugins.nvim-cmp",
 	"plugins.nvim-autopairs",
 	"plugins.commented",

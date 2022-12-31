@@ -47,13 +47,8 @@ return require('packer').startup(function(use)
   use 'Pocco81/TrueZen.nvim' -- Better UI
   use 'junegunn/limelight.vim' -- Dim surrounding text
   use 'lewis6991/gitsigns.nvim' -- Display git signs
-  use { -- Fuzzy finder
-    'nvim-telescope/telescope.nvim',
-    tag = '0.1.0',
-  }
 
   -- Functionality
-  use 'nvim-treesitter/nvim-treesitter' -- Highlight, edit, and navigate code using a fast incremental parsing library
   use {
     'nvim-telescope/telescope.nvim', -- Fuzzy finder
     tag = '0.1.0',
@@ -71,12 +66,15 @@ return require('packer').startup(function(use)
   }
   use {
     'williamboman/mason.nvim', -- Package manager of language servers, DAP servers, linters and formatters
-    'williamboman/mason-lspconfig.nvim', -- Language server installer for mason
     'neovim/nvim-lspconfig', -- Configurations for built-in LSP client
+    'williamboman/mason-lspconfig.nvim', -- Language server installer for mason
+    'jose-elias-alvarez/null-ls.nvim', -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
+    'jayp0521/mason-null-ls.nvim', -- Linter and formatter installer for mason
+    'mfussenegger/nvim-dap', -- Debugger for Neovim
+    'jayp0521/mason-nvim-dap.nvim', -- Debug adapter installer for mason
   }
   use 'hrsh7th/cmp-nvim-lsp' -- Make Neovim use cmp for LSP
   use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
-  -- use 'jose-elias-alvarez/null-ls.nvim' -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
   use 'L3MON4D3/LuaSnip' -- Snippets engine
   use 'rafamadriz/friendly-snippets' -- Pre-existing VSCode snippets
   use 'nvim-neotest/neotest' -- Testing

@@ -34,11 +34,11 @@ local sources = {
   diagnostics.commitlint,
   -- diagnostics.eslint_d,
   diagnostics.fish,
-  diagnostics.luacheck,
   diagnostics.markdownlint,
   diagnostics.proselint,
   diagnostics.shellcheck,
-  diagnostics.spectral,
+  diagnostics.yamllint,
+  diagnostics.jsonlint,
   diagnostics.todo_comments,
   diagnostics.trail_space,
 
@@ -50,7 +50,6 @@ local sources = {
   -- formatting.dart_format,
   formatting.eslint_d,
   formatting.fish_indent,
-  formatting.lua_format,
   formatting.prettierd,
   formatting.trim_newlines,
   formatting.trim_whitespace,
@@ -61,3 +60,9 @@ local sources = {
 }
 
 null_ls.setup({ sources = sources })
+
+require("mason-null-ls").setup({
+  ensure_installed = nil,
+  automatic_installation = true,
+  automatic_setup = false,
+})
