@@ -31,12 +31,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
-
-  if client.server_capabilities.document_formatting then
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      callback = function() vim.lsp.buf.format() end
-    })
-  end
 end
 
 -- Completion (nvim-cmp)
@@ -54,7 +48,8 @@ lsp_installer.setup({
   -- This setting has no relation with the `automatic_installation` setting.
   ensure_installed = {
     "sumneko_lua", -- Lua
-    "marksman" -- Markdown
+    "marksman", -- Markdown
+    "bashls" -- Bash
   },
 
   -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.

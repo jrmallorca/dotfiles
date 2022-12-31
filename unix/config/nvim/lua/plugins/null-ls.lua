@@ -21,7 +21,6 @@ local sources = {
   code_actions.gitsigns,
   code_actions.proselint,
   code_actions.refactoring,
-  code_actions.shellcheck,
 
   -- Completion
   completion.luasnip,
@@ -36,7 +35,6 @@ local sources = {
   diagnostics.fish,
   diagnostics.markdownlint,
   diagnostics.proselint,
-  diagnostics.shellcheck,
   diagnostics.yamllint,
   diagnostics.jsonlint,
   diagnostics.todo_comments,
@@ -44,7 +42,8 @@ local sources = {
 
   -- Formatting
   -- formatting.astyle,
-  formatting.beautysh,
+  formatting.shfmt,
+  formatting.shellharden,
   formatting.codespell,
   -- formatting.csharpier,
   -- formatting.dart_format,
@@ -59,7 +58,33 @@ local sources = {
   hover.printenv,
 }
 
-null_ls.setup({ sources = sources })
+local lsp_formatting = function(bufnr)
+  vim.lsp.buf.format({
+    bufnr = bufnr,
+  })
+end
+
+-- if you want to set up formatting on save, you can use this as a callback
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
+-- add to your shared on_attach callback
+local on_attach = function(client, bufnr)
+  if client.supports_method("textDocument/formatting") then
+    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = augroup,
+      buffer = bufnr,
+      callback = function()
+        lsp_formatting(bufnr)
+      end,
+    })
+  end
+end
+
+null_ls.setup({
+  sources = sources,
+  on_attach = on_attach
+})
 
 require("mason-null-ls").setup({
   ensure_installed = nil,
