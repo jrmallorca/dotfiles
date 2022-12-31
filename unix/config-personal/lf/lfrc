@@ -581,7 +581,6 @@ map e search_edit
 map zr z /
 map zh z ~/
 map zH win_z
-map zn z ~/neorg
 map zp z ~/projects
 map z. z ~/dotfiles
 map zc z ~/.config
