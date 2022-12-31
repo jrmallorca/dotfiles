@@ -1,3 +1,6 @@
 [submodule "unix/os/linux/config/awesome/modalbind"]
 	path = unix/os/linux/config/awesome/modalbind
 	url = https://github.com/crater2150/awesome-modalbind.git
+[submodule "cascade"]
+	path = cascade
+	url = git@github.com:andreasgrafen/cascade.git
