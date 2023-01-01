@@ -44,7 +44,6 @@ local sources = {
   -- formatting.astyle,
   formatting.shfmt,
   formatting.shellharden,
-  formatting.codespell,
   -- formatting.csharpier,
   -- formatting.dart_format,
   formatting.eslint_d,

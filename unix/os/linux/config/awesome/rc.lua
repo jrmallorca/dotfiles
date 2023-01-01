@@ -420,7 +420,7 @@ clientkeys = gears.table.join(
     { description = "move to master", group = "client" }),
   awful.key({ modkey, }, "o", function(c) c:move_to_screen() end,
     { description = "move to screen", group = "client" }),
-  awful.key({ modkey, }, "t", function(c) c.on top = not c.on top end,
+  awful.key({ modkey, }, "t", function(c) c.ontop = not c.ontop end,
     { description = "toggle keep on top", group = "client" }),
   awful.key({ modkey, }, "n",
     function(c)
@@ -691,6 +691,3 @@ battimer:connect_signal("timeout", bat_notification)
 battimer:start()
 
 -- end here for battery warning
-
--- Fix for betterlockscreen
-package.loaded["naughty.dbus"] = {}
