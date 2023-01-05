@@ -36,9 +36,6 @@ ubuntu: unix linux-gui is-personal
 is-personal:
 	-test "$$IS_PERSONAL" = 'true' && cp -a ./unix/config-personal/. ~/.config/
 
-personal:
-	cp -a ./unix/config-personal/. ~/.config/
-
 # Make should never assume that unix (the directory) is up to date
 .PHONY: unix
 unix:
