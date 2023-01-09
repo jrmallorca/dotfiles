@@ -48,7 +48,7 @@ local sources = {
   -- formatting.dart_format,
   formatting.eslint_d,
   formatting.fish_indent,
-  formatting.prettierd,
+  formatting.deno_fmt,
   formatting.trim_newlines,
   formatting.trim_whitespace,
   formatting.trim_whitespace,
