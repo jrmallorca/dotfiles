@@ -9,9 +9,9 @@ require('nvim-treesitter.configs').setup {
     "lua",
     "html",
     "css",
-    "javascript",
     "json",
-    "yaml"
+    "yaml",
+    "markdown"
   },
   highlight = {
     enable = true, -- false will disable the whole extension
