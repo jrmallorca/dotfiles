@@ -63,3 +63,12 @@ function zf -d 'Go to last directory before quitting lf'
         end
     end
 end
+
+function sr -d 'Search and replace in current folder' -a fromText toText
+    # Check fromText is not empty
+    if set -q fromText[1]
+        rg $fromText --files-with-matches | xargs sed -i "s%$fromText%$toText%g"
+    else
+        printf 'Missing fromText'
+    end
+end
