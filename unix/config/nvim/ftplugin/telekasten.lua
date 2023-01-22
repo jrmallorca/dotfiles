@@ -4,13 +4,14 @@ local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 -- https://github.com/renerocksai/telekasten.nvim/wiki/Commands
-map('n', '<leader>z', telekasten.panel, opts)
-map('n', '<leader>zf', telekasten.find_notes, opts)
-map('n', '<leader>zd', telekasten.find_daily_notes, opts)
-map('n', '<leader>zg', telekasten.search_notes, opts)
-map('n', '<leader>zz', telekasten.follow_link, opts)
-map('n', '<leader>znn', telekasten.new_note, opts)
-map('n', '<leader>znt', telekasten.new_templated_note, opts)
+map('n', '<leader>f', telekasten.panel, opts)
+map('n', '<leader>ff', telekasten.find_notes, opts)
+map('n', '<leader>fd', telekasten.find_daily_notes, opts)
+map('n', '<leader>f/', telekasten.search_notes, opts)
+map('n', '<leader>fl', telekasten.follow_link, opts)
+map('n', '<leader>fi', telekasten.insert_link, opts)
+map('n', '<leader>fnn', telekasten.new_note, opts)
+map('n', '<leader>fnt', telekasten.new_templated_note, opts)
 
 -- Remap movement to be more friendly to text
 map('n', 'j', 'gj', opts)
