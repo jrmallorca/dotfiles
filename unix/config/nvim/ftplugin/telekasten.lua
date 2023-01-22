@@ -18,6 +18,7 @@ map('n', 'k', 'gk', opts)
 map('n', '<Down>', 'g<Down>', opts)
 map('n', '<Up>', 'g<Up>', opts)
 
+vim.opt_local.filetype = "markdown"
 vim.wo.wrap = true -- Wrap lines
 vim.wo.linebreak = true -- Text will not break in the middle of a word when wrapping
 vim.wo.spell = true -- Indicate spelling errors
