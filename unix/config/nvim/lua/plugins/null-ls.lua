@@ -20,7 +20,6 @@ local sources = {
   -- Code actions
   code_actions.gitsigns,
   code_actions.proselint,
-  code_actions.refactoring,
 
   -- Completion
   completion.luasnip,
@@ -41,7 +40,7 @@ local sources = {
   diagnostics.trail_space,
 
   -- Formatting
-  -- formatting.astyle,
+  formatting.astyle,
   formatting.shfmt,
   formatting.shellharden,
   -- formatting.csharpier,
@@ -50,7 +49,6 @@ local sources = {
   formatting.fish_indent,
   formatting.deno_fmt,
   formatting.trim_newlines,
-  formatting.trim_whitespace,
   formatting.trim_whitespace,
 
   -- Hover
