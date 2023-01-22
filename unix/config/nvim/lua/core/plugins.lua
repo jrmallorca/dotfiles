@@ -76,6 +76,7 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-nvim-lsp' -- Make Neovim use cmp for LSP
   use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
   use 'L3MON4D3/LuaSnip' -- Snippets engine
+  use 'saadparwaiz1/cmp_luasnip' -- Use snippets engine in autocompletion plugin
   use 'rafamadriz/friendly-snippets' -- Pre-existing VSCode snippets
   use 'nvim-neotest/neotest' -- Testing
 
@@ -86,6 +87,9 @@ return require('packer').startup(function(use)
     branch = 'v2', -- optional but strongly recommended
   }
   use 'winston0410/commented.nvim' -- Comment blocks of code
+
+  -- Zettelkasten
+  use 'renerocksai/telekasten.nvim' -- Zettelkasten functionally for markdown vaults
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
