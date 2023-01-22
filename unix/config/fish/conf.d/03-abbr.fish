@@ -43,7 +43,7 @@ abbr eE 'z /etc && zf -command search_edit'
 abbr eU 'z /usr && zf -command search_edit'
 abbr emc 'z /mnt/c && zf -command search_edit'
 abbr emph 'z /mnt/phone && zf -command search_edit'
-abbr ewv 'z ~/Documents/work-vault && zf -command search_edit'
+abbr evw 'z ~/Documents/work-vault && zf -command search_edit'
 abbr eg 'z (git rev-parse --show-toplevel) && zf -command search_edit'
 
 if [ "$OSTYPE" = WSL ]
@@ -64,7 +64,7 @@ abbr zc 'z ~/.config && zf'
 abbr zE 'z /etc && zf'
 abbr zU 'z /usr && zf'
 abbr zmc 'z /mnt/c && zf'
-abbr zwv 'z ~/Documents/work-vault && zf'
+abbr zvw 'z ~/Documents/work-vault && zf'
 abbr zg 'z (git rev-parse --show-toplevel) && zf'
 
 if [ "$OSTYPE" = WSL ]
