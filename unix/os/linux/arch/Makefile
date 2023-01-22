@@ -43,7 +43,6 @@ init:
 	file-manager window-manager display-manager
 	compositor lockscreen
 	theme fonts
-	null-ls
 
 # paru (AUR Helper)
 package-manager:
@@ -74,12 +73,18 @@ tools:
 	mime
 
 development:
-	paru -Syu --needed git neovim github-cli tmux \
+	editor
+	paru -Syu --needed git github-cli tmux \
 		curl wget daemon xclip xsel xdotool fzf fd bat ripgrep xcape \
 		openssh
 	npm install -g neovim
 	pip install pynvim
 	gitdiff
+
+editor:
+	paru -Syu --needed neovim
+	null-ls
+	telekasten
 
 gitdiff:
 	paru -Syu --needed diff-so-fancy
@@ -189,6 +194,10 @@ fonts:
 # LSPs, linters and formatters
 null-ls:
 	paru -Syu --needed checkmake
+
+# Zettelkasten plugin in Neovim
+telekasten:
+	paru -Syu --needed xclip
 
 # Other
 # -----------------------------------------------------------------------------
