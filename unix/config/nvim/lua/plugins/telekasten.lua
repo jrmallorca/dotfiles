@@ -6,9 +6,9 @@
 -- - Using `vim.fn.expand("~/zettelkasten")` should work now but mileage will vary with anything outside of finding and opening files
 
 local home = vim.fn.expand("~/Documents/personal-vault")
-local telekasten = require('telekasten')
+local templates_dir = home .. '/' .. 'templates/telekasten'
 
-telekasten.setup({
+require('telekasten').setup({
   home = home,
 
   -- if true, telekasten will be enabled when opening a note within the configured home
@@ -21,12 +21,12 @@ telekasten.setup({
   -- dir names for special notes (absolute path or subdir name)
   dailies   = home .. '/' .. 'journal/daily',
   weeklies  = home .. '/' .. 'journal/weekly',
-  templates = home .. '/' .. 'templates',
+  templates = templates_dir,
 
   -- image (sub)dir for pasting
   -- dir name (absolute path or subdir name)
   -- or nil if pasted images shouldn't go into a special subdir
-  image_subdir = "img",
+  image_subdir = "attachments",
 
   -- markdown file extension
   extension = ".md",
@@ -53,22 +53,22 @@ telekasten.setup({
   -- following a link to a non-existing note will create it
   follow_creates_nonexisting = true,
   dailies_create_nonexisting = true,
-  weeklies_create_nonexisting = true,
+  weeklies_create_nonexisting = false,
 
   -- skip telescope prompt for goto_today and goto_thisweek
   journal_auto_open = false,
 
   -- template for new notes (new_note, follow_link)
   -- set to `nil` or do not specify if you do not want a template
-  template_new_note = home .. '/' .. 'templates/zettel.md',
+  template_new_note = templates_dir .. '/' .. 'zettel.md',
 
   -- template for newly created daily notes (goto_today)
   -- set to `nil` or do not specify if you do not want a template
-  template_new_daily = home .. '/' .. 'templates/daily.md',
+  template_new_daily = templates_dir .. '/' .. 'daily.md',
 
   -- template for newly created weekly notes (goto_thisweek)
   -- set to `nil` or do not specify if you do not want a template
-  template_new_weekly = home .. '/' .. 'templates/weekly.md',
+  -- template_new_weekly = templates_dir .. '/' .. 'weekly.md',
 
   -- image link style
   -- wiki:     ![[image name]]
@@ -136,7 +136,7 @@ telekasten.setup({
   --     - same_as_current: put all new notes in the dir of the current note if
   --                        present or else in home
   --                        except for notes/with/subdirs/in/title.
-  new_note_location = "smart",
+  new_note_location = "same_as_current",
 
   -- should all links be updated when a file is renamed
   rename_update_links = true,
@@ -158,13 +158,3 @@ telekasten.setup({
   -- A customizable fallback handler for urls.
   follow_url_fallback = nil,
 })
-
--- Key mappings
-local map = vim.keymap.set
-local opts = { noremap = true, silent = true }
-
-map('n', '<leader>z', telekasten.panel, opts)
-map('n', '<leader>zf', telekasten.find_notes, opts)
-map('n', '<leader>zd', telekasten.find_daily_notes, opts)
-map('n', '<leader>zg', telekasten.search_notes, opts)
-map('n', '<leader>zz', telekasten.follow_link, opts)
