@@ -1,4 +1,6 @@
-require("true-zen").setup({
+local truezen = require('true-zen')
+
+truezen.setup({
   modes = { -- configurations per mode
 
     ataraxis = {
@@ -81,3 +83,25 @@ require("true-zen").setup({
     lualine = false -- hide nvim-lualine (ataraxis)
   },
 })
+
+-- Key mappings
+local map = vim.keymap.set
+local opts = { noremap = true, silent = true }
+
+-- <Leader>zn = Narrow mode (Ataraxis on selected text)
+-- <Leader>za = Ataraxis mode (Center text)
+-- <Leader>zf = Focus mode (Focus on current buffer when split)
+-- <Leader>zm = Minimalist mode (Turn off distractions)
+map('n', '<leader>vn', function()
+  local first = 0
+  local last = vim.api.nvim_buf_line_count(0)
+  truezen.narrow(first, last)
+end, opts)
+map('v', '<leader>zn', function()
+  local first = vim.fn.line('v')
+  local last = vim.fn.line('.')
+  truezen.narrow(first, last)
+end, opts)
+map('n', '<leader>vf', truezen.focus, opts)
+map('n', '<leader>vm', truezen.minimalist, opts)
+map('n', '<leader>va', truezen.ataraxis, opts)

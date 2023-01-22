@@ -29,3 +29,13 @@ require("telescope").setup {
     buffer_previewer_maker = new_maker,
   }
 }
+
+-- Key mappings
+local map = vim.keymap.set
+local opts = { noremap = true, silent = true }
+
+-- <Leader>ff = Find files within current and child directories
+-- <Leader>f/ = Find matching string within current and child directories
+local telescope = require('telescope.builtin')
+map('n', '<leader>ff', telescope.find_files, opts)
+map('n', '<leader>f/', telescope.live_grep, opts)
