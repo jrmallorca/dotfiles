@@ -1,7 +1,12 @@
 -- Remap movement to be more friendly to text
-vim.api.nvim_set_keymap('', 'j', 'gj', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('', 'k', 'gk', { noremap = true, silent = true })
+local map = vim.keymap.set
+local opts = { noremap = true, silent = true }
 
-vim.wo.scrolloff = 999 -- Set cursor line to always be in middle of window
+map('n', 'j', 'gj', opts)
+map('n', 'k', 'gk', opts)
+map('n', '<Down>', 'g<Down>', opts)
+map('n', '<Up>', 'g<Up>', opts)
+
+vim.wo.wrap = true -- Wrap lines
 vim.wo.linebreak = true -- Text will not break in the middle of a word when wrapping
 vim.wo.spell = true -- Indicate spelling errors
