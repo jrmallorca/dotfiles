@@ -22,18 +22,12 @@ local sources = {
   code_actions.proselint,
 
   -- Completion
-  completion.luasnip,
   completion.spell,
 
   -- Diagnostics
-  diagnostics.alex,
   diagnostics.checkmake,
-  diagnostics.codespell,
   diagnostics.commitlint,
-  -- diagnostics.eslint_d,
   diagnostics.fish,
-  diagnostics.markdownlint,
-  diagnostics.proselint,
   diagnostics.yamllint,
   diagnostics.jsonlint,
   diagnostics.todo_comments,
@@ -45,9 +39,17 @@ local sources = {
   formatting.shellharden,
   -- formatting.csharpier,
   -- formatting.dart_format,
-  formatting.eslint_d,
   formatting.fish_indent,
-  formatting.deno_fmt,
+  formatting.deno_fmt.with({
+    extra_args = function(params)
+      return params.options
+          and {
+            "--options-line-width",
+            99999,
+          }
+    end,
+  }),
+  formatting.textlint,
   formatting.trim_newlines,
   formatting.trim_whitespace,
 
