@@ -4,6 +4,8 @@ local opts = { noremap = true, silent = true }
 
 map('n', 'j', 'gj', opts)
 map('n', 'k', 'gk', opts)
+map('n', '$', 'g$', opts)
+map('n', '0', 'g0', opts)
 map('n', '<Down>', 'g<Down>', opts)
 map('n', '<Up>', 'g<Up>', opts)
 
