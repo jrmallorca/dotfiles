@@ -27,6 +27,5 @@ abbr s scli
 
 # QMK
 abbr qc 'qmk compile'
+abbr qca 'qmk clean -a'
 abbr qf 'qmk flash'
-abbr qc2j 'qmk c2json -km jrmallorca -kb rgbkb/sol3 -o jrmallorca.json ~/qmk_firmware/keyboards/rgbkb/sol3/keymaps/jrmallorca/keymap.c'
-abbr qj2c 'qmk json2c -o ~/qmk_firmware/keyboards/rgbkb/sol3/keymaps/jrmallorca/keymap.c'
