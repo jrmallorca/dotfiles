@@ -66,7 +66,7 @@ require('telekasten').setup({
   -- - prefer_new_note: use `new_note` template
   -- - smart: if day or week is detected in title, use daily / weekly templates (default)
   -- - always_ask: always ask before creating a note
-  template_handling = "always_ask",
+  template_handling = "smart",
 
   vaults = {
     work = {
