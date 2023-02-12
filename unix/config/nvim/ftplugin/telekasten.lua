@@ -12,6 +12,8 @@ map('n', '<leader>fl', telekasten.follow_link, opts)
 map('n', '<leader>fi', telekasten.insert_link, opts)
 map('n', '<leader>fnn', telekasten.new_note, opts)
 map('n', '<leader>fnt', telekasten.new_templated_note, opts)
+map('n', '<leader>ftm', function() vim.opt_local.filetype = "markdown" end, opts)
+map('n', '<leader>ftt', function() vim.opt_local.filetype = "telekasten" end, opts)
 
 -- Remap movement to be more friendly to text
 map('n', 'j', 'gj', opts)
@@ -21,7 +23,6 @@ map('n', '0', 'g0', opts)
 map('n', '<Down>', 'g<Down>', opts)
 map('n', '<Up>', 'g<Up>', opts)
 
-vim.opt_local.filetype = "markdown.telekasten"
 vim.wo.wrap = true -- Wrap lines
 vim.wo.linebreak = true -- Text will not break in the middle of a word when wrapping
 vim.wo.spell = true -- Indicate spelling errors
