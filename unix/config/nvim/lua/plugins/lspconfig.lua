@@ -45,10 +45,10 @@ local lspconfig = require("lspconfig")
 
 -- 1. Set up mason-lspconfig first!
 lsp_installer.setup({
-  -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer@nightly", "sumneko_lua" }
+  -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer@nightly", "lua_ls" }
   -- This setting has no relation with the `automatic_installation` setting.
   ensure_installed = {
-    "sumneko_lua", -- Lua
+    "lua_ls", -- Lua
     "marksman", -- Markdown
     "bashls" -- Bash
   },
@@ -77,8 +77,8 @@ lsp_installer.setup_handlers({
     lspconfig[server_name].setup { capabilities = capabilities }
   end,
   -- Next, you can provide targeted overrides for specific servers.
-  ["sumneko_lua"] = function()
-    lspconfig.sumneko_lua.setup {
+  ["lua_ls"] = function()
+    lspconfig.lua_ls.setup {
       capabilities = capabilities,
       settings = {
         Lua = {
