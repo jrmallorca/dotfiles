@@ -56,6 +56,6 @@ fisher-plugins:
 	SHELL:=/opt/homebrew/bin/fish
 	fisher install jorgebucaran/nvm.fish
 
-fonts
+fonts:
 	brew tap homebrew/cask-fonts
 	brew install --cask font-iosevka-ss14
