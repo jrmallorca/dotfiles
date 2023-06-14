@@ -20,7 +20,8 @@ else if [ "$OSTYPE" = MacOS ]
 
     fish_add_path /opt/homebrew/bin
     fish_add_path /usr/local/share/dotnet/x64
-    fish_add_path /Users/JonquilIsys.Mallorca/Library/Python/3.8/bin
+    fish_add_path $HOME/Library/Python/3.8/bin
+    fish_add_path $HOME/.local/bin
 else if [ "$OSTYPE" = WSL ]
     set -gx USERPROFILE (wslpath (wslvar USERPROFILE))
 
