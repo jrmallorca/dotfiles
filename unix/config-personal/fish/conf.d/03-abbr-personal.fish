@@ -11,16 +11,10 @@ abbr -a eq 'z ~/qmk_firmware && zf -command search_edit'
 abbr -a emd 'z /mnt/d && zf -command search_edit'
 abbr -a evp 'z ~/Documents/personal-vault && zf -command search_edit'
 
-abbr -e evw
-abbr -a evw 'z ~/Documents/personal-vault/work-vault && zf -command search_edit'
-
 # Navigate
 abbr -a zq 'z ~/qmk_firmware && zf'
 abbr -a zmd 'z /mnt/d && zf'
 abbr -a zvp 'z ~/Documents/personal-vault && zf'
-
-abbr -e zvw
-abbr -a zvw 'z ~/Documents/personal-vault/work-vault && zf'
 
 # Java versions
 abbr -a j11 'sudo archlinux-java set java-11-openjdk'
