@@ -21,7 +21,9 @@ truezen.setup({
         open_pre = nil,
         open_pos = nil,
         close_pre = nil,
-        close_pos = nil
+        close_pos = function()
+          vim.cmd("quit")
+        end
       },
     },
 
