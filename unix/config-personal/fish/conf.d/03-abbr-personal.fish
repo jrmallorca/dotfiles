@@ -3,29 +3,29 @@ if not set -q MY_ABBR_SET
 end
 
 # (Un)mounting
-abbr mntd 'sudo mount /dev/sda1 /mnt/d'
-abbr umntd 'sudo umount /mnt/d'
+abbr -a mntd 'sudo mount /dev/sda1 /mnt/d'
+abbr -a umntd 'sudo umount /mnt/d'
 
 # Edit
-abbr eq 'z ~/qmk_firmware && zf -command search_edit'
-abbr emd 'z /mnt/d && zf -command search_edit'
-abbr evp 'z ~/Documents/personal-vault && zf -command search_edit'
+abbr -a eq 'z ~/qmk_firmware && zf -command search_edit'
+abbr -a emd 'z /mnt/d && zf -command search_edit'
+abbr -a evp 'z ~/Documents/personal-vault && zf -command search_edit'
 
 # Navigate
-abbr zq 'z ~/qmk_firmware && zf'
-abbr zmd 'z /mnt/d && zf'
-abbr zvp 'z ~/Documents/personal-vault && zf'
+abbr -a zq 'z ~/qmk_firmware && zf'
+abbr -a zmd 'z /mnt/d && zf'
+abbr -a zvp 'z ~/Documents/personal-vault && zf'
 
 # Java versions
-abbr j11 'sudo archlinux-java set java-11-openjdk'
-abbr j18 'sudo archlinux-java set java-18-openjdk'
+abbr -a j11 'sudo archlinux-java set java-11-openjdk'
+abbr -a j18 'sudo archlinux-java set java-18-openjdk'
 
 # Chat
-abbr we weechat
-abbr wh whatscli
-abbr s scli
+abbr -a we weechat
+abbr -a wh whatscli
+abbr -a s scli
 
 # QMK
-abbr qc 'qmk compile'
-abbr qca 'qmk clean -a'
-abbr qf 'qmk flash'
+abbr -a qc 'qmk compile'
+abbr -a qca 'qmk clean -a'
+abbr -a qf 'qmk flash'
