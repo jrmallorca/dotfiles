@@ -4,11 +4,8 @@ return {
 ---
 Created on: {}
 
-tags: flashcards
+tags: []
 ---
-
-- [ ] #todo Complete this thought
-- [ ] #todo Link this thought
 
 # Title
 
@@ -23,5 +20,13 @@ tags: flashcards
       return os.date("%Y-%m-%d")
     end),
     i(1, "Insert zettel here")
+  })),
+
+  s("flashcards", fmt([[
+Q: {}
+A: {}
+]] , {
+    i(1, "Insert question here"),
+    i(2, "Insert answer here")
   }))
 }
