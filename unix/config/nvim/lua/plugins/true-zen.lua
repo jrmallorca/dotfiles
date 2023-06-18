@@ -21,9 +21,7 @@ truezen.setup({
         open_pre = nil,
         open_pos = nil,
         close_pre = nil,
-        close_pos = function()
-          vim.cmd("quit")
-        end
+        close_pos = nil
       },
     },
 
@@ -90,10 +88,9 @@ truezen.setup({
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
--- <Leader>zn = Narrow mode (Ataraxis on selected text)
--- <Leader>za = Ataraxis mode (Center text)
--- <Leader>zf = Focus mode (Focus on current buffer when split)
--- <Leader>zm = Minimalist mode (Turn off distractions)
+-- <Leader>vn = Narrow mode (Ataraxis on selected text)
+-- <Leader>va = Ataraxis mode (Center text)
+-- <Leader>vf = Focus mode (Focus on current buffer when split)
 map('n', '<leader>vn', function()
   local first = 0
   local last = vim.api.nvim_buf_line_count(0)
@@ -105,5 +102,4 @@ map('v', '<leader>zn', function()
   truezen.narrow(first, last)
 end, opts)
 map('n', '<leader>vf', truezen.focus, opts)
-map('n', '<leader>vm', truezen.minimalist, opts)
 map('n', '<leader>va', truezen.ataraxis, opts)
