@@ -1,5 +1,5 @@
 {
-  "base_path": "/Users/JonquilIsys.Mallorca/Library/Application Support/Anki2",
+  "base_path": "/home/joni/.local/share/Anki2/",
   "presets": {
     "default": {
       "model": "Obsidian-basic-source",

@@ -312,6 +312,10 @@ coms:
 obsidian:
 	paru -Syu obsidian
 
+apy:
+	paru -Syu python-pipx
+	pipx install git+https://github.com/lervag/apy
+
 # -----------------------------------------------------------------------------
 # Programs
 # -----------------------------------------------------------------------------
