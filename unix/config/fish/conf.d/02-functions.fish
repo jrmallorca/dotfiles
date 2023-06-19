@@ -74,10 +74,7 @@ function sr -d 'Search and replace in current folder' -a fromText toText
 end
 
 function add-flashcards-to-anki -d 'Add flashcards from file to Anki' -a pathToFile
-    set -l grepCmd ()
-
     if [ -f "$pathToFile" ] # Check if temp is a file
-        # set -l fileContents (bat "$pathToFile")
         set -l fileName (basename "$pathToFile")
         set -l tags (bat "$pathToFile" | rg "tags: \[" | string sub -s 8 -e -1 | sed "s/,//g") # Detect tags in front-matter
         set -l deck (bat "$pathToFile" | rg "deck: \[" | string sub -s 8) # Detect deck in front-matter
