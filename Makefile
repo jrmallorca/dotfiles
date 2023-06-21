@@ -28,6 +28,9 @@ arch: unix linux-gui is-personal
 ubuntu: unix linux-gui is-personal
 	cd ./unix/os/linux/ubuntu-20.04 && make configuration
 
+termux: unix
+	cd ./unix/os/linux/termux && make configuration
+
 # Helpers
 # -----------------------------------------------------------------------------
 
@@ -41,6 +44,7 @@ is-personal:
 unix:
 	cp -a ./unix/config/. ~/.config/
 	cp -a ./unix/.tmux.conf ~/
+	cp -a ./unix/scripts/. ~/bin/
 
 linux-gui:
 	cp -a ./unix/os/linux/config/. ~/.config/

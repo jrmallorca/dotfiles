@@ -137,3 +137,6 @@ abbr -a ghic 'gh issue create --assignee @me'
 abbr -a ghil 'gh issue list'
 abbr -a ghpr 'gh pr'
 abbr -a ghprc 'gh pr create --assignee @me --base'
+
+# Add flashcards to anki
+abbr -a aa add_flashcards_to_anki.sh
