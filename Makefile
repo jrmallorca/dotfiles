@@ -41,6 +41,7 @@ is-personal:
 unix:
 	cp -a ./unix/config/. ~/.config/
 	cp -a ./unix/.tmux.conf ~/
+	cp -a ./unix/scripts/. ~/bin/
 
 linux-gui:
 	cp -a ./unix/os/linux/config/. ~/.config/
