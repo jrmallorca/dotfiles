@@ -72,18 +72,3 @@ function sr -d 'Search and replace in current folder' -a fromText toText
         printf 'Missing fromText'
     end
 end
-
-function add-flashcards-to-anki -d 'Add flashcards from file to Anki' -a pathToFile
-    if [ -f "$pathToFile" ] # Check if temp is a file
-        set -l fileName (basename "$pathToFile")
-        set -l tags (bat "$pathToFile" | rg "tags: \[" | string sub -s 8 -e -1 | sed "s/,//g") # Detect tags in front-matter
-        set -l deck (bat "$pathToFile" | rg "deck: \[" | string sub -s 8) # Detect deck in front-matter
-
-        for qaPair in (bat "$pathToFile" | rg " :: ")
-            echo $qaPair | read -d :: -l question answer # Extract question and answer
-            apy add-single -s default -d "$deck" -t \""$tags"\" "$question" "$answer" "$fileName" # Add to Anki
-        end
-    else
-        printf "ERROR: $pathToFile is not a file in this directory"
-    end
-end
