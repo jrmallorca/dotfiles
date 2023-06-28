@@ -30,6 +30,7 @@ if [ -n "$1" ]; then
 			answer=${qa_pair#* :: }
 
 			apy add-single \
+				--parse-markdown \
 				--preset "$APY_PRESET" \
 				--deck "$deck" \
 				--tags "$tags" \
