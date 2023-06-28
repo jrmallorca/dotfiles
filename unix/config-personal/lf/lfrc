@@ -551,6 +551,7 @@ map zz triple_pane
 
 map ar run
 map ax extract
+map aa !add-flashcards-to-anki.sh $f
 
 # New [ n ]
 

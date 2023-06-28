@@ -139,4 +139,4 @@ abbr -a ghpr 'gh pr'
 abbr -a ghprc 'gh pr create --assignee @me --base'
 
 # Add flashcards to anki
-abbr -a aa add_flashcards_to_anki.sh
+abbr -a aa add-flashcards-to-anki.sh
