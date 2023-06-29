@@ -15,6 +15,17 @@ map('n', '<leader>zn', telekasten.new_note, opts)
 map('n', '<leader>zN', telekasten.new_templated_note, opts)
 map('n', '<leader>zb', telekasten.show_backlinks, opts)
 
+map('n', '<leader>zM',
+  function()
+    if (vim.bo.filetype == "telekasten") then
+      vim.bo.filetype = "markdown"
+    else
+      vim.bo.filetype = "telekasten"
+    end
+  end,
+  opts
+)
+
 map('n', 'j', 'gj', opts)
 map('n', 'k', 'gk', opts)
 map('n', '$', 'g$', opts)
