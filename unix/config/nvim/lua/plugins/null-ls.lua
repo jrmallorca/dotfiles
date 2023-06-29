@@ -36,7 +36,6 @@ local sources = {
   -- Formatting
   formatting.astyle,
   formatting.shfmt,
-  formatting.shellharden,
   -- formatting.csharpier,
   -- formatting.dart_format,
   formatting.fish_indent,
