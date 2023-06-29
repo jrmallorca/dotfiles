@@ -14,15 +14,15 @@ get_tags_from_file() {
 }
 
 get_deck_from_file() {
-	echo $("$cat_cmd" "$1" | "$grep_cmd" "deck: " | cut -d " " -f 2)
+	"$cat_cmd" "$1" | "$grep_cmd" "deck: " | cut -d " " -f 2
 }
 
-if [ -n "$1" ]; then
+if [ "$1" != "" ]; then
 	if [ -f "$1" ]; then
 		APY_PRESET="default"
 
-		tags=$(get_tags_from_file $1)
-		deck=$(get_deck_from_file $1)
+		tags=$(get_tags_from_file "$1")
+		deck=$(get_deck_from_file "$1")
 		filename=$(basename "$1")
 
 		IFS=$'\n' && for qa_pair in $("$cat_cmd" "$1" | "$grep_cmd" " :: "); do
@@ -36,8 +36,10 @@ if [ -n "$1" ]; then
 				--tags "$tags" \
 				"$question" "$answer" "$filename"
 		done
+
+		apy sync
 	else
-		printf "ERROR: $pathToFile is not a file in this directory."
+		printf "ERROR: %s is not a file in this directory." "$1"
 	fi
 else
 	printf "ERROR: File not provided."
