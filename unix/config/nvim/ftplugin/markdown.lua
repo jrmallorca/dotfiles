@@ -27,6 +27,8 @@ map('n', '<leader>zM',
   opts
 )
 
+map('n', '<leader>aa', ":!add-flashcards-to-anki.sh %<CR>", opts)
+
 map('n', 'j', 'gj', opts)
 map('n', 'k', 'gk', opts)
 map('n', '$', 'g$', opts)
