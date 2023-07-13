@@ -15,3 +15,5 @@ local opts = { noremap = true, silent = true }
 map('', '<Space>', '<Nop>', opts)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+
+map('n', '<leader>ll', ":Limelight!!<CR>", opts)
