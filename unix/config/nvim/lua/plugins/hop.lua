@@ -1,5 +1,8 @@
-require('hop').setup {
+local hop = require('hop')
+
+hop.setup {
   keys = 'tnseriaodhc,gmvkxzplfuwybjq',
+  multi_windows = true,
 }
 
 -- Key mappings
@@ -8,6 +11,9 @@ local opts = { noremap = true, silent = true }
 
 -- f = Go to word
 -- F = Go to line
-local hop = require('hop')
 map({ 'n', 'v' }, 'f', hop.hint_words, opts)
-map({ 'n', 'v' }, 'F', hop.hint_lines_skip_whitespace, opts)
+map({ 'n', 'v' }, 'F', function()
+  hop.hint_char1({
+    current_line_only = true
+  })
+end, opts)
