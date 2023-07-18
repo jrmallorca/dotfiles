@@ -49,8 +49,6 @@ else
 		question=${qa_pair% :: *}
 		answer=${qa_pair#* :: }
 
-		echo "$tags"
-
 		apy add-single \
 			--parse-markdown \
 			--preset "$APY_PRESET" \
