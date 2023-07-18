@@ -36,8 +36,10 @@ get_deck_from_file() {
 
 if [[ "$1" == "" ]]; then
 	printf "ERROR: File not provided."
+	exit 1
 elif [[ ! -f "$1" ]]; then
 	printf "ERROR: %s is not a file in this directory." "$1"
+	exit 1
 else
 	APY_PRESET="default"
 
