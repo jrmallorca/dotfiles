@@ -37,12 +37,7 @@ cron:
 # -----------------------------------------------------------------------------
 
 # Initialise setup
-init:
-	package-manager base tools
-	browser terminal shell
-	file-manager window-manager display-manager
-	compositor lockscreen
-	theme fonts
+init: package-manager base tools development editor null-ls telekasten gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager display-manager compositor lockscreen theme fonts
 
 # paru (AUR Helper)
 package-manager:
@@ -56,13 +51,12 @@ base:
 		intel-ucode amd-ucode networkmanager network-manager-applet \
 		xf86-video-amdgpu xf86-video-ati xf86-video-intel xf86-video-nouveau \
 		xf86-video-vesa xdg-utils xdg-user-dirs nvidia \
-		xorg-init xorg-server xorg-xinput \
+		xorg-xinit xorg-server xorg-xinput
 	systemctl enable NetworkManager
 	systemctl enable reflector.service
 	systemctl enable reflector.timer
 
 tools:
-	development
 	paru -Syu --needed unclutter tlp feh mpv ffmpeg youtube-dl zathura \
 		zathura-pdf-mupdf clight nodejs npm python python-pip autotiling \
 		dunst flameshot libinput zoxide trash-cli \
@@ -70,21 +64,16 @@ tools:
 	systemctl enable tlp
 	systemctl enable clightd.service
 	systemctl enable bluetooth.service
-	mime
 
 development:
-	editor
 	paru -Syu --needed git github-cli tmux \
 		curl wget daemon xclip xsel xdotool fzf fd bat ripgrep xcape \
 		openssh
-	npm install -g neovim
-	pip install pynvim
-	gitdiff
+	python3 -m venv .venv; . .venv/bin/activate; pip3 install pynvim; deactivate
+	rm -r .venv
 
 editor:
 	paru -Syu --needed neovim
-	null-ls
-	telekasten
 
 gitdiff:
 	paru -Syu --needed diff-so-fancy
@@ -119,36 +108,33 @@ shell:
 	paru -Syu --needed fish
 	echo /usr/bin/fish | sudo tee -a /etc/shells
 	chsh -s /usr/bin/fish
-	fisher
 
+fisher: SHELL:=/usr/bin/fish
 fisher:
-	SHELL:=/usr/bin/fish
 	curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
-	fisher-plugins
 
+fisher-plugins: SHELL:=/usr/bin/fish
 fisher-plugins:
-	SHELL:=/usr/bin/fish
 	fisher install jorgebucaran/nvm.fish
 
-file-manager:
-	lf
+file-manager: lf
 
 lf:
 	paru -Syu --needed lf ueberzug chafa daemon devour
+	mkdir -p ~/git-installs
 	cd ~/git-installs && \
-		git clone git@github.com:Naheel-Azawy/stpv.git && \
-		git clone git@github.com:exiftool/exiftool.git
+		git clone https://github.com/Naheel-Azawy/stpv.git && \
+		git clone https://github.com/exiftool/exiftool.git
 	cd ~/git-installs/stpv && \
 		sudo make install
 	cd ~/git-installs/exiftool && \
-		perl Makefile.PL
-		make
-		make test
+		perl Makefile.PL && \
+		make && \
+		make test && \
 		sudo make install
 
-window-manager:
+window-manager: awesome
 	# i3
-	awesome
 
 i3:
 	paru -Syu --needed i3-gaps i3status i3lock perl-anyevent-i3 i3-resurrect \
@@ -157,9 +143,8 @@ i3:
 awesome:
 	paru -Syu --needed awesome
 
-display-manager:
+display-manager: ly
 	# lightdm
-	ly
 
 # Webkit2 greeter
 lightdm:
@@ -174,8 +159,7 @@ ly:
 	sudo systemctl disable getty@tty2.service
 	cd ~/ && chmod +x .xinitrc
 
-lockscreen:
-	betterlockscreen
+lockscreen: betterlockscreen
 
 betterlockscreen:
 	paru -Syu --needed betterlockscreen
@@ -189,7 +173,7 @@ theme:
 	paru -Syu --needed lxappearance-gtk3 gtk3
 
 fonts:
-	paru -Syu --needed ttc-iosevka-aile ttc-iosevka-ss14 nerd-fonts-iosevka noto-fonts-emoji
+	paru -Syu --needed ttc-iosevka-aile ttc-iosevka-ss14 ttf-iosevka-nerd noto-fonts-emoji
 
 # LSPs, linters and formatters
 null-ls:
