@@ -2,7 +2,7 @@
 # MacOS Setup
 # -----------------------------------------------------------------------------
 
-.PHONY: all clean test
+.PHONY: all clean test init
 
 # -----------------------------------------------------------------------------
 # Dot Files
@@ -20,19 +20,15 @@ configuration:
 # Base
 # -----------------------------------------------------------------------------
 # Install main programs.
-init:
-	SHELL:=/bin/bash
-	package-manager
+init: SHELL:=/bin/bash
+init: package-manager tools shell fonts
 	brew upgrade
-	tools
-	shell
-	fonts
 
 package-manager:
 	curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
 
 tools:
-	brew install gnupg wget fzf fd bat ripgrep jq \
+	brew upgrade && brew install gnupg wget fzf fd bat ripgrep jq \
 		neovim zoxide diff-so-fancy lf gh
 	brew install --cask cursorcerer alacritty
 	gitdiff
@@ -58,4 +54,16 @@ fisher-plugins:
 
 fonts:
 	brew tap homebrew/cask-fonts
-	brew install --cask font-iosevka-ss14
+	brew upgrade && brew install --cask font-iosevka-ss14
+
+# Development
+# -----------------------------------------------------------------------------
+
+flutter:
+	brew upgrade && brew install --cask flutter
+
+gitgpgkeys:
+	gpg --full-generate-key
+	GPGKEYID=$$(gpg --list-secret-keys --keyid-format=long | grep sec | head -1 | awk '{print $2}' | cut -d '/' -f 2); \
+	gpg --armor --export $$GPGKEYID | pbcopy
+	echo "Paste the secret key into GitHub"
