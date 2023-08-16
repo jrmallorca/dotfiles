@@ -54,7 +54,7 @@ fisher-plugins:
 
 fonts:
 	brew tap homebrew/cask-fonts
-	brew upgrade && brew install --cask font-iosevka-ss14
+	brew upgrade && brew install --cask font-iosevka-nerd-font
 
 # Development
 # -----------------------------------------------------------------------------
