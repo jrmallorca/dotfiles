@@ -20,6 +20,7 @@ for _, source in ipairs({
   "plugins.lspconfig",
   "plugins.nvim-cmp",
   "plugins.nvim-autopairs",
+  "plugins.neotest",
   "plugins.commented",
   "plugins.nvim-treesitter",
   "plugins.hop",
