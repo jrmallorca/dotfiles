@@ -189,7 +189,7 @@ theme:
 	paru -Syu --needed lxappearance-gtk3 gtk3
 
 fonts:
-	paru -Syu --needed ttc-iosevka-aile ttc-iosevka-ss14 nerd-fonts-iosevka noto-fonts-emoji
+	paru -Syu --needed ttf-iosevka-nerd noto-fonts-emoji
 
 # LSPs, linters and formatters
 null-ls:
