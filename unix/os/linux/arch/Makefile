@@ -4,6 +4,9 @@
 
 .PHONY: all clean test
 
+# Initialise setup
+init: package-manager base tools development editor null-ls telekasten gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager display-manager compositor lockscreen theme fonts configuration xorg nobeep
+
 # -----------------------------------------------------------------------------
 # Dot Files
 # -----------------------------------------------------------------------------
@@ -13,8 +16,14 @@ configuration:
 	cp -a ./config/. ~/.config/
 	cp .xinitrc ~/
 
-input:
-	sudo cp 40-libinput.conf /etc/X11/xorg.conf.d/
+xorg:
+	sudo cp -a ./xorg.conf.d/. /etc/X11/xorg.conf.d/
+
+nobeep:
+	sudo cp nobeep.conf /etc/modprobe.d/
+
+hooks:
+	sudo cp -a ./pacman.d/. /etc/modprobe.d/
 
 # Transfer cron jobs
 cron:
@@ -22,12 +31,12 @@ cron:
 
 # Transfer theme related files.
 #  theme:
-	#  sudo cp -a ../backgrounds/ /usr/share/
-	#  sudo cp -a ../themes/ /usr/share/
-	#  sudo cp -a ../icons/ /usr/share/
-	#  sudo cp -a ../fonts/ /usr/share/
-	#  sudo cp bitlbee.conf /etc/bitlbee/
-	#  sudo cp lightdm.conf /etc/lightdm/
+#  sudo cp -a ../backgrounds/ /usr/share/
+#  sudo cp -a ../themes/ /usr/share/
+#  sudo cp -a ../icons/ /usr/share/
+#  sudo cp -a ../fonts/ /usr/share/
+#  sudo cp bitlbee.conf /etc/bitlbee/
+#  sudo cp lightdm.conf /etc/lightdm/
 
 # -----------------------------------------------------------------------------
 # Programs
@@ -35,14 +44,6 @@ cron:
 
 # Base
 # -----------------------------------------------------------------------------
-
-# Initialise setup
-init:
-	package-manager base tools
-	browser terminal shell
-	file-manager window-manager display-manager
-	compositor lockscreen
-	theme fonts
 
 # paru (AUR Helper)
 package-manager:
@@ -55,14 +56,13 @@ base:
 	paru -Syu --needed grub base-devel reflector \
 		intel-ucode amd-ucode networkmanager network-manager-applet \
 		xf86-video-amdgpu xf86-video-ati xf86-video-intel xf86-video-nouveau \
-		xf86-video-vesa xdg-utils xdg-user-dirs nvidia \
-		xorg-init xorg-server xorg-xinput \
+		xf86-video-vesa xdg-utils xdg-user-dirs nvidia-open \
+		xorg-xinit xorg-server xorg-xinput
 	systemctl enable NetworkManager
 	systemctl enable reflector.service
 	systemctl enable reflector.timer
 
 tools:
-	development
 	paru -Syu --needed unclutter tlp feh mpv ffmpeg youtube-dl zathura \
 		zathura-pdf-mupdf clight nodejs npm python python-pip autotiling \
 		dunst flameshot libinput zoxide trash-cli \
@@ -70,21 +70,16 @@ tools:
 	systemctl enable tlp
 	systemctl enable clightd.service
 	systemctl enable bluetooth.service
-	mime
 
 development:
-	editor
 	paru -Syu --needed git github-cli tmux \
 		curl wget daemon xclip xsel xdotool fzf fd bat ripgrep xcape \
 		openssh
-	npm install -g neovim
-	pip install pynvim
-	gitdiff
+	python3 -m venv .venv; . .venv/bin/activate; pip3 install pynvim; deactivate
+	rm -r .venv
 
 editor:
 	paru -Syu --needed neovim
-	null-ls
-	telekasten
 
 gitdiff:
 	paru -Syu --needed diff-so-fancy
@@ -119,36 +114,34 @@ shell:
 	paru -Syu --needed fish
 	echo /usr/bin/fish | sudo tee -a /etc/shells
 	chsh -s /usr/bin/fish
-	fisher
 
+fisher: SHELL:=/usr/bin/fish
 fisher:
-	SHELL:=/usr/bin/fish
 	curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
-	fisher-plugins
 
+fisher-plugins: SHELL:=/usr/bin/fish
 fisher-plugins:
-	SHELL:=/usr/bin/fish
 	fisher install jorgebucaran/nvm.fish
+	nvm install lts
 
-file-manager:
-	lf
+file-manager: lf
 
 lf:
 	paru -Syu --needed lf ueberzug chafa daemon devour
+	mkdir -p ~/git-installs
 	cd ~/git-installs && \
-		git clone git@github.com:Naheel-Azawy/stpv.git && \
-		git clone git@github.com:exiftool/exiftool.git
+		git clone https://github.com/Naheel-Azawy/stpv.git && \
+		git clone https://github.com/exiftool/exiftool.git
 	cd ~/git-installs/stpv && \
 		sudo make install
 	cd ~/git-installs/exiftool && \
-		perl Makefile.PL
-		make
-		make test
+		perl Makefile.PL && \
+		make && \
+		make test && \
 		sudo make install
 
-window-manager:
+window-manager: awesome
 	# i3
-	awesome
 
 i3:
 	paru -Syu --needed i3-gaps i3status i3lock perl-anyevent-i3 i3-resurrect \
@@ -157,9 +150,8 @@ i3:
 awesome:
 	paru -Syu --needed awesome
 
-display-manager:
+display-manager: ly
 	# lightdm
-	ly
 
 # Webkit2 greeter
 lightdm:
@@ -174,8 +166,7 @@ ly:
 	sudo systemctl disable getty@tty2.service
 	cd ~/ && chmod +x .xinitrc
 
-lockscreen:
-	betterlockscreen
+lockscreen: betterlockscreen
 
 betterlockscreen:
 	paru -Syu --needed betterlockscreen
