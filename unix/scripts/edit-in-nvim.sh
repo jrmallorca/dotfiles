@@ -20,9 +20,9 @@ fi
 TMP_DIR=$(mktemp -d)
 TMP_FILE=$TMP_DIR/edit-in-nvim.txt # Make temporary file as .txt for vim formatting
 
-touch "$TMP_FILE"                           # Create file in temporary directory
-echo "$SELECTED_TEXT" >>"$TMP_FILE"         # Put text into temporary file
-"$TERM" "$TERM_FLAGS" "$EDITOR" "$TMP_FILE" # Start new terminal to edit file
+touch "$TMP_FILE"                         # Create file in temporary directory
+echo "$SELECTED_TEXT" >>"$TMP_FILE"       # Put text into temporary file
+"$TERM" $TERM_FLAGS "$EDITOR" "$TMP_FILE" # Start new terminal to edit file
 
 # Get contents of file and copy into clipboard
 # TODO: Conditionally remove file to retain info just in case?

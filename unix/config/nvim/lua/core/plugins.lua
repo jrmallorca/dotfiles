@@ -79,6 +79,9 @@ return require('packer').startup(function(use)
   use 'saadparwaiz1/cmp_luasnip' -- Use snippets engine in autocompletion plugin
   use 'rafamadriz/friendly-snippets' -- Pre-existing VSCode snippets
   use 'nvim-neotest/neotest' -- Testing
+  use 'sidlatau/neotest-dart' -- Dart Testing
+  use 'nvim-neotest/neotest-plenary' -- Neotest adapter for Plenary
+  use 'nvim-neotest/neotest-vim-test' -- Neotest adapter for vim-test
 
   -- Useful bindings
   use 'windwp/nvim-autopairs' -- Autopairs plugin

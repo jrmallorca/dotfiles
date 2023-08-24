@@ -4,12 +4,19 @@ return {
 ---
 Created on: {}
 
-tags: []
+tags: [to-complete, to-tag, to-add-links, to-generate-flashcards]
+deck: Zettelkasten
 ---
 
 # Title
 
 {}
+
+---
+
+## References
+
+-
 
 ---
 

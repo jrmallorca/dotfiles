@@ -6,6 +6,7 @@ local opts = { noremap = true, silent = true }
 local telekasten = require('telekasten')
 map('n', '<leader>z', telekasten.panel, opts)
 map('n', '<leader>zf', telekasten.find_notes, opts)
+map('n', '<leader>zF', telekasten.find_friends, opts)
 map('n', '<leader>zD', telekasten.find_daily_notes, opts)
 map('n', '<leader>z/', telekasten.search_notes, opts)
 map('n', '<leader>zd', telekasten.goto_today, opts)
@@ -25,6 +26,8 @@ map('n', '<leader>zM',
   end,
   opts
 )
+
+map('n', '<leader>aa', ":!add-flashcards-to-anki.sh %<CR>", opts)
 
 map('n', 'j', 'gj', opts)
 map('n', 'k', 'gk', opts)

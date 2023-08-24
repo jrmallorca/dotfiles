@@ -180,7 +180,7 @@ theme:
 	paru -Syu --needed lxappearance-gtk3 gtk3
 
 fonts:
-	paru -Syu --needed ttc-iosevka-aile ttc-iosevka-ss14 ttf-iosevka-nerd noto-fonts-emoji
+	paru -Syu --needed ttf-iosevka-nerd noto-fonts-emoji
 
 # LSPs, linters and formatters
 null-ls:
@@ -288,9 +288,10 @@ gitsshkeys:
 
 # INCOMPLETE and doesn't do the last 2 lines in git docs
 gitgpgkeys:
-	git config --global gpg.program gpg2
-	gpg2 --full-generate-key
-	gpg2 --list-secret-keys --keyid-format LONG
+	gpg --full-generate-key
+	GPGKEYID=$$(gpg --list-secret-keys --keyid-format=long | grep sec | head -1 | awk '{print $2}' | cut -d '/' -f 2); \
+	gpg --armor --export $$GPGKEYID | xclip
+	echo "Paste the secret key into GitHub"
 
 # Extra
 # -----------------------------------------------------------------------------
