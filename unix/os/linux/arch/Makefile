@@ -4,6 +4,9 @@
 
 .PHONY: all clean test
 
+# Initialise setup
+init: package-manager base tools development editor null-ls telekasten gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager display-manager compositor lockscreen theme fonts configuration xorg nobeep
+
 # -----------------------------------------------------------------------------
 # Dot Files
 # -----------------------------------------------------------------------------
@@ -13,8 +16,14 @@ configuration:
 	cp -a ./config/. ~/.config/
 	cp .xinitrc ~/
 
-input:
-	sudo cp 40-libinput.conf /etc/X11/xorg.conf.d/
+xorg:
+	sudo cp -a ./xorg.conf.d/. /etc/X11/xorg.conf.d/
+
+nobeep:
+	sudo cp nobeep.conf /etc/modprobe.d/
+
+hooks:
+	sudo cp -a ./pacman.d/. /etc/modprobe.d/
 
 # Transfer cron jobs
 cron:
@@ -22,12 +31,12 @@ cron:
 
 # Transfer theme related files.
 #  theme:
-	#  sudo cp -a ../backgrounds/ /usr/share/
-	#  sudo cp -a ../themes/ /usr/share/
-	#  sudo cp -a ../icons/ /usr/share/
-	#  sudo cp -a ../fonts/ /usr/share/
-	#  sudo cp bitlbee.conf /etc/bitlbee/
-	#  sudo cp lightdm.conf /etc/lightdm/
+#  sudo cp -a ../backgrounds/ /usr/share/
+#  sudo cp -a ../themes/ /usr/share/
+#  sudo cp -a ../icons/ /usr/share/
+#  sudo cp -a ../fonts/ /usr/share/
+#  sudo cp bitlbee.conf /etc/bitlbee/
+#  sudo cp lightdm.conf /etc/lightdm/
 
 # -----------------------------------------------------------------------------
 # Programs
@@ -35,9 +44,6 @@ cron:
 
 # Base
 # -----------------------------------------------------------------------------
-
-# Initialise setup
-init: package-manager base tools development editor null-ls telekasten gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager display-manager compositor lockscreen theme fonts
 
 # paru (AUR Helper)
 package-manager:
@@ -50,7 +56,7 @@ base:
 	paru -Syu --needed grub base-devel reflector \
 		intel-ucode amd-ucode networkmanager network-manager-applet \
 		xf86-video-amdgpu xf86-video-ati xf86-video-intel xf86-video-nouveau \
-		xf86-video-vesa xdg-utils xdg-user-dirs nvidia \
+		xf86-video-vesa xdg-utils xdg-user-dirs nvidia-open \
 		xorg-xinit xorg-server xorg-xinput
 	systemctl enable NetworkManager
 	systemctl enable reflector.service
@@ -116,6 +122,7 @@ fisher:
 fisher-plugins: SHELL:=/usr/bin/fish
 fisher-plugins:
 	fisher install jorgebucaran/nvm.fish
+	nvm install lts
 
 file-manager: lf
 
