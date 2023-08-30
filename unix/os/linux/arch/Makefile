@@ -2,10 +2,12 @@
 # Arch Setup
 # -----------------------------------------------------------------------------
 
-.PHONY: all clean test
+.PHONY: all clean test init lockscreen
 
 # Initialise setup
 init: package-manager base tools development editor null-ls telekasten gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager display-manager compositor lockscreen theme fonts configuration xorg nobeep
+
+init-wsl: package-manager base-wsl tools-wsl development editor null-ls telekasten gitdiff terminal shell fisher fisher-plugins file-manager fonts configuration apy
 
 # -----------------------------------------------------------------------------
 # Dot Files
@@ -62,14 +64,22 @@ base:
 	systemctl enable reflector.service
 	systemctl enable reflector.timer
 
+base-wsl:
+	paru -Syu --needed grub base-devel reflector xdg-user-dirs
+
 tools:
 	paru -Syu --needed unclutter tlp feh mpv ffmpeg youtube-dl zathura \
-		zathura-pdf-mupdf clight nodejs npm python python-pip autotiling \
+		zathura-pdf-mupdf clight nodejs npm python python-pip \
 		dunst flameshot libinput zoxide trash-cli \
 		alsa-utils bluez bluez-utils blueman
 	systemctl enable tlp
 	systemctl enable clightd.service
 	systemctl enable bluetooth.service
+
+tools-wsl:
+	paru -Syu --needed unclutter feh mpv ffmpeg youtube-dl zathura \
+		zathura-pdf-mupdf nodejs npm python python-pip \
+		zoxide trash-cli
 
 development:
 	paru -Syu --needed git github-cli tmux \
