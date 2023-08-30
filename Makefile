@@ -13,10 +13,10 @@
 windows:
 	cd ./windows && make configuration
 
-wsl-arch: windows unix is-personal
+wsl-arch: windows unix linux-gui is-personal
 	cd ./unix/os/linux/arch && make configuration
 
-wsl-ubuntu: windows unix is-personal
+wsl-ubuntu: windows unix linux-gui is-personal
 	cd ./unix/os/linux/ubuntu-20.04 && make configuration
 
 mac: unix is-personal
