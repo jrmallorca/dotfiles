@@ -50,7 +50,9 @@ lsp_installer.setup({
   ensure_installed = {
     "lua_ls", -- Lua
     "marksman", -- Markdown
-    "bashls" -- Bash
+    "bashls", -- Bash
+    "jdtls", -- Java
+    "dartls" -- Java
   },
 
   -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
@@ -101,25 +103,26 @@ lsp_installer.setup_handlers({
         }
       }
     }
+  end,
+  ["dartls"] = function()
+    lspconfig.dartls.setup({
+      cmd = { "dart", "language-server", "--protocol=lsp" },
+      filetypes = { "dart" },
+      init_options = {
+        closingLabels = true,
+        flutterOutline = true,
+        onlyAnalyzeProjectsWithOpenFiles = true,
+        outline = true,
+        suggestFromUnimportedLibraries = true,
+      },
+      -- root_dir = root_pattern("pubspec.yaml"),
+      settings = {
+        dart = {
+          completeFunctionCalls = true,
+          showTodos = true,
+        },
+      },
+      on_attach = on_attach
+    })
   end
-})
-
-lspconfig.dartls.setup({
-  cmd = { "dart", "language-server", "--protocol=lsp" },
-  filetypes = { "dart" },
-  init_options = {
-    closingLabels = true,
-    flutterOutline = true,
-    onlyAnalyzeProjectsWithOpenFiles = true,
-    outline = true,
-    suggestFromUnimportedLibraries = true,
-  },
-  -- root_dir = root_pattern("pubspec.yaml"),
-  settings = {
-    dart = {
-      completeFunctionCalls = true,
-      showTodos = true,
-    },
-  },
-  on_attach = on_attach
 })
