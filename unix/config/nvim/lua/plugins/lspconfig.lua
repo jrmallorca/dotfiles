@@ -48,10 +48,10 @@ lsp_installer.setup({
   -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer@nightly", "lua_ls" }
   -- This setting has no relation with the `automatic_installation` setting.
   ensure_installed = {
-    "lua_ls", -- Lua
+    "lua_ls",   -- Lua
     "marksman", -- Markdown
-    "bashls", -- Bash
-    "jdtls" -- Java
+    "bashls",   -- Bash
+    "jdtls"     -- Java
   },
 
   -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
@@ -103,25 +103,4 @@ lsp_installer.setup_handlers({
       }
     }
   end
-})
-
--- Dart is special as its LS is already included when installing Flutter/Dart
-lspconfig.dartls.setup({
-  cmd = { "dart", "language-server", "--protocol=lsp" },
-  filetypes = { "dart" },
-  init_options = {
-    closingLabels = true,
-    flutterOutline = true,
-    onlyAnalyzeProjectsWithOpenFiles = true,
-    outline = true,
-    suggestFromUnimportedLibraries = true,
-  },
-  -- root_dir = root_pattern("pubspec.yaml"),
-  settings = {
-    dart = {
-      completeFunctionCalls = true,
-      showTodos = true,
-    },
-  },
-  on_attach = on_attach
 })
