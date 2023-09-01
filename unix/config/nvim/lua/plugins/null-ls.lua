@@ -32,13 +32,10 @@ local sources = {
   diagnostics.jsonlint,
   diagnostics.todo_comments,
   diagnostics.trail_space,
-  diagnostics.semgrep,
 
   -- Formatting
   formatting.astyle,
   formatting.shfmt,
-  -- formatting.csharpier,
-  -- formatting.dart_format,
   formatting.fish_indent,
   formatting.deno_fmt.with({
     extra_args = function(params)
