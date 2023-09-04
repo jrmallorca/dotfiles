@@ -24,6 +24,7 @@ else if [ "$OSTYPE" = MacOS ]
     fish_add_path $HOME/Library/Python/3.8/bin
     fish_add_path $HOME/.local/bin
     fish_add_path $HOME/bin
+    fish_add_path $HOME/.jenv/bin
 else if [ "$OSTYPE" = WSL ]
     set -gx USERPROFILE (wslpath (wslvar USERPROFILE))
 

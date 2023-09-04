@@ -59,7 +59,22 @@ fonts:
 # Development
 # -----------------------------------------------------------------------------
 
-flutter:
+java:
+	brew upgrade && brew install java maven
+	git clone https://github.com/jenv/jenv.git ~/.jenv
+	jenv enable-plugin export
+	exec $$SHELL -l
+	jenv add "$$(/usr/libexec/java_home)"
+	sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk \
+		 /Library/Java/JavaVirtualMachines/openjdk.jdk
+
+#  gradle:
+#  brew upgrade && brew install gradle
+#  echo $"\nGRADLE_VERSION=$(echo $(arr=($(gradle --version | awk '{ print $2 }')) && echo ${arr[0]}))\n"
+
+flutter: java
+	# Android
+	# Flutter
 	brew upgrade && brew install --cask flutter
 
 gitgpgkeys:
