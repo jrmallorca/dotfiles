@@ -8,6 +8,7 @@ require('nvim-treesitter.configs').setup {
     -- Languages
     "lua",
     "dart",
+    "java",
     "html",
     "css",
     "json",

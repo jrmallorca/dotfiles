@@ -36,8 +36,6 @@ local sources = {
   -- Formatting
   formatting.astyle,
   formatting.shfmt,
-  -- formatting.csharpier,
-  -- formatting.dart_format,
   formatting.fish_indent,
   formatting.deno_fmt.with({
     extra_args = function(params)
@@ -85,7 +83,7 @@ null_ls.setup({
 })
 
 require("mason-null-ls").setup({
-  ensure_installed = nil,
+  ensure_installed = {},
   automatic_installation = true,
   automatic_setup = false,
 })
