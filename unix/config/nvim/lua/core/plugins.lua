@@ -51,8 +51,9 @@ return require('packer').startup(function(use)
   -- Functionality
   use {
     'nvim-telescope/telescope.nvim', -- Fuzzy finder
-    tag = '0.1.0',
+    tag = '0.1.4',
   }
+  use 'tpope/vim-eunuch' -- Allow UNIX shell commands in Neovim
 
   -- IDE functionality
   -- Setup explanation:
