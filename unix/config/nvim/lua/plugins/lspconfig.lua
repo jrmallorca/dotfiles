@@ -48,10 +48,10 @@ lsp_installer.setup({
   -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer@nightly", "lua_ls" }
   -- This setting has no relation with the `automatic_installation` setting.
   ensure_installed = {
-    "lua_ls",   -- Lua
-    "marksman", -- Markdown
-    "bashls",   -- Bash
-    "jdtls"     -- Java
+    "lua_ls",                 -- Lua
+    "marksman",               -- Markdown
+    "bashls",                 -- Bash
+    "kotlin_language_server", -- Kotlin
   },
 
   -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
@@ -104,3 +104,12 @@ lsp_installer.setup_handlers({
     }
   end
 })
+
+-- Flutter tools sets up "dartls" for us already
+require("flutter-tools").setup {
+  lsp = {
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }
+}
+require("telescope").load_extension("flutter")
