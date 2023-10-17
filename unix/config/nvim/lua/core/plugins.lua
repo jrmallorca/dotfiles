@@ -69,7 +69,7 @@ return require('packer').startup(function(use)
     'williamboman/mason.nvim',           -- Package manager of language servers, DAP servers, linters and formatters
     'neovim/nvim-lspconfig',             -- Configurations for built-in LSP client
     'williamboman/mason-lspconfig.nvim', -- Language server installer for mason
-    'jose-elias-alvarez/null-ls.nvim',   -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
+    'nvimtools/none-ls.nvim',            -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
     'jayp0521/mason-null-ls.nvim',       -- Linter and formatter installer for mason
     'mfussenegger/nvim-dap',             -- Debugger for Neovim
     'jayp0521/mason-nvim-dap.nvim',      -- Debug adapter installer for mason
