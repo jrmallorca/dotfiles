@@ -48,6 +48,7 @@ fisher:
 fisher-plugins: SHELL:=/opt/homebrew/bin/fish
 fisher-plugins:
 	fisher install jorgebucaran/nvm.fish
+	nvm install lts
 
 fonts:
 	brew tap homebrew/cask-fonts
