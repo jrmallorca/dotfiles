@@ -21,7 +21,7 @@ configuration:
 # -----------------------------------------------------------------------------
 # Install main programs.
 init: SHELL:=/bin/bash
-init: package-manager tools gitdiff shell fisher fisher-plugins fonts
+init: package-manager tools gitdiff shell fisher fisher-plugins fonts twm
 	brew upgrade
 
 package-manager:
@@ -53,6 +53,13 @@ fisher-plugins:
 fonts:
 	brew tap homebrew/cask-fonts
 	brew upgrade && brew install --cask font-iosevka-nerd-font
+
+# Tiling Window Manager (TWM)
+twm:
+	brew upgrade && brew install koekeishiya/formulae/yabai koekeishiya/formulae/skhd
+	yabai --start-service
+	skhd --start-service
+	echo "Follow the instructions in the following link: https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(latest-release)#configure-scripting-addition"
 
 # Development
 # -----------------------------------------------------------------------------
