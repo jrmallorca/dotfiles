@@ -39,7 +39,6 @@ packer.init({
 return require('packer').startup(function(use)
   -- Requirements
   use 'wbthomason/packer.nvim'          -- Package manager
-  use 'lewis6991/impatient.nvim'        -- Reduce Neovim startup time
   use "nvim-lua/plenary.nvim"           -- (Required for many plugins) Neovim functions helper
   use 'antoinemadec/FixCursorHold.nvim' -- (Required for neotest) Fix cursor hold autocmd events
 

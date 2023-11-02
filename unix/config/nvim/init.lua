@@ -1,7 +1,4 @@
-local impatient_ok, impatient = pcall(require, "impatient")
-if impatient_ok then
-  impatient.enable_profile()
-end
+vim.loader.enable()
 
 for _, source in ipairs({
   -- CORE
@@ -21,6 +18,7 @@ for _, source in ipairs({
   "plugins.nvim-cmp",
   "plugins.nvim-autopairs",
   "plugins.neotest",
+  "plugins.nvim-dap",
   "plugins.commented",
   "plugins.nvim-treesitter",
   "plugins.hop",
