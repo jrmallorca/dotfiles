@@ -39,7 +39,6 @@ packer.init({
 return require('packer').startup(function(use)
   -- Requirements
   use 'wbthomason/packer.nvim'          -- Package manager
-  use 'lewis6991/impatient.nvim'        -- Reduce Neovim startup time
   use "nvim-lua/plenary.nvim"           -- (Required for many plugins) Neovim functions helper
   use 'antoinemadec/FixCursorHold.nvim' -- (Required for neotest) Fix cursor hold autocmd events
 
@@ -51,8 +50,9 @@ return require('packer').startup(function(use)
   -- Functionality
   use {
     'nvim-telescope/telescope.nvim', -- Fuzzy finder
-    tag = '0.1.0',
+    tag = '0.1.4',
   }
+  use 'tpope/vim-eunuch' -- Allow UNIX shell commands in Neovim
 
   -- IDE functionality
   -- Setup explanation:
@@ -68,7 +68,7 @@ return require('packer').startup(function(use)
     'williamboman/mason.nvim',           -- Package manager of language servers, DAP servers, linters and formatters
     'neovim/nvim-lspconfig',             -- Configurations for built-in LSP client
     'williamboman/mason-lspconfig.nvim', -- Language server installer for mason
-    'jose-elias-alvarez/null-ls.nvim',   -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
+    'nvimtools/none-ls.nvim',            -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
     'jayp0521/mason-null-ls.nvim',       -- Linter and formatter installer for mason
     'mfussenegger/nvim-dap',             -- Debugger for Neovim
     'jayp0521/mason-nvim-dap.nvim',      -- Debug adapter installer for mason

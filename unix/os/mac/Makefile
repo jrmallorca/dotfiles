@@ -2,7 +2,7 @@
 # MacOS Setup
 # -----------------------------------------------------------------------------
 
-.PHONY: all clean test init
+.PHONY: all clean test init fisher
 
 # -----------------------------------------------------------------------------
 # Dot Files
@@ -21,7 +21,7 @@ configuration:
 # -----------------------------------------------------------------------------
 # Install main programs.
 init: SHELL:=/bin/bash
-init: package-manager tools shell fonts
+init: package-manager tools gitdiff shell fisher fisher-plugins fonts twm
 	brew upgrade
 
 package-manager:
@@ -31,7 +31,6 @@ tools:
 	brew upgrade && brew install gnupg wget fzf fd bat ripgrep jq \
 		neovim zoxide diff-so-fancy lf gh
 	brew install --cask cursorcerer alacritty
-	gitdiff
 
 gitdiff:
 	git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
@@ -41,20 +40,26 @@ shell:
 	brew install fish
 	echo /opt/homebrew/bin/fish | sudo tee -a /etc/shells
 	chsh -s /opt/homebrew/bin/fish
-	fisher
 
+fisher: SHELL:=/opt/homebrew/bin/fish
 fisher:
-	SHELL:=/opt/homebrew/bin/fish
 	curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
-	fisher-plugins
 
+fisher-plugins: SHELL:=/opt/homebrew/bin/fish
 fisher-plugins:
-	SHELL:=/opt/homebrew/bin/fish
 	fisher install jorgebucaran/nvm.fish
+	nvm install lts
 
 fonts:
 	brew tap homebrew/cask-fonts
 	brew upgrade && brew install --cask font-iosevka-nerd-font
+
+# Tiling Window Manager (TWM)
+twm:
+	brew upgrade && brew install koekeishiya/formulae/yabai koekeishiya/formulae/skhd
+	yabai --start-service
+	skhd --start-service
+	echo "Follow the instructions in the following link: https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(latest-release)#configure-scripting-addition"
 
 # Development
 # -----------------------------------------------------------------------------

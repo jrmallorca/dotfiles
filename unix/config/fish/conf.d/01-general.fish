@@ -8,7 +8,7 @@ set fish_greeting
 # Enable jenv
 if [ "$OSTYPE" = MacOS ]
     /opt/homebrew/bin/zoxide init fish | source
-    status --is-interactive; and jenv init - | source
+    command -q jenv; and status --is-interactive; and jenv init - | source
 else
     /usr/bin/zoxide init fish | source
 end

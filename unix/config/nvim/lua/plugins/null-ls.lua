@@ -32,6 +32,7 @@ local sources = {
   diagnostics.jsonlint,
   diagnostics.todo_comments,
   diagnostics.trail_space,
+  diagnostics.eslint,
 
   -- Formatting
   formatting.astyle,
@@ -42,7 +43,7 @@ local sources = {
       return params.options
           and {
             "--options-line-width",
-            99999,
+            999,
           }
     end,
   }),
