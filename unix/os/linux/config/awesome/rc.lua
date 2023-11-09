@@ -89,20 +89,23 @@ awful.layout.layouts = {
 -- {{{ Menu
 -- Create a launcher widget and a main menu
 myawesomemenu = {
-  { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-  { "manual", terminal .. " -e man awesome" },
+  { "hotkeys",     function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
+  { "manual",      terminal .. " -e man awesome" },
   { "edit config", editor_cmd .. " " .. awesome.conffile },
-  { "restart", awesome.restart },
-  { "quit", function() awesome.quit() end },
+  { "restart",     awesome.restart },
+  { "quit",        function() awesome.quit() end },
 }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-  { "open terminal", terminal }
-}
+mymainmenu = awful.menu({
+  items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
+    { "open terminal", terminal }
+  }
 })
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-  menu = mymainmenu })
+mylauncher = awful.widget.launcher({
+  image = beautiful.awesome_icon,
+  menu = mymainmenu
+})
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -206,7 +209,7 @@ awful.screen.connect_for_each_screen(function(s)
       s.mypromptbox,
     },
     s.mytasklist, -- Middle widget
-    { -- Right widgets
+    {             -- Right widgets
       layout = wibox.layout.fixed.horizontal,
       mykeyboardlayout,
       wibox.widget.systray(),
@@ -227,13 +230,13 @@ root.buttons(gears.table.join(
 
 -- {{{ Modes
 local systemmap = {
-  { "a", awesome.quit, "Quit awesome" },
-  { "s", awesome.restart, "Restart awesome" },
+  { "a", awesome.quit,                                           "Quit awesome" },
+  { "s", awesome.restart,                                        "Restart awesome" },
 
   { "h", function() awful.spawn("betterlockscreen -l blur") end, "Lock screen" },
-  { "j", function() awful.spawn("systemctl suspend") end, "Suspend" },
-  { "k", function() awful.spawn("systemctl reboot") end, "Restart" },
-  { "l", function() awful.spawn("systemctl poweroff") end, "Shut down" },
+  { "j", function() awful.spawn("systemctl suspend") end,        "Suspend" },
+  { "k", function() awful.spawn("systemctl reboot") end,         "Restart" },
+  { "l", function() awful.spawn("systemctl poweroff") end,       "Shut down" },
 }
 
 local volumebrightnessmap = {
@@ -252,28 +255,28 @@ local volumebrightnessmap = {
 globalkeys = gears.table.join(
 -- System mode
   awful.key({ modkey, "Shift" }, "q", function()
-    modalbind.grab { keymap = systemmap, name = "System" }
-  end,
+      modalbind.grab { keymap = systemmap, name = "System" }
+    end,
     { description = "System mode" }),
   awful.key({ modkey, }, "v", function()
-    modalbind.grab { keymap = volumebrightnessmap, name = "Volume/Brightness", stay_in_mode = true }
-  end,
+      modalbind.grab { keymap = volumebrightnessmap, name = "Volume/Brightness", stay_in_mode = true }
+    end,
     { description = "Volume/Brightness mode" }),
 
   -- Volume mode
   awful.key({}, "XF86AudioRaiseVolume", function()
-    awful.spawn("amixer set Master 5%+")
-  end,
+      awful.spawn("amixer set Master 5%+")
+    end,
     { description = "volume up", group = "volume" }),
   awful.key({}, "XF86AudioLowerVolume", function()
-    awful.spawn("amixer set Master 5%-")
-  end,
+      awful.spawn("amixer set Master 5%-")
+    end,
     { description = "volume down", group = "volume" }),
 
   -- Scripts
   awful.key({ modkey, }, "e", function()
-    awful.spawn(scripts .. "editInVim.sh")
-  end,
+      awful.spawn(scripts .. "editInVim.sh")
+    end,
     { description = "Edit in nvim", group = "launcher" }),
 
   awful.key({ modkey, }, "s", hotkeys_popup.show_help,
@@ -283,38 +286,38 @@ globalkeys = gears.table.join(
 
   -- Moving window focus works between desktops
   awful.key({ modkey, }, "Down", function()
-    awful.client.focus.global_bydirection("down")
-  end,
+      awful.client.focus.global_bydirection("down")
+    end,
     { description = "focus next window up", group = "client" }),
   awful.key({ modkey, }, "Up", function()
-    awful.client.focus.global_bydirection("up")
-  end,
+      awful.client.focus.global_bydirection("up")
+    end,
     { description = "focus next window down", group = "client" }),
   awful.key({ modkey, }, "Right", function()
-    awful.client.focus.global_bydirection("right")
-  end,
+      awful.client.focus.global_bydirection("right")
+    end,
     { description = "focus next window right", group = "client" }),
   awful.key({ modkey, }, "Left", function()
-    awful.client.focus.global_bydirection("left")
-  end,
+      awful.client.focus.global_bydirection("left")
+    end,
     { description = "focus next window left", group = "client" }),
 
   -- Moving windows between positions works between desktops
   awful.key({ modkey, "Shift" }, "Left", function()
-    awful.client.swap.global_bydirection("left")
-  end,
+      awful.client.swap.global_bydirection("left")
+    end,
     { description = "swap with left client", group = "client" }),
   awful.key({ modkey, "Shift" }, "Right", function()
-    awful.client.swap.global_bydirection("right")
-  end,
+      awful.client.swap.global_bydirection("right")
+    end,
     { description = "swap with right client", group = "client" }),
   awful.key({ modkey, "Shift" }, "Down", function()
-    awful.client.swap.global_bydirection("down")
-  end,
+      awful.client.swap.global_bydirection("down")
+    end,
     { description = "swap with down client", group = "client" }),
   awful.key({ modkey, "Shift" }, "Up", function()
-    awful.client.swap.global_bydirection("up")
-  end,
+      awful.client.swap.global_bydirection("up")
+    end,
     { description = "swap with up client", group = "client" }),
 
   -- Toggle wibar
@@ -521,8 +524,10 @@ root.keys(globalkeys)
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
   -- All clients will match this rule.
-  { rule = {},
-    properties = { border_width = beautiful.border_width,
+  {
+    rule = {},
+    properties = {
+      border_width = beautiful.border_width,
       border_color = beautiful.border_normal,
       focus = awful.client.focus.filter,
       raise = true,
@@ -534,40 +539,45 @@ awful.rules.rules = {
   },
 
   -- Floating clients.
-  { rule_any = {
-    instance = {
-      "DTA", -- Firefox addon DownThemAll.
-      "copyq", -- Includes session name in class.
-      "pinentry",
-    },
-    class = {
-      "Arandr",
-      "Blueman-manager",
-      "Gpick",
-      "Kruler",
-      "MessageWin", -- kalarm.
-      "Sxiv",
-      "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
-      "Wpa_gui",
-      "veromix",
-      "xtightvncviewer"
-    },
+  {
+    rule_any = {
+      instance = {
+        "DTA", -- Firefox addon DownThemAll.
+        "copyq", -- Includes session name in class.
+        "pinentry",
+      },
+      class = {
+        "Arandr",
+        "Blueman-manager",
+        "Gpick",
+        "Kruler",
+        "MessageWin", -- kalarm.
+        "Sxiv",
+        "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
+        "Wpa_gui",
+        "veromix",
+        "xtightvncviewer"
+      },
 
-    -- Note that the name property shown in xprop might be set slightly after creation of the client
-    -- and the name shown there might not match defined rules here.
-    name = {
-      "Event Tester", -- xev.
+      -- Note that the name property shown in xprop might be set slightly after creation of the client
+      -- and the name shown there might not match defined rules here.
+      name = {
+        "Event Tester", -- xev.
+      },
+      role = {
+        "AlarmWindow", -- Thunderbird's calendar.
+        "ConfigManager", -- Thunderbird's about:config.
+        "pop-up",      -- e.g. Google Chrome's (detached) Developer Tools.
+      }
     },
-    role = {
-      "AlarmWindow", -- Thunderbird's calendar.
-      "ConfigManager", -- Thunderbird's about:config.
-      "pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
-    }
-  }, properties = { floating = true } },
+    properties = { floating = true }
+  },
 
   -- Add titlebars to normal clients and dialogs
-  { rule_any = { type = { "normal", "dialog" }
-  }, properties = { titlebars_enabled = false }
+  {
+    rule_any = { type = { "normal", "dialog" }
+    },
+    properties = { titlebars_enabled = false }
   },
 
   -- Set Firefox to always map on the tag named "2" on screen 1.
@@ -611,7 +621,7 @@ client.connect_signal("request::titlebars", function(c)
       buttons = buttons,
       layout  = wibox.layout.fixed.horizontal
     },
-    { -- Middle
+    {   -- Middle
       { -- Title
         align  = "center",
         widget = awful.titlebar.widget.titlewidget(c)
@@ -668,7 +678,6 @@ local function trim(s)
 end
 
 local function bat_notification()
-
   local f_capacity = assert(io.open("/sys/class/power_supply/BAT0/capacity", "r"))
   local f_status = assert(io.open("/sys/class/power_supply/BAT0/status", "r"))
 
@@ -676,12 +685,18 @@ local function bat_notification()
   local bat_status = trim(f_status:read("*all"))
 
   if (bat_capacity <= 20 and bat_status == "Discharging") then
-    naughty.notify({ title = "Battery Warning"
-      , text = "Battery low! " .. bat_capacity .. "%" .. " left!"
-      , fg = "#ff0000"
-      , bg = "#deb887"
-      , timeout = 15
-      , position = "bottom_left"
+    naughty.notify({
+      title = "Battery Warning"
+      ,
+      text = "Battery low! " .. bat_capacity .. "%" .. " left!"
+      ,
+      fg = "#ff0000"
+      ,
+      bg = "#deb887"
+      ,
+      timeout = 15
+      ,
+      position = "bottom_left"
     })
   end
 end
