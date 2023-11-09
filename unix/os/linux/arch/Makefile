@@ -69,12 +69,15 @@ base-wsl:
 
 tools:
 	paru -Syu --needed unclutter tlp feh mpv ffmpeg youtube-dl zathura \
-		zathura-pdf-mupdf clight nodejs npm python python-pip \
+		zathura-pdf-mupdf nodejs npm python python-pip \
 		dunst flameshot libinput zoxide trash-cli \
-		alsa-utils bluez bluez-utils blueman
+		alsa-utils bluez bluez-utils blueman pulseaudio-bluetooth
 	systemctl enable tlp
-	systemctl enable clightd.service
 	systemctl enable bluetooth.service
+
+backlight:
+	paru -Syu --needed clight clightd clight-gui-git
+	systemctl enable clightd.service
 
 tools-wsl:
 	paru -Syu --needed unclutter feh mpv ffmpeg youtube-dl zathura \
@@ -180,7 +183,7 @@ lockscreen: betterlockscreen
 
 betterlockscreen:
 	paru -Syu --needed betterlockscreen
-	betterlockscreen -u "~/dotfiles/backgrounds/"
+	betterlockscreen -u ~/dotfiles/backgrounds/
 	systemctl enable betterlockscreen@$USER
 
 compositor:
@@ -287,19 +290,17 @@ syncthing:
 # Git
 # -----------------------------------------------------------------------------
 
-# UNTESTED and probably doesn't work with 2nd line due to fish
-# Should probably make it a script?
-# Should check if there's no existing SSH key
 gitsshkeys:
 	ssh-keygen -t ed25519 -C "48072014+jrmallorca@users.noreply.github.com"
 	eval "$$(ssh-agent -s)" && ssh-add ~/.ssh/id_ed25519
 	xclip -selection clipboard < ~/.ssh/id_ed25519.pub
+	echo "Paste the secret key into GitHub"
 
 # INCOMPLETE and doesn't do the last 2 lines in git docs
 gitgpgkeys:
 	gpg --full-generate-key
 	GPGKEYID=$$(gpg --list-secret-keys --keyid-format=long | grep sec | head -1 | awk '{print $2}' | cut -d '/' -f 2); \
-	gpg --armor --export $$GPGKEYID | xclip
+	gpg --armor --export $$GPGKEYID | xclip -selection clipboard
 	echo "Paste the secret key into GitHub"
 
 # Extra
