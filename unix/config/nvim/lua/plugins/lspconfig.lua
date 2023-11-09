@@ -95,7 +95,7 @@ lsp_installer.setup_handlers({
             -- Make the server aware of Neovim runtime files
             library = vim.api.nvim_get_runtime_file("", true),
             -- Remove annoying popup about luaassert
-            checkThirdParty = false
+            checkThirdParty = "Disable"
           },
           -- Do not send telemetry data containing a randomized but unique identifier
           telemetry = { enable = false }
