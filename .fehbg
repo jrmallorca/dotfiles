@@ -1,2 +1,2 @@
 #!/bin/sh
-feh --no-fehbg --bg-scale '$HOME/dotfiles/backgrounds/Medusa.png' 
+feh --no-fehbg --bg-scale $HOME/dotfiles/backgrounds/medusa.png
