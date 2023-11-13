@@ -43,7 +43,7 @@ ctrl + alt - left : if [ \
                      (yabai -m query --spaces --space | jq '.index' ) != \
                      (yabai -m query --displays --display | jq '.spaces[0]') \
                      ]; \
-                     yabai -m space --focus prev; \
+                     skhd -k "ctrl - left"; \
                  else; \
                      yabai -m space --focus (yabai -m query --displays --display | jq '.spaces[-1]'); \
                  end
@@ -51,7 +51,7 @@ ctrl + alt - right : if [ \
                      (yabai -m query --spaces --space | jq '.index' ) != \
                      (yabai -m query --displays --display | jq '.spaces[-1]') \
                      ]; \
-                     yabai -m space --focus next; \
+                     skhd -k "ctrl - right"; \
                  else; \
                      yabai -m space --focus (yabai -m query --displays --display | jq '.spaces[0]'); \
                  end
