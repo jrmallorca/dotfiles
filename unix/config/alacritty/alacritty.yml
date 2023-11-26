@@ -175,19 +175,19 @@ window:
 
 font:
   normal:
-    family: Iosevka Nerd Font
+    family: Iosevka NF
     style: Regular
 
   bold:
-    family: Iosevka Nerd Font
+    family: Iosevka NF
     style: Bold
 
   italic:
-    family: Iosevka Nerd Font
+    family: Iosevka NF
     style: Italic
 
   bold_italic:
-    family: Iosevka Nerd Font
+    family: Iosevka NF
     style: Bold Italic
 
   size: 10.0
