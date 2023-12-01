@@ -322,15 +322,18 @@ apy:
 # Programs
 # -----------------------------------------------------------------------------
 
-# Virtual MacOS
-maccat:
-	VBoxManage modifyvm "maccat" --cpuidset 00000001 000106e5 00100800 0098e3fd bfebfbff
-	VBoxManage setextradata "maccat" "VBoxInternal/Devices/efi/0/Config/DmiSystemProduct" "iMac19,1"
-	VBoxManage setextradata "maccat" "VBoxInternal/Devices/efi/0/Config/DmiSystemVersion" "1.0"
-	VBoxManage setextradata "maccat" "VBoxInternal/Devices/efi/0/Config/DmiBoardProduct" "Mac-AA95B1DDAB278B95"
-	VBoxManage setextradata "maccat" "VBoxInternal/Devices/smc/0/Config/DeviceKey" "ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc"
-	VBoxManage setextradata "maccat" "VBoxInternal/Devices/smc/0/Config/GetKeyFromRealSMC" 1
-	VBoxManage setextradata "maccat" VBoxInternal2/EfiGraphicsResolution 1920x1080
+docker:
+	paru -Syu --needed --noconfirm docker
+	- sudo groupadd docker && usermod -aG docker $$USER && newgrp docker
+	docker run hello-world
+	sudo systemctl enable docker.service
+	sudo systemctl enable containerd.service
+
+dockerosx: docker
+	paru -Syu --needed --noconfirm qemu libvirt dnsmasq virt-manager bridge-utils flex bison iptables-nft edk2-ovmf
+	sudo systemctl enable --now libvirtd
+	sudo systemctl enable --now virtlogd
+	sudo modprobe kvm
 
 # QMK Firmware for keyboards
 qmk:
