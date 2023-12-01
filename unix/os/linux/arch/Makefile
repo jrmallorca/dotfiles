@@ -5,7 +5,7 @@
 .PHONY: all clean test init lockscreen
 
 # Initialise setup
-init: package-manager base tools development editor null-ls telekasten gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager display-manager compositor lockscreen theme fonts configuration xorg nobeep
+init: package-manager base tools development editor null-ls telekasten gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager display-manager compositor lockscreen theme fonts configuration xorg modprobe.d
 
 init-wsl: package-manager base-wsl tools-wsl development editor null-ls telekasten gitdiff terminal shell fisher fisher-plugins file-manager fonts configuration apy
 
@@ -21,10 +21,8 @@ configuration:
 xorg:
 	sudo cp -a ./xorg.conf.d/. /etc/X11/xorg.conf.d/
 
-nobeep:
+modprobe.d:
 	sudo cp nobeep.conf /etc/modprobe.d/
-
-hooks:
 	sudo cp -a ./pacman.d/. /etc/modprobe.d/
 
 # Transfer cron jobs
