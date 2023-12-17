@@ -5,7 +5,7 @@
 .PHONY: all clean test init lockscreen
 
 # Initialise setup
-init: package-manager base tools development editor null-ls telekasten gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager display-manager compositor lockscreen theme fonts configuration xorg modprobe.d
+init: package-manager base nvidia-services tools development editor null-ls telekasten gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager display-manager compositor lockscreen theme fonts configuration xorg modprobe.d
 
 init-wsl: package-manager base-wsl tools-wsl development editor null-ls telekasten gitdiff terminal shell fisher fisher-plugins file-manager fonts configuration apy
 
@@ -52,15 +52,20 @@ package-manager:
 		cd paru && makepkg -si
 	sudo rm -rf ~/paru/
 
+nvidia-services:
+	sudo systemctl enable nvidia-suspend.service
+	sudo systemctl enable nvidia-hibernate.service
+	sudo systemctl enable nvidia-resume.service
+
 base:
 	paru -Syu --needed grub base-devel reflector \
 		intel-ucode amd-ucode networkmanager network-manager-applet \
 		xf86-video-amdgpu xf86-video-ati xf86-video-intel xf86-video-nouveau \
 		xf86-video-vesa xdg-utils xdg-user-dirs nvidia-open \
 		xorg-xinit xorg-server xorg-xinput
-	systemctl enable NetworkManager
-	systemctl enable reflector.service
-	systemctl enable reflector.timer
+	sudo systemctl enable NetworkManager
+	sudo systemctl enable reflector.service
+	sudo systemctl enable reflector.timer
 
 base-wsl:
 	paru -Syu --needed grub base-devel reflector xdg-user-dirs
@@ -70,12 +75,12 @@ tools:
 		zathura-pdf-mupdf nodejs npm python python-pip \
 		dunst flameshot libinput zoxide trash-cli \
 		alsa-utils bluez bluez-utils blueman pulseaudio-bluetooth
-	systemctl enable tlp
-	systemctl enable bluetooth.service
+	sudo systemctl enable tlp
+	sudo systemctl enable bluetooth.service
 
 backlight:
 	paru -Syu --needed clight clightd clight-gui-git
-	systemctl enable clightd.service
+	sudo systemctl enable clightd.service
 
 tools-wsl:
 	paru -Syu --needed unclutter feh mpv ffmpeg youtube-dl zathura \
@@ -182,7 +187,7 @@ lockscreen: betterlockscreen
 betterlockscreen:
 	paru -Syu --needed betterlockscreen
 	betterlockscreen -u ~/dotfiles/backgrounds/
-	systemctl enable betterlockscreen@$USER
+	sudo systemctl enable betterlockscreen@$USER
 
 compositor:
 	paru -Syu --needed picom
@@ -250,8 +255,8 @@ weechat-bitlbee:
 spotify:
 	paru -Syu --needed spotifyd spotify-tui
 	echo "Make the .config/spotifyd/spotifyd.conf for the login"
-	systemctl --user start spotifyd.service
-	systemctl --user enable spotifyd.service
+	sudo systemctl --user start spotifyd.service
+	sudo systemctl --user enable spotifyd.service
 
 vm:
 	paru -Syu --needed virtualbox virtualbox-guest-iso virtualbox-ext-oracle
@@ -265,7 +270,7 @@ torrent:
 # -----------------------------------------------------------------------------
 
 java:
-	paru -Syu jre-openjdk jdk-openjdk maven
+	paru -Syu jre-openjdk maven
 
 flutter:
 	paru -Syu --needed jdk8-openjdk simple-mtpfs flutter android-sdk \
