@@ -44,3 +44,6 @@ set -x GPG_TTY (tty)
 
 # nvm.fish
 set -x nvm_default_version lts
+
+# Android Development
+fish_add_path /opt/android-sdk/tools/emulator
