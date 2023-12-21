@@ -21,8 +21,8 @@ configuration:
 xorg:
 	sudo cp -a ./xorg.conf.d/. /etc/X11/xorg.conf.d/
 
-modprobe.d:
-	sudo cp nobeep.conf /etc/modprobe.d/
+modprobe:
+	sudo cp -a ./modprobe.d/. /etc/modprobe.d/
 	sudo cp -a ./pacman.d/. /etc/modprobe.d/
 
 # Transfer cron jobs
@@ -165,6 +165,10 @@ i3:
 
 awesome:
 	paru -Syu --needed awesome
+
+hyprland:
+	paru -Syu --needed hyprland hyprpaper waybar fuzzel
+    curl -sSL https://raw.githubusercontent.com/Duckonaut/hyprload/main/install.sh | bash
 
 display-manager: ly
 	# lightdm
