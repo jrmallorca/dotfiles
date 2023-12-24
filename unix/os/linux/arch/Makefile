@@ -52,10 +52,10 @@ package-manager:
 		cd paru && makepkg -si
 	sudo rm -rf ~/paru/
 
+# Disable NVIDIA services
+# https://askubuntu.com/a/1436921
 nvidia-services:
-	sudo systemctl enable nvidia-suspend.service
-	sudo systemctl enable nvidia-hibernate.service
-	sudo systemctl enable nvidia-resume.service
+	sudo systemctl disable nvidia-suspend nvidia-hibernate nvidia-resume
 
 base:
 	paru -Syu --needed grub base-devel reflector \
