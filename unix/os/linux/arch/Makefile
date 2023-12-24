@@ -167,7 +167,7 @@ awesome:
 	paru -Syu --needed awesome
 
 hyprland:
-	paru -Syu --needed hyprland hyprpaper waybar fuzzel
+	paru -Syu --needed hyprland hyprpaper waybar fuzzel swaylock
     curl -sSL https://raw.githubusercontent.com/Duckonaut/hyprload/main/install.sh | bash
 
 display-manager: ly
