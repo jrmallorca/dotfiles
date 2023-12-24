@@ -43,9 +43,10 @@ return require('packer').startup(function(use)
   use 'antoinemadec/FixCursorHold.nvim' -- (Required for neotest) Fix cursor hold autocmd events
 
   -- UI
-  use 'Pocco81/TrueZen.nvim'    -- Better UI
-  use 'junegunn/limelight.vim'  -- Dim surrounding text
-  use 'lewis6991/gitsigns.nvim' -- Display git signs
+  use 'Pocco81/TrueZen.nvim'     -- Better UI
+  use 'junegunn/limelight.vim'   -- Dim surrounding text
+  use 'lewis6991/gitsigns.nvim'  -- Display git signs
+  use "ellisonleao/gruvbox.nvim" -- Gruvbox theme
 
   -- Functionality
   use {
