@@ -5,14 +5,12 @@
 # Once finished editing, exits terminal and copies the contents
 # into the clipboard.
 
-TERM="alacritty" # Set terminal as alacritty
-TERM_FLAGS="--config-file $HOME/.config/alacritty/pop-up.toml -e"
+TERM="alacritty"
+TERM_FLAGS="--title edit-in-nvim.sh --command"
 
 # (Linux only) Get highlighted text (Primary selection)
 if [ "$OSTYPE" == "Linux" ]; then
-	echo "Start to copy selected text (Linux)"
 	SELECTED_TEXT=$(xclip -out)
-	echo "$SELECTED_TEXT"
 else
 	SELECTED_TEXT=""
 fi
