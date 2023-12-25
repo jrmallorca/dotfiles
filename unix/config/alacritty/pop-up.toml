@@ -1,0 +1,4 @@
+import = ["~/.config/alacritty/alacritty.toml"]
+
+[window]
+title = "Edit in neovim"

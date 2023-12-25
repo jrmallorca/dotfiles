@@ -1,0 +1,6 @@
+[font]
+normal = { family = "Iosevka NF", style = "Regular" }
+bold = { family = "Iosevka NF", style = "Bold" }
+italic = { family = "Iosevka NF", style = "Italic" }
+bold_italic = { family = "Iosevka NF", style = "Bold Italic" }
+size = 10.0

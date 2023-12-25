@@ -6,7 +6,7 @@
 # into the clipboard.
 
 TERM="alacritty" # Set terminal as alacritty
-TERM_FLAGS="--config-file $HOME/.config/alacritty/pop-up.yml -e"
+TERM_FLAGS="--config-file $HOME/.config/alacritty/pop-up.toml -e"
 
 # (Linux only) Get highlighted text (Primary selection)
 if [ "$OSTYPE" == "Linux" ]; then
