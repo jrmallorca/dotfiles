@@ -64,8 +64,7 @@ base:
 		xf86-video-vesa xdg-utils xdg-user-dirs nvidia-open \
 		xorg-xinit xorg-server xorg-xinput
 	sudo systemctl enable NetworkManager
-	sudo systemctl enable reflector.service
-	sudo systemctl enable reflector.timer
+	sudo systemctl enable reflector.service reflector.timer
 
 base-wsl:
 	paru -Syu --needed grub base-devel reflector xdg-user-dirs
@@ -167,7 +166,7 @@ awesome:
 	paru -Syu --needed awesome
 
 hyprland:
-	paru -Syu --needed hyprland hyprpaper waybar fuzzel swaylock
+	paru -Syu --needed hyprland hyprpaper waybar fuzzel physlock
     curl -sSL https://raw.githubusercontent.com/Duckonaut/hyprload/main/install.sh | bash
 
 display-manager: ly
