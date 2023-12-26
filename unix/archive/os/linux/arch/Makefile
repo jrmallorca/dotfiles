@@ -5,9 +5,9 @@
 .PHONY: all clean test init lockscreen
 
 # Initialise setup
-init: package-manager base nvidia-services tools development lsp telekasten gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager display-manager compositor lockscreen theme fonts configuration modprobe.d
+init: package-manager base nvidia-services tools development editor null-ls telekasten gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager display-manager compositor lockscreen theme fonts configuration xorg modprobe.d
 
-init-wsl: package-manager base-wsl tools-wsl development editor lsp telekasten gitdiff terminal shell fisher fisher-plugins file-manager fonts configuration apy
+init-wsl: package-manager base-wsl tools-wsl development editor null-ls telekasten gitdiff terminal shell fisher fisher-plugins file-manager fonts configuration apy
 
 # -----------------------------------------------------------------------------
 # Dot Files
@@ -18,6 +18,9 @@ configuration:
 	cp -a ./config/. ~/.config/
 	cp .xinitrc ~/
 
+xorg:
+	sudo cp -a ./xorg.conf.d/. /etc/X11/xorg.conf.d/
+
 modprobe:
 	sudo cp -a ./modprobe.d/. /etc/modprobe.d/
 	sudo cp -a ./pacman.d/. /etc/modprobe.d/
@@ -25,6 +28,15 @@ modprobe:
 # Transfer cron jobs
 cron:
 	sudo cp mirrorlist /etc/cron.daily/
+
+# Transfer theme related files.
+#  theme:
+#  sudo cp -a ../backgrounds/ /usr/share/
+#  sudo cp -a ../themes/ /usr/share/
+#  sudo cp -a ../icons/ /usr/share/
+#  sudo cp -a ../fonts/ /usr/share/
+#  sudo cp bitlbee.conf /etc/bitlbee/
+#  sudo cp lightdm.conf /etc/lightdm/
 
 # -----------------------------------------------------------------------------
 # Programs
@@ -54,10 +66,13 @@ base:
 	sudo systemctl enable NetworkManager
 	sudo systemctl enable reflector.service reflector.timer
 
+base-wsl:
+	paru -Syu --needed grub base-devel reflector xdg-user-dirs
+
 tools:
 	paru -Syu --needed unclutter tlp feh mpv ffmpeg youtube-dl zathura \
 		zathura-pdf-mupdf nodejs npm python python-pip \
-		dunst libinput zoxide trash-cli \
+		dunst flameshot libinput zoxide trash-cli \
 		alsa-utils bluez bluez-utils blueman pulseaudio-bluetooth
 	sudo systemctl enable tlp
 	sudo systemctl enable bluetooth.service
@@ -66,12 +81,20 @@ backlight:
 	paru -Syu --needed clight clightd clight-gui-git
 	sudo systemctl enable clightd.service
 
+tools-wsl:
+	paru -Syu --needed unclutter feh mpv ffmpeg youtube-dl zathura \
+		zathura-pdf-mupdf nodejs npm python python-pip \
+		zoxide trash-cli
+
 development:
-	paru -Syu --needed git github-cli \
-		curl wget daemon wl-clipboard xsel xdotool fzf fd bat ripgrep xcape man less neovim \
+	paru -Syu --needed git github-cli tmux \
+		curl wget daemon xclip xsel xdotool fzf fd bat ripgrep xcape \
 		openssh
 	python3 -m venv .venv; . .venv/bin/activate; pip3 install pynvim; deactivate
 	rm -r .venv
+
+editor:
+	paru -Syu --needed neovim
 
 gitdiff:
 	paru -Syu --needed diff-so-fancy
@@ -132,41 +155,59 @@ lf:
 		make test && \
 		sudo make install
 
-window-manager: hyprland
+window-manager: awesome
+	# i3
+
+i3:
+	paru -Syu --needed i3-gaps i3status i3lock perl-anyevent-i3 i3-resurrect \
+		dmenu xss-lock
+
+awesome:
+	paru -Syu --needed awesome
 
 hyprland:
 	paru -Syu --needed hyprland hyprpaper waybar fuzzel physlock
     curl -sSL https://raw.githubusercontent.com/Duckonaut/hyprload/main/install.sh | bash
 
 display-manager: ly
+	# lightdm
 
+# Webkit2 greeter
+lightdm:
+	paru -Syu --needed xorg-server xorg-xinit lightdm lightdm-webkit2-greeter \
+		lightdm-webkit-theme-sequoia-git
+	systemctl enable lightdm
+
+# Ly display manager
 ly:
 	paru -Syu --needed ly
 	sudo systemctl enable ly.service
 	sudo systemctl disable getty@tty2.service
 	cd ~/ && chmod +x .xinitrc
 
-lockscreen:
-	paru -Syu --needed physlock
+lockscreen: betterlockscreen
+
+betterlockscreen:
+	paru -Syu --needed betterlockscreen
+	betterlockscreen -u ~/dotfiles/backgrounds/
+	sudo systemctl enable betterlockscreen@$USER
+
+compositor:
+	paru -Syu --needed picom
+
+theme:
+	paru -Syu --needed lxappearance-gtk3 gtk3
 
 fonts:
 	paru -Syu --needed ttf-iosevka-nerd noto-fonts-emoji
 
 # LSPs, linters and formatters
-lsp:
+null-ls:
 	paru -Syu --needed checkmake
 
-# Base (WSL)
-# -----------------------------------------------------------------------------
-
-base-wsl:
-	paru -Syu --needed grub base-devel reflector xdg-user-dirs
-
-tools-wsl:
-	paru -Syu --needed unclutter feh mpv ffmpeg youtube-dl zathura \
-		zathura-pdf-mupdf nodejs npm python python-pip \
-		zoxide trash-cli
-
+# Zettelkasten plugin in Neovim
+telekasten:
+	paru -Syu --needed xclip
 
 # Other
 # -----------------------------------------------------------------------------
@@ -179,10 +220,42 @@ mountd:
 	echo "Get UUID from the following command: lsblk -o NAME,FSTYPE,UUID"
 	echo "Do: sudo mount -av"
 
+# Signal
 signal:
-	paru -Syu --needed signal-desktop
+	gpg --keyserver keyserver.ubuntu.com --recv-key FA10826A74907F9EC6BBB7FC2BA2CD21B5B09570
+	paru -Syu --needed jdk-openjdk rustup
+	# paru -Syu --needed jdk11-openjdk rustup
+	sudo archlinux-java set java-16-openjdk
+	# sudo archlinux-java set java-11-openjdk
+	# rustup install stable
+	# rustup default stable
+	paru -Syu --needed signal-cli
+	pip install urwid
+	cd ~ && git clone https://github.com/isamert/scli.git
 
-spotify-tui:
+# weechat (CLI messaging) and bitlbee (For facebook and other stuff)
+# http://thedarnedestthing.com/weechat%20+%20bitlbee
+# https://zanshin.net/2015/01/10/a-guide-for-setting-up-weechat-and-bitlbee/
+# https://wiki.bitlbee.org/HowtoFacebookMQTT
+# https://weechat.org/files/doc/stable/weechat_quickstart.en.html
+weechat-bitlbee:
+	paru -Syu --needed weechat bitlbee bitlbee-facebook aspell lua tcl ruby libotr
+	sudo cp ../bitlbee.conf /etc/bitlbee
+	systemctl enable bitlbee --now
+	printf "Start weechat and do the following:\n
+	/server add im localhost/6667 -autoconnect\n
+	/connect im\n
+	In the bitlbee channel:\n
+	register <password>\n
+	In the weechat channel:\n
+	/set irc.server.im.command \"/msg &bitlbee identify <password>\"\n
+	Now generate an app password on facebook for bitlbee
+	In the bitlbee channel:\n
+	account add facebook <email> <app_password>\n
+	account facebook on\n"
+
+# Spotify TUI
+spotify:
 	paru -Syu --needed spotifyd spotify-tui
 	echo "Make the .config/spotifyd/spotifyd.conf for the login"
 	sudo systemctl --user start spotifyd.service
@@ -226,13 +299,14 @@ syncthing:
 gitsshkeys:
 	ssh-keygen -t ed25519 -C "48072014+jrmallorca@users.noreply.github.com"
 	eval "$$(ssh-agent -s)" && ssh-add ~/.ssh/id_ed25519
-	wl-copy < ~/.ssh/id_ed25519.pub
+	xclip -selection clipboard < ~/.ssh/id_ed25519.pub
 	echo "Paste the secret key into GitHub"
 
+# INCOMPLETE and doesn't do the last 2 lines in git docs
 gitgpgkeys:
 	gpg --full-generate-key
 	GPGKEYID=$$(gpg --list-secret-keys --keyid-format=long | grep sec | head -1 | awk '{print $2}' | cut -d '/' -f 2); \
-	gpg --armor --export $$GPGKEYID | wl-copy
+	gpg --armor --export $$GPGKEYID | xclip -selection clipboard
 	echo "Paste the secret key into GitHub"
 
 # Extra
