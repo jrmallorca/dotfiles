@@ -20,11 +20,6 @@ abbr -a zvp 'z ~/Documents/personal-vault && zf'
 abbr -a j11 'sudo archlinux-java set java-11-openjdk'
 abbr -a j18 'sudo archlinux-java set java-18-openjdk'
 
-# Chat
-abbr -a we weechat
-abbr -a wh whatscli
-abbr -a s scli
-
 # QMK
 abbr -a qc 'qmk compile'
 abbr -a qca 'qmk clean -a'

@@ -6,11 +6,6 @@ end
 abbr -a xx 'chmod +x'
 abbr -a mc 'sh $HOME/dotfiles/unix/scripts/make-config.sh'
 
-# Multihead
-if [ "$OSTYPE" = Linux ]
-    abbr -a xr 'xrandr --output "eDP1" --auto --output "HDMI-1-0" --auto --left-of "eDP1"'
-end
-
 # Package manager
 if [ "$OSTYPE" = Linux ]
     if type -q paru
@@ -79,24 +74,9 @@ else
     abbr -a zdw 'z ~/Downloads && zf'
 end
 
-# TMUX
-abbr -a t tmux
-abbr -a tls 'tmux ls'
-abbr -a tn 'tmux new -s'
-abbr -a ta 'tmux attach-session'
-abbr -a tat 'tmux attach-session -t'
-abbr -a tk 'tmux kill-session'
-abbr -a rmtr 'rm -rf ~/.tmux/resurrect/*'
-
 # Editor
 abbr -a se sudoedit
 abbr -a e nvim
-
-# nmcli
-abbr -a ns 'nmcli c show'
-abbr -a nd 'nmcli c down'
-abbr -a nu 'nmcli c up'
-abbr -a nc 'nmcli -a d wifi connect'
 
 # Git
 abbr -a ga 'git ls-files --modified --others --exclude-standard --deduplicate | fzf --ansi --multi --print0 --preview="git diff --color=always -- {-1} | diff-so-fancy" | xargs -0 -o git add'
