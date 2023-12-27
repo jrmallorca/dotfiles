@@ -50,7 +50,6 @@ base:
 		intel-ucode amd-ucode networkmanager network-manager-applet \
 		xf86-video-amdgpu xf86-video-ati xf86-video-intel xf86-video-nouveau \
 		xf86-video-vesa xdg-utils xdg-user-dirs nvidia-open \
-		xorg-xinit xorg-server xorg-xinput
 	sudo systemctl enable NetworkManager
 	sudo systemctl enable reflector.service reflector.timer
 
@@ -62,13 +61,9 @@ tools:
 	sudo systemctl enable tlp
 	sudo systemctl enable bluetooth.service
 
-backlight:
-	paru -Syu --needed clight clightd clight-gui-git
-	sudo systemctl enable clightd.service
-
 development:
 	paru -Syu --needed git github-cli \
-		curl wget daemon wl-clipboard xsel xdotool fzf fd bat ripgrep xcape man less neovim \
+		curl wget daemon wl-clipboard xsel xdotool fzf fd bat ripgrep man less neovim \
 		openssh
 	python3 -m venv .venv; . .venv/bin/activate; pip3 install pynvim; deactivate
 	rm -r .venv
@@ -196,6 +191,10 @@ vm:
 torrent:
 	paru -Syu --needed qbittorrent
 
+backlight:
+	paru -Syu --needed clight clightd clight-gui-git
+	sudo systemctl enable clightd.service
+
 # Programming
 # -----------------------------------------------------------------------------
 
@@ -241,10 +240,6 @@ gitgpgkeys:
 # (Proprietary) Communication apps
 coms:
 	paru -Syu teams-for-linux discord
-
-# (Proprietary) Note-taking application
-obsidian:
-	paru -Syu obsidian
 
 apy:
 	paru -Syu python-pipx
