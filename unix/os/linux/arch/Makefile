@@ -16,7 +16,6 @@ init-wsl: package-manager base-wsl tools-wsl development editor lsp telekasten g
 # Transfer config files.
 configuration:
 	cp -a ./config/. ~/.config/
-	cp .xinitrc ~/
 
 modprobe:
 	sudo cp -a ./modprobe.d/. /etc/modprobe.d/

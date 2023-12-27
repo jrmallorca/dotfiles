@@ -37,7 +37,6 @@ is-personal:
 .PHONY: unix
 unix:
 	cp -a ./unix/config/. ~/.config/
-	cp -a ./unix/.tmux.conf ~/
 	cp -a ./unix/scripts/. ~/bin/
 
 linux-gui:
