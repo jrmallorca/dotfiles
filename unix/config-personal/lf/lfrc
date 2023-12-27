@@ -123,7 +123,7 @@ cmd open ${{
         case "text/*" "application/json" "inode/*" "application/octet-stream"
             "$EDITOR" "$f"
         case "*"
-            devour xdg-open "$f"
+            xdg-open "$f"
     end
 }}
 
@@ -147,14 +147,14 @@ cmd open-new-window %{{
 
 cmd gui %{{
     set -l current_dir (pwd)
-    devour pcmanfm "$current_dir" >/dev/null 2>&1
+    pcmanfm "$current_dir" >/dev/null 2>&1
 }}
 
 cmd open-with %{{
     echo -n "Open with: "
     read program
     if [ -n "$(command -v "$program")" ]; then
-        devour "$program" "$fx" >/dev/null 2>&1
+        "$program" "$fx" >/dev/null 2>&1
     else
         echo "$program not found"
     fi

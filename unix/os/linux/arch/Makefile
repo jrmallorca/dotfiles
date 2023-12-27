@@ -116,7 +116,7 @@ fisher-plugins:
 file-manager: lf
 
 lf:
-	paru -Syu --needed lf ueberzug chafa daemon devour
+	paru -Syu --needed lf ueberzug chafa daemon
 	mkdir -p ~/git-installs
 	cd ~/git-installs && \
 		git clone https://github.com/Naheel-Azawy/stpv.git && \
