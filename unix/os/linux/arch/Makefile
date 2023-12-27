@@ -5,7 +5,7 @@
 .PHONY: all clean test init lockscreen
 
 # Initialise setup
-init: package-manager base nvidia-services tools development lsp telekasten gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager display-manager compositor lockscreen theme fonts configuration modprobe.d
+init: package-manager base nvidia-services tools development lsp telekasten gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager compositor lockscreen theme fonts configuration modprobe.d
 
 init-wsl: package-manager base-wsl tools-wsl development editor lsp telekasten gitdiff terminal shell fisher fisher-plugins file-manager fonts configuration apy
 
@@ -20,6 +20,9 @@ configuration:
 modprobe:
 	sudo cp -a ./modprobe.d/. /etc/modprobe.d/
 	sudo cp -a ./pacman.d/. /etc/modprobe.d/
+
+getty:
+	sudo cp -a ./getty@tty1.service.d/. /etc/systemd/system/getty@tty1.service.d/
 
 # Transfer cron jobs
 cron:
@@ -131,14 +134,6 @@ window-manager: hyprland
 hyprland:
 	paru -Syu --needed hyprland hyprpaper waybar fuzzel physlock
     curl -sSL https://raw.githubusercontent.com/Duckonaut/hyprload/main/install.sh | bash
-
-display-manager: ly
-
-ly:
-	paru -Syu --needed ly
-	sudo systemctl enable ly.service
-	sudo systemctl disable getty@tty2.service
-	cd ~/ && chmod +x .xinitrc
 
 lockscreen:
 	paru -Syu --needed physlock
