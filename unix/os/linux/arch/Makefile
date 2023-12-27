@@ -51,7 +51,7 @@ base:
 	paru -Syu --needed grub base-devel reflector \
 		intel-ucode amd-ucode networkmanager network-manager-applet \
 		xf86-video-amdgpu xf86-video-ati xf86-video-intel xf86-video-nouveau \
-		xf86-video-vesa xdg-utils xdg-user-dirs nvidia-open \
+		xf86-video-vesa xdg-utils xdg-user-dirs nvidia-open-dkms \
 	sudo systemctl enable NetworkManager
 	sudo systemctl enable reflector.service reflector.timer
 
