@@ -1,0 +1,5 @@
+import = [
+    "~/.config/alacritty/colors/gruvbox-material.toml",
+    "~/.config/alacritty/window.toml",
+    "~/.config/alacritty/font.toml",
+]

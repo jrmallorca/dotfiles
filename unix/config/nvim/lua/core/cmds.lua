@@ -19,3 +19,8 @@ api.nvim_create_autocmd("TextYankPost", {
 -- When entering Neovim
 api.nvim_create_autocmd({ "VimEnter" }, { pattern = "*", command = "TZMinimalist" })
 api.nvim_create_autocmd({ "VimEnter" }, { pattern = "*", command = "Limelight" })
+
+api.nvim_create_autocmd({ "BufEnter" }, {
+  pattern = "*/hypr/**",
+  command = "set filetype=hypr",
+})

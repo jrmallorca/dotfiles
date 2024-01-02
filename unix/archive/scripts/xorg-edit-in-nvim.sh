@@ -10,7 +10,7 @@ TERM_FLAGS="--title edit-in-nvim.sh --command"
 
 # (Linux only) Get highlighted text (Primary selection)
 if [ "$OSTYPE" == "Linux" ]; then
-	SELECTED_TEXT=$(wl-paste --primary)
+	SELECTED_TEXT=$(xclip -out)
 else
 	SELECTED_TEXT=""
 fi
@@ -27,7 +27,8 @@ echo "$SELECTED_TEXT" >>"$TMP_FILE"       # Put text into temporary file
 if [ "$OSTYPE" == "MacOS" ]; then
 	pbcopy <"$TMP_FILE"
 else
-	wl-copy <"$TMP_FILE"
+	# cat $TMP_FILE | xdotool type --clearmodifiers --delay 0 --file - # Get contents of file and type into the previously focused window
+	xclip -selection clipboard <"$TMP_FILE"
 fi
 
 rm -rf "$TMP_DIR" # Delete file and temporary directory

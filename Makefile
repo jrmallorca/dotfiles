@@ -31,13 +31,12 @@ termux: unix
 # Use `test` instead of directly calling `$IS_PERSONAL` just in case the
 # variable becomes malicious (e.g., `rm -rf /`).
 is-personal:
-	-test "$$IS_PERSONAL" = 'true' && cp -a ./unix/config-personal/. ~/.config/
+	- test "$$IS_PERSONAL" = 'true' && cp -a ./unix/config-personal/. ~/.config/
 
 # Make should never assume that unix (the directory) is up to date
 .PHONY: unix
 unix:
 	cp -a ./unix/config/. ~/.config/
-	cp -a ./unix/.tmux.conf ~/
 	cp -a ./unix/scripts/. ~/bin/
 
 linux-gui:

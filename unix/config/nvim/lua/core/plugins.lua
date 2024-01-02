@@ -43,9 +43,10 @@ return require('packer').startup(function(use)
   use 'antoinemadec/FixCursorHold.nvim' -- (Required for neotest) Fix cursor hold autocmd events
 
   -- UI
-  use 'Pocco81/TrueZen.nvim'    -- Better UI
-  use 'junegunn/limelight.vim'  -- Dim surrounding text
-  use 'lewis6991/gitsigns.nvim' -- Display git signs
+  use 'Pocco81/TrueZen.nvim'     -- Better UI
+  use 'junegunn/limelight.vim'   -- Dim surrounding text
+  use 'lewis6991/gitsigns.nvim'  -- Display git signs
+  use "ellisonleao/gruvbox.nvim" -- Gruvbox theme
 
   -- Functionality
   use {
@@ -73,6 +74,7 @@ return require('packer').startup(function(use)
     'mfussenegger/nvim-dap',             -- Debugger for Neovim
     'jayp0521/mason-nvim-dap.nvim',      -- Debug adapter installer for mason
   }
+  use "luckasRanarison/tree-sitter-hypr" -- Treesitter for hypr files
   use 'hrsh7th/cmp-nvim-lsp'             -- Make Neovim use cmp for LSP
   use 'hrsh7th/nvim-cmp'                 -- Autocompletion plugin
   use 'L3MON4D3/LuaSnip'                 -- Snippets engine
