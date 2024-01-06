@@ -6,6 +6,3 @@ import = [
 
 [window]
 decorations = "Buttonless"
-
-[font]
-size = 14.0
