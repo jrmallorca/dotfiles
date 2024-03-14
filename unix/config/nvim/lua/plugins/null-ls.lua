@@ -29,27 +29,14 @@ local sources = {
   diagnostics.commitlint,
   diagnostics.fish,
   diagnostics.yamllint,
-  diagnostics.jsonlint,
   diagnostics.todo_comments,
   diagnostics.trail_space,
-  diagnostics.eslint,
 
   -- Formatting
   formatting.astyle,
   formatting.shfmt,
   formatting.fish_indent,
-  formatting.deno_fmt.with({
-    extra_args = function(params)
-      return params.options
-          and {
-            "--options-line-width",
-            999,
-          }
-    end,
-  }),
   formatting.textlint,
-  formatting.trim_newlines,
-  formatting.trim_whitespace,
 
   -- Hover
   hover.printenv,
