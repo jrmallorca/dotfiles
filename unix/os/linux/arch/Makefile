@@ -22,6 +22,10 @@ etc:
 	sudo cp -a ./pacman.d/. /etc/pacman.d/
 
 getty:
+	sudo cp -a ./systemd/. /etc/systemd/
+	sudo systemctl enable getty@tty1
+
+getty:
 	sudo cp -a ./getty@tty1.service.d/. /etc/systemd/system/getty@tty1.service.d/
 
 # Transfer cron jobs
