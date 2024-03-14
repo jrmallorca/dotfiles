@@ -5,9 +5,9 @@
 .PHONY: all clean test init lockscreen
 
 # Initialise setup
-init: package-manager base nvidia-services tools development lsp telekasten gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager compositor lockscreen theme fonts configuration modprobe.d
+init: package-manager base nvidia-services tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts configuration etc
 
-init-wsl: package-manager base-wsl tools-wsl development editor lsp telekasten gitdiff terminal shell fisher fisher-plugins file-manager fonts configuration apy
+init-wsl: package-manager base-wsl tools-wsl development editor lsp gitdiff terminal shell fisher fisher-plugins file-manager fonts configuration apy
 
 # -----------------------------------------------------------------------------
 # Dot Files
@@ -17,9 +17,9 @@ init-wsl: package-manager base-wsl tools-wsl development editor lsp telekasten g
 configuration:
 	cp -a ./config/. ~/.config/
 
-modprobe:
+etc:
 	sudo cp -a ./modprobe.d/. /etc/modprobe.d/
-	sudo cp -a ./pacman.d/. /etc/modprobe.d/
+	sudo cp -a ./pacman.d/. /etc/pacman.d/
 
 getty:
 	sudo cp -a ./getty@tty1.service.d/. /etc/systemd/system/getty@tty1.service.d/
@@ -51,14 +51,14 @@ base:
 	paru -Syu --needed grub base-devel reflector \
 		intel-ucode amd-ucode networkmanager network-manager-applet \
 		xf86-video-amdgpu xf86-video-ati xf86-video-intel xf86-video-nouveau \
-		xf86-video-vesa xdg-utils xdg-user-dirs nvidia-open-dkms \
+		xf86-video-vesa xdg-utils xdg-user-dirs nvidia-open-dkms
 	sudo systemctl enable NetworkManager
 	sudo systemctl enable reflector.service reflector.timer
 
 tools:
-	paru -Syu --needed unclutter tlp feh mpv ffmpeg youtube-dl zathura \
+	paru -Syu --needed unclutter tlp feh mpv ffmpeg zathura \
 		zathura-pdf-mupdf nodejs npm python python-pip \
-		dunst libinput zoxide trash-cli \
+		dunst libinput zoxide trash-cli unzip \
 		alsa-utils bluez bluez-utils blueman pulseaudio-bluetooth
 	sudo systemctl enable tlp
 	sudo systemctl enable bluetooth.service
@@ -132,8 +132,10 @@ lf:
 window-manager: hyprland
 
 hyprland:
-	paru -Syu --needed hyprland hyprpaper waybar fuzzel physlock
-    curl -sSL https://raw.githubusercontent.com/Duckonaut/hyprload/main/install.sh | bash
+	paru -Syu --needed hyprland hyprpaper waybar fuzzel physlock qt6ct qt6-wayland libva
+	hyprpm add https://github.com/Duckonaut/split-monitor-workspaces
+	hyprpm enable split-monitor-workspaces
+	hyprpm reload
 
 lockscreen:
 	paru -Syu --needed physlock
