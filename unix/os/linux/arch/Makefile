@@ -246,6 +246,7 @@ apy:
 	paru -Syu python-pipx
 	pipx install git+https://github.com/lervag/apy
 
+# https://forum.garudalinux.org/t/ultimate-guide-to-install-waydroid-in-any-arch-based-distro-especially-garuda/15902
 waydroid:
 	paru -Syu --needed --noconfirm binder_linux-dkms waydroid
 
