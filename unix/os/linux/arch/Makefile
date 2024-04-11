@@ -246,6 +246,9 @@ apy:
 	paru -Syu python-pipx
 	pipx install git+https://github.com/lervag/apy
 
+waydroid:
+	paru -Syu --needed --noconfirm binder_linux-dkms waydroid
+
 # -----------------------------------------------------------------------------
 # Programs
 # -----------------------------------------------------------------------------
