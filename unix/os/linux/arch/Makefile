@@ -247,8 +247,15 @@ apy:
 	pipx install git+https://github.com/lervag/apy
 
 # https://forum.garudalinux.org/t/ultimate-guide-to-install-waydroid-in-any-arch-based-distro-especially-garuda/15902
+# https://docs.waydro.id/faq/setting-up-a-shared-folder
 waydroid:
 	paru -Syu --needed --noconfirm binder_linux-dkms waydroid
+	printf "Add `binder_linux` as a kernel in /etc/mkinitcpio.conf"
+	printf "Then follow the rest of the instructions in https://forum.garudalinux.org/t/ultimate-guide-to-install-waydroid-in-any-arch-based-distro-especially-garuda/15902"
+	printf "Afterwards, execute \
+		`mkdir ~/.local/share/waydroid/data/media/0/personal-vault` \
+		`sudo mount --bind Documents/personal-vault/ ~/.local/share/waydroid/data/media/0/personal-vault` \
+		"
 
 # -----------------------------------------------------------------------------
 # Programs
