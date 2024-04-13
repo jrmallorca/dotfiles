@@ -5,9 +5,15 @@
 .PHONY: all clean test init lockscreen
 
 # Initialise setup
-init: package-manager base nvidia-services tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts configuration etc
+init-nvidia: package-manager base nvidia tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts configuration etc
+
+init-amd: package-manager base nvidia tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts configuration etc
 
 init-wsl: package-manager base-wsl tools-wsl development editor lsp gitdiff terminal shell fisher fisher-plugins file-manager fonts configuration apy
+
+init-archinstall-nvidia: package-manager nvidia tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts configuration etc
+
+init-archinstall-amd: package-manager tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts configuration etc
 
 # -----------------------------------------------------------------------------
 # Dot Files
@@ -19,14 +25,10 @@ configuration:
 
 etc:
 	sudo cp -a ./modprobe.d/. /etc/modprobe.d/
-	sudo cp -a ./pacman.d/. /etc/pacman.d/
 
 getty:
 	sudo cp -a ./systemd/. /etc/systemd/
 	sudo systemctl enable getty@tty1
-
-getty:
-	sudo cp -a ./getty@tty1.service.d/. /etc/systemd/system/getty@tty1.service.d/
 
 # Transfer cron jobs
 cron:
@@ -41,22 +43,24 @@ cron:
 
 # paru (AUR Helper)
 package-manager:
-	sudo pacman -S --needed git base-devel
+	sudo pacman -S --needed git base-devel rustup
+	rustup default stable
 	cd ~ && git clone https://aur.archlinux.org/paru.git && \
 		cd paru && makepkg -si
 	sudo rm -rf ~/paru/
 
 # Disable NVIDIA services
 # https://askubuntu.com/a/1436921
-nvidia-services:
+nvidia:
 	sudo systemctl disable nvidia-suspend nvidia-hibernate nvidia-resume
+	sudo cp -a ./nvidia/modprobe.d/. /etc/modprobe.d/
+	sudo cp -a ./nvidia/pacman.d/. /etc/pacman.d/
 
 base:
-	paru -Syu --needed grub base-devel reflector rustup \
+	paru -Syu --needed grub base-devel reflector \
 		intel-ucode amd-ucode networkmanager network-manager-applet \
 		xf86-video-amdgpu xf86-video-ati xf86-video-intel xf86-video-nouveau \
 		xf86-video-vesa xdg-utils xdg-user-dirs nvidia-open-dkms
-	rustup default stable
 	sudo systemctl enable NetworkManager
 	sudo systemctl enable reflector.service reflector.timer
 
@@ -64,7 +68,7 @@ tools:
 	paru -Syu --needed unclutter tlp feh mpv ffmpeg zathura \
 		zathura-pdf-mupdf nodejs npm python python-pip \
 		dunst libinput zoxide trash-cli unzip \
-		alsa-utils bluez bluez-utils blueman pulseaudio-bluetooth
+		alsa-utils bluez bluez-utils blueman
 	sudo systemctl enable tlp
 	sudo systemctl enable bluetooth.service
 
@@ -74,6 +78,10 @@ development:
 		openssh
 	python3 -m venv .venv; . .venv/bin/activate; pip3 install pynvim; deactivate
 	rm -r .venv
+
+# LSPs, linters and formatters
+lsp:
+	paru -Syu --needed checkmake
 
 gitdiff:
 	paru -Syu --needed diff-so-fancy
@@ -137,7 +145,7 @@ lf:
 window-manager: hyprland
 
 hyprland:
-	paru -Syu --needed hyprland hyprpaper waybar fuzzel physlock qt6ct qt6-wayland libva
+	paru -Syu --needed hyprland hyprpaper waybar fuzzel qt6ct qt6-wayland libva cpio cmake meson
 	hyprpm add https://github.com/Duckonaut/split-monitor-workspaces
 	hyprpm enable split-monitor-workspaces
 	hyprpm reload
@@ -147,10 +155,6 @@ lockscreen:
 
 fonts:
 	paru -Syu --needed ttf-iosevka-nerd noto-fonts-emoji
-
-# LSPs, linters and formatters
-lsp:
-	paru -Syu --needed checkmake
 
 # Base (WSL)
 # -----------------------------------------------------------------------------
