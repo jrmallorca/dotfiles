@@ -19,10 +19,6 @@ init-archinstall-amd: package-manager tools development lsp gitdiff mime browser
 # Dot Files
 # -----------------------------------------------------------------------------
 
-# Transfer config files.
-configuration:
-	cp -a ./config/. ~/.config/
-
 etc:
 	sudo cp -a ./modprobe.d/. /etc/modprobe.d/
 
