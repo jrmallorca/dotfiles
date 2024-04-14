@@ -20,10 +20,9 @@ init-archinstall-amd: package-manager tools development lsp gitdiff mime browser
 # -----------------------------------------------------------------------------
 
 etc:
-	sudo cp -a ./modprobe.d/. /etc/modprobe.d/
+	sudo cp -a ./../etc/. /etc/
 
-getty:
-	sudo cp -a ./systemd/. /etc/systemd/
+getty: etc
 	sudo systemctl enable getty@tty1
 
 # Transfer cron jobs
@@ -152,9 +151,6 @@ lockscreen:
 
 fonts:
 	paru -Syu --needed ttf-iosevka-nerd noto-fonts-emoji
-
-tlp:
-	sudo cp -a ./../tlp.d/. /etc/tlp.d/.
 
 # Base (WSL)
 # -----------------------------------------------------------------------------
