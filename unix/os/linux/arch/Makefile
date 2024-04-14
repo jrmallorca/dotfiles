@@ -62,10 +62,11 @@ base:
 
 tools:
 	paru -Syu --needed unclutter tlp feh mpv ffmpeg zathura \
-		zathura-pdf-mupdf nodejs npm python python-pip \
+		zathura-pdf-mupdf nodejs npm python python-pip brightnessctl \
 		dunst libinput zoxide trash-cli unzip \
 		alsa-utils bluez bluez-utils blueman
 	sudo systemctl enable tlp
+	sudo systemctl mask systemd-rfkill.service systemd-rfkill.socket
 	sudo systemctl enable bluetooth.service
 
 development:
@@ -192,10 +193,6 @@ vm:
 torrent:
 	paru -Syu --needed qbittorrent
 
-backlight:
-	paru -Syu --needed clight clightd clight-gui-git
-	sudo systemctl enable clightd.service
-
 # Programming
 # -----------------------------------------------------------------------------
 
@@ -246,15 +243,16 @@ apy:
 	paru -Syu python-pipx
 	pipx install git+https://github.com/lervag/apy
 
-# https://forum.garudalinux.org/t/ultimate-guide-to-install-waydroid-in-any-arch-based-distro-especially-garuda/15902
-# https://docs.waydro.id/faq/setting-up-a-shared-folder
+# Install Waydroid: https://forum.garudalinux.org/t/ultimate-guide-to-install-waydroid-in-any-arch-based-distro-especially-garuda/15902
+# Share personal-vaults folder: https://docs.waydro.id/faq/setting-up-a-shared-folder
+# Fix /dev/anbox-binder not found issue: https://bbs.archlinux.org/viewtopic.php?id=286306
 waydroid:
-	paru -Syu --needed --noconfirm binder_linux-dkms waydroid
-	printf "Add `binder_linux` as a kernel in /etc/mkinitcpio.conf"
+	paru -Syu --needed --noconfirm linux-headers linux-lts-headers binder_linux-dkms waydroid
+	printf "Add 'binder_linux' as a kernel in /etc/mkinitcpio.conf"
 	printf "Then follow the rest of the instructions in https://forum.garudalinux.org/t/ultimate-guide-to-install-waydroid-in-any-arch-based-distro-especially-garuda/15902"
 	printf "Afterwards, execute \
-		`mkdir ~/.local/share/waydroid/data/media/0/personal-vault` \
-		`sudo mount --bind Documents/personal-vault/ ~/.local/share/waydroid/data/media/0/personal-vault` \
+		mkdir ~/.local/share/waydroid/data/media/0/personal-vault \
+		sudo mount --bind Documents/personal-vault/ ~/.local/share/waydroid/data/media/0/personal-vault \
 		"
 
 # -----------------------------------------------------------------------------
