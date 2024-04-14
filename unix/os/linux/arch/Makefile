@@ -153,6 +153,9 @@ lockscreen:
 fonts:
 	paru -Syu --needed ttf-iosevka-nerd noto-fonts-emoji
 
+tlp:
+	sudo cp -a ./../tlp.d/. /etc/tlp.d/.
+
 # Base (WSL)
 # -----------------------------------------------------------------------------
 
