@@ -193,6 +193,23 @@ vm:
 torrent:
 	paru -Syu --needed qbittorrent
 
+# Install Waydroid: https://forum.garudalinux.org/t/ultimate-guide-to-install-waydroid-in-any-arch-based-distro-especially-garuda/15902
+# Share personal-vaults folder: https://docs.waydro.id/faq/setting-up-a-shared-folder
+# Fix /dev/anbox-binder not found issue: https://bbs.archlinux.org/viewtopic.php?id=286306
+waydroid:
+	paru -Syu --needed --noconfirm linux-headers linux-lts-headers binder_linux-dkms waydroid
+	printf "Add 'binder_linux' as a kernel in /etc/mkinitcpio.conf"
+	printf "Then follow the rest of the instructions in https://forum.garudalinux.org/t/ultimate-guide-to-install-waydroid-in-any-arch-based-distro-especially-garuda/15902"
+	printf "Afterwards, execute \
+		mkdir ~/.local/share/waydroid/data/media/0/personal-vault \
+		sudo mount --bind Documents/personal-vault/ ~/.local/share/waydroid/data/media/0/personal-vault \
+		"
+
+# P2P syncing
+syncthing:
+	paru -Syu syncthing
+	sudo systemctl enable syncthing@$$USER
+
 # Programming
 # -----------------------------------------------------------------------------
 
@@ -211,11 +228,6 @@ flutter:
 	sudo gpasswd -a $$USER android-sdk
 	sudo setfacl -R -m g:android-sdk:rwx /opt/android-sdk
 	sudo setfacl -d -m g:android-sdk:rwX /opt/android-sdk
-
-# P2P syncing
-syncthing:
-	paru -Syu syncthing
-	sudo systemctl enable syncthing@$$USER
 
 # Git
 # -----------------------------------------------------------------------------
@@ -242,18 +254,6 @@ coms:
 apy:
 	paru -Syu python-pipx
 	pipx install git+https://github.com/lervag/apy
-
-# Install Waydroid: https://forum.garudalinux.org/t/ultimate-guide-to-install-waydroid-in-any-arch-based-distro-especially-garuda/15902
-# Share personal-vaults folder: https://docs.waydro.id/faq/setting-up-a-shared-folder
-# Fix /dev/anbox-binder not found issue: https://bbs.archlinux.org/viewtopic.php?id=286306
-waydroid:
-	paru -Syu --needed --noconfirm linux-headers linux-lts-headers binder_linux-dkms waydroid
-	printf "Add 'binder_linux' as a kernel in /etc/mkinitcpio.conf"
-	printf "Then follow the rest of the instructions in https://forum.garudalinux.org/t/ultimate-guide-to-install-waydroid-in-any-arch-based-distro-especially-garuda/15902"
-	printf "Afterwards, execute \
-		mkdir ~/.local/share/waydroid/data/media/0/personal-vault \
-		sudo mount --bind Documents/personal-vault/ ~/.local/share/waydroid/data/media/0/personal-vault \
-		"
 
 # -----------------------------------------------------------------------------
 # Programs
