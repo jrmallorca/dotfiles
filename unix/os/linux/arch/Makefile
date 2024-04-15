@@ -5,15 +5,15 @@
 .PHONY: all clean test init lockscreen
 
 # Initialise setup
-init-nvidia: package-manager base nvidia tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts configuration etc
+init-nvidia: configuration etc package-manager base nvidia tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts
 
-init-amd: package-manager base nvidia tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts configuration etc
+init-amd: configuration etc package-manager base nvidia tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts
 
-init-wsl: package-manager base-wsl tools-wsl development editor lsp gitdiff terminal shell fisher fisher-plugins file-manager fonts configuration apy
+init-wsl: configuration etc package-manager base-wsl tools-wsl development editor lsp gitdiff terminal shell fisher fisher-plugins file-manager fonts apy
 
-init-archinstall-nvidia: package-manager nvidia tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts configuration etc
+init-archinstall-nvidia: configuration etc package-manager nvidia tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts
 
-init-archinstall-amd: package-manager tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts configuration etc
+init-archinstall-amd: configuration etc package-manager tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts
 
 # -----------------------------------------------------------------------------
 # Dot Files
@@ -146,8 +146,9 @@ hyprland:
 	hyprpm enable split-monitor-workspaces
 	hyprpm reload
 
-lockscreen:
-	paru -Syu --needed physlock
+lockscreen: etc
+	paru -Syu --needed --noconfirm physlock
+	sudo systemctl enable lockscreen.service
 
 fonts:
 	paru -Syu --needed ttf-iosevka-nerd noto-fonts-emoji
