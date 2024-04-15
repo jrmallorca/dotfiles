@@ -1,0 +1,21 @@
+[Unit]
+Description=Lock X session using physlock for user jon
+Before=suspend.target
+Before=hibernate.target
+Before=suspend-then-hibernate.target
+
+[Service]
+User=jon
+Type=simple
+Environment=DISPLAY=:0
+ExecStartPre=/usr/bin/xset dpms force suspend
+ExecStart=/usr/bin/physlock -p "Please enter password to unlock" -m -s
+# TimeoutSec=infinity
+# ExecStartPost=/usr/bin/sleep 1
+# Restart=on-failure
+# RestartSec=2s
+
+[Install]
+WantedBy=suspend.target
+WantedBy=hibernate.target
+WantedBy=suspend-then-hibernate.target
