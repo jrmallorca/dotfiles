@@ -203,6 +203,7 @@ waydroid:
 	printf "Afterwards, execute \
 		mkdir ~/.local/share/waydroid/data/media/0/personal-vault \
 		sudo mount --bind Documents/personal-vault/ ~/.local/share/waydroid/data/media/0/personal-vault \
+		sudo waydroid shell appops set com.flyersoft.moonreader MANAGE_EXTERNAL_STORAGE allow \
 		"
 
 # P2P syncing
