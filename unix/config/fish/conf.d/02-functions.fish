@@ -72,3 +72,8 @@ function sr -d 'Search and replace in current folder' -a fromText toText
         printf 'Missing fromText'
     end
 end
+
+function mr -d 'Open Moon+ Reader Pro in Waydroid'
+    sudo mount --bind ~/personal-vault/ ~/.local/share/waydroid/data/media/0/personal-vault
+    waydroid app launch com.flyersoft.moonreader
+end
