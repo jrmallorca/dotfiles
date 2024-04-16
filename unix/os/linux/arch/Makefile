@@ -196,14 +196,16 @@ torrent:
 # Install Waydroid: https://forum.garudalinux.org/t/ultimate-guide-to-install-waydroid-in-any-arch-based-distro-especially-garuda/15902
 # Share personal-vaults folder: https://docs.waydro.id/faq/setting-up-a-shared-folder
 # Fix /dev/anbox-binder not found issue: https://bbs.archlinux.org/viewtopic.php?id=286306
+# Resizing hack: https://github.com/waydroid/waydroid/issues/70#issuecomment-927144567
 waydroid:
 	paru -Syu --needed --noconfirm linux-headers linux-lts-headers binder_linux-dkms waydroid
 	printf "Add 'binder_linux' as a kernel in /etc/mkinitcpio.conf"
 	printf "Then follow the rest of the instructions in https://forum.garudalinux.org/t/ultimate-guide-to-install-waydroid-in-any-arch-based-distro-especially-garuda/15902"
 	printf "Afterwards, execute \
-		mkdir ~/.local/share/waydroid/data/media/0/personal-vault \
-		sudo mount --bind Documents/personal-vault/ ~/.local/share/waydroid/data/media/0/personal-vault \
+		sudo mkdir ~/.local/share/waydroid/data/media/0/personal-vault \
+		sudo mount --bind ~/personal-vault/ ~/.local/share/waydroid/data/media/0/personal-vault \
 		sudo waydroid shell appops set com.flyersoft.moonreader MANAGE_EXTERNAL_STORAGE allow \
+		waydroid prop set persist.waydroid.multi_windows true \
 		"
 
 # P2P syncing
