@@ -2,9 +2,9 @@ vim.loader.enable()
 
 for _, source in ipairs({
   -- CORE
-  "core.plugins",
-  "core.opts",
   "core.maps",
+  "core.package-manager",
+  "core.opts",
   "core.cmds",
   "core.colors",
 
