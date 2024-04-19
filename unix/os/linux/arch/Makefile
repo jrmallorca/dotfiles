@@ -153,6 +153,9 @@ lockscreen: etc
 fonts:
 	paru -Syu --needed ttf-iosevka-nerd noto-fonts-emoji
 
+snapper:
+	paru -Syu --needed --noconfirm snapper snapper-rollback snap-pac
+
 # Base (WSL)
 # -----------------------------------------------------------------------------
 
