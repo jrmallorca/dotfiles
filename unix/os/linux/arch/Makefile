@@ -141,9 +141,9 @@ lf:
 window-manager: hyprland
 
 hyprland:
-	paru -Syu --needed hyprland hyprpaper waybar fuzzel qt6ct qt6-wayland libva cpio cmake meson
-	hyprpm add https://github.com/Duckonaut/split-monitor-workspaces
-	hyprpm enable split-monitor-workspaces
+	paru -Syu --needed hyprwayland-scanner hyprland hyprpaper waybar fuzzel qt6ct qt6-wayland libva cpio cmake meson
+	hyprpm add https://github.com/shezdy/hyprsplit
+	hyprpm enable hyprsplit
 	hyprpm reload
 
 lockscreen: etc
