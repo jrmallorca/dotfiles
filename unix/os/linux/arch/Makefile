@@ -5,15 +5,15 @@
 .PHONY: all clean test init lockscreen
 
 # Initialise setup
-init-nvidia: configuration etc package-manager base nvidia tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts
+init-nvidia: etc package-manager base nvidia tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts
 
-init-amd: configuration etc package-manager base nvidia tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts
+init-amd: etc package-manager base nvidia tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts
 
-init-wsl: configuration etc package-manager base-wsl tools-wsl development editor lsp gitdiff terminal shell fisher fisher-plugins file-manager fonts apy
+init-wsl: etc package-manager base-wsl tools-wsl development editor lsp gitdiff terminal shell fisher fisher-plugins file-manager fonts apy
 
-init-archinstall-nvidia: configuration etc package-manager nvidia tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts
+init-archinstall-nvidia: etc package-manager nvidia tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts
 
-init-archinstall-amd: configuration etc package-manager tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts
+init-archinstall-amd: etc package-manager tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts
 
 # -----------------------------------------------------------------------------
 # Dot Files
