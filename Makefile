@@ -37,7 +37,8 @@ is-personal:
 .PHONY: unix
 unix:
 	cp -a ./unix/config/. ~/.config/
-	cp -a ./unix/scripts/. ~/bin/
+	cp -a ./unix/scripts/user/. ~/bin/
+	sudo cp -a ./unix/scripts/superuser/. /usr/local/sbin/
 
 linux-gui:
 	cp -a ./unix/os/linux/config/. ~/.config/

@@ -1,0 +1,10 @@
+[Unit]
+Description=backing up home directory
+
+[Service]
+Environment="HOME=/root"
+Environment="USER_HOME=/home/jon"
+ExecStart=/usr/bin/bash /usr/local/sbin/backup-home.sh
+
+[Install]
+WantedBy=default.target

@@ -4,7 +4,7 @@ end
 
 # General
 abbr -a xx 'chmod +x'
-abbr -a mc 'sh $HOME/dotfiles/unix/scripts/make-config.sh'
+abbr -a mc 'sh $HOME/dotfiles/unix/scripts/user/make-config.sh'
 
 # Package manager
 if [ "$OSTYPE" = Linux ]
