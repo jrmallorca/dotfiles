@@ -62,7 +62,7 @@ base:
 tools:
 	paru -Syu --needed unclutter tlp feh mpv ffmpeg zathura \
 		zathura-pdf-mupdf nodejs npm python python-pip brightnessctl \
-		dunst libinput zoxide trash-cli unzip \
+		dunst libinput zoxide trash-cli unzip kopia \
 		alsa-utils bluez bluez-utils blueman
 	sudo systemctl enable tlp
 	sudo systemctl mask systemd-rfkill.service systemd-rfkill.socket
