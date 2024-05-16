@@ -17,9 +17,9 @@ mac: unix is-personal
 	cd ./unix/os/mac && make configuration
 
 .PHONY: arch
-arch: unix linux-gui is-personal
+arch: linux-gui unix is-personal
 
-ubuntu: unix linux-gui is-personal
+ubuntu: linux-gui unix is-personal
 	cd ./unix/os/linux/ubuntu-20.04 && make configuration
 
 termux: unix
@@ -37,8 +37,7 @@ is-personal:
 .PHONY: unix
 unix:
 	cp -a ./unix/config/. ~/.config/
-	cp -a ./unix/scripts/user/. ~/bin/
-	sudo cp -a ./unix/scripts/superuser/. /usr/local/sbin/
+	cp -a ./unix/scripts/. ~/bin/
 
 linux-gui:
 	cp -a ./unix/os/linux/config/. ~/.config/
