@@ -14,7 +14,6 @@ abbr -a evp 'z ~/personal-vault && zf -command search_edit'
 # Navigate
 abbr -a zq 'z ~/qmk_firmware && zf'
 abbr -a zmd 'z /mnt/d && zf'
-abbr -a zvp 'z ~/personal-vault && zf'
 
 # Java versions
 abbr -a j11 'sudo archlinux-java set java-11-openjdk'

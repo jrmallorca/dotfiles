@@ -5,7 +5,7 @@
 -- - NEVER use "C:\Users\myname" style paths
 -- - Using `vim.fn.expand("~/zettelkasten")` should work now but mileage will vary with anything outside of finding and opening files
 
-local home = vim.fn.expand("~/personal-vault")
+local home = vim.fn.expand("~/Documents")
 local templates_dir = 'templates/telekasten'
 
 require('telekasten').setup({

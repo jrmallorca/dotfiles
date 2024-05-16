@@ -4,7 +4,7 @@ end
 
 # General
 abbr -a xx 'chmod +x'
-abbr -a mc 'sh $HOME/dotfiles/unix/scripts/user/make-config.sh'
+abbr -a mc 'sh $HOME/dotfiles/unix/scripts/make-config.sh'
 
 # Package manager
 if [ "$OSTYPE" = Linux ]
@@ -38,6 +38,7 @@ abbr -a eE 'z /etc && zf -command search_edit'
 abbr -a eU 'z /usr && zf -command search_edit'
 abbr -a emc 'z /mnt/c && zf -command search_edit'
 abbr -a emph 'z /mnt/phone && zf -command search_edit'
+abbr -a edc 'z ~/Documents/ && zf -command search_edit'
 abbr -a evw 'z ~/Documents/work-vault && zf -command search_edit'
 abbr -a eg 'z (git rev-parse --show-toplevel) && zf -command search_edit'
 
@@ -59,6 +60,7 @@ abbr -a zc 'z ~/.config && zf'
 abbr -a zE 'z /etc && zf'
 abbr -a zU 'z /usr && zf'
 abbr -a zmc 'z /mnt/c && zf'
+abbr -a zdc 'z ~/Documents && zf'
 abbr -a zvw 'z ~/Documents/work-vault && zf'
 abbr -a zg 'z (git rev-parse --show-toplevel) && zf'
 

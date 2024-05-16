@@ -525,7 +525,7 @@ map f   # Disable find
 
 # Commands
 
-map mc $sh $HOME/dotfiles/unix/scripts/user/make-config.sh
+map mc $sh $HOME/dotfiles/unix/scripts/make-config.sh
 map p paste
 map y copy
 map x cut
@@ -587,7 +587,7 @@ map z. z ~/dotfiles
 map zc z ~/.config
 map zdw z ~/Downloads
 map zDw win_z Downloads
-map zvp z ~/personal-vault
+map zdc z ~/Documents
 map zvw z ~/work-vault
 map zE z /etc
 map zU z /usr
