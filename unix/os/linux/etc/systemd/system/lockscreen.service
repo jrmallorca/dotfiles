@@ -8,12 +8,7 @@ Before=suspend-then-hibernate.target
 User=jon
 Type=forking
 Environment=DISPLAY=:0
-# ExecStartPre=/usr/bin/xset dpms force suspend
 ExecStart=/usr/bin/physlock -dms -p "Please enter password to unlock"
-# TimeoutSec=infinity
-# ExecStartPost=/usr/bin/sleep 1
-# Restart=on-failure
-# RestartSec=2s
 
 [Install]
 WantedBy=suspend.target
