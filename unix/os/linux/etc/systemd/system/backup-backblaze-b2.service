@@ -1,11 +1,11 @@
 [Unit]
-Description=back up home directory
+Description=back up home directory to Backblaze B2
 
 [Service]
 User=root
 EnvironmentFile=/root/bws-access-token-env
 Environment="USER_HOME=/home/jon"
-ExecStart=/usr/bin/bash /home/jon/bin/backup-home.sh
+ExecStart=/usr/bin/bash /home/jon/bin/backup-backblaze-b2.sh
 
 [Install]
 WantedBy=default.target

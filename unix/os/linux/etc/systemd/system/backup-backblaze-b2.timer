@@ -1,5 +1,5 @@
 [Unit]
-Description=back up of home directory every 15 minutes
+Description=back up of home directory to Backblaze B2 every 15 minutes
 
 [Timer]
 OnBootSec=10min
