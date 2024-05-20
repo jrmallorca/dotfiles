@@ -1,5 +1,7 @@
 [Unit]
 Description=back up of home directory to Backblaze B2 daily
+Wants=network-online.target
+After=network-online.target
 
 [Timer]
 OnCalendar=daily

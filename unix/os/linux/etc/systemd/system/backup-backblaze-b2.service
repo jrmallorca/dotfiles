@@ -1,5 +1,7 @@
 [Unit]
 Description=back up home directory to Backblaze B2
+Wants=network-online.target
+After=network-online.target
 
 [Service]
 User=root
