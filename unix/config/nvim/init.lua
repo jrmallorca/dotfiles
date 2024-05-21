@@ -10,6 +10,7 @@ for _, source in ipairs({
 
   -- PLUGINS
   "plugins.telescope",
+  "plugins.gruvbox",
   "plugins.gitsigns",
   "plugins.true-zen",
   "plugins.mason",
