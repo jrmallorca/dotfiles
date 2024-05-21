@@ -12,13 +12,13 @@ wo.statusline = "%F"
 -- Do not save when switching buffers
 o.hidden = true
 
-o.updatetime = 250          -- Decrease update time
+o.updatetime = 250       -- Decrease update time
 
-wo.relativenumber = true    -- Show relative line numbers
-wo.number = true            -- Show actual line numbers (where the cursor is)
-wo.signcolumn = 'yes'       -- Display sign column
+wo.relativenumber = true -- Show relative line numbers
+wo.number = true         -- Show actual line numbers (where the cursor is)
+wo.signcolumn = 'yes'    -- Display sign column
 
-o.pastetoggle = "<F2>"      -- Toggle paste format via 'F2'
+-- o.pastetoggle = "<F2>"      -- Toggle paste format via 'F2'
 o.clipboard = "unnamedplus" -- Yank to system clipboard
 
 o.expandtab = true          -- Tabs become spaces
