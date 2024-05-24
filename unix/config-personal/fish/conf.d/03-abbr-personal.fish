@@ -9,11 +9,12 @@ abbr -a umntd 'sudo umount /mnt/d'
 # Edit
 abbr -a eq 'z ~/qmk_firmware && zf -command search_edit'
 abbr -a emd 'z /mnt/d && zf -command search_edit'
-abbr -a evp 'z ~/personal-vault && zf -command search_edit'
+abbr -a ez 'z ~/Documents/zettelkasten && zf -command search_edit'
 
 # Navigate
 abbr -a zq 'z ~/qmk_firmware && zf'
 abbr -a zmd 'z /mnt/d && zf'
+abbr -a zz 'z ~/Documents/zettelkasten && zf'
 
 # Java versions
 abbr -a j11 'sudo archlinux-java set java-11-openjdk'

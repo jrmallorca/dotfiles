@@ -588,6 +588,7 @@ map zc z ~/.config
 map zdw z ~/Downloads
 map zDw win_z Downloads
 map zdc z ~/Documents
+map zz z ~/Documents/zettelkasten
 map zvw z ~/work-vault
 map zE z /etc
 map zU z /usr
