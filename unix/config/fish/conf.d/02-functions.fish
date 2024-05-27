@@ -74,6 +74,6 @@ function sr -d 'Search and replace in current folder' -a fromText toText
 end
 
 function mr -d 'Open Moon+ Reader Pro in Waydroid'
-    sudo mount --bind ~/personal-vault/ ~/.local/share/waydroid/data/media/0/personal-vault
+    sudo mount --bind ~/Documents/ ~/.local/share/waydroid/data/media/0/Documents
     waydroid app launch com.flyersoft.moonreader
 end
