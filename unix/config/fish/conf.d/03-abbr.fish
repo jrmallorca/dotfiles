@@ -82,6 +82,7 @@ abbr -a e nvim
 
 # Git
 abbr -a ga 'git ls-files --modified --others --exclude-standard --deduplicate | fzf --ansi --multi --print0 --preview="git diff --color=always -- {-1} | diff-so-fancy" | xargs -0 -o git add'
+abbr -a gap 'git ls-files --modified --others --exclude-standard --deduplicate | fzf --ansi --multi --print0 --preview="git diff --color=always -- {-1} | diff-so-fancy" | xargs -0 -o git add -p'
 abbr -a ga. 'git add .'
 abbr -a gaa 'git add -A'
 abbr -a gb 'git branch'
