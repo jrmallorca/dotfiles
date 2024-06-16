@@ -23,6 +23,12 @@ function gcl -d 'Clone a repository with using a username and repository name' -
     end
 end
 
+function gswr -d 'Create local branch that tracks an existing remote branch'
+    set remote_branch (git branch --remote | fzf --ansi | tr -d "[:blank:]")
+    set local_branch (echo "$remote_branch" | cut -d "/" -f2-)
+    git switch -c "$local_branch" --track "$remote_branch"
+end
+
 function gd -d 'Git diff'
     set -l is_git (git rev-parse --git-dir 2>/dev/null) # Check if current directory is within a git directory
 
