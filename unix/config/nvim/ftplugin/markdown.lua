@@ -11,7 +11,7 @@ map('n', '<leader>zD', telekasten.find_daily_notes, opts)
 map('n', '<leader>z/', telekasten.search_notes, opts)
 map('n', '<leader>zd', telekasten.goto_today, opts)
 map('n', '<leader>zl', telekasten.follow_link, opts)
-map('n', '<leader>z[', telekasten.insert_link, opts)
+map('n', '<leader>zi', telekasten.insert_link, opts)
 map('n', '<leader>zn', telekasten.new_note, opts)
 map('n', '<leader>zN', telekasten.new_templated_note, opts)
 map('n', '<leader>zb', telekasten.show_backlinks, opts)
@@ -36,6 +36,6 @@ map('n', '0', 'g0', opts)
 map('n', '<Down>', 'g<Down>', opts)
 map('n', '<Up>', 'g<Up>', opts)
 
-vim.wo.wrap = true -- Wrap lines
+vim.wo.wrap = true      -- Wrap lines
 vim.wo.linebreak = true -- Text will not break in the middle of a word when wrapping
-vim.wo.spell = true -- Indicate spelling errors
+vim.wo.spell = true     -- Indicate spelling errors
