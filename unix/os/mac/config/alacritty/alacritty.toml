@@ -1,3 +1,4 @@
+[general]
 import = [
     "~/.config/alacritty/colors/gruvbox-material.toml",
     "~/.config/alacritty/window.toml",
