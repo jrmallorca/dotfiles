@@ -3,12 +3,12 @@ vim.loader.enable()
 for _, source in ipairs({
   -- CORE
   "core.maps",
-  "core.package-manager",
   "core.opts",
   "core.cmds",
   "core.colors",
 
   -- PLUGINS
+  "plugins.package-manager",
   "plugins.telescope",
   "plugins.gruvbox",
   "plugins.gitsigns",
@@ -23,7 +23,7 @@ for _, source in ipairs({
   "plugins.commented",
   "plugins.nvim-treesitter",
   "plugins.hop",
-  "plugins.telekasten",
+  "plugins.obsidian",
 }) do
   local status_ok, fault = pcall(require, source)
   if not status_ok then

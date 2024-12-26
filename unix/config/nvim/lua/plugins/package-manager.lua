@@ -94,7 +94,14 @@ local plugins = {
   'winston0410/commented.nvim', -- Comment blocks of code
 
   -- Zettelkasten
-  'renerocksai/telekasten.nvim', -- Zettelkasten functionally for markdown vaults
+  {
+    "epwalsh/obsidian.nvim",
+    version = "*",
+    event = {
+      "BufReadPre " .. vim.fn.expand "~" .. "Documents/*.md",
+      "BufNewFile " .. vim.fn.expand "~" .. "Documents/*.md",
+    },
+  }
 }
 
 require("lazy").setup(plugins, opts)
