@@ -71,7 +71,7 @@ tools:
 development:
 	paru -Syu --needed git github-cli \
 		curl wget daemon wl-clipboard xsel xdotool fzf fd bat ripgrep man less neovim \
-		openssh
+		openssh tree-sitter-cli
 	python3 -m venv .venv; . .venv/bin/activate; pip3 install pynvim; deactivate
 	rm -r .venv
 
