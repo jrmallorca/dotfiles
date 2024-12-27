@@ -7,6 +7,8 @@ local g = vim.g
 opt.shell = "/bin/bash" -- Use bash for scripts
 
 opt.statusline = "%F"
+opt.laststatus = 3
+opt.cmdheight = 0
 
 -- Hide buffer when abandoned instead of closing
 -- Do not save when switching buffers
