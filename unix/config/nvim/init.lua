@@ -24,6 +24,7 @@ for _, source in ipairs({
   "plugins.nvim-treesitter",
   "plugins.hop",
   "plugins.obsidian",
+  "plugins.flutter-tools",
 }) do
   local status_ok, fault = pcall(require, source)
   if not status_ok then
