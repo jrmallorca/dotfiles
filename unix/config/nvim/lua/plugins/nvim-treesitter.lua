@@ -14,7 +14,8 @@ require('nvim-treesitter.configs').setup {
     "css",
     "json",
     "yaml",
-    "markdown"
+    "markdown",
+    "markdown_inline"
   },
   highlight = {
     enable = true, -- false will disable the whole extension
