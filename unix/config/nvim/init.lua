@@ -21,7 +21,7 @@ for _, source in ipairs({
   "plugins.nvim-dap",
   "plugins.commented",
   "plugins.nvim-treesitter",
-  "plugins.hop",
+  "plugins.flash",
   "plugins.obsidian",
   "plugins.flutter-tools",
 

@@ -89,10 +89,10 @@ local plugins = {
   },
 
   -- Useful bindings
-  'windwp/nvim-autopairs',      -- Autopairs plugin
-  {
-    'phaazon/hop.nvim',         -- Navigation
-    branch = 'v2',              -- optional but strongly recommended
+  'windwp/nvim-autopairs', -- Autopairs plugin
+  {                        -- Jump labels while searching
+    "folke/flash.nvim",
+    event = "VeryLazy",
   },
   'winston0410/commented.nvim', -- Comment blocks of code
 
