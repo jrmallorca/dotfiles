@@ -2,7 +2,13 @@ local flash = require('flash')
 
 flash.setup {
   keys = 'tnseriaodhc,gmvkxzplfuwybjq',
-  multi_windows = true,
+  search = {
+    multi_window = true,
+    incremental = true,
+  },
+  modes = {
+    search = {
+      enabled = true,
+    }
+  }
 }
-
-flash.toggle(true)
