@@ -34,7 +34,10 @@ local plugins = {
   'nvim-neotest/nvim-nio',
 
   -- UI
-  'Pocco81/TrueZen.nvim',       -- Better UI
+  {
+    "cdmill/focus.nvim", -- Focus mode
+    cmd = { "Focus", "Zen", "Narrow" },
+  },
   'junegunn/limelight.vim',     -- Dim surrounding text
   'lewis6991/gitsigns.nvim',    -- Display git signs
   {

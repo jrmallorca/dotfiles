@@ -5,7 +5,8 @@ local g = vim.g
 hl(0, "VertSplit", { cterm = vim.empty_dict() })
 
 -- Status line
-hl(0, "StatusLine", { ctermbg = "NONE", cterm = vim.empty_dict() })
+hl(0, "StatusLine", { cterm = vim.empty_dict() })
+hl(0, "StatusLineNC", { cterm = vim.empty_dict() })
 
 -- Sign column
 hl(0, "SignColumn", { ctermbg = "NONE" })

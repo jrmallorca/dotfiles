@@ -5,14 +5,13 @@ for _, source in ipairs({
   "core.maps",
   "core.opts",
   "core.cmds",
-  "core.colors",
 
   -- PLUGINS
   "plugins.package-manager",
-  "plugins.telescope",
   "plugins.gruvbox",
+  "plugins.telescope",
   "plugins.gitsigns",
-  "plugins.true-zen",
+  "plugins.focus",
   "plugins.mason",
   "plugins.null-ls",
   "plugins.lspconfig",
@@ -25,6 +24,9 @@ for _, source in ipairs({
   "plugins.hop",
   "plugins.obsidian",
   "plugins.flutter-tools",
+
+  -- Make colours come after everything, especially the theme (currently gruvbox)
+  "core.colors",
 }) do
   local status_ok, fault = pcall(require, source)
   if not status_ok then

@@ -6,17 +6,17 @@ local g = vim.g
 
 opt.shell = "/bin/bash" -- Use bash for scripts
 
-wo.statusline = "%F"
+opt.statusline = "%F"
 
 -- Hide buffer when abandoned instead of closing
 -- Do not save when switching buffers
 o.hidden = true
 
-o.updatetime = 250       -- Decrease update time
+o.updatetime = 250        -- Decrease update time
 
-wo.relativenumber = true -- Show relative line numbers
-wo.number = true         -- Show actual line numbers (where the cursor is)
-wo.signcolumn = 'yes'    -- Display sign column
+wo.relativenumber = false -- Don't show relative line numbers
+wo.number = false         -- Don't show line numbers
+wo.signcolumn = 'yes'     -- Display sign column
 
 -- o.pastetoggle = "<F2>"      -- Toggle paste format via 'F2'
 o.clipboard = "unnamedplus" -- Yank to system clipboard
