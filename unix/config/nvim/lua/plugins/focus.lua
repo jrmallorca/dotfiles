@@ -1,20 +1,12 @@
 local focus = require('focus')
 
 focus.setup({
-  auto_zen = false,
-  zen = {
-    opts = {
-      -- cmdheight = 0,          -- disable cmdline
-      -- cursorline = false,     -- disable cursorline
-      -- laststatus = 0,         -- disable statusline
-      -- number = false,         -- disable number column
-      -- relativenumber = false, -- disable relative numbers
-      -- foldcolumn = "0",       -- disable fold column
-      signcolumn = "yes",
-      -- statuscolumn = " ",     -- disable status column
-    },
-    diagnostics = false, -- disables diagnostics
-  },
+  on_open = function(_win)
+    vim.cmd("Limelight")
+  end,
+  on_close = function()
+    vim.cmd("Limelight!")
+  end,
 })
 
 -- Key mappings
@@ -34,4 +26,3 @@ map('v', '<leader>vn', function()
   focus.toggle_narrow({ line1 = first, line2 = last })
 end, opts)
 map('n', '<leader>vf', '<cmd>:Focus<cr>', opts)
-map('n', '<leader>vz', focus.toggle_zen, opts)

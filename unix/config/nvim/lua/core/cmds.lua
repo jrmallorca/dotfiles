@@ -18,7 +18,6 @@ api.nvim_create_autocmd("TextYankPost", {
 
 -- When entering Neovim
 api.nvim_create_autocmd({ "VimEnter" }, { pattern = "*", command = "Focus" })
-api.nvim_create_autocmd({ "VimEnter" }, { pattern = "*", command = "Limelight" })
 
 -- Format on save
 api.nvim_create_autocmd("BufWritePre", {
