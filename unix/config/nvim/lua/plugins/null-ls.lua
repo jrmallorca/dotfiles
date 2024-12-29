@@ -12,21 +12,14 @@ local formatting = null_ls.builtins.formatting
 -- hover sources
 local hover = null_ls.builtins.hover
 
--- completion sources
-local completion = null_ls.builtins.completion
-
 -- Register any number of sources simultaneously
 local sources = {
   -- Code actions
   code_actions.gitsigns,
   code_actions.proselint,
 
-  -- Completion
-  completion.spell,
-
   -- Diagnostics
   diagnostics.checkmake,
-  diagnostics.commitlint,
   diagnostics.fish,
   diagnostics.yamllint,
   diagnostics.todo_comments,
