@@ -7,6 +7,7 @@ for _, source in ipairs({
 
   -- PLUGINS
   "plugins.package-manager",
+  "plugins.twilight",
   "plugins.gruvbox",
   "plugins.telescope",
   "plugins.gitsigns",

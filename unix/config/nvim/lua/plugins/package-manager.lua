@@ -38,7 +38,7 @@ local plugins = {
     "cdmill/focus.nvim", -- Focus mode
     cmd = { "Focus", "Zen", "Narrow" },
   },
-  'junegunn/limelight.vim',     -- Dim surrounding text
+  'folke/twilight.nvim',        -- Dim surrounding text
   'lewis6991/gitsigns.nvim',    -- Display git signs
   {
     'ellisonleao/gruvbox.nvim', -- Gruvbox theme

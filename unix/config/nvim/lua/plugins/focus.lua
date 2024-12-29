@@ -1,9 +1,11 @@
+local twilight = require('twilight')
 local map = vim.keymap.set
 local focus = require('focus')
 
 focus.setup({
   on_open = function(_)
     local opts = { noremap = true, silent = true }
+    twilight.enable()
 
     -- Hack to quit neovim from focus mode
     -- https://github.com/folke/zen-mode.nvim/issues/54#issuecomment-1200155414
@@ -22,6 +24,8 @@ focus.setup({
     if vim.b.quitting == 1 then
       vim.b.quitting = 0
       vim.cmd("q")
+    else
+      twilight.disable()
     end
   end,
 })
