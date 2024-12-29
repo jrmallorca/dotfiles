@@ -9,6 +9,7 @@ opt.shell = "/bin/bash" -- Use bash for scripts
 opt.statusline = "%F"
 opt.laststatus = 3
 opt.cmdheight = 0
+opt.conceallevel = 2
 
 -- Hide buffer when abandoned instead of closing
 -- Do not save when switching buffers
