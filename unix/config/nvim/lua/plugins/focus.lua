@@ -15,7 +15,6 @@ focus.setup({
       vim.cmd("let b:quitting = 1")
       vim.cmd("x")
     end, opts)
-    vim.cmd("Limelight")
     vim.cmd("cabbrev <buffer> q let b:quitting = 1 <bar> q")
     vim.cmd("cabbrev <buffer> wq let b:quitting = 1 <bar> wq")
   end,
@@ -23,8 +22,6 @@ focus.setup({
     if vim.b.quitting == 1 then
       vim.b.quitting = 0
       vim.cmd("q")
-    else
-      vim.cmd("Limelight!")
     end
   end,
 })
