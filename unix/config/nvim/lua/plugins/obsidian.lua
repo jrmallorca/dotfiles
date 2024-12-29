@@ -86,7 +86,6 @@ require('obsidian').setup({
       tags = note.tags,
       created_on = getDate(note.metadata),
       modified_on = os.date "%Y-%m-%d %H:%M:%S",
-      deck = "Zettelkasten",
     }
 
     -- `note.metadata` contains any manually added fields in the frontmatter.
