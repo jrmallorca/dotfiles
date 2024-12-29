@@ -1,20 +1,40 @@
+local map = vim.keymap.set
 local focus = require('focus')
 
 focus.setup({
-  on_open = function(_win)
+  on_open = function(_)
+    local opts = { noremap = true, silent = true }
+
+    -- Hack to quit neovim from focus mode
+    -- https://github.com/folke/zen-mode.nvim/issues/54#issuecomment-1200155414
+    map('n', 'ZQ', function()
+      vim.cmd("let b:quitting = 1")
+      vim.cmd("q")
+    end, opts)
+    map('n', 'ZZ', function()
+      vim.cmd("let b:quitting = 1")
+      vim.cmd("x")
+    end, opts)
     vim.cmd("Limelight")
+    vim.cmd("cabbrev <buffer> q let b:quitting = 1 <bar> q")
+    vim.cmd("cabbrev <buffer> wq let b:quitting = 1 <bar> wq")
   end,
   on_close = function()
-    vim.cmd("Limelight!")
+    if vim.b.quitting == 1 then
+      vim.b.quitting = 0
+      vim.cmd("q")
+    else
+      vim.cmd("Limelight!")
+    end
   end,
 })
 
 -- Key mappings
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
+
 -- <Leader>vn = Narrow mode
 -- <Leader>vf = Focus mode (Focus on current buffer when split)
--- <Leader>vz = Zen mode (Remove distractions)
 map('n', '<leader>vn', function()
   local first = 0
   local last = vim.api.nvim_buf_line_count(0)
