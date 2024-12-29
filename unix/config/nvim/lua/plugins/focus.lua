@@ -9,7 +9,7 @@ focus.setup({
     -- https://github.com/folke/zen-mode.nvim/issues/54#issuecomment-1200155414
     map('n', 'ZQ', function()
       vim.cmd("let b:quitting = 1")
-      vim.cmd("q")
+      vim.cmd("q!")
     end, opts)
     map('n', 'ZZ', function()
       vim.cmd("let b:quitting = 1")
