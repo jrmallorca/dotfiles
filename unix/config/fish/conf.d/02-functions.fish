@@ -43,6 +43,15 @@ function gd -d 'Git diff'
     end
 end
 
+function gswbr -d 'Create a local branch that tracks a remote branch of the same name' -a branchname
+    # Check if branch name is non-empty
+    if set -q branchname[1]
+        git switch -c $branchname --track origin/$branchname
+    else
+        printf 'Missing branch name'
+    end
+end
+
 function gsetup -d 'Set up a new repository using a repository name'
     set repository (basename $PWD) # Assume repository name is the same in GitHub
     set username jrmallorca # Set username in GitHub
