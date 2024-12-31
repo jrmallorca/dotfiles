@@ -7,7 +7,7 @@ require('obsidian').setup({
   },
 
   templates = {
-    folder = "templates/obsidian.nvim",
+    folder = "templates/obsidian-nvim",
     date_format = "%Y-%m-%d",
     time_format = "%H:%M",
     -- A map for custom variables, the key should be the variable and the value a function
@@ -74,17 +74,7 @@ require('obsidian').setup({
   -- Optional, alternatively you can customize the frontmatter data.
   ---@return table
   note_frontmatter_func = function(note)
-    local getDate = function(metadata)
-      local date = os.date "%Y-%m-%d %H:%M"
-      if metadata == nil then
-        return date
-      end
-      return metadata.created_on
-    end
-
     local out = {
-      tags = note.tags,
-      created_on = getDate(note.metadata),
       modified_on = os.date "%Y-%m-%d %H:%M:%S",
     }
 
