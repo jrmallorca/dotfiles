@@ -75,7 +75,7 @@ require('obsidian').setup({
   ---@return table
   note_frontmatter_func = function(note)
     local out = {
-      modified_on = os.date "%Y-%m-%d %H:%M:%S",
+      tags = note.tags,
     }
 
     -- `note.metadata` contains any manually added fields in the frontmatter.
@@ -85,6 +85,8 @@ require('obsidian').setup({
         out[k] = v
       end
     end
+
+    out["modified_on"] = os.date("%Y-%m-%d %H:%M:%S", os.time())
 
     return out
   end,
