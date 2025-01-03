@@ -10,8 +10,16 @@ require('obsidian').setup({
     folder = "templates/obsidian-nvim",
     date_format = "%Y-%m-%d",
     time_format = "%H:%M",
-    -- A map for custom variables, the key should be the variable and the value a function
-    substitutions = {},
+    substitutions = {
+      -- https://otland.net/threads/lua-get-day-of-next-week.165801/
+      nextSunday = function()
+        for i = 1, 9 do
+          if os.date('%A', os.time() + 24 * 3600 * i) == "Sunday" then
+            return os.date('%Y-%m-%d', os.time() + 24 * 3600 * i)
+          end
+        end
+      end
+    },
   },
 
   daily_notes = {
