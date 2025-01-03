@@ -13,7 +13,7 @@ require('obsidian').setup({
     substitutions = {
       -- https://otland.net/threads/lua-get-day-of-next-week.165801/
       nextSunday = function()
-        for i = 1, 9 do
+        for i = 1, 7 do
           if os.date('%A', os.time() + 24 * 3600 * i) == "Sunday" then
             return os.date('%Y-%m-%d', os.time() + 24 * 3600 * i)
           end
@@ -53,7 +53,7 @@ require('obsidian').setup({
     }
   },
 
-  new_notes_location = "zettelkasten/fleeting",
+  new_notes_location = "current_dir",
 
   note_id_func = function(title)
     local suffix = ""
