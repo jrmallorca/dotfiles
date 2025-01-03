@@ -587,7 +587,7 @@ map z. z ~/dotfiles
 map zc z ~/.config
 map zdw z ~/Downloads
 map zdc z ~/Documents
-map zvw z ~/Documents/work-vault
+map zj z ~/Documents/journal
 map zE z /etc
 map zU z /usr
 map zmc z /mnt/c
