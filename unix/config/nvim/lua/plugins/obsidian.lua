@@ -1,4 +1,6 @@
-require('obsidian').setup({
+local obsidian = require('obsidian')
+
+obsidian.setup({
   workspaces = {
     {
       name = "personal",
@@ -26,6 +28,7 @@ require('obsidian').setup({
     folder = "journal/daily",
     date_format = "%Y-%m-%d",
     alias_format = "%B %-d, %Y",
+    default_tags = {},
     template = "daily.md"
   },
 
@@ -33,23 +36,43 @@ require('obsidian').setup({
     -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
     ["gf"] = {
       action = function()
-        return require("obsidian").util.gf_passthrough()
+        return obsidian.util.gf_passthrough()
       end,
       opts = { noremap = false, expr = true, buffer = true },
     },
     -- Toggle check-boxes.
     ["<leader>ch"] = {
       action = function()
-        return require("obsidian").util.toggle_checkbox()
+        return obsidian.util.toggle_checkbox()
       end,
       opts = { buffer = true },
     },
     -- Smart action depending on context, either follow link or toggle checkbox.
     ["<cr>"] = {
       action = function()
-        return require("obsidian").util.smart_action()
+        return obsidian.util.smart_action()
       end,
       opts = { buffer = true, expr = true },
+    },
+    ["<leader>rn"] = {
+      action = "<cmd>ObsidianRename<CR>",
+      opts = { noremap = true, silent = true },
+    },
+    ["<leader>ff"] = {
+      action = "<cmd>ObsidianQuickSwitch<CR>",
+      opts = { noremap = true, silent = true },
+    },
+    ["<leader>ob"] = {
+      action = "<cmd>ObsidianBacklinks<CR>",
+      opts = { noremap = true, silent = true },
+    },
+    ["<leader>od"] = {
+      action = "<cmd>ObsidianDailies<CR>",
+      opts = { noremap = true, silent = true },
+    },
+    ["<leader>ox"] = {
+      action = "<cmd>ObsidianExtractNote<CR>",
+      opts = { noremap = true, silent = true },
     }
   },
 
