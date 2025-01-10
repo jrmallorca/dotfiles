@@ -20,6 +20,9 @@ obsidian.setup({
             return os.date('%Y-%m-%d', os.time() + 24 * 3600 * i)
           end
         end
+      end,
+      currentYear = function()
+        return os.date('%Y')
       end
     },
   },
