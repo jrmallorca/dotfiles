@@ -16,7 +16,6 @@ local hover = null_ls.builtins.hover
 local sources = {
   -- Code actions
   code_actions.gitsigns,
-  code_actions.proselint,
 
   -- Diagnostics
   diagnostics.checkmake,
@@ -29,8 +28,6 @@ local sources = {
   formatting.astyle,
   formatting.shfmt,
   formatting.fish_indent,
-  formatting.textlint,
-  formatting.prettierd,
 
   -- Hover
   hover.printenv,
