@@ -58,6 +58,10 @@ obsidian.setup({
       end,
       opts = { buffer = true, expr = true },
     },
+    ["d-"] = { -- Find the title, replace the dashes with space, and capitalise the first letter.
+      action = "<cmd>0;/#/;:s/-/ /g<CR>w~",
+      opts = { noremap = true, silent = true },
+    },
     ["<leader>rn"] = {
       action = "<cmd>ObsidianRename<CR>",
       opts = { noremap = true, silent = true },
