@@ -198,7 +198,7 @@ torrent:
 
 # Install Waydroid: https://forum.garudalinux.org/t/ultimate-guide-to-install-waydroid-in-any-arch-based-distro-especially-garuda/15902
 # Share personal-vaults folder: https://docs.waydro.id/faq/setting-up-a-shared-folder
-# Fix /dev/anbox-binder not found issue: https://bbs.archlinux.org/viewtopic.php?id=286306
+# Fix /dev/anbox-binder not found issue: https://bbs.archlinux.org/viewtopic.php?id=286306 / https://github.com/waydroid/waydroid/issues/801
 # Resizing hack: https://github.com/waydroid/waydroid/issues/70#issuecomment-927144567
 waydroid:
 	paru -Syu --needed --noconfirm linux-headers linux-lts-headers binder_linux-dkms waydroid
