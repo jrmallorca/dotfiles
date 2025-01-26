@@ -1,4 +1,5 @@
 local obsidian = require('obsidian')
+local telescope = require('telescope.builtin')
 
 obsidian.setup({
   workspaces = {
@@ -65,6 +66,12 @@ obsidian.setup({
       action = "<cmd>ObsidianQuickSwitch<CR>",
       opts = { noremap = true, silent = true },
     },
+    ["<leader>f/"] = {
+      action = function()
+        return telescope.live_grep({ cwd = obsidian.get_client().dir.filename })
+      end,
+      opts = { noremap = true, silent = true },
+    },
     ["<leader>ob"] = {
       action = "<cmd>ObsidianBacklinks<CR>",
       opts = { noremap = true, silent = true },
@@ -76,7 +83,11 @@ obsidian.setup({
     ["<leader>ox"] = {
       action = "<cmd>ObsidianExtractNote<CR>",
       opts = { noremap = true, silent = true },
-    }
+    },
+    ["<leader>ot"] = {
+      action = "ggVGx<cmd>ObsidianTemplate<CR>",
+      opts = { noremap = true, silent = true },
+    },
   },
 
   new_notes_location = "current_dir",
