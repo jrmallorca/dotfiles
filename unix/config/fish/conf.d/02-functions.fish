@@ -92,3 +92,7 @@ function mr -d 'Open Moon+ Reader Pro in Waydroid'
     sudo mount --bind ~/Documents/ ~/.local/share/waydroid/data/media/0/Documents
     waydroid app launch com.flyersoft.moonreader
 end
+
+function wd -d 'Start Waydroid session'
+    waydroid session start &
+end
