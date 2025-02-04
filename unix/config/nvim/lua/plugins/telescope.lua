@@ -46,6 +46,8 @@ map("n", "<leader>mv", function()
   local current_file = vim.fn.expand("%:p")
   local current_file_name = vim.fn.fnamemodify(current_file, ":t")
 
+  vim.cmd.w() -- Save file
+
   telescope.find_files({
     prompt_title = "Select Folder to Move File",
     cwd = vim.fs.dirname(vim.fs.find(root_patterns, { upward = true })[1]),
