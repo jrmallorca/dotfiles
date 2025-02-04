@@ -104,7 +104,10 @@ local plugins = {
       "BufReadPre " .. vim.fn.expand "~" .. "Documents/*.md",
       "BufNewFile " .. vim.fn.expand "~" .. "Documents/*.md",
     },
-  }
+  },
+
+  -- LLMs
+  "David-Kunz/gen.nvim",
 }
 
 require("lazy").setup(plugins, opts)
