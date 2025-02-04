@@ -35,10 +35,10 @@ local plugins = {
 
   -- UI
   {
-    "cdmill/focus.nvim", -- Focus mode
+    "cdmill/focus.nvim", -- Focus mode (Replacable with folke/snacks.nvim)
     cmd = { "Focus", "Zen", "Narrow" },
   },
-  'folke/twilight.nvim',        -- Dim surrounding text
+  'folke/twilight.nvim',        -- Dim surrounding text (Replacable with folke/snacks.nvim)
   'lewis6991/gitsigns.nvim',    -- Display git signs
   {
     'ellisonleao/gruvbox.nvim', -- Gruvbox theme
@@ -48,7 +48,7 @@ local plugins = {
 
   -- Functionality
   {
-    'nvim-telescope/telescope.nvim', -- Fuzzy finder
+    'nvim-telescope/telescope.nvim', -- Fuzzy finder (Replacable with folke/snacks.nvim)
     tag = '0.1.4',
   },
   'tpope/vim-eunuch', -- Allow UNIX shell commands in Neovim
@@ -73,7 +73,7 @@ local plugins = {
     'jayp0521/mason-nvim-dap.nvim',      -- Debug adapter installer for mason
   },
   'hrsh7th/cmp-nvim-lsp',                -- Make Neovim use cmp for LSP
-  'hrsh7th/nvim-cmp',                    -- Autocompletion plugin
+  'hrsh7th/nvim-cmp',                    -- Autocompletion plugin (Replacable with blink.nvim)
   'L3MON4D3/LuaSnip',                    -- Snippets engine
   'saadparwaiz1/cmp_luasnip',            -- Use snippets engine in autocompletion plugin
   'rafamadriz/friendly-snippets',        -- Pre-existing VSCode snippets
