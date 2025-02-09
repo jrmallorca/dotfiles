@@ -15,3 +15,6 @@ local opts = { noremap = true, silent = true }
 map('', '<Space>', '<Nop>', opts)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+
+-- Do not format on save
+map('n', '<leader>w', '<Cmd>set eventignore+=BufWritePre | w | set eventignore-=BufWritePre<CR>', opts)
