@@ -108,6 +108,7 @@ local plugins = {
 
   -- LLMs
   "David-Kunz/gen.nvim",
+  "olimorris/codecompanion.nvim",
 }
 
 require("lazy").setup(plugins, opts)

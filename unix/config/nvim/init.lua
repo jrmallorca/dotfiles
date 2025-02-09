@@ -24,7 +24,7 @@ for _, source in ipairs({
   "plugins.flash",
   "plugins.obsidian",
   "plugins.flutter-tools",
-  "plugins.gen",
+  "plugins.llm",
 
   "core.cmds",
   "core.colors", -- Make colours come after everything, especially the theme (currently gruvbox)
