@@ -92,6 +92,10 @@ obsidian.setup({
       action = "ggVGx<cmd>ObsidianTemplate<CR>",
       opts = { noremap = true, silent = true },
     },
+    ["<leader>or"] = {
+      action = "<cmd>ObsidianRename<CR>",
+      opts = { noremap = true, silent = true },
+    },
   },
 
   new_notes_location = "current_dir",
