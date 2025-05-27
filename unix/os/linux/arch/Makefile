@@ -144,6 +144,7 @@ window-manager: hyprland
 
 hyprland:
 	paru -Syu --needed hyprwayland-scanner hyprland hyprpaper waybar fuzzel qt6ct qt6-wayland libva cpio cmake meson
+	hyprpm update
 	hyprpm add https://github.com/shezdy/hyprsplit
 	hyprpm enable hyprsplit
 	hyprpm reload
