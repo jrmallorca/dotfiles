@@ -74,6 +74,8 @@ development:
 		openssh tree-sitter-cli
 	python3 -m venv .venv; . .venv/bin/activate; pip3 install pynvim; deactivate
 	rm -r .venv
+	git config --global user.email "48072014+jrmallorca@users.noreply.github.com"
+	git config --global user.name "Jonquil Isys Mallorca"
 
 # LSPs, linters and formatters
 lsp:
