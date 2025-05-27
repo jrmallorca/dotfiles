@@ -5,15 +5,15 @@
 .PHONY: all clean test init lockscreen
 
 # Initialise setup
-init-nvidia: etc package-manager base nvidia tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts
+init-nvidia: etc package-manager base nvidia tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts config
 
-init-amd: etc package-manager base nvidia tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts
+init-amd: etc package-manager base nvidia tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts config
 
-init-wsl: etc package-manager base-wsl tools-wsl development editor lsp gitdiff terminal shell fisher fisher-plugins file-manager fonts apy
+init-wsl: etc package-manager base-wsl tools-wsl development editor lsp gitdiff terminal shell fisher fisher-plugins file-manager fonts apy config
 
-init-archinstall-nvidia: etc package-manager nvidia tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts
+init-archinstall-nvidia: etc package-manager nvidia tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts config
 
-init-archinstall-amd: etc package-manager tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts
+init-archinstall-amd: etc package-manager tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts config
 
 # -----------------------------------------------------------------------------
 # Dot Files
@@ -167,6 +167,10 @@ tools-wsl:
 		zathura-pdf-mupdf nodejs npm python python-pip \
 		zoxide trash-cli
 
+config:
+	set IS_PERSONAL true
+	cd ../../../.. && \
+		make arch
 
 # Other
 # -----------------------------------------------------------------------------
