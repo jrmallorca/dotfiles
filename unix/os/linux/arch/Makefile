@@ -103,7 +103,7 @@ mime:
 	xdg-mime default org.pwmt.zathura.desktop application/pdf
 
 browser:
-	paru -Syu --needed firefox
+	paru -Syu --needed zen-browser-bin
 
 terminal:
 	paru -Syu --needed alacritty
