@@ -13,7 +13,7 @@ init-wsl: etc package-manager base-wsl tools-wsl development editor lsp gitdiff 
 
 init-archinstall-nvidia: etc package-manager nvidia tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts config
 
-init-archinstall-amd: etc package-manager tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts config
+init-archinstall-amd: etc package-manager tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts config notes
 
 # -----------------------------------------------------------------------------
 # Dot Files
@@ -127,7 +127,7 @@ fisher-plugins:
 file-manager: lf
 
 lf:
-	paru -Syu --needed lf ueberzug chafa daemon
+	paru -Syu --needed lf ueberzug chafa daemon ctpv
 	mkdir -p ~/git-installs
 	cd ~/git-installs && \
 		git clone https://github.com/Naheel-Azawy/stpv.git && \
@@ -219,8 +219,8 @@ waydroid:
 		"
 
 # P2P syncing
-syncthing:
-	paru -Syu syncthing
+notes:
+	paru -Syu syncthing obsidian anki
 	sudo systemctl enable syncthing@$$USER
 
 # Programming
