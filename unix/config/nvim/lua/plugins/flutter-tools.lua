@@ -1,1 +1,3 @@
-require('flutter-tools').setup()
+return {
+  "nvim-flutter/flutter-tools.nvim",
+}
