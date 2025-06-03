@@ -7,7 +7,3 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
   pattern = { "*" },
   callback = Snacks.zen.zen,
 })
-vim.api.nvim_create_autocmd({ "BufLeave" }, {
-  pattern = { "*" },
-  callback = Snacks.zen.zen,
-})
