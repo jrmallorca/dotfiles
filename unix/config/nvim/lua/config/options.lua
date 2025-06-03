@@ -12,8 +12,7 @@ g.mapleader = " "
 g.maplocalleader = " "
 
 -- LazyVim root dir detection
-g.root_spec = { { ".git", "cwd" } }
-
+g.root_spec = { { ".git", "cwd" }, ".obsidian" }
 opt.shell = "/bin/bash" -- Use bash for scripts
 
 opt.statusline = "%F"
