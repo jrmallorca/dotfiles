@@ -130,10 +130,7 @@ lf:
 	paru -Syu --needed lf ueberzug chafa daemon ctpv
 	mkdir -p ~/git-installs
 	cd ~/git-installs && \
-		git clone https://github.com/Naheel-Azawy/stpv.git && \
 		git clone https://github.com/exiftool/exiftool.git
-	cd ~/git-installs/stpv && \
-		sudo make install
 	cd ~/git-installs/exiftool && \
 		perl Makefile.PL && \
 		make && \

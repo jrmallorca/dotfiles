@@ -29,7 +29,7 @@ package-manager:
 
 tools:
 	brew upgrade && brew install gnupg wget fzf fd bat ripgrep jq \
-		neovim zoxide diff-so-fancy lf gh trash-cli
+		neovim zoxide diff-so-fancy lf gh trash-cli ctpv
 	brew install --cask cursorcerer alacritty
 
 gitdiff:
