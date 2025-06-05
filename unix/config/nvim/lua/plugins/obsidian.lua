@@ -150,6 +150,12 @@ return {
         currentYear = function()
           return os.date("%Y")
         end,
+        yesterday = function()
+          return os.date("%Y-%m-%d", os.time() - 86400)
+        end,
+        tomorrow = function()
+          return os.date("%Y-%m-%d", os.time() + 86400)
+        end,
       },
     },
 
