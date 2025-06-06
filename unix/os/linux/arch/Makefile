@@ -60,10 +60,11 @@ base:
 	sudo systemctl enable reflector.service reflector.timer
 
 tools:
-	paru -Syu --needed unclutter tlp feh mpv ffmpeg zathura \
-		zathura-pdf-mupdf nodejs npm python python-pip brightnessctl \
-		dunst libinput zoxide trash-cli unzip jq kopia \
+	paru -Syu --needed unclutter tlp feh mpv ffmpeg zathura zathura-pdf-mupdf \
+		nodejs npm python python-pip networkmanager network-manager-applet
+		brightnessctl dunst libinput zoxide trash-cli unzip jq kopia \
 		alsa-utils bluez bluez-utils blueman
+	sudo systemctl enable NetworkManager
 	sudo systemctl enable tlp
 	sudo systemctl mask systemd-rfkill.service systemd-rfkill.socket
 	sudo systemctl enable bluetooth.service
