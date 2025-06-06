@@ -3,22 +3,22 @@
 # Open lf in a terminal
 
 if [ "$1" != "" ]; then
-	if [ -d "$1" ]; then
-		args="$1"
-	else
-		args=""
-	fi
+    if [ -d "$1" ]; then
+        args="$1"
+    else
+        args=""
+    fi
 else
-	dir=$(xclip -selection primary -o 2>/dev/null)
-	_dir=$(xclip -selection clipboard -o 2>/dev/null)
+    dir=$(xclip -selection primary -o 2>/dev/null)
+    _dir=$(xclip -selection clipboard -o 2>/dev/null)
 
-	if [ -d "$_dir" ]; then
-		args="$_dir"
-	elif [ -d "$dir" ]; then
-		args="$dir"
-	else
-		args=""
-	fi
+    if [ -d "$_dir" ]; then
+        args="$_dir"
+    elif [ -d "$dir" ]; then
+        args="$dir"
+    else
+        args=""
+    fi
 fi
 
-alacritty --command sh -c "lf '$args'"
+ghostty --command sh -c "lf '$args'"

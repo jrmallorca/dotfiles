@@ -30,7 +30,7 @@ package-manager:
 tools:
 	brew upgrade && brew install gnupg wget fzf fd bat ripgrep jq \
 		neovim zoxide diff-so-fancy lf gh trash-cli ctpv
-	brew install --cask cursorcerer alacritty
+	brew install --cask cursorcerer ghostty
 
 gitdiff:
 	git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"

@@ -137,7 +137,7 @@ cmd open-new-window %{{
         set -l mime_type (file --mime-type "$f" -bL)
         switch $mime_type
             case "text/*" "application/json" "inode/*" "application/octet-stream"
-                setsid alacritty -e sh -c "sleep 0.5 && "$EDITOR" "$file"" >/dev/null 2>&1 &
+                setsid ghostty -e="sh -c 'sleep 0.5 && "$EDITOR" "$file"' >/dev/null 2>&1 &"
             case "*"
                 setsid xdg-open "$f" >/dev/null 2>&1 &
         end
