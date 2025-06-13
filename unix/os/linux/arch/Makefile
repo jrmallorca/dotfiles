@@ -226,7 +226,8 @@ notes:
 # -----------------------------------------------------------------------------
 
 java:
-	paru -Syu jre-openjdk maven
+	paru -Syu maven mise
+	mise use -g java@24
 
 flutter:
 	paru -Syu --needed jdk8-openjdk simple-mtpfs flutter android-sdk \
