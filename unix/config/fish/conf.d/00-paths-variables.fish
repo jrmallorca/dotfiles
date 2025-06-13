@@ -33,6 +33,8 @@ else
     set -gx EDITOR /usr/bin/nvim
 end
 
+set -gx BROWSER zen-browser
+
 # Zoxide
 set -gx _ZO_ECHO 1
 set -gx _ZO_DATA_DIR $HOME/.local/share
