@@ -229,6 +229,20 @@ java:
 	paru -Syu maven mise
 	mise use -g java@24
 
+postgres: docker
+	paru -Syu --needed postgres
+	# Initialise database through the postgres user created with the above command
+	sudo -u postgres initdb -D /var/lib/postgres/data
+	sudo systemctl start postgresql
+	sudo systemctl enable postgresql
+	# https://stackoverflow.com/questions/27107557/what-is-the-default-password-for-postgres
+	# Have a look at the above to access postgres user and set its password
+	# sudo -iu postgres
+	# psql
+	# ALTER USER postgres PASSWORD 'mynewpassword';
+	# \q
+	# exit
+
 flutter:
 	paru -Syu --needed jdk8-openjdk simple-mtpfs flutter android-sdk \
 		android-sdk-platform-tools android-sdk-build-tools android-platform \
@@ -273,13 +287,12 @@ apy:
 # -----------------------------------------------------------------------------
 
 docker:
-	paru -Syu --needed --noconfirm docker
+	paru -Syu --needed --noconfirm docker docker-desktop
 	- sudo groupadd docker && usermod -aG docker $$USER && newgrp docker
-	docker run hello-world
 	sudo systemctl enable docker.service
-	sudo systemctl enable containerd.service
 
 dockerosx: docker
+	sudo systemctl enable containerd.service
 	paru -Syu --needed --noconfirm qemu libvirt dnsmasq virt-manager bridge-utils flex bison iptables-nft edk2-ovmf
 	sudo systemctl enable --now libvirtd
 	sudo systemctl enable --now virtlogd
