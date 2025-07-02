@@ -15,3 +15,5 @@ A few scripts are run through `systemd` and require the `$BWS_ACCESS_TOKEN` secr
 10. `exit`
 
 Source: [Baeldung Linux](https://www.baeldung.com/linux/systemd-services-environment-variables)
+
+The `initialise-home-backup.sh` script is meant to be run as root when initialising `kopia` in the root user's home directory. Use `sudo`.
