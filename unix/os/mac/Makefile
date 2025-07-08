@@ -56,10 +56,9 @@ fonts:
 
 # Tiling Window Manager (TWM)
 twm:
-	brew upgrade && brew install koekeishiya/formulae/yabai koekeishiya/formulae/skhd
-	yabai --start-service
-	skhd --start-service
-	echo "Follow the instructions in the following link: https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(latest-release)#configure-scripting-addition"
+	brew upgrade && brew install --cask nikitabobko/tap/aerospace
+	echo "Follow the instructions in the following link: https://nikitabobko.github.io/AeroSpace/guide"
+	echo "Ensure that Aerospace starts up automatically through Settings > Search 'launch' > Login items & Extensions > Allow in Background > Open at Login", 
 
 # Development
 # -----------------------------------------------------------------------------
