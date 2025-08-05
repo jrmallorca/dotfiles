@@ -40,68 +40,6 @@ return {
       min_chars = 2,
     },
 
-    mappings = {
-      -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
-      ["gf"] = {
-        action = function()
-          return require("obsidian").util.gf_passthrough()
-        end,
-        opts = { noremap = false, expr = true, buffer = true },
-      },
-      -- Toggle check-boxes.
-      ["<leader>ch"] = {
-        action = function()
-          return require("obsidian").util.toggle_checkbox()
-        end,
-        opts = { buffer = true },
-      },
-      -- Smart action depending on context, either follow link or toggle checkbox.
-      ["<cr>"] = {
-        action = function()
-          return require("obsidian").util.smart_action()
-        end,
-        opts = { buffer = true, expr = true },
-      },
-      ["d-"] = { -- Find the title, replace the dashes with space, and capitalise the first letter.
-        action = "<cmd>0;/#/;:s/-/ /g<CR>w~",
-        opts = { noremap = true, silent = true },
-      },
-      ["<leader>rn"] = {
-        action = "<cmd>ObsidianRename<CR>",
-        opts = { noremap = true, silent = true },
-      },
-      ["<leader>ff"] = {
-        action = "<cmd>ObsidianQuickSwitch<CR>",
-        opts = { noremap = true, silent = true },
-      },
-      ["<leader>/"] = {
-        action = function()
-          return Snacks.picker.grep({ cwd = require("obsidian").get_client().dir.filename })
-        end,
-        opts = { noremap = true, silent = true },
-      },
-      ["<leader>ob"] = {
-        action = "<cmd>ObsidianBacklinks<CR>",
-        opts = { noremap = true, silent = true },
-      },
-      ["<leader>od"] = {
-        action = "<cmd>ObsidianDailies<CR>",
-        opts = { noremap = true, silent = true },
-      },
-      ["<leader>ox"] = {
-        action = "<cmd>ObsidianExtractNote<CR>",
-        opts = { noremap = true, silent = true },
-      },
-      ["<leader>ot"] = {
-        action = "ggVGx<cmd>ObsidianTemplate<CR>",
-        opts = { noremap = true, silent = true },
-      },
-      ["<leader>or"] = {
-        action = "<cmd>ObsidianRename<CR>",
-        opts = { noremap = true, silent = true },
-      },
-    },
-
     new_notes_location = "current_dir",
 
     note_id_func = function(title)
@@ -176,7 +114,41 @@ return {
       -- Runs anytime you enter the buffer for a note.
       ---@param client obsidian.Client
       ---@param note obsidian.Note
-      enter_note = function(client, note) end,
+      enter_note = function(client, note)
+        vim.keymap.set("n", "<CR>", function()
+          return require("obsidian").util.smart_action()
+        end, {
+          desc = "Obsidian: Smart action",
+        })
+        vim.keymap.set("n", "<leader>ch", function()
+          return require("obsidian").util.toggle_checkbox()
+        end, {
+          desc = "Obsidian: Toggle checkbox status",
+        })
+        vim.keymap.set("n", "d-", "<cmd>0;/#/;:s/-/ /g<CR>w~", {
+          desc = "Obsidian: Format line with header 1",
+        })
+        vim.keymap.set("n", "<leader>rn", "<cmd>ObsidianRename<CR>", {
+          desc = "Obsidian: Rename file",
+        })
+        vim.keymap.set("n", "<leader>f", "<cmd>ObsidianQuickSwitch<CR>", {
+          desc = "Obsidian: Quick switch",
+        })
+        vim.keymap.set("n", "<leader>/", function()
+          return Snacks.picker.grep({ cwd = require("obsidian").get_client().dir.filename })
+        end, {
+          desc = "Obsidian: Find in files",
+        })
+        vim.keymap.set("n", "<leader>ob", "<cmd>ObsidianBacklinks<CR>", {
+          desc = "Obsidian: Find backlinks",
+        })
+        vim.keymap.set("n", "<leader>od", "<cmd>ObsidianDailies<CR>", {
+          desc = "Obsidian: Find daily notes",
+        })
+        vim.keymap.set("n", "<leader>ot", "ggVGx<cmd>ObsidianTemplate<CR>", {
+          desc = "Obsidian: Replace template in file",
+        })
+      end,
 
       -- Runs anytime you leave the buffer for a note.
       ---@param client obsidian.Client
