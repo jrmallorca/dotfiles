@@ -128,10 +128,10 @@ return {
         vim.keymap.set("n", "d-", "<cmd>0;/#/;:s/-/ /g<CR>w~", {
           desc = "Obsidian: Format line with header 1",
         })
-        vim.keymap.set("n", "<leader>rn", "<cmd>ObsidianRename<CR>", {
+        vim.keymap.set("n", "<leader>rn", "<cmd>Obsidian rename<CR>", {
           desc = "Obsidian: Rename file",
         })
-        vim.keymap.set("n", "<leader>f", "<cmd>ObsidianQuickSwitch<CR>", {
+        vim.keymap.set("n", "<leader>f", "<cmd>Obsidian quick_switch<CR>", {
           desc = "Obsidian: Quick switch",
         })
         vim.keymap.set("n", "<leader>/", function()
@@ -139,13 +139,13 @@ return {
         end, {
           desc = "Obsidian: Find in files",
         })
-        vim.keymap.set("n", "<leader>ob", "<cmd>ObsidianBacklinks<CR>", {
+        vim.keymap.set("n", "<leader>ob", "<cmd>Obsidian backlinks<CR>", {
           desc = "Obsidian: Find backlinks",
         })
-        vim.keymap.set("n", "<leader>od", "<cmd>ObsidianDailies<CR>", {
+        vim.keymap.set("n", "<leader>od", "<cmd>Obsidian dailies<CR>", {
           desc = "Obsidian: Find daily notes",
         })
-        vim.keymap.set("n", "<leader>ot", "ggVGx<cmd>ObsidianTemplate<CR>", {
+        vim.keymap.set("n", "<leader>ot", "ggVGx<cmd>Obsidian template<CR>", {
           desc = "Obsidian: Replace template in file",
         })
       end,
