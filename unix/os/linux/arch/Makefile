@@ -225,9 +225,15 @@ notes:
 # Programming
 # -----------------------------------------------------------------------------
 
-java:
-	paru -Syu maven mise
+mise:
+	paru -Syu --needed mise usage
+
+java: mise
+	paru -Syu --needed maven
 	mise use -g java@24
+
+csharp: mise
+	mise use -g dotnet
 
 postgres: docker
 	paru -Syu --needed postgres
