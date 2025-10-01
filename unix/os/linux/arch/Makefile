@@ -233,6 +233,7 @@ java: mise
 	mise use -g java@24
 
 csharp: mise
+	paru -Syu --needed omnisharp-roslyn
 	mise use -g dotnet
 
 postgres: docker
