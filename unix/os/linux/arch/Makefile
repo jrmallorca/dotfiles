@@ -250,18 +250,19 @@ postgres: docker
 	# \q
 	# exit
 
+# https://ashpex.net/2021/06/how-to-install-flutter-on-arch-linux/
 flutter:
-	paru -Syu --needed jdk8-openjdk simple-mtpfs flutter android-sdk \
+	paru -Syu --needed jdk8-openjdk simple-mtpfs android-sdk \
 		android-sdk-platform-tools android-sdk-build-tools android-platform \
 		android-sdk-cmdline-tools-latest scrcpy
-	sudo groupadd flutterusers
-	sudo gpasswd -a $$USER flutterusers
-	sudo chown -R :flutterusers /opt/flutter
-	sudo chmod -R g+w /opt/flutter/
+	git clone git@github.com:flutter/flutter.git ~/development/flutter
+	curl https://github.com/qiuxiang/flutter-fish-completions/releases/latest/download/flutter.fish -Lo ~/.config/fish/completions/flutter.fish
 	sudo groupadd android-sdk
 	sudo gpasswd -a $$USER android-sdk
 	sudo setfacl -R -m g:android-sdk:rwx /opt/android-sdk
 	sudo setfacl -d -m g:android-sdk:rwX /opt/android-sdk
+	# https://stackoverflow.com/questions/70173390/flutter-some-android-licenses-not-accepted-cannot-accept-licenses#70173740
+	echo "Use root to execute 'sdkmanager --licenses'"
 
 # Git
 # -----------------------------------------------------------------------------
