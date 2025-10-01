@@ -15,8 +15,6 @@ return {
     -- Required.
     "nvim-lua/plenary.nvim",
   },
-  ---@module 'obsidian'
-  ---@type obsidian.config.ClientOpts
   opts = {
     ui = { enable = false },
 
@@ -105,16 +103,8 @@ return {
 
     open_notes_in = "vsplit",
 
-    -- Optional, define your own callbacks to further customize behavior.
     callbacks = {
-      -- Runs at the end of `require("obsidian").setup()`.
-      ---@param client obsidian.Client
-      post_setup = function(client) end,
-
-      -- Runs anytime you enter the buffer for a note.
-      ---@param client obsidian.Client
-      ---@param note obsidian.Note
-      enter_note = function(client, note)
+      enter_note = function(note)
         vim.keymap.set("n", "<CR>", function()
           return require("obsidian").util.smart_action()
         end, {
@@ -149,21 +139,6 @@ return {
           desc = "Obsidian: Replace template in file",
         })
       end,
-
-      -- Runs anytime you leave the buffer for a note.
-      ---@param client obsidian.Client
-      ---@param note obsidian.Note
-      leave_note = function(client, note) end,
-
-      -- Runs right before writing the buffer for a note.
-      ---@param client obsidian.Client
-      ---@param note obsidian.Note
-      pre_write_note = function(client, note) end,
-
-      -- Runs anytime the workspace is set/changed.
-      ---@param client obsidian.Client
-      ---@param workspace obsidian.Workspace
-      post_set_workspace = function(client, workspace) end,
     },
 
     attachments = {
