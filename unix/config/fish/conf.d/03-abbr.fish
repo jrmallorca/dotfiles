@@ -94,7 +94,10 @@ abbr -a gbl 'git blame'
 abbr -a gc 'git commit -m'
 abbr -a gca 'git commit --amend'
 abbr -a gcam 'git commit --amend -m'
+
+# Checkout a commit
 abbr -a gcoc 'git log --oneline | fzf --ansi | head -n1 | awk \'{print $1;}\' | xargs git checkout'
+
 abbr -a gcp 'git cherry-pick'
 abbr -a gd 'git diff --name-only | fzf --multi --ansi --preview="git diff --color=always -- {-1} | diff-so-fancy"'
 abbr -a gdc 'git diff --cached --name-only | fzf --multi --ansi --preview="git diff --cached --color=always -- {-1} | diff-so-fancy"'
@@ -115,6 +118,11 @@ abbr -a gst 'git stash'
 abbr -a gstp 'git stash pop'
 abbr -a gg 'git log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"'
 abbr -a gresign 'git rebase --exec \'git commit --amend --no-edit -n -S\' -i'
+abbr -a gclw 'git-clone-bare-for-worktrees.sh'
+abbr -a gwt 'git worktree'
+abbr -a gwta 'git worktree add'
+abbr -a gwtr 'git worktree remove'
+abbr -a gwtl 'git worktree list'
 
 # GitHub CLI
 abbr -a ghi 'gh issue'
