@@ -11,15 +11,16 @@ return {
           local current_file_name = vim.fn.fnamemodify(current_file, ":t")
 
           Snacks.picker.pick({
+            layout = { preset = "select", layout = { max_width = 50 } },
             cwd = root_dir,
             title = "Directories",
             format = "text",
-            finder = function(opts, ctx)
+            finder = function(_, ctx)
               local proc_opts = {
                 cmd = "fd",
                 args = { ".", "--type", "directory", "--exclude", "./.git/*" },
               }
-              return require("snacks.picker.source.proc").proc({ opts, proc_opts }, ctx)
+              return require("snacks.picker.source.proc").proc(proc_opts, ctx)
             end,
             confirm = function(picker, item)
               picker:close()
