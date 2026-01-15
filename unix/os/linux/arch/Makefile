@@ -11,9 +11,9 @@ init-amd: etc package-manager base nvidia tools development lsp gitdiff mime bro
 
 init-wsl: etc package-manager base-wsl tools-wsl development editor lsp gitdiff terminal shell fisher fisher-plugins file-manager fonts apy config
 
-init-archinstall-nvidia: etc package-manager nvidia tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts config
+init-archinstall-nvidia: etc package-manager nvidia tools development lsp gitdiff mime browser terminal mise shell fisher fisher-plugins file-manager window-manager lockscreen fonts config
 
-init-archinstall-amd: etc package-manager tools development lsp gitdiff mime browser terminal shell fisher fisher-plugins file-manager window-manager lockscreen fonts config notes
+init-archinstall-amd: etc package-manager tools development lsp gitdiff mime browser terminal shell mise fisher fisher-plugins file-manager window-manager lockscreen fonts config notes
 
 # -----------------------------------------------------------------------------
 # Dot Files
@@ -61,7 +61,7 @@ base:
 
 tools:
 	paru -Syu --needed unclutter tlp feh mpv ffmpeg zathura zathura-pdf-mupdf \
-		nodejs npm python python-pip networkmanager network-manager-applet
+		nodejs npm python python-pip networkmanager network-manager-applet \
 		brightnessctl dunst libinput zoxide trash-cli unzip jq kopia \
 		alsa-utils bluez bluez-utils blueman \
 		imagemagick tectonic ghostscript # Render images with snacks.nvim
@@ -147,6 +147,12 @@ hyprland:
 	hyprpm add https://github.com/shezdy/hyprsplit
 	hyprpm enable hyprsplit
 	hyprpm reload
+
+login-manager: ly
+
+ly:
+	paru -Syu --needed ly
+	sudo systemctl enable --now ly@tty1.service
 
 lockscreen: etc
 	paru -Syu --needed --noconfirm physlock
