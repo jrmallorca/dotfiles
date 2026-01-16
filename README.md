@@ -1,3 +1,33 @@
+# Dotfiles
+
+## Set up GitHub
+
+[Source](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+
+1. Get your GitHub email and run the following:
+
+```
+ssh-keygen -t ed25519 -C "YOUR_EMAIL_HERE"
+eval "$$(ssh-agent -s)" && ssh-add ~/.ssh/id_ed25519
+wl-copy < ~/.ssh/id_ed25519.pub
+```
+
+2. Navigate to [GitHub Keys page](https://github.com/settings/keys) > New SSH key.
+3. Add your device name and paste the contents of the public key.
+
+## Set up dotfiles
+
+Run the following:
+
+```shell
+cd ~
+git clone git@github.com:jrmallorca/dotfiles.git
+cd ~/dotfiles/unix/os/linux/arch/
+make init-archinstall-amd
+```
+
+There may be a few instances it asks for your password. Fill it in.
+
 ## Notes on scripts
 
 A few scripts are run through `systemd` and require the `$BWS_ACCESS_TOKEN` secret. Create `bws-access-token-env` file that assigns `$BWS_ACCESS_TOKEN` to the value of your BitWarden Secrets Manager Access Token.
