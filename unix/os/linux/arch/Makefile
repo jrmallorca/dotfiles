@@ -13,7 +13,7 @@ init-wsl: etc package-manager base-wsl tools-wsl development editor lsp gitdiff 
 
 init-archinstall-nvidia: etc package-manager nvidia tools development lsp gitdiff mime browser terminal mise shell fisher fisher-plugins file-manager window-manager lockscreen fonts config
 
-init-archinstall-amd: etc package-manager tools development lsp gitdiff mime browser terminal shell mise fisher fisher-plugins file-manager window-manager lockscreen fonts config notes
+init-archinstall-amd: etc package-manager tools development lsp gitdiff mime browser terminal shell mise fisher fisher-plugins file-manager login-manager window-manager lockscreen fonts config notes
 
 # -----------------------------------------------------------------------------
 # Dot Files
@@ -73,7 +73,7 @@ tools:
 development:
 	paru -Syu --needed git github-cli \
 		curl wget daemon wl-clipboard xsel xdotool fzf fd bat ripgrep man less neovim \
-		openssh tree-sitter-cli
+		openssh tree-sitter-cli zellij
 	python3 -m venv .venv; . .venv/bin/activate; pip3 install pynvim; deactivate
 	rm -r .venv
 	git config --global user.email "48072014+jrmallorca@users.noreply.github.com"
@@ -292,6 +292,7 @@ gitgpgkeys:
 coms:
 	paru -Syu teams-for-linux discord
 
+# Anki flashcard import from markdown files.
 apy:
 	paru -Syu python-pipx
 	pipx install git+https://github.com/lervag/apy
