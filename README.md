@@ -1,5 +1,23 @@
 # Dotfiles
 
+## Set up Wi-Fi
+
+[Source](https://unix.stackexchange.com/questions/736703/waiting-for-iwd-to-start)
+
+If Wi-Fi is not set up after installation, then we may need to set it up ourselves.
+
+1. Input into terminal `iwctl`.
+    - If you get "Waiting for IWD to start", execute `sudo systemctl start iwd` to start it.
+2. List the WiFi adapters by inputting `device list`.
+3. Scan for WiFi networks by inputting `station <WIFI_ADAPTER> scan`.
+    - It is most likely "wlan0".
+4. List the WiFi networks by inputting `station <WIFI_ADAPTER> get-networks`.
+5. Note the network you want to connect to.
+    - It is most likely "XYQ1G2WORLD"
+6. Connect to the network by inputting `station <WIFI_ADAPTER> connect <WIFI_NETWORK>`.
+7. Enter the passphrase of the WiFi network.
+8. Exit out by inputting `exit`.
+
 ## Set up GitHub
 
 [Source](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
