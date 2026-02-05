@@ -13,31 +13,26 @@ return {
   -- },
   opts = {
     legacy_commands = false,
-
     ui = { enable = false },
-
+    frontmatter = { enabled = false },
     workspaces = {
       {
         name = "personal",
         path = "~/Documents",
       },
     },
-
     daily_notes = {
       folder = "journal/daily",
       default_tags = {},
       template = "daily.md",
       -- workdays_only = true,
     },
-
     completion = {
       nvim_cmp = false,
       blink = true,
       min_chars = 2,
     },
-
     new_notes_location = "current_dir",
-
     note_id_func = function(title)
       local suffix = ""
       if title ~= nil then
@@ -51,29 +46,15 @@ return {
       end
       return suffix
     end,
-
-    frontmatter_func = function(note)
-      local out = {
-        tags = note.tags,
-      }
-
-      -- `note.metadata` contains any manually added fields in the frontmatter.
-      -- So here we just make sure those fields are kept in the frontmatter.
-      if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
-        for k, v in pairs(note.metadata) do
-          out[k] = v
-        end
-      end
-
-      out["modified_on"] = os.date("%Y-%m-%d %H:%M:%S", os.time())
-
-      return out
-    end,
-
     templates = {
       folder = "templates/obsidian-nvim",
       date_format = "%Y-%m-%d",
-      time_format = "%H:%M",
+      customizations = {
+        task = { notes_subdir = "journal/tasks" },
+        zettel = { notes_subdir = "zettelkasten/fleeting" },
+        crm = { notes_subdir = "crm" },
+        recipe = { notes_subdir = "recipes" },
+      },
       substitutions = {
         -- https://otland.net/threads/lua-get-day-of-next-week.165801/
         nextSunday = function()
@@ -94,13 +75,8 @@ return {
         end,
       },
     },
-
-    picker = {
-      name = "snacks.pick",
-    },
-
+    picker = { name = "snacks.pick" },
     open_notes_in = "vsplit",
-
     callbacks = {
       enter_note = function(note)
         vim.keymap.set("n", "<CR>", function()
@@ -138,14 +114,6 @@ return {
         })
       end,
     },
-
-    attachments = {
-      folder = "zettelkasten/attachments",
-    },
-
-    footer = {
-      enabled = true,
-      format = "{{properties}} properties {{backlinks}} backlinks {{words}} words {{chars}} chars",
-    },
+    attachments = { folder = "zettelkasten/attachments" },
   },
 }
