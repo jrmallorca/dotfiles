@@ -79,14 +79,10 @@ return {
     open_notes_in = "vsplit",
     callbacks = {
       enter_note = function(note)
-        vim.keymap.set("n", "<CR>", function()
-          return require("obsidian").util.smart_action()
-        end, {
+        vim.keymap.set("n", "<CR>", require("obsidian").actions.smart_action, {
           desc = "Obsidian: Smart action",
         })
-        vim.keymap.set("n", "<leader>ch", function()
-          return require("obsidian").util.toggle_checkbox()
-        end, {
+        vim.keymap.set("n", "<leader>ch", require("obsidian").actions.toggle_checkbox, {
           desc = "Obsidian: Toggle checkbox status",
         })
         vim.keymap.set("n", "d-", "<cmd>0;/#/;:s/-/ /g<CR>w~", {
@@ -99,7 +95,7 @@ return {
           desc = "Obsidian: Quick switch",
         })
         vim.keymap.set("n", "<leader>/", function()
-          return Snacks.picker.grep({ cwd = require("obsidian").get_client().dir.filename })
+          return Snacks.picker.grep({ cwd = Obsidian.dir.filename })
         end, {
           desc = "Obsidian: Find in files",
         })
