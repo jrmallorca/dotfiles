@@ -11,11 +11,9 @@ return {
   --   "BufReadPre path/to/my-vault/*.md",
   --   "BufNewFile path/to/my-vault/*.md",
   -- },
-  dependencies = {
-    -- Required.
-    "nvim-lua/plenary.nvim",
-  },
   opts = {
+    legacy_commands = false,
+
     ui = { enable = false },
 
     workspaces = {
@@ -54,7 +52,7 @@ return {
       return suffix
     end,
 
-    note_frontmatter_func = function(note)
+    frontmatter_func = function(note)
       local out = {
         tags = note.tags,
       }
@@ -142,10 +140,10 @@ return {
     },
 
     attachments = {
-      img_folder = "zettelkasten/attachments",
+      folder = "zettelkasten/attachments",
     },
 
-    statusline = {
+    footer = {
       enabled = true,
       format = "{{properties}} properties {{backlinks}} backlinks {{words}} words {{chars}} chars",
     },
