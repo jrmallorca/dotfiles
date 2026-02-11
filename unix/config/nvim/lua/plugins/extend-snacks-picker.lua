@@ -24,7 +24,6 @@ return {
             end,
             confirm = function(picker, item)
               picker:close()
-              Snacks.notify.info(item.text)
               if item then
                 -- Ask for confirmation/edit of new filename
                 vim.ui.input({ prompt = "New filename: ", default = current_file_name }, function(new_file_name)
