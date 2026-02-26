@@ -13,7 +13,7 @@ init-wsl: etc package-manager base-wsl tools-wsl development editor lsp gitdiff 
 
 init-archinstall-nvidia: etc package-manager nvidia tools development lsp gitdiff mime browser terminal mise shell fisher fisher-plugins file-manager window-manager lockscreen fonts config
 
-init-archinstall-amd: etc package-manager tools development lsp gitdiff mime browser terminal shell mise fisher fisher-plugins file-manager login-manager window-manager lockscreen fonts config notes
+init-archinstall-amd: etc package-manager tools development lsp gitdiff mime browser terminal shell mise fisher fisher-plugins file-manager login-manager window-manager lockscreen fonts config notes voxtype
 
 # -----------------------------------------------------------------------------
 # Dot Files
@@ -300,6 +300,14 @@ apy:
 # -----------------------------------------------------------------------------
 # Programs
 # -----------------------------------------------------------------------------
+
+# Speech-to-text
+voxtype:
+	paru -Syu --needed wtype wl-clipboard libnotify pipewire-alsa voxtype
+	sudo usermod -aG input $$USER
+	sudo voxtype setup gpu --enable
+	voxtype setup --download
+	sudo systemctl --user enable --now voxtype
 
 docker:
 	paru -Syu --needed --noconfirm docker docker-desktop
