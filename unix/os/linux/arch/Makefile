@@ -301,16 +301,8 @@ apy:
 # Programs
 # -----------------------------------------------------------------------------
 
-# Speech-to-text
-voxtype:
-	paru -Syu --needed wtype wl-clipboard libnotify pipewire-alsa voxtype
-	sudo usermod -aG input $$USER
-	sudo voxtype setup gpu --enable
-	voxtype setup --download
-	sudo systemctl --user enable --now voxtype
-
 docker:
-	paru -Syu --needed --noconfirm docker docker-desktop
+	paru -Syu --needed --noconfirm docker
 	- sudo groupadd docker && usermod -aG docker $$USER && newgrp docker
 	sudo systemctl enable docker.service
 
@@ -327,8 +319,21 @@ qmk:
 	python3 -m pip install --user qmk
 	cd ~ && git clone --recurse-submodules git@github.com:jrmallorca/qmk_firmware.git
 
-# Enable stenography in OS
-steno:
-	pip install rtf-tokenize
-	paru -Syu --needed --noconfirm plover-git plover_plugins_manager
-	sudo usermod -aG uucp $$USER
+# Local LLMs
+ollama:
+	paru -Syu --needed ollama-vulkan
+	sudo systemctl enable --now ollama.service
+
+# Speech-to-text through LLM
+voxtype:
+	paru -Syu --needed wtype wl-clipboard libnotify pipewire-alsa voxtype
+	sudo usermod -aG input $$USER
+	sudo voxtype setup gpu --enable
+	voxtype setup --download
+	sudo systemctl --user enable --now voxtype
+
+# Text-to-speech through LLM
+# https://github.com/remsky/Kokoro-FastAPI?tab=readme-ov-file
+kokorotts:
+	paru -Syu --needed uv espeak-ng
+	cd ~ && git clone https://github.com/remsky/Kokoro-FastAPI.git
