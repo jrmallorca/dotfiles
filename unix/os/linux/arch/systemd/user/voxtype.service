@@ -1,0 +1,18 @@
+[Unit]
+Description=Voxtype push-to-talk voice-to-text daemon
+Documentation=https://voxtype.io
+PartOf=default.target
+After=default.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/voxtype daemon
+Restart=on-failure
+RestartSec=5
+
+# Ensure we have access to the display
+Environment=XDG_RUNTIME_DIR=%t
+Environment=WAYLAND_DISPLAY=wayland-1
+
+[Install]
+WantedBy=default.target
