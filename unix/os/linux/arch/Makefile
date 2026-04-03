@@ -73,7 +73,7 @@ tools:
 development:
 	paru -Syu --needed git github-cli \
 		curl wget daemon wl-clipboard xsel xdotool fzf fd bat ripgrep man less neovim \
-		openssh tree-sitter-cli zellij
+		openssh tree-sitter-cli zellij worktrunk
 	python3 -m venv .venv; . .venv/bin/activate; pip3 install pynvim; deactivate
 	rm -r .venv
 	git config --global user.email "48072014+jrmallorca@users.noreply.github.com"
