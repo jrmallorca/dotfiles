@@ -1,0 +1,13 @@
+[Unit]
+Description=Activate Text to speech TTS via Kokoro FastAPI
+After=network.target
+
+[Service]
+Type=simple
+User=jon
+WorkingDirectory=/home/jon/git-installs/Kokoro-FastAPI
+ExecStart=/home/jon/git-installs/Kokoro-FastAPI/start-cpu.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target
