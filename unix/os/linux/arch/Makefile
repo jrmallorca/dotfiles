@@ -315,8 +315,7 @@ dockerosx: docker
 
 # QMK Firmware for keyboards
 qmk:
-	paru -Syu --needed --noconfirm git python-pip libffi
-	python3 -m pip install --user qmk
+	paru -Syu --needed --noconfirm git python-pip libffi qmk
 	cd ~ && git clone --recurse-submodules git@github.com:jrmallorca/qmk_firmware.git
 
 # Local LLMs
