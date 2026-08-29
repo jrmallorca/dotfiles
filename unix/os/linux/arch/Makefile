@@ -11,7 +11,7 @@ init-amd: etc package-manager base nvidia tools development lsp gitdiff mime bro
 
 init-wsl: etc package-manager base-wsl tools-wsl development editor lsp gitdiff terminal shell fisher fisher-plugins file-manager fonts apy config
 
-init-archinstall-nvidia: etc package-manager nvidia tools development lsp gitdiff mime browser terminal mise shell fisher fisher-plugins file-manager window-manager lockscreen fonts config
+init-archinstall-nvidia: etc package-manager nvidia tools development lsp gitdiff mime browser terminal mise shell fisher fisher-plugins file-manager window-manager lockscreen fonts config notes voxtype
 
 init-archinstall-amd: etc package-manager tools development lsp gitdiff mime browser terminal shell mise fisher fisher-plugins file-manager login-manager window-manager lockscreen fonts config notes voxtype
 
@@ -64,7 +64,7 @@ tools:
 		nodejs npm python python-pip networkmanager network-manager-applet \
 		brightnessctl dunst libinput zoxide trash-cli unzip jq kopia \
 		alsa-utils bluez bluez-utils blueman \
-		imagemagick tectonic ghostscript # Render images with snacks.nvim
+		imagemagick tectonic ghostscript rendercv-bin
 	sudo systemctl enable NetworkManager
 	sudo systemctl enable tlp
 	sudo systemctl mask systemd-rfkill.service systemd-rfkill.socket
