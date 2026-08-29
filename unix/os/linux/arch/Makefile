@@ -325,7 +325,7 @@ ollama:
 
 # Speech-to-text through LLM
 voxtype:
-	paru -Syu --needed wtype wl-clipboard libnotify pipewire-alsa voxtype
+	paru -Syu --needed wtype wl-clipboard libnotify pipewire-alsa voxtype quickshell
 	sudo usermod -aG input $$USER
 	sudo voxtype setup gpu --enable
 	voxtype setup --download
